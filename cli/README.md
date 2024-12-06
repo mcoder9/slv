@@ -6,8 +6,14 @@ slv is a toolkit for Solana developers. It provides a set of tools to help
 developers build, test, and deploy Solana Validatros and Solana-based
 applications.
 
+## Installation
+
+Coming soon!
+
+## For Developers
+
 ```bash
-slv --help
+deno task dev --help
 ```
 
 Coming soon!
@@ -25,6 +31,13 @@ The elSOL staking pool exclusively includes validators with;
 Plus, elSOL offers;
 
 ✅ - 0% pool management fee,
+
+For enhanced security, we have set
+
+Sol Withdrawal Fee & Stake Withdrawal Fee of 0.10%.
+
+This fee helps prevent misuse and ensures the stability and reliability of the
+service, safeguarding both the system and our users.
 
 thus, elSOL offers higher True APY in long-term staking.
 
