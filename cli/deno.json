@@ -1,0 +1,26 @@
+{
+  "name": "@slv/cli",
+  "version": "0.1.0",
+  "exports": "./dist/exe",
+  "publish": {
+    "include": ["src"],
+    "exclude": ["src/tests"]
+  },
+  "tasks": {
+    "dev": "deno run -A --watch src/index.ts",
+    "build": "deno compile --unstable --allow-all --output dist/exe src/index.ts",
+    "start": "deno run -A src/index.ts"
+  },
+  "imports": {
+    "@/": "./src/",
+    "@/lib": "./src/lib/",
+    "@cmn/": "../../cmn/",
+    "/": "./",
+
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "fmt": {
+    "semiColons": false,
+    "singleQuote": true
+  }
+}
