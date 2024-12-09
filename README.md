@@ -1,8 +1,29 @@
+<p align="center">
+  <a href="">
+    <img src="https://storage.slv.dev/SLVogp.jpg" alt="SLV" />
+  </a>
+
+<a href="https://twitter.com/intent/follow?screen_name=ValidatorsDAO">
+    <img src="https://img.shields.io/twitter/follow/ValidatorsDAO.svg?label=Follow%20@ValidatorsDAO" alt="Follow @ValidatorsDAO" />
+  </a>
+  <br/>
+  <!-- <a aria-label="npm version" href="https://www.npmjs.com/package/@epics-dao/solv">
+    <img alt="" src="https://badgen.net/npm/v/@epics-dao/solv">
+  </a>
+  <a aria-label="Downloads Number" href="https://www.npmjs.com/package/@epics-dao/solv">
+    <img alt="" src="https://badgen.net/npm/dt/@epics-dao/solv">
+  </a> -->
+  <a aria-label="License" href="https://github.com/ValidatorsDAO/slv/blob/master/LICENSE.txt">
+    <img alt="" src="https://badgen.net/badge/license/Apache/blue">
+  </a>
+    <a aria-label="Code of Conduct" href="https://github.com/ValidatorsDAO/slv/blob/master/CODE_OF_CONDUCT.md">
+    <img alt="" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg">
+  </a>
+</p>
+
 ## The Toolkit for Solana Devs
 
-https://storage.slv.dev/SLVogp.jpg
-
-slv is a toolkit for Solana developers. It provides a set of tools to help
+SLV is a toolkit for Solana developers. It provides a set of tools to help
 developers build, test, and deploy Solana Validatros and Solana-based
 applications.
 
