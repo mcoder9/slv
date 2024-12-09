@@ -6,6 +6,7 @@ import { validatorCmd } from '@/validator/index.ts'
 import { rpcCmd } from '@/rpc/index.ts'
 import { cloudCmd } from '@/cloud/index.ts'
 import { swapCmd } from '@/swap/index.ts'
+import { aiCmd } from '/src/ai/index.ts'
 
 const program = new Command()
   .name('slv')
@@ -19,5 +20,6 @@ program.command('validator', validatorCmd)
 program.command('rpc', rpcCmd)
 program.command('cloud', cloudCmd)
 program.command('swap', swapCmd)
+program.command('ai', aiCmd)
 
 await program.parse(Deno.args)

@@ -29,15 +29,47 @@ applications.
 
 ## Installation
 
-Coming soon!
+```bash
+curl -fsSL https://storage.slv.dev/slv/install | sh
+```
+
+## Usage
+
+```bash
+slv --help
+```
+
+## Roadmap
+
+- [] Add `slv rpc deploy` for Solana RPC Build (in progress)
+- [] Add `slv rpc deploy --relayer` for Solana RPC Relayer Build (in progress)
+- [] Add `slv rpc deploy --geyser` for Solana gRPC Geyser Plugin Node Build (in
+  progress)
+- [] Add `slv rpc deploy --shredstream` for ShredStream Node Build (in progress)
+- [] Add `slv validator deploy` for Solana Validator Deploy (in progress)
+- [] add `slv validator migrate` for Solana Validator Migration from `solv4` (in
+  progress)
+- [] Add CI/CD pipeline (Github Actions) for `slv` Release (in progress)
+- [] Add `slv bot` for gRPC Geyser Client (in progress)
+- [] Add `slv swap` for Solana Token Swap (in progress)
+- [] Add `slv cloud` for configuring Solana App on Cloud (in progress)
+- [] Add `slv app` for Solana App Development (in progress)
+- [] Add `slv app create --blinks` for Solana Blinks App Development (in
+  progress)
 
 ## For Developers
+
+Install Deno
+
+```bash
+curl -fsSL https://deno.land/install.sh | sh
+```
+
+Run slv CLI
 
 ```bash
 deno task dev --help
 ```
-
-Coming soon!
 
 ## elSOL - Solana Liquid Staking Token (LST)
 
@@ -70,14 +102,14 @@ The Enhanced Solana RPC is a high-performance Solana RPC API service that
 provides a reliable and scalable infrastructure for Solana developers and
 validators.
 
-New! Geyser gRPC Connection Free Trial is now available!
+- New! Geyser gRPC Connection Free Trial is now available!
 
 website: [https://erpc.validators.solutions](https://erpc.validators.solutions)
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at
-https://github.com/EpicsDAO/solv This project is intended to be a safe,
+https://github.com/ValidatorsDAO/slv This project is intended to be a safe,
 welcoming space for collaboration, and contributors are expected to adhere to
 the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 

@@ -14,7 +14,7 @@
   "imports": {
     "@/": "./src/",
     "@/lib": "./src/lib/",
-    "@cmn/": "../../cmn/",
+    "@cmn/": "../cmn/",
     "/": "./",
 
     "@std/assert": "jsr:@std/assert@1"
