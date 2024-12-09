@@ -1,16 +1,20 @@
-// src/bot/index.ts
-export const botCommand = (cmd: string) => {
-  switch (cmd) {
-    case 'start':
-      console.log('Bot is starting...')
-      // Bot 開始処理
-      break
-    case 'stop':
-      console.log('Bot is stopping...')
-      // Bot 停止処理
-      break
-    default:
-      console.error(`Unknown bot command: ${cmd}`)
-      break
-  }
-}
+import { Command } from '@cliffy'
+
+// bot Command
+export const botCmd = new Command()
+  .description('Manage Solana gRPC Geyser Client')
+
+// bot init subcommand
+botCmd.command('init')
+  .description('Initialize the bot template')
+  .option('-q, --queue', 'Use queue mode', { default: false })
+  .action((options: { queue: boolean }) => {
+    console.log('option queue:', options)
+  })
+
+// bot stop subcommand
+botCmd.command('stop')
+  .description('Stop the bot')
+  .action(() => {
+    console.log('Stopping the bot...')
+  })

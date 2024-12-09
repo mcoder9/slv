@@ -54,3 +54,4 @@ tmp
 dist
 .turbo
 node_modules
+.aws
