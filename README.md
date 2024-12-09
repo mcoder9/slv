@@ -29,6 +29,8 @@ applications.
 
 ## Installation
 
+Install slv CLI
+
 ```bash
 curl -fsSL https://storage.slv.dev/slv/install | sh
 ```
@@ -56,6 +58,7 @@ slv --help
 - [] Add `slv app` for Solana App Development (in progress)
 - [] Add `slv app create --blinks` for Solana Blinks App Development (in
   progress)
+- [] Add `test` for keeping the codebase stable (in progress)
 
 ## For Developers
 
@@ -68,7 +71,20 @@ curl -fsSL https://deno.land/install.sh | sh
 Run slv CLI
 
 ```bash
+git clone https://github.com/ValidatorsDAO/slv.git
 deno task dev --help
+```
+
+Run Build
+
+```bash
+deno task build
+```
+
+Run Test
+
+```bash
+deno test -A
 ```
 
 ## elSOL - Solana Liquid Staking Token (LST)

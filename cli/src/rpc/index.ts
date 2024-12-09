@@ -4,8 +4,8 @@ import { Command } from '@cliffy'
 export const rpcCmd = new Command()
   .description('Manage Solana RPC Nodes')
 
-rpcCmd.command('info')
-  .description('Show RPC node info')
+rpcCmd.command('deploy')
+  .description('Deploy a new RPC node')
   .action(() => {
-    console.log('Showing RPC node info...')
+    console.log('Deploying RPC node...')
   })
