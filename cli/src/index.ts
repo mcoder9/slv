@@ -6,12 +6,25 @@ import { validatorCmd } from '@/validator/index.ts'
 import { rpcCmd } from '@/rpc/index.ts'
 import { cloudCmd } from '@/cloud/index.ts'
 import { swapCmd } from '@/swap/index.ts'
-import { aiCmd } from '/src/ai/index.ts'
+import { aiCmd } from '@/ai/index.ts'
+import { installClientMessage, slvAA } from '/lib/slvAA.ts'
+import { upgrade } from '@/upgrade.ts'
 
 const program = new Command()
   .name('slv')
-  .description('slv is a toolkit for Solana Developers')
+  .description('slv is a Toolkit for Solana Developers')
   .version(denoJson.version)
+  .option('-P,--print', 'Print slv ASCII Art').action(() => {
+    slvAA()
+    installClientMessage(denoJson.version)
+  })
+
+program
+  .command('upgrade')
+  .description('Upgrade slv to the latest version')
+  .action(async () => {
+    await upgrade()
+  })
 
 // Subcommands
 program.command('bot', botCmd)

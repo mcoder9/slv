@@ -58,6 +58,8 @@ slv --help
 - [] Add `slv app` for Solana App Development (in progress)
 - [] Add `slv app create --blinks` for Solana Blinks App Development (in
   progress)
+- [] Add `slv ai` Fine-tuning AI Models for Solana Validator/RPC Debugging (in
+  progress)
 - [] Add `test` for keeping the codebase stable (in progress)
 
 ## For Developers
