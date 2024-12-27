@@ -1,6 +1,7 @@
 // cli/test/unit/rpc_test.ts
 import { assertEquals } from 'https://deno.land/std@0.185.0/testing/asserts.ts'
 import { rpcCmd } from '@/rpc/index.ts'
+import { colors } from '@cliffy/colors'
 
 Deno.test("slv rpc deploy should print 'Deploying RPC node...'", async () => {
   const originalLog = console.log
@@ -17,7 +18,7 @@ Deno.test("slv rpc deploy should print 'Deploying RPC node...'", async () => {
     await rpcCmd.parse(['deploy'])
 
     // 出力が期待通りか確認
-    assertEquals(output.trim(), 'Deploying RPC node...')
+    assertEquals(output.trim(), colors.blue('Coming soon...🌝'))
   } finally {
     // console.log を元に戻す
     console.log = originalLog

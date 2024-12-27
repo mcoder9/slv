@@ -1,0 +1,54 @@
+#!/bin/bash
+exec agave-validator \
+  --identity /home/solv/identity.json \
+  --log /home/solv/solana-validator.log \
+  --accounts /mnt/accounts \
+  --ledger /mnt/ledger \
+  --snapshots /mnt/snapshot \
+  {% for entrypoint in [
+    "entrypoint.mainnet-beta.solana.com:8001",
+    "entrypoint2.mainnet-beta.solana.com:8001",
+    "entrypoint3.mainnet-beta.solana.com:8001",
+    "entrypoint4.mainnet-beta.solana.com:8001",
+    "entrypoint5.mainnet-beta.solana.com:8001"
+  ] %}
+  --entrypoint {{ entrypoint }} \
+  {% endfor %}
+  {% for validator in [
+    "Certusm1sa411sMpV9FPqU5dXAYhmmhygvxJ23S6hJ24",
+    "7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2",
+    "GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ",
+    "CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S"
+  ] %}
+  --known-validator {{ validator }} \
+  {% endfor %}
+  --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \
+  --expected-shred-version 50093 \
+  --only-known-rpc \
+  --full-rpc-api \
+  --no-voting \
+  --private-rpc \
+  --enable-cpi-and-log-storage \
+  --no-skip-initial-accounts-db-clean \
+  --dynamic-port-range 8000-8020 \
+  --rpc-bind-address 0.0.0.0 \
+  --rpc-port {{ port }} \
+  --no-port-check \
+  {% if rpc_type == "geyser_yellowstone" %}
+  --account-index program-id spl-token-mint spl-token-owner \
+  {% elif rpc_type == "minimal" %}
+  --account-index program-id \
+  --account-index-include-key Stake11111111111111111111111111111111111111 \
+  --account-index-include-key Config1111111111111111111111111111111111111 \
+  --account-index-include-key AddressLookupTab1e1111111111111111111111111 \
+  {% endif %}
+  --enable-rpc-transaction-history \
+  --rpc-pubsub-enable-block-subscription \
+  --rpc-pubsub-enable-vote-subscription \
+  --no-wait-for-vote-to-start-leader \
+  --wal-recovery-mode skip_any_corrupted_record \
+  --use-snapshot-archives-at-startup when-newest \
+  --limit-ledger-size {{ leader_limit_size }} \
+  {% if rpc_type == "geyser_yellowstone" %}
+  --geyser-plugin-config /home/solv/geyser.json \
+  {% endif %}

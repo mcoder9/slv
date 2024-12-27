@@ -3,8 +3,10 @@ import { Command } from '@cliffy'
 // app Command
 export const appCmd = new Command()
   .description('Manage Solana Applications')
+  .action(() => {
+    appCmd.showHelp()
+  })
 
-// 例: app runサブコマンド
 appCmd.command('run')
   .description('Run an application')
   .option('-v, --verbose', 'Enable verbose mode', { default: false })

@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="0.1.2"
+VERSION="0.2.0"
 BASE_URL="https://storage.slv.dev/slv"
 
 detect_platform() {
@@ -21,7 +21,9 @@ install_slv() {
   echo "Platform detected: $platform"
 
   DOWNLOAD_URL="${BASE_URL}/${VERSION}/${platform}-exe.tar.gz"
+  TEMPLATE_URL="${BASE_URL}/template/${VERSION}/template.tar.gz"
   INSTALL_DIR="/usr/local/bin"
+  TEMPLATE_DIR="$HOME/.slv/template"
   TEMP_DIR=$(mktemp -d)
 
   if [ "$platform" == "x86_64-pc-windows-msvc" ]; then
@@ -34,10 +36,19 @@ install_slv() {
   echo "Downloading slv from $DOWNLOAD_URL..."
   curl -fsSL "$DOWNLOAD_URL" -o "$TEMP_DIR/slv.tar.gz"
 
+  echo "Downloading templates from $TEMPLATE_URL..."
+  curl -fsSL "$TEMPLATE_URL" -o "$HOME/.slv/template.tar.gz"
+  
   echo "Extracting slv..."
   tar -xzvf "$TEMP_DIR/slv.tar.gz" -C "$TEMP_DIR" --strip-components=1
 
+  echo "Extracting templates..."
+  tar -xzvf "$HOME/.slv/template.tar.gz" -C "$HOME/.slv" --strip-components=1
+  mkdir -p "$HOME/.slv/template"
+  echo "Copying templates to $HOME/.slv/template"
+
   SLV_FILE="$TEMP_DIR/slv-x86_64-apple-darwin-exe"
+  TEMPLATE_DL_DIR="$HOME/.slv/"
 
   if [ ! -f "$SLV_FILE" ]; then
     echo "Error: Extracted file not found."
@@ -59,13 +70,14 @@ install_slv() {
 
   echo "Cleaning up..."
   rm -rf "$TEMP_DIR"
+  rm -rf "$TEMP_DIR2"
 
   echo "slv has been installed successfully!"
   echo "Ensure $INSTALL_DIR is in your PATH."
   if [ "$platform" == "x86_64-pc-windows-msvc" ]; then
     echo "Windows users, add $INSTALL_DIR to your PATH manually."
   fi
-  echo "Loading slv..."
+  mkdir -p ~/.slv/keys
   slv -P
 }
 

@@ -6,7 +6,6 @@ const uploadExe = async () => {
   const compileTargets = [
     'x86_64-apple-darwin',
     'x86_64-unknown-linux-gnu',
-    'x86_64-pc-windows-msvc',
   ]
   console.log(`Uploading slv v${version} to Solana`)
   await Promise.all(compileTargets.map(async (target) => {

@@ -55,3 +55,5 @@ dist
 .turbo
 node_modules
 .aws
+!./deno.json
+*.json

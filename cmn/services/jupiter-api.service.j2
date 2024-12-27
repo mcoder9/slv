@@ -1,0 +1,20 @@
+[Unit]
+Description=Jupiter API Service Instance
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/solv
+Restart=always
+User=solv
+Environment=NODE_ENV=production
+Environment=RUST_LOG=info
+ExecStart=/home/solv/jupiter-swap-api \
+  --rpc-url http://localhost:{{ port_rpc }} \
+  --yellowstone-grpc-endpoint http://localhost:{{ port_grpc }} \ --yellowstone-grpc-x-token "{{ x_token }}" \
+  --allow-circular-arbitrage \
+  --enable-new-dexes \
+  --port {{ port_jupiter }}
+
+[Install]
+WantedBy=multi-user.target

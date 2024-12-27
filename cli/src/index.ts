@@ -27,12 +27,30 @@ program
   })
 
 // Subcommands
-program.command('bot', botCmd)
-program.command('app', appCmd)
-program.command('validator', validatorCmd)
-program.command('rpc', rpcCmd)
-program.command('cloud', cloudCmd)
-program.command('swap', swapCmd)
-program.command('ai', aiCmd)
+program
+  .command('bot', botCmd)
+  .alias('b')
+
+program
+  .command('app', appCmd)
+
+program
+  .command('validator', validatorCmd)
+  .alias('v')
+
+program
+  .command('rpc', rpcCmd)
+  .alias('r')
+
+program
+  .command('cloud', cloudCmd)
+  .alias('c')
+
+program
+  .command('swap', swapCmd)
+  .alias('s')
+
+program
+  .command('ai', aiCmd)
 
 await program.parse(Deno.args)

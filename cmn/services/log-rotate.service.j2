@@ -1,0 +1,11 @@
+/home/solv/solana-validator.log {
+  su solv solv
+  daily
+  rotate 1
+  size 4G
+  missingok
+  compress
+  postrotate
+    systemctl kill -s USR1 solv.service
+  endscript
+}

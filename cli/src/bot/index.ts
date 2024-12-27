@@ -3,7 +3,9 @@ import { Command } from '@cliffy'
 // bot Command
 export const botCmd = new Command()
   .description('Manage Solana gRPC Geyser Client')
-
+  .action(() => {
+    botCmd.showHelp()
+  })
 // bot init subcommand
 botCmd.command('init')
   .description('Initialize the bot template')

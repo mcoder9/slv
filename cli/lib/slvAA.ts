@@ -32,15 +32,10 @@ SLV is a Toolkit for Solana Developers 🪄
 
 ${colors.bold.underline('One-line Launch:')}
 
-$ slv validator deploy
-$ slv rpc deploy
+$ slv validator init
+$ slv validator deploy -n testnet
 
-${colors.bold.underline('Init a new project:')}
-
-$ slv app init
-$ slv bot init
-
-$ solv --help for more information
+$ slv --help for more information
 `
   console.log('slv version:', colors.rgb24(version, green))
   console.log(msg)
