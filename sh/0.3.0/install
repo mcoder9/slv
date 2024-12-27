@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="0.3.1"
+VERSION="0.3.0"
 BASE_URL="https://storage.slv.dev/slv"
 
 detect_platform() {
@@ -20,8 +20,8 @@ install_slv() {
   detect_platform
   echo "Platform detected: $platform"
 
-  DOWNLOAD_URL="${BASE_URL}/${VERSION}/${platform}-exe.tar.gz?cachebuster=$(date +%s)"
-  TEMPLATE_URL="${BASE_URL}/template/${VERSION}/template.tar.gz?cachebuster=$(date +%s)"
+  DOWNLOAD_URL="${BASE_URL}/${VERSION}/${platform}-exe.tar.gz"
+  TEMPLATE_URL="${BASE_URL}/template/${VERSION}/template.tar.gz"
   INSTALL_DIR="/usr/local/bin"
   TEMPLATE_DIR="$HOME/.slv/template"
   TEMP_DIR=$(mktemp -d)
@@ -71,7 +71,6 @@ install_slv() {
   echo "Cleaning up..."
   rm -rf "$TEMP_DIR"
   rm -rf "$TEMP_DIR2"
-  rm -rf "$HOME/.slv/template.tar.gz"
 
   echo "slv has been installed successfully!"
   echo "Ensure $INSTALL_DIR is in your PATH."

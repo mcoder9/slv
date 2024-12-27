@@ -27,6 +27,24 @@ SLV is a toolkit for Solana developers. It provides a set of tools to help
 developers build, test, and deploy Solana Validatros and Solana-based
 applications.
 
+In the newly revamped slv, you can complete all configurations from a remote
+machine—no more direct node logins required. This approach ensures that only
+essential packages are installed on the node, leaving behind no unnecessary
+clutter. We’ve also introduced Ansible Playbooks & Jinja Template for Linux
+configuration, allowing us to manage and migrate multiple validators with
+greater efficiency and security.
+
+Additionally, the new slv always uses a dummy key (an invalid key named
+“unstaked-identity.json”) for its initial startup. Once you confirm everything
+is running smoothly, you simply set the actual Identity and switch to the active
+key. Following this consistent flow helps prevent double votes and ensures
+you’re prepared in case the node ever becomes unreachable.
+
+We’ll continue to provide method documentation along the way, and we look
+forward to your ongoing support!
+
+[Validators DAO Discord](https://discord.gg/X4BgkBHavp)
+
 ## Dependencies
 
 - OS MacOS or Linux
@@ -40,12 +58,20 @@ slv Install script will install the following dependencies.
 
 Please install the following dependencies manually if install script fails.
 
-## Installation
+## Installation & Validator Launch
 
 Install slv CLI
 
 ```bash
 curl -fsSL https://storage.slv.dev/slv/install | sh
+slv validator init
+slv validator deploy
+```
+
+## Usage
+
+```bash
+slv v --help
 ```
 
 ## Deploy Solana Validator Testnet with Firedancer
@@ -57,7 +83,7 @@ This command will prompt you to provide necessary information to deploy.
 New slv Deployment is always use `unstaked-keypair.json` for the identity key.
 This is the best practice to avoid double voting, and etc.
 
-So Please make sure to set the aurhorized identity key with `identity.json`
+So Please make sure to set the aurhorized identity key with `slv v set:identity`
 after the deployment.
 
 ### Input Server's Default Username
@@ -161,13 +187,20 @@ from the vote account.
 ```bash
 ? Please Enter Your Vote Account's Authrority Key › <your-authority-pubkey>
 ✔︎ Validator testnet config saved to /Users/fumi/.slv/config.validator.testnet.yml
+
+Now you can deploy with:
+
+$ slv v deploy -n testnet
 ```
 
-### Confirm the Configuration and Deploy
+Now your configuration is saved to `~/.slv/config.validator.testnet.yml`.
+
+### Deploy the Solana Validator
 
 Once you confirm the configuration, the deployment will start.
 
 ```bash
+slv v deploy -n testnet
 Your Testnet Validators Settings:
 ┌────────────────┬──────────────────────────────────────────────┐
 │ Identity Key   │ EjDwu2Czy8eWEYRuNwtjniYks47Du3KNJ6JY9rs3aFSV │
@@ -182,15 +215,7 @@ Your Testnet Validators Settings:
 ├────────────────┼──────────────────────────────────────────────┤
 │ Version        │ 0.302.20104                                  │
 └────────────────┴──────────────────────────────────────────────┘
-Now you can deploy with:
-
-$ slv v deploy -n testnet
-```
-
-All set! You can deploy the Solana Validator with the following command.
-
-```bash
-slv v deploy -n testnet
+? Do you want to continue? (Y/n) › Yes
 ```
 
 It's done! Your Solana Validator is now deployed. It will take some time to
@@ -229,6 +254,30 @@ validator.
 slv v restart -n testnet --pubkey <your-identity-pubkey> --rm
 ```
 
+### slv Validator Commands
+
+```bash
+Usage:   slv validator
+Version: 0.3.1        
+
+Description:
+
+  Manage Solana Validator Nodes
+
+Options:
+
+  -h, --help  - Show this help.  
+
+Commands:
+
+  init          - Initialize a new validator                                       
+  deploy        - Deploy Validators                                                
+  list          - List validators                                                  
+  set:identity  - Set Validator Identity                                           
+  set:unstaked  - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
+  restart       - Restart validator
+```
+
 ### Community Support
 
 If you have any questions or need help, please join our Discord community.
@@ -242,8 +291,6 @@ If you have any questions or need help, please join our Discord community.
 - [] Add `slv validator setup --relayer` for Solana Validator Relayer Build (in
   progress)
 - [] Add `slv validator setup --shredstream` for ShredStream Node Build (in
-  progress)
-- [] add `slv validator migrate` for Solana Validator Migration from `solv4` (in
   progress)
 - [] Add CI/CD pipeline (Github Actions) for `slv` Release (in progress)
 - [] Add `slv bot` for gRPC Geyser Client (in progress)

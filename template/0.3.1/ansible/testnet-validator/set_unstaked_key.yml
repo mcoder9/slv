@@ -1,0 +1,10 @@
+---
+- name: Set Unstaked Key to Identity
+  hosts: all
+  become: true
+  become_user: solv
+  tasks:
+    - name: Change Symbolic Link to Unstaked Identity
+      shell: ln -sf /home/solv/unstaked-identity.json /home/solv/identity.json
+      become: true
+      become_user: solv
