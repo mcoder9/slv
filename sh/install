@@ -25,6 +25,8 @@ install_slv() {
   INSTALL_DIR="/usr/local/bin"
   TEMPLATE_DIR="$HOME/.slv/template"
   TEMP_DIR=$(mktemp -d)
+  mkdir -p "$HOME/.slv"
+  mkdir -p "$HOME/.slv/keys"
 
   if [ "$platform" == "x86_64-pc-windows-msvc" ]; then
     INSTALL_DIR="$HOME/.local/bin"

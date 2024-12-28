@@ -19,6 +19,7 @@ import { genSolvUser } from '/src/validator/init/genSolvUser.ts'
 import { addInventory } from '/lib/addInventory.ts'
 import { exec } from '@elsoul/child-process'
 import denoJson from '/deno.json' with { type: 'json' }
+import { copyKeys } from '/src/validator/init/copyKeys.ts'
 
 const initTestnetConfig = async (sshConnection: SSHConnection) => {
   // Check if testnet-validator Template exists
@@ -73,6 +74,7 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   }
   // Create solv User on Ubuntu Server
   await genSolvUser(sshConnection.ip, 'testnet_validators')
+  await copyKeys('testnet_validators')
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
   const configTestnet: ValidatorTestnetConfig = {

@@ -10,7 +10,7 @@
     - name: Select node config by identity_account
       set_fact:
         selected_validator: '{{ item }}'
-      loop: '{{ validators }}'
+      with_items: '{{ validators }}'
       when: item.identity_account == hostvars[inventory_hostname].identity_account
 
     - name: Install Agave from the specified version

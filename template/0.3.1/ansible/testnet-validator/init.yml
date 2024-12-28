@@ -1,5 +1,4 @@
 ---
-- import_playbook: copy_keys.yml
 - import_playbook: ../cmn/setup_ufw.yml
 - import_playbook: ../cmn/install_package.yml
 - import_playbook: ../cmn/install_rust.yml

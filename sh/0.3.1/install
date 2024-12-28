@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="0.3.0"
+VERSION="0.3.1"
 BASE_URL="https://storage.slv.dev/slv"
 
 detect_platform() {
@@ -20,11 +20,13 @@ install_slv() {
   detect_platform
   echo "Platform detected: $platform"
 
-  DOWNLOAD_URL="${BASE_URL}/${VERSION}/${platform}-exe.tar.gz"
-  TEMPLATE_URL="${BASE_URL}/template/${VERSION}/template.tar.gz"
+  DOWNLOAD_URL="${BASE_URL}/${VERSION}/${platform}-exe.tar.gz?cachebuster=$(date +%s)"
+  TEMPLATE_URL="${BASE_URL}/template/${VERSION}/template.tar.gz?cachebuster=$(date +%s)"
   INSTALL_DIR="/usr/local/bin"
   TEMPLATE_DIR="$HOME/.slv/template"
   TEMP_DIR=$(mktemp -d)
+  mkdir -p "$HOME/.slv"
+  mkdir -p "$HOME/.slv/keys"
 
   if [ "$platform" == "x86_64-pc-windows-msvc" ]; then
     INSTALL_DIR="$HOME/.local/bin"

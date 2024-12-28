@@ -8,30 +8,26 @@
   tasks:
     - name: Select node config by identity_account
       set_fact:
-        validators: >-
-          {{
-            validators
-            | selectattr('identity_account', 'equalto', hostvars[inventory_hostname].identity_account)
-            | list
-            | first
-          }}
+        validators: '{{ item }}'
+      with_items: '{{ validators }}'
+      when: item.identity_account == hostvars[inventory_hostname].identity_account
 
     - name: Copy validator key file
       become: yes
       become_user: root
       copy:
-        src: "~/.slv/keys/{{ validators.identity_account }}.json"
-        dest: "/home/solv/testnet-validator-keypair.json"
+        src: '~/.slv/keys/{{ validators.identity_account }}.json'
+        dest: '/home/solv/testnet-validator-keypair.json'
         owner: solv
         group: solv
-        mode: "0600"
+        mode: '0600'
 
     - name: Copy vote key file
       become: yes
       become_user: root
       copy:
-        src: "~/.slv/keys/{{ validators.vote_account }}.json"
-        dest: "/home/solv/testnet-vote-account-keypair.json"
+        src: '~/.slv/keys/{{ validators.vote_account }}.json'
+        dest: '/home/solv/testnet-vote-account-keypair.json'
         owner: solv
         group: solv
-        mode: "0600"
+        mode: '0600'

@@ -186,7 +186,7 @@ from the vote account.
 
 ```bash
 ? Please Enter Your Vote Account's Authrority Key › <your-authority-pubkey>
-✔︎ Validator testnet config saved to /Users/fumi/.slv/config.validator.testnet.yml
+✔︎ Validator testnet config saved to ~/.slv/config.validator.testnet.yml
 
 Now you can deploy with:
 
