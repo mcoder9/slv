@@ -47,16 +47,21 @@ forward to your ongoing support!
 
 ## Dependencies
 
-- OS MacOS or Linux
+### OS
+
+MacOS or Linux
 
 ※ Please use WSL2 for Windows users.
 
-slv Install script will install the following dependencies.
+Download WSL2 For Windows 10
+[https://docs.microsoft.com/en-us/windows/wsl/install](https://docs.microsoft.com/en-us/windows/wsl/install)
 
-- Python3 [https://www.python.org/downloads/](https://www.python.org/downloads/)
-- Ansible [https://docs.ansible.com](https://docs.ansible.com/)
+### Libraries
 
-Please install the following dependencies manually if install script fails.
+Please install the following software before using slv.
+
+- Python3 [Install](https://www.python.org/downloads/)
+- Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html/)
 
 ## Installation & Validator Launch
 
