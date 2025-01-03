@@ -368,7 +368,7 @@ validators.
 
 - New! Geyser gRPC Connection Free Trial is now available!
 
-website: [https://erpc.validators.solutions](https://erpc.validators.solutions)
+website: [https://erpc.global](https://erpc.global)
 
 ## Contributing
 

@@ -1,5 +1,5 @@
 {
-  "workspace": ["cli"],
+  "workspace": ["cli", "website/slv-dev"],
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test -A",
@@ -12,7 +12,8 @@
     "upload:script": "cd ./sh/ && aws --endpoint-url=https://278a7109e511280594fe6a2ebb778333.r2.cloudflarestorage.com/slv s3 cp install s3://slv/ --content-disposition 'attachment; filename=install'",
     "upload:exe": "deno run -A cli/uploadExe.ts",
     "upload:template": "tar -czf dist/template.tar.gz ./template/0.3.1 && deno run -A cli/uploadTemplate.ts",
-    "purge:cache": "deno run -A cmn/lib/purgeR2Cache.ts"
+    "purge:cache": "deno run -A cmn/lib/purgeR2Cache.ts",
+    "slv-dev": "npm run --prefix website/slv-dev"
   },
   "imports": {
     "@/": "./",
@@ -34,6 +35,7 @@
   "exclude": ["README.md"],
   "fmt": {
     "semiColons": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "exclude": ["./website"]
   }
 }

@@ -2,5 +2,6 @@
   "deno.enable": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
+  "deno.disablePaths": ["./website"],
   "ansible.python.interpreterPath": "/opt/homebrew/bin/python3"
 }
