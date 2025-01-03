@@ -19,15 +19,16 @@ const addInventory = async (
     )
     console.log(`✔ Identity account: ${findIdentity}`)
     if (findIdentity) {
-      console.log(colors.yellow(`⚠️ The same IP already exists
+      console.log(
+        colors.yellow(`⚠️ The same IP already exists
         
-  Please remove the existing IP from ${inventoryPath} and try again`))
+  Please remove the existing IP from ${inventoryPath} and try again`),
+      )
       return false
     }
-    const checkIdentityKey = Object.values(inventory.testnet_validators.hosts)
-      .find(
-        (key) => key.identity_account === identityAccount,
-      )
+    const checkIdentityKey = Object.values(
+      inventory.testnet_validators.hosts,
+    ).find((key) => key.identity_account === identityAccount)
     if (checkIdentityKey) {
       console.log(colors.yellow(`⚠️ Identity account already exists`))
       return false

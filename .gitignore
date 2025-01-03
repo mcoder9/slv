@@ -57,3 +57,25 @@ node_modules
 .aws
 !./deno.json
 *.json
+
+.dev.vars
+.wrangler
+keypairs
+.env.prod
+unstaked-identity.json
+.ssh
+
+**/sitemap*.xml
+**/robots*.txt
+
+
+# Vercel
+.vercel
+# Build Outputs
+.next/
+out/
+build
+
+
+# includes
+!settings.json
