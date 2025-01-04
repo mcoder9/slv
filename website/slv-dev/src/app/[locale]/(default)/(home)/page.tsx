@@ -9,6 +9,8 @@ import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
 import EasyStartValidatorRow from './EasyStartValidatorRow'
 import AdaptiveSolutionsRow from './AdaptiveSolutionsRow'
 import QualityOperationsRow from './QualityOperationsRow'
+import RocketStartRow from './RocketStartRow'
+import GlobalEdgeServersRow from './GlobalEdgeServersRow'
 
 const groupDir = '(home)'
 const { generateMetadata } = getDataForPageByGroupDir(groupDir)
@@ -30,6 +32,8 @@ export default async function HomePage({ params }: PageProps) {
       <EasyStartValidatorRow />
       <AdaptiveSolutionsRow />
       <QualityOperationsRow />
+      <RocketStartRow />
+      <GlobalEdgeServersRow />
       <VLDAirdropRow />
       <ProductsSlideRow />
       <CTARow />

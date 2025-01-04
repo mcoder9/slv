@@ -213,6 +213,9 @@ import BDLCxERPCImg from '@/assets/img/rows/bdlc/BDLCxERPC.jpg'
 import AdaptiveSolutionsImg from '@/assets/img/merit/AdaptiveSolutions.png'
 import EasyStartValidatorImg from '@/assets/img/merit/EasyStartValidator.png'
 import QualityOperationsImg from '@/assets/img/merit/QualityOperations.png'
+import EdgeComputeNetworkImg from '@/assets/img/merit/EdgeComputeNetwork.png'
+import MonorepoArchitectureImg from '@/assets/img/merit/MonorepoArchitecture.png'
+import Web3CompatibleImg from '@/assets/img/merit/Web3Compatible.png'
 
 export {
   logoHorizontal,
@@ -403,5 +406,8 @@ export {
   BDLCxERPCImg,
   AdaptiveSolutionsImg,
   EasyStartValidatorImg,
-  QualityOperationsImg
+  QualityOperationsImg,
+  EdgeComputeNetworkImg,
+  MonorepoArchitectureImg,
+  Web3CompatibleImg
 }
