@@ -29,7 +29,7 @@ export default function DefaultHeader() {
         )}
       >
         <div className="mx-auto flex w-full max-w-7xl flex-row items-center gap-2 lg:gap-20">
-          <LogoHorizontalLink className="w-24 sm:w-28" />
+          <LogoHorizontalLink className="w-16 sm:w-20" />
           <div className="hidden gap-8 lg:flex lg:flex-row">
             {defaultHeaderNav.map((navItem) => (
               <Link

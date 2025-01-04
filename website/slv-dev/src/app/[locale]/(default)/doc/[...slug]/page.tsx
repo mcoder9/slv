@@ -3,7 +3,7 @@ import {
   ArticlePageProps,
   getArticleBySlug,
   getAllRoutes,
-  getDataForArticlePageByGroupDir,
+  getDataForArticlePageByGroupDir
 } from '@/lib/articles'
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
 import { cn } from '@/lib/utils'
@@ -14,7 +14,7 @@ import ArticlePager from '@/components/articles/ArticlePager'
 import { getPagerData } from '@/lib/getPagerData'
 
 const groupDir = 'doc'
-const {  generateMetadata, generateStaticParams } =
+const { generateMetadata, generateStaticParams } =
   getDataForArticlePageByGroupDir(groupDir)
 export { generateMetadata, generateStaticParams }
 
@@ -26,18 +26,18 @@ export default async function DocArticlePage({ params }: ArticlePageProps) {
     slug,
     ['title', 'thumbnail', 'content'],
     groupDir,
-    locale,
+    locale
   )
   const allRoutes = getAllRoutes(docMenuData)
   const articlePaths = allRoutes.map(
-    (route) => `/${route.split('/').slice(2).join('/')}`,
+    (route) => `/${route.split('/').slice(2).join('/')}`
   )
 
   const pagerData = getPagerData({
     slug,
     groupDir,
     locale,
-    articlePaths,
+    articlePaths
   })
 
   return (
@@ -57,7 +57,7 @@ export default async function DocArticlePage({ params }: ArticlePageProps) {
           <div
             className={cn(
               'scrollbar-thumb-rounded-full scrollbar-track-rounded-full overflow-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-zinc-300 dark:scrollbar-track-zinc-950 dark:scrollbar-thumb-zinc-600',
-              'hidden max-h-[calc(100vh-10rem)] md:sticky md:top-32 md:block',
+              'hidden max-h-[calc(100vh-10rem)] md:sticky md:top-32 md:block'
             )}
           >
             <ScrollSyncToc rawMarkdownBody={articleData.content as string} />
