@@ -11,8 +11,8 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import {
   DiscordIconLink,
-  GithubIconLink,
-  TwitterIconLink,
+  GitHubLink,
+  TwitterIconLink
 } from '@/components/common/icons'
 import DocMenu from './DocMenu'
 
@@ -58,7 +58,7 @@ export default function DocMenuModalNav() {
           </nav>
           <div className="mt-auto">
             <div className="flex flex-row gap-3">
-              <GithubIconLink />
+              <GitHubLink />
               <TwitterIconLink />
               <DiscordIconLink />
             </div>
