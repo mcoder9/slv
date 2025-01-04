@@ -30,8 +30,8 @@ jobs:
 
       - name: Create .env.local file
         run: |
-          echo "NEXT_PUBLIC_SOLANA_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_ENDPOINT }}" > websites/slv-dev/.env.local
-          echo "NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT }}" >> websites/slv-dev/.env.local
+          echo "NEXT_PUBLIC_SOLANA_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_ENDPOINT }}" > website/slv-dev/.env.local
+          echo "NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT }}" >> website/slv-dev/.env.local
 
       - name: Deploy to Cloudflare
         run: deno task slv-dev deploy
