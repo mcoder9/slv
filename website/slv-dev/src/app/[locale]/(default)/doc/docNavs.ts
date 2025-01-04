@@ -6,25 +6,68 @@ export const docMenuData: Section[] = [
     route: '/doc/general/getting-started',
     items: [
       {
-        title: 'doc.nav.quickstart.firedancer',
-        route: '/doc/quickstart/firedancer',
+        title: 'doc.nav.validator.title',
+        subItems: [
+          {
+            title: 'doc.nav.validator.quickstart',
+            route: '/doc/validator/quickstart'
+          }
+        ]
       },
       {
-        title: 'doc.nav.quickstart.geyser-plugin',
-        route: '/doc/quickstart/geyser-plugin',
+        title: 'doc.nav.rpc.title',
+        subItems: [
+          {
+            title: 'doc.nav.rpc.quickstart',
+            route: '/doc/rpc/quickstart'
+          }
+        ]
       },
       {
-        title: 'doc.nav.quickstart.solv-mev-mode',
-        route: '/doc/quickstart/solv-mev-mode',
+        title: 'doc.nav.bot.title',
+        subItems: [
+          {
+            title: 'doc.nav.bot.quickstart',
+            route: '/doc/bot/quickstart'
+          }
+        ]
       },
       {
-        title: 'doc.nav.quickstart.no-downtime-update',
-        route: '/doc/quickstart/no-downtime-update',
+        title: 'doc.nav.swap.title',
+        subItems: [
+          {
+            title: 'doc.nav.swap.quickstart',
+            route: '/doc/swap/quickstart'
+          }
+        ]
       },
       {
-        title: 'doc.nav.quickstart.solv-swap',
-        route: '/doc/quickstart/solv-swap',
+        title: 'doc.nav.app.title',
+        subItems: [
+          {
+            title: 'doc.nav.app.quickstart',
+            route: '/doc/app/quickstart'
+          }
+        ]
       },
-    ],
-  },
+      {
+        title: 'doc.nav.cloud.title',
+        subItems: [
+          {
+            title: 'doc.nav.cloud.quickstart',
+            route: '/doc/cloud/quickstart'
+          }
+        ]
+      },
+      {
+        title: 'doc.nav.ai.title',
+        subItems: [
+          {
+            title: 'doc.nav.ai.quickstart',
+            route: '/doc/ai/quickstart'
+          }
+        ]
+      }
+    ]
+  }
 ]

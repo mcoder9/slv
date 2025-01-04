@@ -1,7 +1,7 @@
 ---
-id: general-getting-started
-title: SLV - Getting Started
-description: SLV - Getting Started
+id: validator-quickstart
+title: Solana バリデータ - クイックスタート
+description: SLV - Solana バリデータ - クイックスタート
 ---
 
 ![SLV](https://storage.slv.dev/SLVogp.jpg)

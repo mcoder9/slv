@@ -43,7 +43,7 @@ you’re prepared in case the node ever becomes unreachable.
 We’ll continue to provide method documentation along the way, and we look
 forward to your ongoing support!
 
-[Validators DAO Discord](https://discord.gg/X4BgkBHavp)
+[Validators DAO Discord](https://discord.com/invite/C7ZQSrCkYR)
 
 ## Dependencies
 
@@ -287,7 +287,7 @@ Commands:
 
 If you have any questions or need help, please join our Discord community.
 
-[Validators DAO Discord](https://discord.gg/X4BgkBHavp)
+[Validators DAO Discord](https://discord.com/invite/C7ZQSrCkYR)
 
 ## Roadmap
 

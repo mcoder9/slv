@@ -1,7 +1,7 @@
 ---
-id: quickstart-firedancer
-title: Firedancer
-description: solv - Firedancer Quickstart
+id: validator-quickstart
+title: Solana Validator Quickstart
+description: SLV - Solana Validator Quickstart
 ---
 
 ## Firedancer Setup Support (Frankendancer)
