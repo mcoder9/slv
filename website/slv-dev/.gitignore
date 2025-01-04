@@ -66,3 +66,4 @@ tmp/
 !components.json
 !tsconfig.json
 !.eslintrc.json
+!messages/**/*.json
