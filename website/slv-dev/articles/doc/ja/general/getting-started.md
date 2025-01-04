@@ -8,49 +8,28 @@ description: SLV - Getting Started
 
 ## The Toolkit for Solana Devs
 
-SLV is a toolkit for Solana developers. It provides a set of tools to help
-developers build, test, and deploy Solana Validatros and Solana-based
-applications.
+SLVはSolana開発者向けのツールキットです。SolanaバリデータやRPC、Solanaベースのアプリケーションを開発、テスト、デプロイするためのツール一式を提供します。
 
-In the newly revamped slv, you can complete all configurations from a remote
-machine—no more direct node logins required. This approach ensures that only
-essential packages are installed on the node, leaving behind no unnecessary
-clutter. We’ve also introduced Ansible Playbooks & Jinja Template for Linux
-configuration, allowing us to manage and migrate multiple validators with
-greater efficiency and security.
+リニューアルされた新しい SLV では、リモートマシンからすべての設定を完結できるようになり、ノードへの直接ログインが不要になりました。この方法により、ノードには必要最低限のパッケージのみがインストールされるため、不要なものが一切残りません。また、Linuxの設定にAnsible PlaybooksとJinja Templateを導入し、複数のバリデーターをより効率的かつ安全に管理・移行できるようになりました。
 
-Additionally, the new slv always uses a dummy key (an invalid key named
-“unstaked-identity.json”) for its initial startup. Once you confirm everything
-is running smoothly, you simply set the actual Identity and switch to the active
-key. Following this consistent flow helps prevent double votes and ensures
-you’re prepared in case the node ever becomes unreachable.
-
-We’ll continue to provide method documentation along the way, and we look
-forward to your ongoing support!
-
-[Validators DAO Discord](https://discord.gg/X4BgkBHavp)
+さらに、新しい SLV は起動時に常にダミーキー（「unstaked-identity.json」という無効なキー）を使用します。すべてが問題なく動作していることを確認したら、本番用のIdentityを設定し、アクティブキーに切り替えるだけです。この流れを徹底することで二重投票を防止し、ノードにアクセスできなくなった場合等の非常事態に備えることができます。
 
 ## Dependencies
 
 ### OS
 
-MacOS or Linux
+MacOS または Linux
 
-※ Please use WSL2 for Windows users.
+※ WindowsユーザーはWSL2をご利用ください。
 
-Download WSL2 For Windows 10
-[https://docs.microsoft.com/en-us/windows/wsl/install](https://docs.microsoft.com/en-us/windows/wsl/install)
+Windows 10向け WSL2のインストール: https://docs.microsoft.com/en-us/windows/wsl/install
 
 ### Libraries
-
-Please install the following software before using slv.
 
 - Python3 [Install](https://www.python.org/downloads/)
 - Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html/)
 
 ## Installation
-
-Install SLV CLI
 
 ```bash
 curl -fsSL https://storage.slv.dev/slv/install | sh

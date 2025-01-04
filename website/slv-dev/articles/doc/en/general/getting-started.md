@@ -9,7 +9,7 @@ description: SLV - Getting Started
 ## The Toolkit for Solana Devs
 
 SLV is a toolkit for Solana developers. It provides a set of tools to help
-developers build, test, and deploy Solana Validatros and Solana-based
+developers build, test, and deploy Solana Validators and Solana-based
 applications.
 
 In the newly revamped slv, you can complete all configurations from a remote
@@ -19,16 +19,11 @@ clutter. We’ve also introduced Ansible Playbooks & Jinja Template for Linux
 configuration, allowing us to manage and migrate multiple validators with
 greater efficiency and security.
 
-Additionally, the new slv always uses a dummy key (an invalid key named
+Additionally, the new SLV always uses a dummy key (an invalid key named
 “unstaked-identity.json”) for its initial startup. Once you confirm everything
 is running smoothly, you simply set the actual Identity and switch to the active
 key. Following this consistent flow helps prevent double votes and ensures
 you’re prepared in case the node ever becomes unreachable.
-
-We’ll continue to provide method documentation along the way, and we look
-forward to your ongoing support!
-
-[Validators DAO Discord](https://discord.gg/X4BgkBHavp)
 
 ## Dependencies
 
@@ -42,8 +37,6 @@ Download WSL2 For Windows 10
 [https://docs.microsoft.com/en-us/windows/wsl/install](https://docs.microsoft.com/en-us/windows/wsl/install)
 
 ### Libraries
-
-Please install the following software before using slv.
 
 - Python3 [Install](https://www.python.org/downloads/)
 - Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html/)
