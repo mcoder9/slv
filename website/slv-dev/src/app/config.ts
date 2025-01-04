@@ -6,10 +6,6 @@ export const messageJsons = [
   'metadata',
   '(home)',
   'staking',
-  'company',
-  'daos',
-  'products',
-  'press-kits',
   'news',
   'doc',
   'legal'

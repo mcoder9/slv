@@ -3,10 +3,8 @@
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import ProductsErpcRow from './products/ProductsErpcRow'
-import ProductsSolvRow from './products/ProductsSolvRow'
 import ProductsValidatorsSolutionsRow from './products/ProductsValidatorsSolutionsRow'
 import { cn } from '@/lib/utils'
-import ProductsSkeetRow from './products/ProductsSkeetRow'
 import ProductsBuidlersCollectiveRow from './products/ProductsBuidlersCollectiveRow'
 import DAOsEpicsRow from './daos/DAOsEpicsRow'
 import DAOsValidatorsRow from './daos/DAOsValidatorsRow'
@@ -27,12 +25,6 @@ export default function ProductsSlideRow() {
         )}
       >
         <CarouselContent>
-          <CarouselItem>
-            <ProductsSkeetRow />
-          </CarouselItem>
-          <CarouselItem>
-            <ProductsSolvRow />
-          </CarouselItem>
           <CarouselItem>
             <ProductsValidatorsSolutionsRow />
           </CarouselItem>

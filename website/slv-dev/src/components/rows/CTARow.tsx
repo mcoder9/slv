@@ -27,7 +27,11 @@ export default function CTARow() {
         </div>
 
         <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
-          <Link href={appInfo.discordInviteURL}>
+          <Link
+            href={appInfo.discordInviteURL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button>
               <FontAwesomeIcon icon={faDiscord} className="mr-2 h-5 w-5" />
               {t('common.CTARow.button')}
