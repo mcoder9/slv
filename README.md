@@ -43,7 +43,7 @@ you’re prepared in case the node ever becomes unreachable.
 We’ll continue to provide method documentation along the way, and we look
 forward to your ongoing support!
 
-[Validators DAO Discord](https://discord.gg/X4BgkBHavp)
+[Validators DAO Discord](https://discord.gg/C7ZQSrCkYR)
 
 ## Dependencies
 
@@ -58,10 +58,9 @@ Download WSL2 For Windows 10
 
 ### Libraries
 
-Please install the following software before using slv.
-
 - Python3 [Install](https://www.python.org/downloads/)
-- Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html/)
+- Ansible
+  [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html/)
 
 ## Installation & Validator Launch
 
@@ -287,7 +286,7 @@ Commands:
 
 If you have any questions or need help, please join our Discord community.
 
-[Validators DAO Discord](https://discord.gg/X4BgkBHavp)
+[Validators DAO Discord](https://discord.gg/C7ZQSrCkYR)
 
 ## Roadmap
 
@@ -388,6 +387,6 @@ The package is available as open source under the terms of the
 
 ## Code of Conduct
 
-Everyone interacting in the solv project’s codebases, issue trackers, chat rooms
+Everyone interacting in the SLV project’s codebases, issue trackers, chat rooms
 and mailing lists is expected to follow the
 [code of conduct](https://github.com/ValidatorsDAO/slv/blob/master/CODE_OF_CONDUCT.md).

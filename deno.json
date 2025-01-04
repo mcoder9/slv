@@ -32,7 +32,6 @@
   "compilerOptions": {
     "checkJs": true
   },
-  "exclude": ["README.md"],
   "fmt": {
     "semiColons": false,
     "singleQuote": true,

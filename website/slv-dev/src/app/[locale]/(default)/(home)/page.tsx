@@ -6,9 +6,11 @@ import HomeHeroRow from './HomeHeroRow'
 import CTARow from '@/components/rows/CTARow'
 import VLDAirdropRow from '@/components/rows/VLDAirdropRow'
 import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
-import GoalDrivenRow from './GoalDrivenRow'
-import GreenCodingRow from './GreenCodingRow'
-import OpenSourceRow from './OpenSourceRow'
+import EasyStartValidatorRow from './EasyStartValidatorRow'
+import AdaptiveSolutionsRow from './AdaptiveSolutionsRow'
+import QualityOperationsRow from './QualityOperationsRow'
+import RocketStartRow from './RocketStartRow'
+import GlobalEdgeServersRow from './GlobalEdgeServersRow'
 
 const groupDir = '(home)'
 const { generateMetadata } = getDataForPageByGroupDir(groupDir)
@@ -27,9 +29,11 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <HomeHeroRow />
-      <GoalDrivenRow />
-      <GreenCodingRow />
-      <OpenSourceRow />
+      <EasyStartValidatorRow />
+      <AdaptiveSolutionsRow />
+      <QualityOperationsRow />
+      <RocketStartRow />
+      <GlobalEdgeServersRow />
       <VLDAirdropRow />
       <ProductsSlideRow />
       <CTARow />

@@ -11,11 +11,17 @@ import {
 
 import { LanguageToggle } from '@/components/config/LanguageToggle'
 import { ModeToggle } from '@/components/config/ModeToggle'
-import { defaultFooterNav1, defaultFooterNav2 } from './defaultNavs'
+import { defaultFooterNav1 } from './defaultNavs'
 import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { useLocale, useTranslations } from 'next-intl'
 import GreenHostingBadge from '@/components/common/GreenHostingBadge'
+import {
+  ELSOL_WEB_LINK,
+  ERPC_WEB_LINK,
+  VALIDATORS_DAO_WEB_LINK,
+  VALIDATORS_SOLUTIONS_WEB_LINK
+} from '@/constants/links'
 
 export default function DefaultFooter() {
   const t = useTranslations()
@@ -27,7 +33,7 @@ export default function DefaultFooter() {
     <>
       <footer className="mx-auto flex w-full max-w-7xl flex-col gap-10 border-t border-zinc-200 px-6 pb-8 pt-10 dark:border-zinc-500">
         <div className="flex w-full flex-col items-stretch justify-between gap-8 sm:flex-row">
-          <div className="flex w-full items-start justify-between sm:flex-col">
+          <div className="flex w-full items-center justify-between sm:flex-col sm:items-start">
             <LogoHorizontalLink className="w-24" />
             <div className="flex flex-row items-center gap-4">
               <GitHubLink />
@@ -53,20 +59,46 @@ export default function DefaultFooter() {
             ))}
           </div>
           <div className="flex w-full flex-col gap-3">
-            {defaultFooterNav2.map((navItem) => (
-              <Link
-                href={navItem.path}
-                key={navItem.label}
-                className={cn(
-                  isActivePath(navItem.path)
-                    ? 'text-blue-500 dark:text-blue-300'
-                    : 'text-zinc-500 dark:text-zinc-300',
-                  'flex items-center gap-4 py-2 text-sm hover:opacity-70'
-                )}
-              >
-                {t(navItem.label)}
-              </Link>
-            ))}
+            <Link
+              href={VALIDATORS_DAO_WEB_LINK}
+              className={cn(
+                'text-zinc-500 dark:text-zinc-300',
+                'flex items-center gap-4 py-2 text-sm hover:opacity-70'
+              )}
+              target="_blank"
+            >
+              Validators DAO
+            </Link>
+            <Link
+              href={VALIDATORS_SOLUTIONS_WEB_LINK}
+              className={cn(
+                'text-zinc-500 dark:text-zinc-300',
+                'flex items-center gap-4 py-2 text-sm hover:opacity-70'
+              )}
+              target="_blank"
+            >
+              Validators Solutions
+            </Link>
+            <Link
+              href={ERPC_WEB_LINK}
+              className={cn(
+                'text-zinc-500 dark:text-zinc-300',
+                'flex items-center gap-4 py-2 text-sm hover:opacity-70'
+              )}
+              target="_blank"
+            >
+              ERPC - Solana Enhanced RPC
+            </Link>
+            <Link
+              href={ELSOL_WEB_LINK}
+              className={cn(
+                'text-zinc-500 dark:text-zinc-300',
+                'flex items-center gap-4 py-2 text-sm hover:opacity-70'
+              )}
+              target="_blank"
+            >
+              elSOL - Solana Incentivized LST
+            </Link>
           </div>
           <div className="flex w-full flex-col">
             <div className="max-w-40 sm:ml-auto">

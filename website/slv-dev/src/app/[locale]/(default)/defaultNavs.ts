@@ -1,30 +1,19 @@
 export enum DEFAULT_PATHS {
   home = '/',
   staking = '/staking',
-  company = '/company',
-  daos = '/daos',
-  products = '/products',
-  pressKits = '/press-kits',
+  doc = '/doc/general/getting-started',
   news = '/news',
   privacy = '/legal/privacy-policy'
 }
 
 export const defaultHeaderNav = [
   {
-    path: DEFAULT_PATHS.products,
-    label: 'products.title'
-  },
-  {
-    path: DEFAULT_PATHS.daos,
-    label: 'daos.title'
+    path: DEFAULT_PATHS.doc,
+    label: 'doc.title'
   },
   {
     path: DEFAULT_PATHS.staking,
     label: 'staking.title'
-  },
-  {
-    path: DEFAULT_PATHS.company,
-    label: 'company.title'
   },
   {
     path: DEFAULT_PATHS.news,
@@ -34,34 +23,21 @@ export const defaultHeaderNav = [
 
 export const defaultFooterNav1 = [
   {
-    path: DEFAULT_PATHS.products,
-    label: 'products.title'
-  },
-  {
-    path: DEFAULT_PATHS.daos,
-    label: 'daos.title'
+    path: DEFAULT_PATHS.doc,
+    label: 'doc.title'
   },
   {
     path: DEFAULT_PATHS.staking,
     label: 'staking.title'
-  }
-]
-
-export const defaultFooterNav2 = [
-  {
-    path: DEFAULT_PATHS.company,
-    label: 'company.title'
   },
   {
     path: DEFAULT_PATHS.news,
     label: 'news.title'
   },
   {
-    path: DEFAULT_PATHS.pressKits,
-    label: 'press-kits.title'
-  },
-  {
     path: DEFAULT_PATHS.privacy,
     label: 'legal.privacy'
   }
 ]
+
+export const defaultFooterNav2 = []

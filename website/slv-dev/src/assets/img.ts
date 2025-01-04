@@ -1,5 +1,5 @@
-import logoHorizontal from '@/assets/img/logo/ELSOULLaboLogoHorizontal.svg'
-import logoHorizontalInvert from '@/assets/img/logo/ELSOULLaboLogoHorizontalInvert.svg'
+import logoHorizontal from '@/assets/img/logo/SLVLogoHorizontal.svg'
+import logoHorizontalInvert from '@/assets/img/logo/SLVLogoInvertHorizontal.svg'
 
 import ElsolLogoHorizontal from '@/assets/img/logo/elSOLLogoHorizontal.svg'
 import ElsolLogoInvertHorizontal from '@/assets/img/logo/elSOLLogoInvertHorizontal.svg'
@@ -30,6 +30,8 @@ import SanctumLogoInvertHorizontal from '@/assets/img/logo/partners/defi/Sanctum
 
 import JitoFoundationLogoHorizontal from '@/assets/img/logo/partners/validator/JitoFoundationLogoHorizontal.svg'
 import JitoFoundationLogoInvertHorizontal from '@/assets/img/logo/partners/validator/JitoFoundationLogoInvertHorizontal.svg'
+import JitoLogoHorizontal from '@/assets/img/logo/partners/validator/JitoLogoGreen.svg'
+import JitoLogoInvertHorizontal from '@/assets/img/logo/partners/validator/JitoLogoWhite.svg'
 import AgaveLogoHorizontal from '@/assets/img/logo/partners/validator/AgaveLogoHorizontal.svg'
 import AgaveLogoInvertHorizontal from '@/assets/img/logo/partners/validator/AgaveLogoInvertHorizontal.svg'
 import FiredancerLogoHorizontal from '@/assets/img/logo/partners/validator/FiredancerLogoHorizontal.svg'
@@ -208,6 +210,13 @@ import TFIAlphaJA91 from '@/assets/img/cards/TheFirstInvestor/91-TFI-AlphaJA.png
 import BDLCStakingImg from '@/assets/img/rows/bdlc/NFTStaking.png'
 import BDLCxERPCImg from '@/assets/img/rows/bdlc/BDLCxERPC.jpg'
 
+import AdaptiveSolutionsImg from '@/assets/img/merit/AdaptiveSolutions.png'
+import EasyStartValidatorImg from '@/assets/img/merit/EasyStartValidator.png'
+import QualityOperationsImg from '@/assets/img/merit/QualityOperations.png'
+import EdgeComputeNetworkImg from '@/assets/img/merit/EdgeComputeNetwork.png'
+import MonorepoArchitectureImg from '@/assets/img/merit/MonorepoArchitecture.png'
+import Web3CompatibleImg from '@/assets/img/merit/Web3Compatible.png'
+
 export {
   logoHorizontal,
   logoHorizontalInvert,
@@ -246,6 +255,8 @@ export {
   IncentivizedLST,
   JitoFoundationLogoHorizontal,
   JitoFoundationLogoInvertHorizontal,
+  JitoLogoHorizontal,
+  JitoLogoInvertHorizontal,
   JupiterLogoHorizontal,
   JupiterLogoInvertHorizontal,
   LiquidityPoolOrca,
@@ -392,5 +403,11 @@ export {
   TFIAlphaEN91,
   TFIAlphaJA91,
   BDLCStakingImg,
-  BDLCxERPCImg
+  BDLCxERPCImg,
+  AdaptiveSolutionsImg,
+  EasyStartValidatorImg,
+  QualityOperationsImg,
+  EdgeComputeNetworkImg,
+  MonorepoArchitectureImg,
+  Web3CompatibleImg
 }

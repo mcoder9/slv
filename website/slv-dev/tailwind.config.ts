@@ -3,6 +3,7 @@ import type { Config } from 'tailwindcss'
 import typographyConfig from '@tailwindcss/typography'
 import animateConfig from 'tailwindcss-animate'
 import scrollbarConfig from 'tailwind-scrollbar'
+import scrollbarHide from 'tailwind-scrollbar-hide'
 
 const config = {
   darkMode: ['class'],
@@ -92,7 +93,7 @@ const config = {
       }
     }
   },
-  plugins: [typographyConfig, animateConfig, scrollbarConfig]
+  plugins: [typographyConfig, animateConfig, scrollbarConfig, scrollbarHide]
 } satisfies Config
 
 export default config
