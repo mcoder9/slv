@@ -1,9 +1,9 @@
 <p align="center">
-  <a href="">
+  <a href="https://slv.dev/" target="_blank">
     <img src="https://storage.slv.dev/SLVogp.jpg" alt="SLV" />
   </a>
 
-<a href="https://twitter.com/intent/follow?screen_name=slvSOLANA">
+<a href="https://twitter.com/intent/follow?screen_name=slvSOLANA" target="_blank">
     <img src="https://img.shields.io/twitter/follow/slvSOLANA.svg?label=Follow%20@slvSOLANA" alt="Follow @slvSOLANA" />
   </a>
 <a aria-label="License" href="https://github.com/ValidatorsDAO/slv/blob/master/LICENSE.txt">
