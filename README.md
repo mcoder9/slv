@@ -3,23 +3,20 @@
     <img src="https://storage.slv.dev/SLVogp.jpg" alt="SLV" />
   </a>
 
-<a href="https://twitter.com/intent/follow?screen_name=ValidatorsDAO">
-    <img src="https://img.shields.io/twitter/follow/ValidatorsDAO.svg?label=Follow%20@ValidatorsDAO" alt="Follow @ValidatorsDAO" />
+<a href="https://twitter.com/intent/follow?screen_name=slvSOLANA">
+    <img src="https://img.shields.io/twitter/follow/slvSOLANA.svg?label=Follow%20@slvSOLANA" alt="Follow @slvSOLANA" />
   </a>
-  <br/>
-  <!-- <a aria-label="npm version" href="https://www.npmjs.com/package/@epics-dao/solv">
-    <img alt="" src="https://badgen.net/npm/v/@epics-dao/solv">
-  </a>
-  <a aria-label="Downloads Number" href="https://www.npmjs.com/package/@epics-dao/solv">
-    <img alt="" src="https://badgen.net/npm/dt/@epics-dao/solv">
-  </a> -->
-  <a aria-label="License" href="https://github.com/ValidatorsDAO/slv/blob/master/LICENSE.txt">
+<a aria-label="License" href="https://github.com/ValidatorsDAO/slv/blob/master/LICENSE.txt">
     <img alt="" src="https://badgen.net/badge/license/Apache/blue">
   </a>
     <a aria-label="Code of Conduct" href="https://github.com/ValidatorsDAO/slv/blob/master/CODE_OF_CONDUCT.md">
     <img alt="" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg">
   </a>
 </p>
+
+**Everything you need for Solana development is here💃**
+
+**Launch validators, RPCs, and dApps at blazing speed⚡️**
 
 ## The Toolkit for Solana Devs
 
@@ -290,8 +287,8 @@ If you have any questions or need help, please join our Discord community.
 
 ## Roadmap
 
-- [] Add `slv rpc init` for Solana RPC Build (in progress)
 - [x] Add `slv validator init` for Solana Validator Deploy (in progress)
+- [] Add `slv rpc init` for Solana RPC Build (in progress)
 - [] Add `slv validator setup --relayer` for Solana Validator Relayer Build (in
   progress)
 - [] Add `slv validator setup --shredstream` for ShredStream Node Build (in
@@ -333,41 +330,6 @@ Run Test
 ```bash
 deno test -A
 ```
-
-## elSOL - Solana Liquid Staking Token (LST)
-
-✨ The elSOL pool is simple. ✨
-
-The elSOL staking pool exclusively includes validators with;
-
-✅ - 0% vote commission
-
-✅ - 0% Jito MEV commission
-
-Plus, elSOL offers;
-
-✅ - 0% pool management fee,
-
-For enhanced security, we have set
-
-Sol Withdrawal Fee & Stake Withdrawal Fee of 0.10%.
-
-This fee helps prevent misuse and ensures the stability and reliability of the
-service, safeguarding both the system and our users.
-
-thus, elSOL offers higher True APY in long-term staking.
-
-website: [https://elsol.app](https://elsol.app)
-
-## Enhanced Solana RPC
-
-The Enhanced Solana RPC is a high-performance Solana RPC API service that
-provides a reliable and scalable infrastructure for Solana developers and
-validators.
-
-- New! Geyser gRPC Connection Free Trial is now available!
-
-website: [https://erpc.global](https://erpc.global)
 
 ## Contributing
 
