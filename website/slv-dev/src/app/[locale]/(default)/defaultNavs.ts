@@ -11,10 +11,10 @@ export const defaultHeaderNav = [
     path: DEFAULT_PATHS.doc,
     label: 'doc.title'
   },
-  // {
-  //   path: DEFAULT_PATHS.staking,
-  //   label: 'staking.title'
-  // },
+  {
+    path: DEFAULT_PATHS.staking,
+    label: 'staking.title'
+  },
   {
     path: DEFAULT_PATHS.news,
     label: 'news.title'
@@ -26,10 +26,10 @@ export const defaultFooterNav1 = [
     path: DEFAULT_PATHS.doc,
     label: 'doc.title'
   },
-  // {
-  //   path: DEFAULT_PATHS.staking,
-  //   label: 'staking.title'
-  // },
+  {
+    path: DEFAULT_PATHS.staking,
+    label: 'staking.title'
+  },
   {
     path: DEFAULT_PATHS.news,
     label: 'news.title'
