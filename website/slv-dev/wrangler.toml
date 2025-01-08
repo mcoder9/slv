@@ -1,7 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "slv-dev"
-compatibility_date = "2024-05-24"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2025-01-04"
+compatibility_flags = ["nodejs_compat_v2"]
 pages_build_output_dir = "./out"
 
 # Automatically place your workloads in an optimal location to minimize latency.

@@ -79,3 +79,5 @@ build
 
 # includes
 !settings.json
+!tsconfig.json
+!package.json

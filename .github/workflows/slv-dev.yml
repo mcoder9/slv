@@ -6,7 +6,6 @@ on:
     paths:
       - "website/slv-dev/**"
       - ".github/workflows/slv-dev.yml"
-      - "deno.lock"
 
 jobs:
   build:
@@ -20,13 +19,19 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v2
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
         with:
-          deno-version: v2.x
+          version: 9
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: deno install
+        run: pnpm install
 
       - name: Create .env.local file
         run: |
