@@ -39,7 +39,7 @@ jobs:
           echo "NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT }}" >> website/slv-dev/.env.local
 
       - name: Deploy to Cloudflare
-        run: deno task slv-dev deploy
+        run: pnpm -F slv-dev run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
