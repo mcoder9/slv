@@ -74,7 +74,6 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   }
   // Create solv User on Ubuntu Server
   await genSolvUser(sshConnection.ip, 'testnet_validators')
-  await copyKeys('testnet_validators')
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
   const configTestnet: ValidatorTestnetConfig = {
@@ -96,6 +95,7 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   console.log(
     `✔︎ Validator testnet config saved to ${validatorTestnetConfigFilePath}`,
   )
+  await copyKeys('testnet_validators')
   console.log(colors.white(`Now you can deploy with:
 
 $ slv v deploy -n testnet    
