@@ -1,5 +1,5 @@
 {
-  "workspace": ["cli", "website/slv-dev"],
+  "workspace": ["cli"],
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test -A",

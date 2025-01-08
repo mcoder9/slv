@@ -18,7 +18,7 @@ export const getArticleBySlug = (
   const articlesDirectory = join(
     process.cwd(),
     `articles/${articleDirPrefix}/${locale}`
-  )
+  ) 
   const matchedSlug = slugArray.join('/')
   const realSlug = matchedSlug.replace(/\.md$/, '')
   const fullPath = join(articlesDirectory, `${realSlug}.md`)
