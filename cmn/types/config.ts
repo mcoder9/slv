@@ -6,6 +6,8 @@ export type ValidatorTestnetType = 'firedancer'
 
 export interface HostData {
   ansible_user: string
+  ansible_host: string
+  ansible_ssh_private_key_file: string
   name: string
   identity_account: string
 }

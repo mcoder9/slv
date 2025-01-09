@@ -36,16 +36,20 @@ const addInventory = async (
     if (!inventory.testnet_validators.hosts) {
       inventory.testnet_validators.hosts = {
         [sshConnection.ip]: {
+          ansible_host: sshConnection.ip,
+          ansible_user: sshConnection.username,
+          ansible_ssh_private_key_file: sshConnection.rsa_key_path,
           identity_account: identityAccount,
           name: identityAccount,
-          ansible_user: sshConnection.username,
         },
       }
     } else {
       inventory.testnet_validators.hosts[sshConnection.ip] = {
+        ansible_host: sshConnection.ip,
+        ansible_user: sshConnection.username,
+        ansible_ssh_private_key_file: sshConnection.rsa_key_path,
         identity_account: identityAccount,
         name: identityAccount,
-        ansible_user: sshConnection.username,
       }
     }
 
