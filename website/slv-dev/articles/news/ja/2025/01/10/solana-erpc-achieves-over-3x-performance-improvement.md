@@ -1,11 +1,11 @@
 ---
 id: solana-erpc-achieves-over-3x-performance-improvement
-title: Solana ERPC、Rust 製高性能ネットワークシステム実装実験で3倍超の性能を達成
+title: Solana ERPC、Rust 製・低レイテンシネットワークシステム実装実験で3倍超の性能を達成
 category: プレスリリース
 thumbnail: /news/2025/01/10/rust-based-solana-proxy-delivers-3x-performanceJA.jpg
 ---
 
-ELSOUL LABO B.V.（本社: オランダ・アムステルダム、代表取締役 CEO: 川崎文武）と、Solana ネットワークの分散化・セキュリティ強化を推進する Validators DAO は、Solana Enhanced RPC（以下「ERPC」）のプロキシを従来の Nginx ベースから Rust 製の高性能ネットワークシステムフレームワーク「Pingora」ベースに換装する実験を行い、ピーク時に 3 倍を超える性能改善を確認したことを発表しました。今後は本番環境での導入を順次進め、さらなる速度と安定性を提供してまいります。
+ELSOUL LABO B.V.（本社: オランダ・アムステルダム、代表取締役 CEO: 川崎文武）と、Solana ネットワークの分散化・セキュリティ強化を推進する Validators DAO は、Solana Enhanced RPC（以下「ERPC」）のプロキシを従来の Nginx ベースから Rust 製の高性能ネットワークシステムフレームワーク「Pingora」ベースに換装する実験を行い、ピーク時に 3 倍を超える性能改善を達成したことを発表しました。今後は本番環境での導入を順次進め、さらなる速度と安定性を提供してまいります。
 
 DeFi トレードや NFT ミントなど、アクセスが集中するタイミングでこそトランザクションを迅速に処理できることが重要です。高負荷時でも安定した接続を維持し、ユーザーが機会を逃さずに取引を成立させられるよう、今回の実装実験ではピーク時のスループット向上と低レイテンシ化に特に注力しました。
 
