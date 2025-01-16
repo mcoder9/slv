@@ -7,6 +7,8 @@ import { listValidators } from '/src/validator/listValidators.ts'
 import { getIPByIdentityKey } from '/lib/getIPByIdentityKey.ts'
 import { getTemplatePath } from '/lib/getTemplatePath.ts'
 import { runAnsilbe } from '/lib/runAnsible.ts'
+import type { InventoryType, NetworkType } from '@cmn/types/config.ts'
+import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 
 export const validatorCmd = new Command()
   .description('Manage Solana Validator Nodes')
@@ -50,8 +52,8 @@ validatorCmd.command('list')
     default: 'testnet',
   })
   .action(async (options) => {
-    // const network = options.network
-    await listValidators()
+    const network = options.network as NetworkType
+    await listValidators(network)
   })
 
 validatorCmd.command('set:identity')
@@ -66,16 +68,14 @@ validatorCmd.command('set:identity')
       console.log(colors.yellow('⚠️ Public Key is required'))
       return
     }
-    const ip = await getIPByIdentityKey(options.pubkey)
-    if (!ip) {
-      console.log(colors.yellow('⚠️ IP not found'))
-      return
-    }
-    console.log(`Setting Validator Identity with IP: ${ip}`)
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
+
     const templateRoot = getTemplatePath()
     const playbook =
       `${templateRoot}/ansible/testnet-validator/change_identity_and_restart.yml`
-    const result = await runAnsilbe(playbook, ip)
+    const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
     if (result) {
       console.log(colors.white('✅ Successfully Set Validator Identity'))
       return
@@ -95,16 +95,14 @@ validatorCmd.command('set:unstaked')
       console.log(colors.yellow('⚠️ Public Key is required'))
       return
     }
-    const ip = await getIPByIdentityKey(options.pubkey)
-    if (!ip) {
-      console.log(colors.yellow('⚠️ IP not found'))
-      return
-    }
-    console.log(`Setting Validator Identity with IP: ${ip}`)
+
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
     const templateRoot = getTemplatePath()
     const playbook =
       `${templateRoot}/ansible/testnet-validator/set_unstaked_key.yml`
-    const result = await runAnsilbe(playbook, ip)
+    const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
     if (result) {
       console.log(colors.white('✅ Successfully Set Unstaked Identity'))
       return
@@ -127,18 +125,17 @@ validatorCmd.command('restart')
       console.log(colors.yellow('⚠️ Public Key is required'))
       return
     }
-    const ip = await getIPByIdentityKey(options.pubkey)
-    if (!ip) {
-      console.log(colors.yellow('⚠️ IP not found'))
-      return
-    }
-    console.log(`Setting Validator Identity with IP: ${ip}`)
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
     const templateRoot = getTemplatePath()
+    const inventory = await genOrReadInventory(inventoryType)
+    const validator = inventory[inventoryType].hosts[options.pubkey]
     const playbook = options.rm
-      ? `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
-      : `${templateRoot}/ansible/testnet-validator/restart_firedancer.yml`
+      ? `${templateRoot}/ansible/testnet-validator/restart_${validator.validator_type}_with_rm_ledger.yml`
+      : `${templateRoot}/ansible/testnet-validator/restart_${validator.validator_type}.yml`
 
-    const result = await runAnsilbe(playbook, ip)
+    const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
     if (result) {
       console.log(colors.white('✅ Successfully Restarted Validator'))
       return

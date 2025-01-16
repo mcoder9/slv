@@ -1,5 +1,5 @@
 ---
-- name: Execute tasks as solv user
+- name: Stop Agave, Rm ledger, DL snapshot, and run Agave
   hosts: all
   become: yes
   tasks:

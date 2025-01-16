@@ -158,7 +158,7 @@ example shows how to set an existing identity key.
 .
 .
 ✔︎ Success
-✔ Inventory updated to ~/.slv/inventory.yml
+✔ Inventory updated to ~/.slv/inventory.testnet.validators.yml
 ✔ Successfully created solv user on x.x.x.x
 ```
 
