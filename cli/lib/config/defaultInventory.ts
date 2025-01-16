@@ -1,11 +1,9 @@
-const defaultInventory = `testnet_validators:
-  hosts: null
+import type { InventoryType } from '@cmn/types/config.ts'
 
-mainnet_validators:
-  hosts: null
-
-rpcs:
-  hosts: null
-`
+const defaultInventory = (
+  inventoryType: InventoryType,
+) =>
+  `${inventoryType}:
+  hosts: null`
 
 export { defaultInventory }

@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars_files:
-    - ~/.slv/config.validator.testnet.yml
+    - ~/.slv/inventory.testnet.validators.yml
   tasks:
     # 1. Ensure pip3 and venv are installed
     - name: Install pip3 and venv if not present

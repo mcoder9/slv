@@ -3,20 +3,14 @@
   hosts: all
   gather_facts: no
   vars_files:
-    - ~/.slv/config.validator.testnet.yml
+    - ~/.slv/inventory.testnet.validators.yml
 
   tasks:
-    - name: Select node config by identity_account
-      set_fact:
-        validators: '{{ item }}'
-      with_items: '{{ validators }}'
-      when: item.identity_account == hostvars[inventory_hostname].identity_account
-
     - name: Copy validator key file
       become: yes
       become_user: root
       copy:
-        src: '~/.slv/keys/{{ validators.identity_account }}.json'
+        src: '~/.slv/keys/{{ hostvars[inventory_hostname].identity_account }}.json'
         dest: '/home/solv/testnet-validator-keypair.json'
         owner: solv
         group: solv
@@ -26,7 +20,7 @@
       become: yes
       become_user: root
       copy:
-        src: '~/.slv/keys/{{ validators.vote_account }}.json'
+        src: '~/.slv/keys/{{ hostvars[inventory_hostname].vote_account }}.json'
         dest: '/home/solv/testnet-vote-account-keypair.json'
         owner: solv
         group: solv

@@ -1,8 +1,12 @@
-import { readValidatorTestnetConfig } from '/lib/readConfig.ts'
 import { colors } from '@cliffy/colors'
 import { Row, Table } from '@cliffy/table'
-const listValidators = async () => {
-  const testnetValidatorConfig = await readValidatorTestnetConfig()
+import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
+import type { NetworkType } from '@cmn/types/config.ts'
+const listValidators = async (network: NetworkType) => {
+  const inventoryType = network === 'mainnet'
+    ? 'mainnet_validators'
+    : 'testnet_validators'
+  const inventory = await genOrReadInventory(inventoryType)
   const header = [
     'Identity Key',
     'Vote Key',
@@ -12,7 +16,7 @@ const listValidators = async () => {
     'Version',
   ]
   console.log(colors.white('Your Testnet Validators Settings:'))
-  for (const validator of testnetValidatorConfig.validators) {
+  for (const validator of Object.values(inventory.testnet_validators.hosts)) {
     const table = new Table()
     table
       .body([
@@ -35,7 +39,7 @@ const listValidators = async () => {
           .border(true),
         new Row(
           colors.blue(header[3]),
-          colors.white(validator.ip),
+          colors.white(validator.ansible_host),
         )
           .border(true),
         new Row(

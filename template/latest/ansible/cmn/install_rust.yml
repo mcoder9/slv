@@ -18,10 +18,6 @@
         chdir: /home/solv/
       register: install_output
 
-    - name: Debug Rust installation output
-      debug:
-        var: install_output
-
     - name: Add Cargo bin directory to PATH manually
       shell: |
         echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> /home/solv/.bashrc
@@ -40,10 +36,6 @@
       environment:
         PATH: /bin:/usr/bin:/usr/local/bin:/home/solv/.cargo/bin
       register: rustup_output
-
-    - name: Debug rustfmt installation output
-      debug:
-        var: rustup_output
 
     - name: Verify Rust installation
       shell: |

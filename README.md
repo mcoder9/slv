@@ -187,14 +187,14 @@ from the vote account.
 
 ```bash
 ? Please Enter Your Vote Account's Authrority Key › <your-authority-pubkey>
-✔︎ Validator testnet config saved to ~/.slv/config.validator.testnet.yml
+✔︎ Validator testnet config saved to ~/.slv/inventory.testnet.validators.yml
 
 Now you can deploy with:
 
 $ slv v deploy -n testnet
 ```
 
-Now your configuration is saved to `~/.slv/config.validator.testnet.yml`.
+Now your configuration is saved to `~/.slv/inventory.testnet.validators.yml`.
 
 ### Deploy the Solana Validator
 

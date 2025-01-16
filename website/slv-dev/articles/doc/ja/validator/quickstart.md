@@ -126,14 +126,14 @@ slv v init
 
 ```bash
 ? Please Enter Your Vote Account's Authrority Key › <your-authority-pubkey>
-✔︎ Validator testnet config saved to ~/.slv/config.validator.testnet.yml
+✔︎ Validator testnet config saved to ~/.slv/inventory.testnet.validators.yml
 
 Now you can deploy with:
 
 $ slv v deploy -n testnet
 ```
 
-これで設定内容が `~/.slv/config.validator.testnet.yml` に保存されました。
+これで設定内容が `~/.slv/inventory.testnet.validators.yml` に保存されました。
 
 ### バリデータのデプロイ
 

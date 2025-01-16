@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars_files:
-    - ~/.slv/config.validator.testnet.yml
+    - ~/.slv/inventory.testnet.validators.yml
   tasks:
     # 1. Ensure pip3 and venv are installed
     - name: Install pip3 and venv if not present
@@ -56,21 +56,9 @@
       become: false
       become_user: solv
 
-    # 7. Find snapshot configuration for this host by identity_account
-    - name: Find snapshot configuration for this host by identity_account
-      set_fact:
-        snapshot_config: '{{ item }}'
-      with_items: '{{ validators }}'
-      when: item.identity_account == identity_account
-
-    - name: Debug selected snapshot configuration
-      debug:
-        var: snapshot_config
-
-    # 8. Run Snapshot Finder
     - name: Run Snapshot Finder
       shell: |
-        source ./venv/bin/activate && python3 snapshot-finder.py --snapshot_path /mnt/snapshot --version {{ snapshot_config.solana_version }} -r http://api.testnet.solana.com --min_download_speed 45
+        source ./venv/bin/activate && python3 snapshot-finder.py --snapshot_path /mnt/snapshot --version {{ hostvars[inventory_hostname].solana_version }} -r http://api.testnet.solana.com --min_download_speed 45
       args:
         chdir: /home/solv/solana-snapshot-finder
         executable: /bin/bash

@@ -2,7 +2,13 @@ export type KeyDirType = 'rpc' | 'validator' | 'relayer' | 'shreadstream'
 
 export type NetworkType = 'mainnet' | 'testnet'
 export type RpcType = 'minimal' | 'geyser-yellowstone'
-export type ValidatorTestnetType = 'firedancer'
+export type ValidatorTestnetType = 'firedancer' | 'agave'
+export type InventoryType = 'testnet_validators' | 'mainnet_validators'
+
+export const DEFAULT_SOLANA_CLI = 'agave'
+export const DEFAULT_SOLANA_VERSION = '2.0.22'
+export const DEFAULT_FIREDANCER_VERSION = '0.304.20106'
+export const DEFAULT_VALIDATOR_TYPE = 'agave'
 
 export interface HostData {
   ansible_user: string
@@ -10,13 +16,19 @@ export interface HostData {
   ansible_ssh_private_key_file: string
   name: string
   identity_account: string
+  vote_account: string
+  authority_account: string
+  solana_cli: string
+  solana_version: string
+  validator_type: string
+  version: string
 }
 
 export interface GroupData {
   hosts: Record<string, HostData>
 }
 
-export type Inventory = Record<string, GroupData>
+export type Inventory = Record<InventoryType, GroupData>
 
 export interface RpcConfig {
   identity_account: string

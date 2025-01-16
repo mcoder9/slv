@@ -3,7 +3,7 @@
   hosts: all
   become: true
   vars_files:
-    - ~/.slv/config.validator.testnet.yml
+    - ~/.slv/inventory.testnet.validators.yml
   vars:
     solana_bin_dir: '/home/solv/.local/share/solana/install/active_release/bin'
   tasks:

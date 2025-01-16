@@ -19,55 +19,14 @@
         rule: allow
         name: OpenSSH
 
-    - name: Allow port 53 (DNS)
+    - name: Allow ports 8000-8020 TCP
       ufw:
         rule: allow
-        port: 53
-
-    - name: Allow port 8899 TCP
-      ufw:
-        rule: allow
-        port: 8899
+        port: '8000:8020'
         proto: tcp
 
-    - name: Allow port 8899 UDP
+    - name: Allow ports 8000-8020 UDP
       ufw:
         rule: allow
-        port: 8899
-        proto: udp
-
-    - name: Allow ports 8000-8898 TCP
-      ufw:
-        rule: allow
-        port: '8000:8898'
-        proto: tcp
-
-    - name: Allow ports 8000-8898 UDP
-      ufw:
-        rule: allow
-        port: '8000:8898'
-        proto: udp
-
-    - name: Allow ports 8900-9999 TCP
-      ufw:
-        rule: allow
-        port: '8900:9999'
-        proto: tcp
-
-    - name: Allow ports 8900-9999 UDP
-      ufw:
-        rule: allow
-        port: '8900:9999'
-        proto: udp
-
-    - name: Allow port 10000 TCP
-      ufw:
-        rule: allow
-        port: 10000
-        proto: tcp
-
-    - name: Allow port 10000 UDP
-      ufw:
-        rule: allow
-        port: 10000
+        port: '8000:8020'
         proto: udp

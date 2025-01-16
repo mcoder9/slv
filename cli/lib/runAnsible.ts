@@ -1,11 +1,17 @@
-import { inventoryPath } from '@cmn/constants/path.ts'
+import type { InventoryType } from '@cmn/types/config.ts'
+import { getInventoryPath } from '@cmn/constants/path.ts'
 import { spawnSync } from '@elsoul/child-process'
 
 const runAnsilbe = async (
   filePath: string,
-  limit: string,
+  inventoryType: InventoryType,
+  limit?: string, // Identity account
   debug?: boolean,
 ) => {
+  if (!limit) {
+    limit = inventoryType
+  }
+  const inventoryPath = getInventoryPath(inventoryType)
   let cmd = `ansible-playbook -i ${inventoryPath} ${filePath} --limit ${limit}`
   if (debug) {
     cmd += ' -vvv'

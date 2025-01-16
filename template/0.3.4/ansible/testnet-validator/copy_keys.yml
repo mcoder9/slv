@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: no
   vars_files:
-    - ~/.slv/config.validator.testnet.yml
+    - ~/.slv/inventory.testnet.validators.yml
 
   tasks:
     - name: Select node config by identity_account

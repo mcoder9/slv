@@ -1,11 +1,30 @@
 ---
-- name: Setup Solana Snapshot Finder
+- name: Execute tasks as solv user
   hosts: all
   become: yes
-  vars_files:
-    - ~/.slv/config.validator.testnet.yml
   tasks:
-    # 1. Ensure pip3 and venv are installed
+    - name: Stop solv.service
+      ansible.builtin.systemd:
+        name: solv.service
+        state: stopped
+      become: true
+      become_user: root
+      register: stop_service_result
+
+    - name: Display stop service result
+      ansible.builtin.debug:
+        msg: '{{ inventory_hostname }}: Stopped solv.service.'
+
+    - name: Remove all files in /mnt/ledger/ using rm -rf
+      ansible.builtin.shell: rm -rf /mnt/ledger/*
+      become: true
+      become_user: root
+
+    - name: Remove all files in /mnt/snapshot/ using rm -rf
+      ansible.builtin.shell: rm -rf /mnt/snapshot/*
+      become: true
+      become_user: root
+
     - name: Install pip3 and venv if not present
       apt:
         name:
@@ -14,13 +33,11 @@
         state: present
       become: yes
 
-    # 2. Check if Solana Snapshot Finder directory exists
     - name: Check if Solana Snapshot Finder directory exists
       stat:
         path: /home/solv/solana-snapshot-finder
       register: snapshot_finder_dir
 
-    # 3. Gitリポジトリのクローン
     - name: Clone Solana Snapshot Finder repository
       git:
         repo: https://github.com/c29r3/solana-snapshot-finder.git
@@ -28,7 +45,6 @@
         update: yes
       when: not snapshot_finder_dir.stat.exists
 
-    # 4. Ensure correct ownership of solana-snapshot-finder directory
     - name: Ensure correct ownership of solana-snapshot-finder directory
       file:
         path: /home/solv/solana-snapshot-finder
@@ -37,7 +53,6 @@
         group: solv
         recurse: yes
 
-    # 5. Create virtual environment
     - name: Create virtual environment
       shell: |
         python3 -m venv venv
@@ -46,7 +61,6 @@
       become: false
       become_user: solv
 
-    # 6. Activate virtual environment and install requirements
     - name: Install Python dependencies in virtual environment
       shell: |
         source ./venv/bin/activate && pip3 install -r requirements.txt
@@ -56,21 +70,9 @@
       become: false
       become_user: solv
 
-    # 7. Find snapshot configuration for this host by identity_account
-    - name: Find snapshot configuration for this host by identity_account
-      set_fact:
-        snapshot_config: '{{ item }}'
-      with_items: '{{ validators }}'
-      when: item.identity_account == identity_account
-
-    - name: Debug selected snapshot configuration
-      debug:
-        var: snapshot_config
-
-    # 8. Run Snapshot Finder
     - name: Run Snapshot Finder
       shell: |
-        source ./venv/bin/activate && python3 snapshot-finder.py --snapshot_path /mnt/snapshot --version {{ snapshot_config.solana_version }} -r http://api.testnet.solana.com --min_download_speed 45
+        source ./venv/bin/activate && python3 snapshot-finder.py --snapshot_path /mnt/snapshot --version {{ hostvars[inventory_hostname].solana_version }} -r http://api.testnet.solana.com --min_download_speed 45
       args:
         chdir: /home/solv/solana-snapshot-finder
         executable: /bin/bash
@@ -78,3 +80,8 @@
       become_user: solv
       async: 3600
       poll: 10
+
+    - name: Start solv.service
+      systemd:
+        name: solv.service
+        state: started
