@@ -106,9 +106,7 @@ Input the IP address of the server.
 
 ### Set RSA Key for SSH
 
-※ Please set the path to your RSA key. The default path is `~/.ssh/id_rsa`. ※
-Currently, only the default path is supported.Please set the path to your RSA
-key. The default path is `~/.ssh/id_rsa`.
+※ Please set the path to your RSA key. The default path is `~/.ssh/id_rsa`.
 
 ```bash
 ? What's the path to your RSA key? (~/.ssh/id_rsa) › ~/.ssh/id_rsa

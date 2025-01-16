@@ -16,7 +16,16 @@ const listValidators = async (network: NetworkType) => {
     'Version',
   ]
   console.log(colors.white('Your Testnet Validators Settings:'))
-  for (const validator of Object.values(inventory.testnet_validators.hosts)) {
+  if (!inventory.testnet_validators || !inventory.testnet_validators.hosts) {
+    console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
+    return
+  }
+  const validators = Object.values(inventory.testnet_validators.hosts)
+  if (!validators) {
+    console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
+    return
+  }
+  for (const validator of validators) {
     const table = new Table()
     table
       .body([

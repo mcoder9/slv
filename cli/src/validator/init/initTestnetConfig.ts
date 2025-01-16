@@ -10,8 +10,29 @@ import { exec } from '@elsoul/child-process'
 import denoJson from '/deno.json' with { type: 'json' }
 import { copyKeys } from '/src/validator/init/copyKeys.ts'
 import { updateInventory } from '/lib/updateInventory.ts'
+import { prompt, Select } from '@cliffy/prompt'
+import { testnetValidatorConfigDir } from '@cmn/constants/path.ts'
 
 const initTestnetConfig = async (sshConnection: SSHConnection) => {
+  try {
+    await Deno.stat(testnetValidatorConfigDir)
+  } catch (_error) {
+    await exec(
+      `cp -r ${configRoot}/template/${denoJson.version}/jinja/testnet-validator ${configRoot}`,
+    )
+  }
+  const { validatorType } = await prompt([
+    {
+      name: 'validatorType',
+      message: 'Select Validator Type',
+      type: Select,
+      options: ['firedancer', 'agave'],
+      default: 'agave',
+    },
+  ])
+  if (!validatorType) {
+    return
+  }
   const inventoryType = 'testnet_validators' as InventoryType
   // Check if testnet-validator Template exists
   try {
@@ -35,20 +56,20 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
     return
   }
   // Create solv User on Ubuntu Server
-  await genSolvUser(sshConnection.ip, inventoryType)
+  await genSolvUser(identityAccount, inventoryType)
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
   const configTestnet: Partial<HostData> = {
     vote_account: voteAccount,
     authority_account: authAccount,
-    validator_type: 'firedancer',
+    validator_type: validatorType,
   }
   await updateInventory(identityAccount, inventoryType, configTestnet)
 
   console.log(
     `✔︎ Validator testnet config saved to ${inventoryPath}`,
   )
-  await copyKeys('testnet_validators')
+  await copyKeys(inventoryType, identityAccount)
   console.log(colors.white(`Now you can deploy with:
 
 $ slv v deploy -n testnet    

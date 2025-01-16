@@ -24,7 +24,7 @@ const addInventory = async (
     const findIdentity = Object.keys(inventory[inventoryType].hosts).find(
       (key) => String(key) === identityAccount,
     )
-    console.log(`✔ Identity account: ${findIdentity}`)
+
     if (findIdentity) {
       console.log(
         colors.yellow(`⚠️ The same Identity already exists

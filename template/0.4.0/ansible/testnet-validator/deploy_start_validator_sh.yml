@@ -2,6 +2,7 @@
 - name: Deploy start-validator script dynamically
   hosts: all
   become: true
+  gather_facts: no
   vars_files:
     - ~/.slv/inventory.testnet.validators.yml
   tasks:
@@ -15,14 +16,13 @@
 
     - name: Generate start-validator.sh from template
       template:
-        src: templates/start-validator.sh.j2
+        src: ~/.slv/testnet-validator/start-validator.sh.j2
         dest: /home/solv/start-validator.sh
         mode: '0755'
         owner: solv
         group: solv
       vars:
         vote_account: '{{ hostvars[inventory_hostname].vote_account }}'
-      when: matched_validator is defined
 
     # Make sure if solv user has permission for /mnt directory
     - name: Ensure /mnt directory belongs to solv

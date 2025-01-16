@@ -1,5 +1,5 @@
 ---
-- name: Setup Firedancer
+- name: Install Firedancer
   hosts: all
   become: true
   gather_facts: no
@@ -73,54 +73,3 @@
       shell: sudo ln -s /home/solv/firedancer/build/native/gcc/bin/fdctl /usr/local/bin/fdctl
       args:
         creates: /usr/local/bin/fdctl
-
-    - name: Create config.toml
-      template:
-        src: ~/.slv/testnet-validator/firedancer-config.toml.j2
-        dest: /home/solv/firedancer/firedancer-config.toml
-        owner: solv
-        group: solv
-        mode: '0644'
-
-    - name: Generate start-firedancer.sh from template
-      template:
-        src: ~/.slv/testnet-validator/start-firedancer.sh.j2
-        dest: /home/solv/start-firedancer.sh
-        mode: '0755'
-        owner: solv
-        group: solv
-
-    - name: Create Firedancer systemd service file with sudo tee
-      shell: |
-        echo "[Unit]
-        Description=Firedancer Solana
-        After=network.target
-        StartLimitIntervalSec=0
-
-        [Service]
-        Type=simple
-        Restart=always
-        RestartSec=1
-        User=solv
-        LimitNOFILE=1000000
-        LogRateLimitIntervalSec=0
-        ExecStart=/home/solv/start-firedancer.sh
-
-        [Install]
-        WantedBy=multi-user.target" | sudo tee /etc/systemd/system/firedancer.service > /dev/null
-      become: yes
-      become_user: solv
-
-    - name: Reload systemd daemon
-      command: systemctl daemon-reload
-      become: yes
-      become_user: root
-
-    - name: Enable Firedancer
-      shell: sudo systemctl enable firedancer
-      become: yes
-      become_user: root
-
-    - name: Start Firedancer
-      shell: . ~/.profile && sudo systemctl start firedancer
-      register: command_output

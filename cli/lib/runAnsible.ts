@@ -16,6 +16,7 @@ const runAnsilbe = async (
   if (debug) {
     cmd += ' -vvv'
   }
+  console.log(`🚀 Running ansible: ${cmd}`)
   const result = await spawnSync(cmd)
   if (!result.success) {
     console.error(
