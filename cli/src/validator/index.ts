@@ -257,7 +257,7 @@ validatorCmd.command('codebot')
     const config = parse(fileContent) as Config
     for (const validator of config.validators) {
       const sshConnection: SSHConnection = {
-        username: validator.username,
+        username: 'solv',
         ip: validator.ip,
         rsa_key_path: validator.rsa_key_path,
       }
