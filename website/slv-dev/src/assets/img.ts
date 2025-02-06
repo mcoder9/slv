@@ -27,6 +27,8 @@ import JupiterLogoHorizontal from '@/assets/img/logo/partners/defi/JupiterLogoHo
 import JupiterLogoInvertHorizontal from '@/assets/img/logo/partners/defi/JupiterLogoInvertHorizontal.svg'
 import SanctumLogoHorizontal from '@/assets/img/logo/partners/defi/SanctumLogoHorizontal.svg'
 import SanctumLogoInvertHorizontal from '@/assets/img/logo/partners/defi/SanctumLogoInvertHorizontal.svg'
+import CircleLogoHorizontal from '@/assets/img/logo/partners/defi/CircleLogoHorizontal.svg'
+import CircleLogoInvertHorizontal from '@/assets/img/logo/partners/defi/CircleLogoInvertHorizontal.svg'
 
 import JitoFoundationLogoHorizontal from '@/assets/img/logo/partners/validator/JitoFoundationLogoHorizontal.svg'
 import JitoFoundationLogoInvertHorizontal from '@/assets/img/logo/partners/validator/JitoFoundationLogoInvertHorizontal.svg'
@@ -241,6 +243,8 @@ export {
   EpicsLogoInvertHorizontal,
   BuidlersCollectiveLogoHorizontal,
   BuidlersCollectiveLogoInvertHorizontal,
+  CircleLogoHorizontal,
+  CircleLogoInvertHorizontal,
   ElsolProductImg,
   ERPCProductImg,
   EpicsDAOImg,
