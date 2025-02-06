@@ -3,6 +3,8 @@
 import {
   AgaveLogoHorizontal,
   AgaveLogoInvertHorizontal,
+  CircleLogoHorizontal,
+  CircleLogoInvertHorizontal,
   FiredancerLogoHorizontal,
   FiredancerLogoInvertHorizontal,
   JitoLogoHorizontal,
@@ -51,7 +53,13 @@ const logos = [
     logo: FiredancerLogoHorizontal,
     logoInvert: FiredancerLogoInvertHorizontal,
     href: 'https://jumpcrypto.com/firedancer/'
-  }
+  },
+    {
+    title: 'Circle',
+    logo: CircleLogoHorizontal,
+    logoInvert: CircleLogoInvertHorizontal,
+    href: 'https://www.circle.com/'
+  },
 ]
 
 export default function HomeHeroRow() {
