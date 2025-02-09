@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="0.4.1"
+VERSION="0.5.0"
 BASE_URL="https://storage.slv.dev/slv"
 
 detect_platform() {
@@ -84,58 +84,4 @@ install_slv() {
   slv -P
 }
 
-install_dependencies() {
-  if ! command -v python3 >/dev/null 2>&1; then
-    echo "Python3 not found. Installing..."
-    if [ "$osfamily" = "linux" ]; then
-      # Distribution check
-      # Ubuntu/Debian
-      if command -v apt-get >/dev/null 2>&1; then
-        sudo apt-get update
-        sudo apt-get install -y python3 python3-pip
-      # RHEL/CentOS
-      elif command -v yum >/dev/null 2>&1; then
-        sudo yum install -y python3 python3-pip
-      else
-        echo "No known package manager found. Please install Python3 manually."
-        exit 1
-      fi
-    elif [ "$osfamily" = "darwin" ]; then
-      # macOS
-      if command -v brew >/dev/null 2>&1; then
-        brew update
-        brew install python3
-      else
-        echo "Homebrew not found. Please install Homebrew or Python3 manually."
-        exit 1
-      fi
-    elif [ "$osfamily" = "windows" ]; then
-      echo "Windows environment detected. Please install Python3 manually (e.g. via choco)."
-      # Windows coming soon
-    fi
-  else
-    echo "Python3 is already installed."
-  fi
-
-  if ! command -v pip3 >/dev/null 2>&1; then
-    echo "pip3 not found. Please ensure python3-pip is installed."
-    exit 1
-  fi
-
-  
-  if ! command -v ansible >/dev/null 2>&1; then
-    echo "Ansible not found. Installing via pip3..."
-    pip3 install --user ansible
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile
-    source ~/.profile
-  else
-    echo "Ansible is already installed."
-  fi
-
-  echo "Python3 and Ansible installation completed."
-}
-
-install_dependencies
 install_slv
-cp -r ~/.slv/template/$VERSION/jinja/testnet-validator ~/.slv/testnet-validator
-

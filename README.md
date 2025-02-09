@@ -212,7 +212,7 @@ Your Testnet Validators Settings:
 ├────────────────┼──────────────────────────────────────────────┤
 │ Validator Type │ firedancer                                   │
 ├────────────────┼──────────────────────────────────────────────┤
-│ Version        │ 0.302.20104                                  │
+│ Version        │ 0.305.20111                                  │
 └────────────────┴──────────────────────────────────────────────┘
 ? Do you want to continue? (Y/n) › Yes
 ```
@@ -222,6 +222,30 @@ catch up with the Solana network.
 
 Next, You need to change the identity key from the unstaked key to the
 authorized identity key.
+
+### If your firedancer deployment freezes during firedancer compile,
+
+If your Firedancer deployment stops responding during the compile process, it
+may be due to a network issue. To resolve this, please try setting it up again
+by running the following command:
+
+```bash
+slv v setup:firedancer --pubkey <your-identity-pubkey>
+```
+
+And then, start firedancer.
+
+You can run Ansible Playbook with the following command.
+
+```bash
+slv v apply -n testnet --pubkey <your-identity-pubkey> --yml <path-to-yml>
+```
+
+So start firedancer with the following command.
+
+```bash
+slv v apply -n testnet --pubkey <your-identity-pubkey> --yml ~/.slv/template/0.5.0/ansible/testnet-validator/start_firedancer.yml
+```
 
 ### Change the Identity Key from Unstaked Key to Authorized Identity Key
 
@@ -267,7 +291,7 @@ cp -r ~/.slv/template/$VERSION/jinja/testnet-validator/* ~/.slv/testnet-validato
 
 ```bash
 Usage:   slv validator
-Version: 0.3.1        
+Version: 0.5.0        
 
 Description:
 
@@ -279,12 +303,16 @@ Options:
 
 Commands:
 
-  init          - Initialize a new validator                                       
-  deploy        - Deploy Validators                                                
-  list          - List validators                                                  
-  set:identity  - Set Validator Identity                                           
-  set:unstaked  - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
-  restart       - Restart validator
+  init              - Initialize a new validator                                       
+  deploy            - Deploy Validators                                                
+  list              - List validators                                                  
+  set:identity      - Set Validator Identity                                           
+  set:unstaked      - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
+  restart           - Restart validator                                                
+  setup:firedancer  - Setup Firedancer Validator                                       
+  update:version    - Update Validator Version                                         
+  apply             - Apply Ansiible Playbook                                          
+  codebot           - CodeBot Validator Config
 ```
 
 ### Community Support
