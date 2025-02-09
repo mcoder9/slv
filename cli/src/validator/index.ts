@@ -7,13 +7,12 @@ import { listValidators } from '/src/validator/listValidators.ts'
 import { getTemplatePath } from '/lib/getTemplatePath.ts'
 import { runAnsilbe } from '/lib/runAnsible.ts'
 import type { InventoryType, NetworkType } from '@cmn/types/config.ts'
-import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 import { parse } from 'https://deno.land/std@0.202.0/yaml/parse.ts'
 import { addInventory } from '/lib/addInventory.ts'
 import type { SSHConnection } from '@cmn/prompt/checkSshConnection.ts'
 import { homeDir } from '@cmn/constants/path.ts'
 import { updateInventory } from '/lib/updateInventory.ts'
-import { VERSION_SOLANA_TESTNET } from '@cmn/constants/version.ts'
+import { VERSION_FIREDANCER_TESTNET } from '@cmn/constants/version.ts'
 
 export const validatorCmd = new Command()
   .description('Manage Solana Validator Nodes')
@@ -78,12 +77,8 @@ validatorCmd.command('set:identity')
       : 'testnet_validators'
 
     const templateRoot = getTemplatePath()
-    const inventory = await genOrReadInventory(inventoryType)
     const playbook =
-      inventory[inventoryType].hosts[options.pubkey].validator_type ===
-          'firedancer'
-        ? `${templateRoot}/ansible/testnet-validator/change_identity_and_restart.yml`
-        : `${templateRoot}/ansible/testnet-validator/set_identity_to_active.yml`
+      `${templateRoot}/ansible/testnet-validator/change_identity_and_restart.yml`
     const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
     if (result) {
       console.log(colors.white('✅ Successfully Set Validator Identity'))
@@ -138,11 +133,8 @@ validatorCmd.command('restart')
       ? 'mainnet_validators'
       : 'testnet_validators'
     const templateRoot = getTemplatePath()
-    const inventory = await genOrReadInventory(inventoryType)
-    const validator = inventory[inventoryType].hosts[options.pubkey]
-    const playbook = options.rm
-      ? `${templateRoot}/ansible/testnet-validator/restart_${validator.validator_type}_with_rm_ledger.yml`
-      : `${templateRoot}/ansible/testnet-validator/restart_${validator.validator_type}.yml`
+    const playbook =
+      `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
 
     const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
     if (result) {
@@ -151,8 +143,8 @@ validatorCmd.command('restart')
     }
   })
 
-validatorCmd.command('setup:agave')
-  .description('Setup Agave Validator')
+validatorCmd.command('setup:firedancer')
+  .description('Setup Firedancer Validator')
   .option('--pubkey <pubkey>', 'Public Key of Validator')
   .action(async (options) => {
     if (!options.pubkey) {
@@ -161,14 +153,15 @@ validatorCmd.command('setup:agave')
     }
     const inventoryType: InventoryType = 'testnet_validators'
     const templateRoot = getTemplatePath()
-    const playbook = `${templateRoot}/ansible/testnet-validator/setup_agave.yml`
+    const playbook =
+      `${templateRoot}/ansible/testnet-validator/setup_firedancer.yml`
     const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
     await updateInventory(options.pubkey, inventoryType, {
-      validator_type: 'agave',
-      version: VERSION_SOLANA_TESTNET,
+      validator_type: 'firedancer',
+      version: VERSION_FIREDANCER_TESTNET,
     })
     if (result) {
-      console.log(colors.white('✅ Successfully Setup Agave Validator'))
+      console.log(colors.white('✅ Successfully Setup Firedancer Validator'))
       return
     }
   })

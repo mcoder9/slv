@@ -39,7 +39,7 @@
 
     - name: Create config.toml
       template:
-        src: templates/firedancer-config.toml.j2
+        src: ~/.slv/testnet-validator/firedancer-config.toml.j2
         dest: /home/solv/firedancer/firedancer-config.toml
         owner: solv
         group: solv
@@ -47,7 +47,7 @@
 
     - name: Generate start-firedancer.sh from template
       template:
-        src: templates/start-firedancer.sh.j2
+        src: ~/.slv/testnet-validator/start-firedancer.sh.j2
         dest: /home/solv/start-firedancer.sh
         mode: '0755'
         owner: solv

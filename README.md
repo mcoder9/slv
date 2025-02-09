@@ -253,6 +253,16 @@ validator.
 slv v restart -n testnet --pubkey <your-identity-pubkey> --rm
 ```
 
+### Update slv Template
+
+If you want to update the slv template, you can use the following command.
+
+```bash
+slv upgrade
+mkdir -p ~/.slv/testnet-validator
+cp -r ~/.slv/template/$VERSION/jinja/testnet-validator/* ~/.slv/testnet-validator/
+```
+
 ### slv Validator Commands
 
 ```bash

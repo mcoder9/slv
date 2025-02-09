@@ -137,6 +137,3 @@ install_dependencies() {
 
 install_dependencies
 install_slv
-mkdir -p ~/.slv/testnet-validator
-cp -r ~/.slv/template/$VERSION/jinja/testnet-validator/* ~/.slv/testnet-validator/
-
