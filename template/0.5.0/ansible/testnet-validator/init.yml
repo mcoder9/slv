@@ -1,5 +1,6 @@
 ---
 - import_playbook: copy_keys.yml
+- import_playbook: add_solv.yml
 - import_playbook: ../cmn/setup_ufw.yml
 - import_playbook: ../cmn/install_rust.yml
 - import_playbook: ../cmn/install_agave.yml
@@ -10,4 +11,3 @@
 - import_playbook: ../cmn/setup_unstaked_identity.yml
 - import_playbook: setup_firedancer.yml
 - import_playbook: start_firedancer.yml
-- import_playbook: add_solv.yml

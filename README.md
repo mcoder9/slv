@@ -233,6 +233,8 @@ by running the following command:
 slv v setup:firedancer --pubkey <your-identity-pubkey>
 ```
 
+(Please try a few times if the issue persists.)
+
 And then, start firedancer.
 
 You can run Ansible Playbook with the following command.
