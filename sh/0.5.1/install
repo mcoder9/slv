@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="0.5.0"
+VERSION="0.5.1"
 BASE_URL="https://storage.slv.dev/slv"
 
 detect_platform() {

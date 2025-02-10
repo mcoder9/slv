@@ -13,10 +13,10 @@
       failed_when: hostvars[inventory_hostname].validator_type != 'agave'
       tags: skip_check
   tasks:
-    - name: Start Solv
-      shell: . ~/.profile && sudo systemctl start solv
+    - name: Stop Solv
+      shell: . ~/.profile && sudo systemctl stop solv
       register: command_output
 
     - name: Display Command output
       debug:
-        msg: '{{ inventory_hostname }} ({{ hostvars[inventory_hostname].name }}): Start Solv: {{ command_output.stdout }}'
+        msg: '{{ inventory_hostname }} ({{ hostvars[inventory_hostname].name }}): Stop Solv: {{ command_output.stdout }}'
