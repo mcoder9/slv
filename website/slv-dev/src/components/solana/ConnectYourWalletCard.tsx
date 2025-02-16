@@ -14,7 +14,6 @@ import Image from 'next/image'
 export default function ConnectYourWalletCard() {
   const t = useTranslations()
   const { theme, mounted } = useTheme()
-  if (!mounted) return null
   return (
     <>
       <Card className="grid w-full gap-5 p-4">
@@ -27,18 +26,20 @@ export default function ConnectYourWalletCard() {
           >
             {t('common.connectYourWallet')}
           </p>
-          <Image
-            src={
-              theme === 'light'
-                ? SolanaLogoHorizontal
-                : SolanaLogoInvertHorizontal
-            }
-            alt="Wallet"
-            className="mx-auto w-32"
-            unoptimized
-            width={256}
-            height={256}
-          />
+          {mounted && (
+            <Image
+              src={
+                theme === 'light'
+                  ? SolanaLogoHorizontal
+                  : SolanaLogoInvertHorizontal
+              }
+              alt="Wallet"
+              className="mx-auto w-32"
+              unoptimized
+              width={256}
+              height={256}
+            />
+          )}
         </div>
         <div className="w-full">
           <Image

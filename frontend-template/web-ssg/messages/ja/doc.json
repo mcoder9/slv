@@ -1,0 +1,39 @@
+{
+  "doc": {
+    "title": "ドキュメント",
+    "nav": {
+      "title": "ドキュメント一覧",
+      "general": {
+        "getting-started": "Getting Started"
+      },
+      "validator": {
+        "title": "Validator",
+        "quickstart": "クイックスタート"
+      },
+      "rpc": {
+        "title": "RPC",
+        "quickstart": "クイックスタート"
+      },
+      "bot": {
+        "title": "Geyser gRPC",
+        "quickstart": "クイックスタート"
+      },
+      "swap": {
+        "title": "Swap",
+        "quickstart": "クイックスタート"
+      },
+      "app": {
+        "title": "App",
+        "quickstart": "クイックスタート"
+      },
+      "cloud": {
+        "title": "Cloud",
+        "quickstart": "クイックスタート"
+      },
+      "ai": {
+        "title": "AI",
+        "quickstart": "クイックスタート"
+      }
+    }
+  }
+}
