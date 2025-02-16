@@ -1,0 +1,39 @@
+{
+  "doc": {
+    "title": "Doc",
+    "nav": {
+      "title": "Doc Index",
+      "general": {
+        "getting-started": "Getting Started"
+      },
+      "validator": {
+        "title": "Validator",
+        "quickstart": "Quickstart"
+      },
+      "rpc": {
+        "title": "RPC",
+        "quickstart": "Quickstart"
+      },
+      "bot": {
+        "title": "Geyser gRPC",
+        "quickstart": "Quickstart"
+      },
+      "swap": {
+        "title": "Swap",
+        "quickstart": "Quickstart"
+      },
+      "app": {
+        "title": "App",
+        "quickstart": "Quickstart"
+      },
+      "cloud": {
+        "title": "Cloud",
+        "quickstart": "Quickstart"
+      },
+      "ai": {
+        "title": "AI",
+        "quickstart": "Quickstart"
+      }
+    }
+  }
+}
