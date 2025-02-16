@@ -29,7 +29,6 @@ export default function StakingHeroRow() {
   const t = useTranslations()
   const locale = useLocale()
   const { theme, mounted } = useTheme()
-  if (!mounted) return null
 
   return (
     <>
@@ -67,23 +66,24 @@ export default function StakingHeroRow() {
             </p>
 
             <div className="mt-3 flex flex-wrap items-center justify-start gap-4">
-              {logos.map((logo) => (
-                <Link
-                  key={logo.title}
-                  href={logo.href}
-                  className="hover:opacity-80"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src={theme === 'light' ? logo.logo : logo.logoInvert}
-                    alt="Background"
-                    className="w-20 sm:w-24 md:w-28"
-                    unoptimized
-                    width={256}
-                  />
-                </Link>
-              ))}
+              {mounted &&
+                logos.map((logo) => (
+                  <Link
+                    key={logo.title}
+                    href={logo.href}
+                    className="hover:opacity-80"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={theme === 'light' ? logo.logo : logo.logoInvert}
+                      alt="Background"
+                      className="w-20 sm:w-24 md:w-28"
+                      unoptimized
+                      width={256}
+                    />
+                  </Link>
+                ))}
             </div>
           </div>
           <div className="mx-auto w-full max-w-xl p-4">
