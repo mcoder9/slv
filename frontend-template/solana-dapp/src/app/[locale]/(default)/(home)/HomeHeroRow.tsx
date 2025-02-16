@@ -54,19 +54,18 @@ const logos = [
     logoInvert: FiredancerLogoInvertHorizontal,
     href: 'https://jumpcrypto.com/firedancer/'
   },
-    {
+  {
     title: 'Circle',
     logo: CircleLogoHorizontal,
     logoInvert: CircleLogoInvertHorizontal,
     href: 'https://www.circle.com/'
-  },
+  }
 ]
 
 export default function HomeHeroRow() {
   const t = useTranslations()
   const locale = useLocale()
   const { theme, mounted } = useTheme()
-  if (!mounted) return null
 
   return (
     <>
@@ -129,26 +128,27 @@ export default function HomeHeroRow() {
               </Link>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 md:justify-start md:gap-6">
-              {logos.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="hover:opacity-80"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src={theme === 'light' ? item.logo : item.logoInvert}
-                    alt={item.title}
-                    className={cn(
-                      'w-16 sm:w-24 md:w-16 lg:w-24',
-                      item.title === 'Jito' && 'px-3'
-                    )}
-                    unoptimized
-                    width={256}
-                  />
-                </Link>
-              ))}
+              {mounted &&
+                logos.map((item) => (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className="hover:opacity-80"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={theme === 'light' ? item.logo : item.logoInvert}
+                      alt={item.title}
+                      className={cn(
+                        'w-16 sm:w-24 md:w-16 lg:w-24',
+                        item.title === 'Jito' && 'px-3'
+                      )}
+                      unoptimized
+                      width={256}
+                    />
+                  </Link>
+                ))}
             </div>
           </div>
           <SLVCommands />

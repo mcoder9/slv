@@ -30,30 +30,30 @@ const logos = [
 export default function VLDAirdropRow() {
   const t = useTranslations()
   const { theme, mounted } = useTheme()
-  if (!mounted) return null
 
   return (
     <>
       <div className="mx-auto grid max-w-7xl items-center justify-center px-6 py-48 sm:py-80 md:grid-cols-2 md:gap-16 lg:gap-24">
         <div className="grid w-full gap-2">
           <div className="flex flex-wrap items-center justify-start gap-4">
-            {logos.map((item) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className="hover:opacity-80"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={theme === 'light' ? item.logo : item.logoInvert}
-                  alt="Background"
-                  className="w-20 sm:w-24 md:w-28"
-                  unoptimized
-                  width={256}
-                />
-              </Link>
-            ))}
+            {mounted &&
+              logos.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="hover:opacity-80"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={theme === 'light' ? item.logo : item.logoInvert}
+                    alt="Background"
+                    className="w-20 sm:w-24 md:w-28"
+                    unoptimized
+                    width={256}
+                  />
+                </Link>
+              ))}
           </div>
           <h2
             className={cn(

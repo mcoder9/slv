@@ -23,11 +23,10 @@ export default function BlinksComponent({ actionUrl }: Props) {
   })
   const [solanaBalance] = useAtom(solanaBalanceAtom)
   const { theme, mounted } = useTheme()
-  if (!mounted) return null
 
   return (
     <>
-      {publicKey ? (
+      {mounted && publicKey ? (
         <>
           {action ? (
             <Blink
