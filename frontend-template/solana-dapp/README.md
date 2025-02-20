@@ -43,6 +43,8 @@ Demo: https://solana-dapp.slv.dev/
 - [React Compiler](https://react.dev/learn/react-compiler)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Origin UI](https://originui.com/)
+- [Prism UI](https://prismui.tech/)
+- [motion](https://motion.dev/)
 - [Next Sitemap](https://github.com/iamvishnusankar/next-sitemap)
 - [Solana Web3.js](https://github.com/solana-labs/solana-web3.js/)
 - [Solana Wallet Adapter](https://github.com/anza-xyz/wallet-adapter)
@@ -97,7 +99,8 @@ For example:
 You can add the high-quality UI components from
 [shadcn/ui](https://ui.shadcn.com/)
 
-Also you can use [Origin UI](https://originui.com/) for more components.
+Also you can use [Origin UI](https://originui.com/) and
+[Prism UI](https://prismui.tech/) for more components.
 
 <a href="https://v0.dev/">
   <img src="https://storage.skeet.dev/v0.jpg" alt="v0" />
