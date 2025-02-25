@@ -1,4 +1,5 @@
 import { Command } from '@cliffy'
+import { initBotTemplate } from '/src/bot/init/initBotTemplate.ts'
 
 // bot Command
 export const botCmd = new Command()
@@ -10,6 +11,7 @@ export const botCmd = new Command()
 botCmd.command('init')
   .description('Initialize the bot template')
   .option('-q, --queue', 'Use queue mode', { default: false })
-  .action((_options: { queue: boolean }) => {
+  .action(async (options: { queue: boolean }) => {
     console.log('Initializing the bot...')
+    await initBotTemplate(options)
   })

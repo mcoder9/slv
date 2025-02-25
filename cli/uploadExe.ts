@@ -1,8 +1,8 @@
-import denoJson from '/deno.json' with { type: 'json' }
+import { VERSION } from '@cmn/constants/version.ts'
 import { spawnSync } from '@elsoul/child-process'
 
 const uploadExe = async () => {
-  const version = denoJson.version
+  const version = VERSION
   const compileTargets = [
     'x86_64-apple-darwin',
     'x86_64-unknown-linux-gnu',

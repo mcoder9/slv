@@ -331,7 +331,7 @@ If you have any questions or need help, please join our Discord community.
   progress)
 - [] Add `slv validator setup --shredstream` for ShredStream Node Build (in
   progress)
-- [] Add CI/CD pipeline (Github Actions) for `slv` Release (in progress)
+- [x] Add CI/CD pipeline (Github Actions) for `slv` Release
 - [] Add `slv bot` for gRPC Geyser Client (in progress)
 - [] Add `slv swap` for Solana Token Swap (in progress)
 - [] Add `slv cloud` for configuring Solana App on Cloud (in progress)
@@ -368,6 +368,35 @@ Run Test
 ```bash
 deno test -A
 ```
+
+## Release Process
+
+SLV uses GitHub Actions for automated releases. The process is as follows:
+
+1. Update the version in `cmn/constants/version.ts`
+2. Create and push a tag with the new version (e.g., `v0.6.1`)
+3. GitHub Actions will automatically:
+   - Run tests
+   - Update all version references
+   - Build the binaries
+   - Upload artifacts to storage
+   - Create a GitHub release
+
+For heavy compilation tasks, SLV can use a remote build server:
+
+1. Set up a Ubuntu 24.04 LTS server
+2. Configure the server in `ansible/inventory.yml`
+3. Use the remote build workflow:
+   ```bash
+   # Manually trigger the workflow
+   gh workflow run slv-remote-build.yml -f version=0.6.1
+
+   # Or push a tag
+   git tag v0.6.1
+   git push origin v0.6.1
+   ```
+
+See the `ansible/README.md` file for more details on remote builds.
 
 ## Contributing
 

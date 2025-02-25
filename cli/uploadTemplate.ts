@@ -1,8 +1,8 @@
-import denoJson from '/deno.json' with { type: 'json' }
+import { VERSION } from '@cmn/constants/version.ts'
 import { spawnSync } from '@elsoul/child-process'
 
 const uploadTemplate = async () => {
-  const version = denoJson.version
+  const version = VERSION
   const fileName = `template.tar.gz`
   console.log(`Uploading slv v${version} to Solana`)
   const cmd =
