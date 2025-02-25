@@ -3,6 +3,7 @@ import type { SSHConnection } from '@cmn/prompt/checkSshConnection.ts'
 import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 import { colors } from '@cliffy/colors'
 import {
+  DEFAULT_FIREDANCER_VERSION,
   DEFAULT_SOLANA_CLI,
   DEFAULT_SOLANA_VERSION,
   DEFAULT_VALIDATOR_TYPE,
@@ -53,7 +54,7 @@ const addInventory = async (
           solana_cli: DEFAULT_SOLANA_CLI,
           solana_version: DEFAULT_SOLANA_VERSION,
           validator_type: DEFAULT_VALIDATOR_TYPE,
-          version: DEFAULT_SOLANA_VERSION,
+          version: DEFAULT_FIREDANCER_VERSION,
         },
       }
     } else {
@@ -68,7 +69,7 @@ const addInventory = async (
         solana_cli: DEFAULT_SOLANA_CLI,
         solana_version: DEFAULT_SOLANA_VERSION,
         validator_type: DEFAULT_VALIDATOR_TYPE,
-        version: DEFAULT_SOLANA_VERSION,
+        version: DEFAULT_FIREDANCER_VERSION,
       }
     }
     const inventoryPath = getInventoryPath(inventoryType)

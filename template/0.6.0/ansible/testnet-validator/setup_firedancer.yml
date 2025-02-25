@@ -19,7 +19,6 @@
 
     - name: Run deps.sh script with yes (async/poll)
       shell: |
-        sudo apt update -y
         yes y | ./deps.sh
       args:
         chdir: /home/solv/firedancer

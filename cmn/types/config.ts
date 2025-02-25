@@ -7,7 +7,7 @@ export type InventoryType = 'testnet_validators' | 'mainnet_validators'
 
 export const DEFAULT_SOLANA_CLI = 'agave'
 export const DEFAULT_SOLANA_VERSION = '2.1.14'
-export const DEFAULT_FIREDANCER_VERSION = '0.305.20111'
+export const DEFAULT_FIREDANCER_VERSION = '0.402.20113'
 export const DEFAULT_VALIDATOR_TYPE = 'firedancer'
 
 export interface HostData {
