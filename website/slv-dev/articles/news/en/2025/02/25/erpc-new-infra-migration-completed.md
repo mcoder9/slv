@@ -1,6 +1,6 @@
 ---
 id: erpc-new-infra-migration-completed
-title: ERPC Completes New Infrastructure Migration, Updating the Fastest Solana RPC Records with Latency Reduced by Half
+title: ERPC Completes New Infrastructure Migration, Further Extending Its Fastest Solana RPC Benchmark with Latency Reduced by Half
 category: Press Release
 thumbnail: /news/2025/02/25/ERPCNewInfraMigrationCompletedEN.jpg
 ---
