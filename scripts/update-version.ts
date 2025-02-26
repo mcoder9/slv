@@ -93,10 +93,18 @@ async function updateVersion() {
 
   // 6. Update the template/latest symlink
   try {
-    await Deno.remove('./template/latest')
+    // Check if it's a symlink first
+    const latestInfo = await Deno.lstat('./template/latest')
+    if (latestInfo.isSymlink) {
+      await Deno.remove('./template/latest')
+    } else {
+      // If it's a directory, remove it recursively
+      await Deno.remove('./template/latest', { recursive: true })
+    }
   } catch (error) {
-    // Ignore if the symlink doesn't exist
+    // Ignore if the path doesn't exist
     if (!(error instanceof Deno.errors.NotFound)) {
+      console.error('Error removing template/latest:', error)
       throw error
     }
   }
