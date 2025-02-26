@@ -5,7 +5,7 @@ import { stringify } from 'https://deno.land/std@0.202.0/yaml/mod.ts'
 import type { RpcConfig, RpcType } from '@cmn/types/config.ts'
 import { genPasswordYml } from '/lib/genPasswordYml.ts'
 import { genIdentityKey } from '/src/validator/init/genIdentityKey.ts'
-import { checkSSHConnection } from '@cmn/prompt/checkSshConnection.ts'
+import { checkSSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { VERSION_SOLANA_MAINNET } from '@cmn/constants/version.ts'
 
 const init = async () => {
