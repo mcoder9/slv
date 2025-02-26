@@ -83,6 +83,8 @@ jobs:
             -e "github_token=${{ secrets.GITHUB_TOKEN }}" \
             -e "cloudflare_account_id=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" \
             -e "cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -e "cloudflare_purge_email=${{ secrets.CLOUDFLARE_PURGE_EMAIL }}" \
+            -e "cloudflare_purge_api_token=${{ secrets.CLOUDFLARE_PURGE_API_TOKEN }}" \
             -e "cloudflare_email=${{ secrets.CLOUDFLARE_EMAIL }}" \
             -e "cloudflare_api_key=${{ secrets.CLOUDFLARE_API_KEY }}" \
             -e "cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}"
