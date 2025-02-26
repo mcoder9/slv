@@ -3,7 +3,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "deno.disablePaths": ["./website"],
-  "deno.enablePaths": ["./cli"],
+  "deno.enablePaths": ["./cli", "./cmn", "./scripts"],
   "deno.config": "./deno.json",
   "[typescript]": {
     "deno.config": {
