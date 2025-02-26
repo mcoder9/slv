@@ -1,5 +1,5 @@
 import { stringify } from 'https://deno.land/std@0.202.0/yaml/stringify.ts'
-import type { SSHConnection } from '@cmn/prompt/checkSshConnection.ts'
+import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 import { colors } from '@cliffy/colors'
 import {

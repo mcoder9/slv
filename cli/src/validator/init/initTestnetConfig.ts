@@ -1,7 +1,7 @@
 import { genVoteKey } from '/src/validator/init/genVoteKey.ts'
 import { genIdentityKey } from '/src/validator/init/genIdentityKey.ts'
 import type { HostData, InventoryType } from '@cmn/types/config.ts'
-import type { SSHConnection } from '@cmn/prompt/checkSshConnection.ts'
+import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { configRoot, getInventoryPath } from '@cmn/constants/path.ts'
 import { colors } from '@cliffy/colors'
 import { genSolvUser } from '/src/validator/init/genSolvUser.ts'

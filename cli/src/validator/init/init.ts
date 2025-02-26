@@ -2,7 +2,7 @@ import { prompt, Select } from '@cliffy/prompt'
 import { initMainnetConfig } from '/src/validator/init/initMainnetConfig.ts'
 import { initTestnetConfig } from '/src/validator/init/initTestnetConfig.ts'
 import { genPasswordYml } from '/lib/genPasswordYml.ts'
-import { checkSSHConnection } from '@cmn/prompt/checkSshConnection.ts'
+import { checkSSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { colors } from '@cliffy/colors'
 
 const init = async () => {
