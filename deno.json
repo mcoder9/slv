@@ -37,6 +37,7 @@
   "fmt": {
     "semiColons": false,
     "singleQuote": true,
+    "include": ["./cli"],
     "exclude": ["./website"]
   }
 }

@@ -396,7 +396,8 @@ For heavy compilation tasks, SLV can use a remote build server:
    git push origin v0.6.1
    ```
 
-See the `ansible/README.md` file for more details on remote builds.
+See the `ansible/README.md` file for more details on remote builds. Improvements
+are always welcome!
 
 ## Contributing
 

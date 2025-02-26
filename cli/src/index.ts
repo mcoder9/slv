@@ -7,6 +7,7 @@ import { rpcCmd } from '@/rpc/index.ts'
 import { cloudCmd } from '@/cloud/index.ts'
 import { swapCmd } from '@/swap/index.ts'
 import { aiCmd } from '@/ai/index.ts'
+import { metalCmd } from '@/metal/index.ts'
 import { installClientMessage, slvAA } from '/lib/slvAA.ts'
 import { upgrade } from '@/upgrade.ts'
 
@@ -52,5 +53,9 @@ program
 
 program
   .command('ai', aiCmd)
+
+program
+  .command('metal', metalCmd)
+  .alias('m')
 
 await program.parse(Deno.args)

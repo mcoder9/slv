@@ -16,7 +16,6 @@
     "@/lib": "./src/lib/",
     "@cmn/": "../cmn/",
     "/": "./",
-
     "@std/assert": "jsr:@std/assert@1"
   },
   "fmt": {
