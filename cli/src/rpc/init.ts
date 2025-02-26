@@ -2,7 +2,6 @@ import { Confirm, Input, Number, prompt, Select } from '@cliffy/prompt'
 import { RPC_TYPE } from '@cmn/constants/rpc.ts'
 import { colors } from '@cliffy/colors'
 import { stringify } from 'https://deno.land/std@0.202.0/yaml/mod.ts'
-import { rpcConfigFilePath } from '@cmn/constants/path.ts'
 import type { RpcConfig, RpcType } from '@cmn/types/config.ts'
 import { genPasswordYml } from '/lib/genPasswordYml.ts'
 import { genIdentityKey } from '/src/validator/init/genIdentityKey.ts'
@@ -97,11 +96,9 @@ const init = async () => {
 
   // Save to YAML file
   const yamlContent = stringify({ rpcs })
-  await Deno.writeTextFile(rpcConfigFilePath, yamlContent)
-  console.log(
-    colors.green(`✔︎ Configuration saved to ${rpcConfigFilePath}`),
-  )
-
+  const yamlPath = './config/rpcs.yml'
+  await Deno.writeTextFile(yamlPath, yamlContent)
+  console.log(`✅ Saved to ${yamlPath}`)
   return rpcConfig
 }
 
