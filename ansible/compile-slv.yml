@@ -77,10 +77,24 @@
       args:
         executable: /bin/bash
 
+    - name: Build for Mac
+      shell: |
+        export DENO_INSTALL="/root/.deno"
+        export PATH="$DENO_INSTALL/bin:$PATH"
+        cd {{ build_dir }} && deno task build:mac
+      args:
+        executable: /bin/bash
+
     - name: Copy Linux artifacts
       copy:
         src: '{{ build_dir }}/dist/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
         dest: '{{ artifacts_dir }}/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
+        remote_src: yes
+
+    - name: Copy Mac artifacts
+      copy:
+        src: '{{ build_dir }}/dist/slv-x86_64-apple-darwin-exe.tar.gz'
+        dest: '{{ artifacts_dir }}/slv-x86_64-apple-darwin-exe.tar.gz'
         remote_src: yes
 
     - name: Upload Linux executable
@@ -158,8 +172,14 @@
       debug:
         msg: '{{ build_dist_files.stdout_lines }}'
 
-    - name: Copy artifacts back to local dist directory
+    - name: Copy Linux artifacts back to local dist directory
       fetch:
         src: '{{ build_dir }}/dist/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
+        dest: ./dist/
+        flat: yes
+
+    - name: Copy Mac artifacts back to local dist directory
+      fetch:
+        src: '{{ build_dir }}/dist/slv-x86_64-apple-darwin-exe.tar.gz'
         dest: ./dist/
         flat: yes

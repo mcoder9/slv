@@ -109,11 +109,22 @@ jobs:
           else
             echo "Linux executable not found in dist directory"
           fi
+          if [ -f "dist/slv-x86_64-apple-darwin-exe.tar.gz" ]; then
+            cp dist/slv-x86_64-apple-darwin-exe.tar.gz renamed_files/x86_64-apple-darwin-exe.tar.gz
+            echo "Renamed Mac executable for GitHub release"
+          else
+            echo "Mac executable not found in dist directory"
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
         with:
+          files: |
+            dist/slv-x86_64-unknown-linux-gnu-exe.tar.gz
+            dist/slv-x86_64-apple-darwin-exe.tar.gz
+            renamed_files/x86_64-unknown-linux-gnu-exe.tar.gz
+            renamed_files/x86_64-apple-darwin-exe.tar.gz
           body: |
             SLV v${{ env.VERSION }} Release (Remote Build)
             
