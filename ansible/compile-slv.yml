@@ -14,9 +14,6 @@
     cloudflare_email: '{{ cloudflare_email }}'
     cloudflare_api_key: '{{ cloudflare_api_key }}'
     cloudflare_zone_id: '{{ cloudflare_zone_id }}'
-    # Keep AWS credentials for backward compatibility
-    aws_access_key_id: '{{ aws_access_key_id }}'
-    aws_secret_access_key: '{{ aws_secret_access_key }}'
     build_dir: /opt/slv-build
     artifacts_dir: /opt/slv-artifacts
   tasks:
@@ -90,6 +87,8 @@
         export PATH="$DENO_INSTALL/bin:$PATH"
         export CLOUDFLARE_ACCOUNT_ID="{{ cloudflare_account_id }}"
         export CLOUDFLARE_API_TOKEN="{{ cloudflare_api_token }}"
+        export CLOUDFLARE_API_KEY="{{ cloudflare_api_key }}"
+        export CLOUDFLARE_EMAIL="{{ cloudflare_email }}"
         cd {{ build_dir }} && deno run -A cli/uploadExe.ts
       args:
         executable: /bin/bash
@@ -106,6 +105,8 @@
         export PATH="$DENO_INSTALL/bin:$PATH"
         export CLOUDFLARE_ACCOUNT_ID="{{ cloudflare_account_id }}"
         export CLOUDFLARE_API_TOKEN="{{ cloudflare_api_token }}"
+        export CLOUDFLARE_API_KEY="{{ cloudflare_api_key }}"
+        export CLOUDFLARE_EMAIL="{{ cloudflare_email }}"
         cd {{ build_dir }} && deno run -A cli/uploadTemplate.ts
       args:
         executable: /bin/bash
@@ -116,6 +117,8 @@
         export PATH="$DENO_INSTALL/bin:$PATH"
         export CLOUDFLARE_ACCOUNT_ID="{{ cloudflare_account_id }}"
         export CLOUDFLARE_API_TOKEN="{{ cloudflare_api_token }}"
+        export CLOUDFLARE_API_KEY="{{ cloudflare_api_key }}"
+        export CLOUDFLARE_EMAIL="{{ cloudflare_email }}"
         cd {{ build_dir }} && deno run -A cli/uploadScript.ts
       args:
         executable: /bin/bash

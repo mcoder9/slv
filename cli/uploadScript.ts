@@ -50,7 +50,7 @@ const uploadScript = async () => {
 
   // Upload to R2 using Cloudflare API
   const bucketName = 'slv'
-  const objectKey = 'install'
+  const objectKey = 'slv/install'
   const url =
     `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${objectKey}`
 

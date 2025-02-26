@@ -48,38 +48,65 @@ const uploadExe = async () => {
     }
   }
 
-  await Promise.all(compileTargets.map(async (target) => {
-    // Read the executable file
-    const filePath = `./dist/slv-${target}-exe.tar.gz`
-    const fileContent = await Deno.readFile(filePath)
+  // Process each target sequentially to handle errors better
+  for (const target of compileTargets) {
+    try {
+      // Check if the file exists
+      const filePath = `./dist/slv-${target}-exe.tar.gz`
 
-    // Upload to R2 using Cloudflare API
-    const bucketName = 'slv'
-    const objectKey = `${version}/${target}-exe.tar.gz`
-    const url =
-      `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${objectKey}`
+      try {
+        // Check if file exists by getting its stats
+        await Deno.stat(filePath)
+      } catch (error) {
+        if (error instanceof Deno.errors.NotFound) {
+          console.log(
+            `⚠️ File not found: ${filePath} - skipping upload for ${target}`,
+          )
+          continue // Skip this target and move to the next one
+        }
+        throw error // Re-throw other errors
+      }
 
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        ...authHeaders,
-        'Content-Type': 'application/octet-stream',
-        'Content-Disposition': 'attachment; filename=install',
-      },
-      body: fileContent,
-    })
+      console.log(`Reading file: ${filePath}`)
+      const fileContent = await Deno.readFile(filePath)
 
-    if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(
-        `Failed to upload ${target} executable: ${response.status} ${response.statusText} - ${errorText}`,
+      // Upload to R2 using Cloudflare API
+      const bucketName = 'slv'
+      const objectKey = `slv/${version}/${target}-exe.tar.gz`
+      const url =
+        `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${objectKey}`
+
+      console.log(`Uploading to: ${url}`)
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          ...authHeaders,
+          'Content-Type': 'application/octet-stream',
+          'Content-Disposition': 'attachment; filename=install',
+        },
+        body: fileContent,
+      })
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        throw new Error(
+          `Failed to upload ${target} executable: ${response.status} ${response.statusText} - ${errorText}`,
+        )
+      }
+
+      console.log(
+        `✅ Successfully uploaded ${target} executable to ${SLV_STORAGE_URL}/slv/${version}/${target}-exe.tar.gz`,
       )
+    } catch (error) {
+      // Handle the error with proper type checking
+      if (error instanceof Error) {
+        console.error(`❌ Error processing ${target}: ${error.message}`)
+      } else {
+        console.error(`❌ Error processing ${target}: ${String(error)}`)
+      }
+      // Continue with other targets even if one fails
     }
-
-    console.log(
-      `✅ Successfully uploaded ${target} executable to ${SLV_STORAGE_URL}/slv/${version}/${target}-exe.tar.gz`,
-    )
-  }))
+  }
 }
 
 await uploadExe()

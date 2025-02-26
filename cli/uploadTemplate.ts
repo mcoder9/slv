@@ -51,7 +51,7 @@ const uploadTemplate = async () => {
 
   // Upload to R2 using Cloudflare API
   const bucketName = 'slv'
-  const objectKey = `template/${version}/${fileName}`
+  const objectKey = `slv/template/${version}/${fileName}`
   const url =
     `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${objectKey}`
 

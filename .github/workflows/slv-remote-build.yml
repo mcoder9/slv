@@ -1,9 +1,12 @@
-name: SLV Remote Build
+name: SLV Tests and Release
 
 on:
   push:
+    branches: ["main"]
     tags:
       - 'v*.*.*'
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
     inputs:
       version:
@@ -12,8 +15,25 @@ on:
         default: '0.6.0'
 
 jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+
+      - name: Run tests
+        run: deno task test
+
   remote-build:
     name: Remote Build and Release
+    needs: test
+    if: success() && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -65,9 +85,7 @@ jobs:
             -e "cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
             -e "cloudflare_email=${{ secrets.CLOUDFLARE_EMAIL }}" \
             -e "cloudflare_api_key=${{ secrets.CLOUDFLARE_API_KEY }}" \
-            -e "cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" \
-            -e "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" \
-            -e "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+            -e "cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
