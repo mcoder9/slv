@@ -1,0 +1,9 @@
+---
+# Ansible inventory file for SLV build servers
+
+build_servers:
+  hosts:
+    build1:
+      ansible_host: <BUILD_SERVER_IP>
+      ansible_user: solv
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa

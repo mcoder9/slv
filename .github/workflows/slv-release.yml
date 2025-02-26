@@ -1,0 +1,93 @@
+name: SLV Release
+
+on:
+  push:
+    branches: ["main"]
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+
+      - name: Run tests
+        run: deno task test
+
+  release:
+    name: Build and Release
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+
+      - name: Extract version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Update version in constants
+        run: |
+          sed -i "s/export const VERSION = '[^']*'/export const VERSION = '${{ env.VERSION }}'/g" cmn/constants/version.ts
+
+      - name: Run version update script
+        run: deno run -A scripts/update-version.ts
+
+      - name: Create dist directory
+        run: mkdir -p dist
+
+      - name: Build for Linux
+        run: deno task build:linux
+
+      - name: Build for macOS
+        run: deno task build:mac
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: auto
+
+      - name: Upload executables
+        run: deno run -A cli/uploadExe.ts
+
+      - name: Upload install script
+        run: |
+          cd ./sh/ && aws --endpoint-url=https://278a7109e511280594fe6a2ebb778333.r2.cloudflarestorage.com/slv s3 cp install s3://slv/ --content-disposition 'attachment; filename=install'
+
+      - name: Upload template
+        run: |
+          tar -czf dist/template.tar.gz ./template/${{ env.VERSION }} && deno run -A cli/uploadTemplate.ts
+
+      - name: Purge cache
+        run: deno run -A cmn/lib/purgeR2Cache.ts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/slv-x86_64-unknown-linux-gnu-exe.tar.gz
+            dist/slv-x86_64-apple-darwin-exe.tar.gz
+          body: |
+            SLV v${{ env.VERSION }} Release
+            
+            ## Changes
+            
+            - See commit history for details

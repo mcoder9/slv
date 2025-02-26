@@ -3,5 +3,20 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "deno.disablePaths": ["./website"],
-  "ansible.python.interpreterPath": "/opt/homebrew/bin/python3"
+  "deno.enablePaths": ["./cli", "./cmn", "./scripts"],
+  "deno.config": "./deno.json",
+  "[typescript]": {
+    "deno.config": {
+      "./cli/**/*": "./cli/deno.jsonc"
+    }
+  },
+  "deno.suggest.imports.hosts": {
+    "https://deno.land": true
+  },
+  "deno.importMap": "./deno.json",
+  "deno.path": "/Users/fumi/.deno/bin/deno",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
