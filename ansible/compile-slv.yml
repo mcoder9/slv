@@ -137,8 +137,29 @@
       args:
         executable: /bin/bash
 
-    - name: Copy artifacts back
+    - name: Copy Linux artifacts to dist directory
+      copy:
+        src: '{{ build_dir }}/dist/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
+        dest: '{{ artifacts_dir }}/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
+        remote_src: yes
+
+    - name: Debug artifact paths
+      debug:
+        msg:
+          - 'Build directory: {{ build_dir }}'
+          - 'Artifacts directory: {{ artifacts_dir }}'
+          - 'Checking for file: {{ build_dir }}/dist/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
+
+    - name: List files in build dist directory
+      shell: ls -la {{ build_dir }}/dist/
+      register: build_dist_files
+
+    - name: Show build dist files
+      debug:
+        msg: '{{ build_dist_files.stdout_lines }}'
+
+    - name: Copy artifacts back to local dist directory
       fetch:
-        src: '{{ artifacts_dir }}/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
-        dest: ./artifacts/
+        src: '{{ build_dir }}/dist/slv-x86_64-unknown-linux-gnu-exe.tar.gz'
+        dest: ./dist/
         flat: yes
