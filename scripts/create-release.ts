@@ -1,6 +1,4 @@
 #!/usr/bin/env deno run -A
-
-import { VERSION } from '../cmn/constants/version.ts'
 import { spawnSync } from '@elsoul/child-process'
 import { parse } from 'https://deno.land/std@0.224.0/flags/mod.ts'
 
