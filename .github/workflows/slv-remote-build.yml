@@ -61,6 +61,11 @@ jobs:
           ansible-playbook -i ansible/inventory.yml ansible/compile-slv.yml \
             -e "version=${{ env.VERSION }}" \
             -e "github_token=${{ secrets.GITHUB_TOKEN }}" \
+            -e "cloudflare_account_id=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" \
+            -e "cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -e "cloudflare_email=${{ secrets.CLOUDFLARE_EMAIL }}" \
+            -e "cloudflare_api_key=${{ secrets.CLOUDFLARE_API_KEY }}" \
+            -e "cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}" \
             -e "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" \
             -e "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 

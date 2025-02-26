@@ -8,6 +8,13 @@
   vars:
     version: '{{ version }}'
     github_token: '{{ github_token }}'
+    # Cloudflare API credentials
+    cloudflare_account_id: '{{ cloudflare_account_id }}'
+    cloudflare_api_token: '{{ cloudflare_api_token }}'
+    cloudflare_email: '{{ cloudflare_email }}'
+    cloudflare_api_key: '{{ cloudflare_api_key }}'
+    cloudflare_zone_id: '{{ cloudflare_zone_id }}'
+    # Keep AWS credentials for backward compatibility
     aws_access_key_id: '{{ aws_access_key_id }}'
     aws_secret_access_key: '{{ aws_secret_access_key }}'
     build_dir: /opt/slv-build
@@ -79,9 +86,11 @@
 
     - name: Upload Linux executable
       shell: |
-        export AWS_ACCESS_KEY_ID="{{ aws_access_key_id }}"
-        export AWS_SECRET_ACCESS_KEY="{{ aws_secret_access_key }}"
-        cd {{ build_dir }}/dist && aws --endpoint-url=https://278a7109e511280594fe6a2ebb778333.r2.cloudflarestorage.com/slv s3 cp slv-x86_64-unknown-linux-gnu-exe.tar.gz s3://slv/{{ version }}/x86_64-unknown-linux-gnu-exe.tar.gz --content-disposition 'attachment; filename=install'
+        export DENO_INSTALL="/root/.deno"
+        export PATH="$DENO_INSTALL/bin:$PATH"
+        export CLOUDFLARE_ACCOUNT_ID="{{ cloudflare_account_id }}"
+        export CLOUDFLARE_API_TOKEN="{{ cloudflare_api_token }}"
+        cd {{ build_dir }} && deno run -A cli/uploadExe.ts
       args:
         executable: /bin/bash
 
@@ -95,17 +104,19 @@
       shell: |
         export DENO_INSTALL="/root/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
-        export AWS_ACCESS_KEY_ID="{{ aws_access_key_id }}"
-        export AWS_SECRET_ACCESS_KEY="{{ aws_secret_access_key }}"
+        export CLOUDFLARE_ACCOUNT_ID="{{ cloudflare_account_id }}"
+        export CLOUDFLARE_API_TOKEN="{{ cloudflare_api_token }}"
         cd {{ build_dir }} && deno run -A cli/uploadTemplate.ts
       args:
         executable: /bin/bash
 
     - name: Upload install script
       shell: |
-        export AWS_ACCESS_KEY_ID="{{ aws_access_key_id }}"
-        export AWS_SECRET_ACCESS_KEY="{{ aws_secret_access_key }}"
-        cd {{ build_dir }}/sh && aws --endpoint-url=https://278a7109e511280594fe6a2ebb778333.r2.cloudflarestorage.com/slv s3 cp install s3://slv/ --content-disposition 'attachment; filename=install'
+        export DENO_INSTALL="/root/.deno"
+        export PATH="$DENO_INSTALL/bin:$PATH"
+        export CLOUDFLARE_ACCOUNT_ID="{{ cloudflare_account_id }}"
+        export CLOUDFLARE_API_TOKEN="{{ cloudflare_api_token }}"
+        cd {{ build_dir }} && deno run -A cli/uploadScript.ts
       args:
         executable: /bin/bash
 
@@ -113,8 +124,10 @@
       shell: |
         export DENO_INSTALL="/root/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
-        export AWS_ACCESS_KEY_ID="{{ aws_access_key_id }}"
-        export AWS_SECRET_ACCESS_KEY="{{ aws_secret_access_key }}"
+        export CLOUDFLARE_EMAIL="{{ cloudflare_email }}"
+        export CLOUDFLARE_API_KEY="{{ cloudflare_api_key }}"
+        export CLOUDFLARE_API_TOKEN="{{ cloudflare_api_token }}"
+        export CLOUDFLARE_ZONE_ID="{{ cloudflare_zone_id }}"
         cd {{ build_dir }} && deno run -A cmn/lib/purgeR2Cache.ts
       args:
         executable: /bin/bash

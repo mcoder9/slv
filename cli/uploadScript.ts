@@ -2,13 +2,12 @@ import { VERSION } from '@cmn/constants/version.ts'
 import { SLV_STORAGE_URL } from '@cmn/constants/url.ts'
 
 /**
- * Uploads the template files to Cloudflare R2 using the Cloudflare API
+ * Uploads the install script to Cloudflare R2 using the Cloudflare API
  * This is more reliable than using the AWS CLI
  */
-const uploadTemplate = async () => {
+const uploadScript = async () => {
   const version = VERSION
-  const fileName = `template.tar.gz`
-  console.log(`Uploading template v${version} to Cloudflare R2`)
+  console.log(`Uploading install script v${version} to Cloudflare R2`)
 
   // Get environment variables for authentication
   const accountId = Deno.env.get('CLOUDFLARE_ACCOUNT_ID')
@@ -45,13 +44,13 @@ const uploadTemplate = async () => {
     }
   }
 
-  // Read the template file
-  const filePath = `./dist/${fileName}`
+  // Read the install script file
+  const filePath = './sh/install'
   const fileContent = await Deno.readFile(filePath)
 
   // Upload to R2 using Cloudflare API
   const bucketName = 'slv'
-  const objectKey = `template/${version}/${fileName}`
+  const objectKey = 'install'
   const url =
     `https://api.cloudflare.com/client/v4/accounts/${accountId}/r2/buckets/${bucketName}/objects/${objectKey}`
 
@@ -68,13 +67,13 @@ const uploadTemplate = async () => {
   if (!response.ok) {
     const errorText = await response.text()
     throw new Error(
-      `Failed to upload template: ${response.status} ${response.statusText} - ${errorText}`,
+      `Failed to upload install script: ${response.status} ${response.statusText} - ${errorText}`,
     )
   }
 
   console.log(
-    `✅ Successfully uploaded template to ${SLV_STORAGE_URL}/slv/template/${version}/${fileName}`,
+    `✅ Successfully uploaded install script to ${SLV_STORAGE_URL}/slv/install`,
   )
 }
 
-await uploadTemplate()
+await uploadScript()
