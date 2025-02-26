@@ -1,10 +1,14 @@
 {
   "name": "@slv/cli",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "exports": "./dist/exe",
   "publish": {
-    "include": ["src"],
-    "exclude": ["src/tests"]
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "src/tests"
+    ]
   },
   "tasks": {
     "dev": "deno run -A --watch src/index.ts",

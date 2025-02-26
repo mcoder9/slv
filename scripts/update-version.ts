@@ -3,7 +3,6 @@
 import { VERSION } from '../cmn/constants/version.ts'
 import { join } from '@std/path'
 import { copy, ensureDir, ensureSymlink } from 'https://deno.land/std/fs/mod.ts'
-import { spawnSync } from '@elsoul/child-process'
 
 /**
  * Updates all version references in the project
@@ -110,7 +109,11 @@ async function updateVersion() {
   }
 
   // Create the symlink
-  await ensureSymlink(newTemplateDir, './template/latest')
+  // Use absolute paths to avoid path resolution issues
+  const absNewTemplateDir = await Deno.realPath(newTemplateDir)
+  const absLatestPath = join(Deno.cwd(), 'template', 'latest')
+  
+  await ensureSymlink(absNewTemplateDir, absLatestPath)
   console.log(
     `✅ Updated template/latest symlink to point to ${newTemplateDir}`,
   )
