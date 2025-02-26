@@ -2,7 +2,7 @@
 
 import { VERSION } from '../cmn/constants/version.ts'
 import { join } from '@std/path'
-import { copy, ensureDir, ensureSymlink } from 'https://deno.land/std/fs/mod.ts'
+import { copy, ensureDir, ensureSymlink } from '@std/fs'
 
 /**
  * Updates all version references in the project
@@ -85,10 +85,16 @@ async function updateVersion() {
 
   // Copy the latest template directory to the new version
   await ensureDir(newTemplateDir)
-  await copy(`./template/${latestTemplateDir}`, newTemplateDir, {
-    overwrite: true,
-  })
-  console.log(`✅ Created ${newTemplateDir} from template/${latestTemplateDir}`)
+  
+  // Skip copy if source and destination are the same
+  if (latestTemplateDir !== VERSION) {
+    await copy(`./template/${latestTemplateDir}`, newTemplateDir, {
+      overwrite: true,
+    })
+    console.log(`✅ Created ${newTemplateDir} from template/${latestTemplateDir}`)
+  } else {
+    console.log(`✅ Template directory ${newTemplateDir} already exists, skipping copy`)
+  }
 
   // 6. Update the template/latest symlink
   try {
