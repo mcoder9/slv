@@ -98,6 +98,7 @@ install_slv() {
   if [ "$platform" = "x86_64-pc-windows-msvc" ]; then
     echo "Windows users, add $INSTALL_DIR to your PATH manually."
   fi
+  echo "Loading..."
 
   # Optional: Test the installed 'slv'
   slv -P || true
