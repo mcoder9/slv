@@ -93,10 +93,10 @@ export default function ArticleContents({ content }: Props) {
             code({ node, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '')
               const fileMatch = /:(.*)/.exec(className || '')
-
+              const { ref, ...restProps } = props
               if (!match) {
                 return (
-                  <code className={cn(className)} {...props}>
+                  <code className={cn(className)} {...restProps}>
                     {/* @ts-ignore */}
                     {children}
                   </code>
