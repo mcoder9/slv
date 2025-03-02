@@ -11,7 +11,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "preview": "pnpm build && wrangler pages dev ./out",
-    "deploy": "pnpm build && wrangler pages deploy"
+    "deploy": "pnpm build && wrangler pages deploy",
+    "update:packages": "pnpm update \"!remark-slug\" --latest"
   },
   "dependencies": {
     "@dialectlabs/blinks": "0.10.1",
