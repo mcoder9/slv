@@ -97,7 +97,6 @@ export default function ArticleContents({ content }: Props) {
             if (!match) {
               return (
                 <code className={cn(className)} {...props}>
-                  {/* @ts-ignore */}
                   {children}
                 </code>
               )

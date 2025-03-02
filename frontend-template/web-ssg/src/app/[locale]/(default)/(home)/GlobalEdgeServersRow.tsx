@@ -17,7 +17,7 @@ export default function GlobalEdgeServersRow() {
         <h2
           className={cn(
             'py-2 text-center text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl',
-            mainShardGradation,
+            mainShardGradation
           )}
         >
           {t('(home).GlobalEdgeServersRow.title')}
@@ -27,7 +27,7 @@ export default function GlobalEdgeServersRow() {
             <div
               className={cn(
                 'dark:bg-gradient-to-b',
-                'dark:from-zinc-950 dark:via-white dark:to-zinc-950',
+                'dark:from-zinc-950 dark:via-white dark:to-zinc-950'
               )}
             >
               <Image
@@ -46,7 +46,7 @@ export default function GlobalEdgeServersRow() {
             <h3
               className={cn(
                 'pb-4 text-lg font-bold tracking-tight sm:text-2xl md:text-3xl lg:text-4xl xl:pb-5 xl:text-5xl',
-                mainShardGradation,
+                mainShardGradation
               )}
             >
               {t('(home).GlobalEdgeServersRow.summary')}
@@ -54,7 +54,7 @@ export default function GlobalEdgeServersRow() {
             <p
               className={cn(
                 'text-sm font-medium sm:text-base lg:text-lg xl:text-xl',
-                'text-zinc-500 dark:text-zinc-300',
+                'text-zinc-500 dark:text-zinc-300'
               )}
             >
               {t('(home).GlobalEdgeServersRow.description')}
@@ -67,7 +67,6 @@ export default function GlobalEdgeServersRow() {
               >
                 <Button>
                   {
-                    // @ts-ignore
                     <FontAwesomeIcon
                       icon={faDiscord}
                       className="mr-2 h-5 w-5"

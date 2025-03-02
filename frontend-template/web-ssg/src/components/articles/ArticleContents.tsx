@@ -50,7 +50,6 @@ export default function ArticleContents({ content }: Props) {
             img({ children, ...props }) {
               return (
                 <>
-                  {/* eslint-disable */}
                   <img
                     className="mt-4 mb-6 rounded-lg"
                     alt={props.alt as string}
@@ -97,7 +96,6 @@ export default function ArticleContents({ content }: Props) {
               if (!match) {
                 return (
                   <code className={cn(className)} {...restProps}>
-                    {/* @ts-ignore */}
                     {children}
                   </code>
                 )
