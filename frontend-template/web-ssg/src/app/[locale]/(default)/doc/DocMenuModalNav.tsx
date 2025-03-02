@@ -26,11 +26,8 @@ export default function DocMenuModalNav() {
 
   return (
     <>
-      {/* @ts-ignore */}
       <Sheet open={open} onOpenChange={setOpen}>
-        {/* @ts-ignore */}
         <SheetTrigger asChild>
-          {/* @ts-ignore */}
           <Button
             variant="outline"
             size="sm"
@@ -42,7 +39,6 @@ export default function DocMenuModalNav() {
             <span className="ml-1 text-xs">{t('doc.nav.title')}</span>
           </Button>
         </SheetTrigger>
-        {/* @ts-ignore */}
         <SheetContent side="top" className="flex h-screen flex-col">
           <nav className="grid gap-2 text-lg font-medium">
             <div className="mb-6 flex flex-row items-start">
