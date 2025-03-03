@@ -1,0 +1,34 @@
+#!/bin/sh
+# Pre-commit hook to check for Solana keys in the repository
+
+echo "Running pre-commit hook to check for Solana keys..."
+
+# Check if Deno is available
+if command -v deno >/dev/null 2>&1; then
+  echo "Using Deno to check for Solana keys..."
+  # Run the Deno script to check for Solana keys
+  SOLANA_KEYS=$(deno run --allow-read .husky/check-solana-keys-deno.ts)
+  SCRIPT_EXIT_CODE=$?
+# Check if Node.js is available
+elif command -v node >/dev/null 2>&1; then
+  echo "Using Node.js to check for Solana keys..."
+  # Run the Node.js script to check for Solana keys
+  SOLANA_KEYS=$(node .husky/check-solana-keys-node.js)
+  SCRIPT_EXIT_CODE=$?
+else
+  echo "Error: Neither Deno nor Node.js is available. Cannot check for Solana keys."
+  exit 1
+fi
+
+# Check if any Solana keys were found (either by exit code or by output)
+if [ $SCRIPT_EXIT_CODE -ne 0 ] || [ -n "$SOLANA_KEYS" ]; then
+  echo "Error: Solana keys found in the repository:"
+  echo "$SOLANA_KEYS"
+  echo "Commit aborted. Please remove these files before committing."
+  exit 1
+fi
+
+# If we got here, no Solana keys were found
+
+echo "No Solana keys found. Proceeding with commit."
+exit 0
