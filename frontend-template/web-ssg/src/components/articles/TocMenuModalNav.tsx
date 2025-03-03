@@ -34,7 +34,7 @@ export default function TocMenuModalNav({ articleContent }: Props) {
             <CaretDownIcon className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="top" className="flex h-screen flex-col">
+        <SheetContent side="top" className="flex h-screen flex-col p-5">
           <nav className="grid gap-2 text-lg font-medium">
             <div className="mb-6 flex flex-row items-start">
               <LogoHorizontalLink
@@ -44,6 +44,7 @@ export default function TocMenuModalNav({ articleContent }: Props) {
                 }}
               />
             </div>
+            <p className="p-2 text-sm font-light">{t('common.toc')}</p>
             <ScrollSyncToc
               rawMarkdownBody={articleContent}
               modalFunction={setOpen}
