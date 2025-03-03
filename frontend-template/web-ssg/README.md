@@ -90,8 +90,6 @@ from simple text prompts and images.
 - [Next.js App Routing](https://nextjs.org/docs/app/building-your-application/routing)
 - [Static Site Generation (SSG)](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)
 - [Static Exports](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
-- [Solana](https://solana.com/)
-- [Solana Actions and Blinks](https://solana.com/docs/advanced/actions)
 
 ## Contributing
 
