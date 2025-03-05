@@ -6,6 +6,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Pluggable } from 'unified'
 import { CodeBlock } from './CodeBlock'
 import { cn, getYouTubeVideoId, isYouTubeUrl } from '@/lib/utils'
+import Image from 'next/image'
 
 type Props = {
   content: string
@@ -50,8 +51,7 @@ export default function ArticleContents({ content }: Props) {
           img({ children, ...props }) {
             return (
               <>
-                {/* eslint-disable */}
-                <img
+                <Image
                   className="mb-6 mt-4 rounded-lg"
                   alt={props.alt as string}
                   src={props.src as string}
