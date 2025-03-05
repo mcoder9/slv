@@ -1,6 +1,7 @@
 {
   "doc": {
     "title": "Doc",
+    "description": "SLV documentation",
     "nav": {
       "title": "Doc Index",
       "general": {

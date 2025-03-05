@@ -17,6 +17,7 @@ import {
   YouTubeLink
 } from '@/components/common/icons'
 import { defaultHeaderNav } from './defaultNavs'
+import { LanguageToggle } from '@/components/config/LanguageToggle'
 
 export default function DefaultModalNav() {
   const [open, setOpen] = useState(false)
@@ -66,6 +67,7 @@ export default function DefaultModalNav() {
           </nav>
           <div className="mt-auto">
             <div className="flex flex-row gap-3">
+              <LanguageToggle />
               <GitHubLink />
               <TwitterIconLink />
               <DiscordIconLink />
