@@ -37,6 +37,8 @@
           - clang
           - cmake
           - make
+          - curl
+          - wget
           - libprotobuf-dev
           - protobuf-compiler
         state: present

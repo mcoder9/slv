@@ -3,7 +3,14 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "deno.disablePaths": ["./website"],
-  "deno.enablePaths": ["./cli", "./cmn", "./scripts", "test-r2-upload.ts"],
+  "deno.enablePaths": [
+    "./cli",
+    "./cmn",
+    "./scripts",
+    "test-r2-upload.ts",
+    ".husky/check-solana-keys-deno.ts",
+    ".husky/check-solana-keys.ts"
+  ],
   "deno.config": "./deno.json",
   "[typescript]": {
     "deno.config": {

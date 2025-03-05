@@ -6,8 +6,9 @@ import { validatorCmd } from '@/validator/index.ts'
 import { rpcCmd } from '@/rpc/index.ts'
 import { cloudCmd } from '@/cloud/index.ts'
 import { swapCmd } from '@/swap/index.ts'
-import { aiCmd } from '@/ai/index.ts'
 import { metalCmd } from '@/metal/index.ts'
+import { loginCmd } from '@/login/index.ts'
+import { checkCmd } from '@/check/index.ts'
 import { installClientMessage, slvAA } from '/lib/slvAA.ts'
 import { upgrade } from '@/upgrade.ts'
 
@@ -52,10 +53,13 @@ program
   .alias('s')
 
 program
-  .command('ai', aiCmd)
-
-program
   .command('metal', metalCmd)
   .alias('m')
+
+program
+  .command('login', loginCmd)
+
+program
+  .command('check', checkCmd)
 
 await program.parse(Deno.args)
