@@ -115,14 +115,26 @@ export const getDataForArticlePageByGroupDir = (groupDir: string) => {
           description: `${metadata.description}`,
           locale,
           type: 'website',
-          images: [metadata.thumbnail]
+          images: [metadata.thumbnail ??
+            new URL(
+          process.env.NODE_ENV === 'production'
+            ? `https://${appInfo.domain}/opengraph-image.jpg`
+            : 'http://localhost:4242/opengraph-image.jpg'
+        )
+      ]
         },
         twitter: {
           card: 'summary_large_image',
           title: `${metadata.title} | ${t(`metadata.appTitle`)}`,
           creator: appInfo.twitterId,
           site: appInfo.twitterId,
-          images: [metadata.thumbnail]
+          images: [metadata.thumbnail ??
+            new URL(
+          process.env.NODE_ENV === 'production'
+            ? `https://${appInfo.domain}/twitter-image.jpg`
+            : 'http://localhost:4242/twitter-image.jpg'
+        )
+      ]
         },
         robots: {
           index: true,
