@@ -1,6 +1,7 @@
 {
   "staking": {
     "title": "SOL Staking",
+    "description": "As an elSOL holder, you can contribute to the decentralization and security enhancement of the Solana blockchain.",
     "staking": "Staking",
     "unstaking": "Unstaking",
     "withdraw": "Withdraw",

@@ -1,6 +1,7 @@
 {
   "staking": {
     "title": "SOL ステーキング",
+    "description": "elSOL ホルダーとして、Solanaブロックチェーンの分散化とセキュリティ向上に貢献できます。",
     "staking": "ステーク",
     "unstaking": "アンステーク",
     "withdraw": "引き出し",

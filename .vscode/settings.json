@@ -21,7 +21,6 @@
     "https://deno.land": true
   },
   "deno.importMap": "./deno.json",
-  "deno.path": "/Users/fumi/.deno/bin/deno",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "javascript.preferences.importModuleSpecifier": "non-relative",
