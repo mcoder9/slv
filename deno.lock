@@ -14,7 +14,7 @@
     "npm:bs58@6.0.0": "6.0.0",
     "npm:cli-progress@*": "3.12.0",
     "npm:cloudflare@*": "3.5.0",
-    "npm:husky@^9.0.11": "9.1.7",
+    "npm:husky@9.0.11": "9.0.11",
     "npm:prettier@3.2.5": "3.2.5",
     "npm:tsx@4.7.1": "4.7.1",
     "npm:typescript@5.6.3": "5.6.3",
@@ -651,8 +651,8 @@
         "ms"
       ]
     },
-    "husky@9.1.7": {
-      "integrity": "sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA=="
+    "husky@9.0.11": {
+      "integrity": "sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw=="
     },
     "is-core-module@2.16.1": {
       "integrity": "sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==",
@@ -1496,7 +1496,7 @@
     ],
     "packageJson": {
       "dependencies": [
-        "npm:husky@^9.0.11",
+        "npm:husky@9.0.11",
         "npm:prettier@3.2.5",
         "npm:tsx@4.7.1",
         "npm:typescript@5.6.3",
