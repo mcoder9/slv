@@ -11,6 +11,7 @@ import { loginCmd } from '@/login/index.ts'
 import { checkCmd } from '@/check/index.ts'
 import { installClientMessage, slvAA } from '/lib/slvAA.ts'
 import { upgrade } from '@/upgrade.ts'
+import { signupCmd } from '/src/signup/index.ts'
 
 const program = new Command()
   .name('slv')
@@ -55,6 +56,9 @@ program
 program
   .command('metal', metalCmd)
   .alias('m')
+
+program
+  .command('signup', signupCmd)
 
 program
   .command('login', loginCmd)

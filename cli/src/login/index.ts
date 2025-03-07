@@ -1,24 +1,47 @@
 import { Command } from '@cliffy'
+import { prompt, Secret } from '@cliffy/prompt'
 import { colors } from '@cliffy/colors'
-
-// Discord login URL - replace with the actual URL if needed
-const DISCORD_LOGIN_URL =
-  'https://discord.com/oauth2/authorize?client_id=1283876217006718976&response_type=code&redirect_uri=https%3A%2F%2Fverify.erpc.global%2Fv1%2Fdiscord%2Flogin&scope=identify+email'
+import { DISCORD_LINK } from '@cmn/constants/url.ts'
 
 export const loginCmd = new Command()
   .description('Login to SLV using Discord')
-  .action(() => {
-    console.log(colors.bold.green('\nSLV Discord Login\n'))
-    console.log(
-      colors.white(`👇 Please visit the following URL to login with Discord:`),
-    )
-    console.log(colors.blue.underline(DISCORD_LOGIN_URL))
+  .action(async () => {
+    const loginTxt = `⚡️ SLV Login to unlock full features ⚡️\n`
+    console.log(colors.bold.blue(loginTxt))
     console.log(
       colors.white(
-        `\nAfter logging in,\nYou will get a validation link to your email.\nAPI Key will be showed on the discord dashboard after validation.\n`,
+        `👉 You can get Free API Key from ValidatorsDAO Discord Channel
+🔗 ValidatorsDAO Discord: ${DISCORD_LINK}\n`,
       ),
     )
+    const { apiKey } = await prompt([{
+      name: 'apiKey',
+      message: '🔑 Enter API Key',
+      type: Secret,
+    }])
+    const home = Deno.env.get('HOME')
+    if (!home) {
+      console.log(colors.red('⚠️ HOME environment variable not found'))
+      Deno.exit(1)
+    }
+    const inventoryPath = home + '/.slv/api.yml'
+    try {
+      await Deno.stat(inventoryPath)
+      await Deno.writeTextFile(
+        inventoryPath,
+        `slv:
+  api_key: ${apiKey}`,
+      )
+    } catch (_error) {
+      await Deno.writeTextFile(
+        inventoryPath,
+        `slv:
+  api_key: ${apiKey}`,
+      )
+    }
     console.log(
-      colors.white(`This login is required to access certain SLV features.\n`),
+      colors.green('\n✔️ API Key Successfully Saved to ~/.slv/api.yml\n'),
     )
+    console.log(colors.white(`🚀 Full Features Unlocked\n`))
+    console.log(colors.blue(`👉 $ slv metal list\n`))
   })
