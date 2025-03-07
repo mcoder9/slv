@@ -24,7 +24,7 @@ export default function DefaultHeader() {
     <>
       <header
         className={cn(
-          'sticky top-0 z-10 flex w-full flex-col gap-10 bg-white bg-opacity-80 px-6 py-4 backdrop-blur-xl transition-transform duration-300 ease-in-out dark:bg-zinc-950 dark:bg-opacity-20',
+          'sticky top-0 z-10 flex w-full flex-col gap-10 bg-white/60 px-6 py-4 backdrop-blur-xl transition-transform duration-300 ease-in-out dark:bg-zinc-950/40',
           showHeader ? 'translate-y-0' : '-translate-y-full'
         )}
       >
