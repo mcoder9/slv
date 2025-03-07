@@ -5,7 +5,9 @@ import { DISCORD_LINK } from '@cmn/constants/url.ts'
 import { statusAction } from '/src/metal/status/statusAction.ts'
 import { cancelAction } from '/src/metal/cancel/cancelAction.ts'
 // metal Command
-const text = `📖 Steps After Payment Completion
+const text = `🚀 SLV BareMetal: High-Performance Servers Built for Solana Nodes
+
+📖 Steps After Payment Completion
 
 1. Registering Your SSH Public Key  
    Once your payment is complete, you’ll be able to register your SSH public key with the following command:

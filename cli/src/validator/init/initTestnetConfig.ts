@@ -8,7 +8,6 @@ import { genSolvUser } from '/src/validator/init/genSolvUser.ts'
 import { addInventory } from '/lib/addInventory.ts'
 import { exec } from '@elsoul/child-process'
 import denoJson from '/deno.json' with { type: 'json' }
-import { copyKeys } from '/src/validator/init/copyKeys.ts'
 import { updateInventory } from '/lib/updateInventory.ts'
 import { prompt, Select } from '@cliffy/prompt'
 import { testnetValidatorConfigDir } from '@cmn/constants/path.ts'
@@ -16,6 +15,9 @@ import { testnetValidatorConfigDir } from '@cmn/constants/path.ts'
 const initTestnetConfig = async (sshConnection: SSHConnection) => {
   try {
     await Deno.stat(testnetValidatorConfigDir)
+    await exec(
+      `cp -r ${configRoot}/template/${denoJson.version}/jinja/testnet-validator ${configRoot}`,
+    )
   } catch (_error) {
     await exec(
       `cp -r ${configRoot}/template/${denoJson.version}/jinja/testnet-validator ${configRoot}`,
@@ -69,7 +71,6 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   console.log(
     `✔︎ Validator testnet config saved to ${inventoryPath}`,
   )
-  await copyKeys(inventoryType, identityAccount)
   console.log(colors.white(`Now you can deploy with:
 
 $ slv v deploy -n testnet    

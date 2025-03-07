@@ -5,7 +5,7 @@ import { colors } from '@cliffy/colors'
 import rpcLog from '/lib/config/rpcLog.ts'
 import { listValidators } from '/src/validator/listValidators.ts'
 
-const deployValidatorTestnet = async () => {
+const deployValidatorTestnet = async (limit?: string) => {
   const inventoryType = 'testnet_validators'
   const templateRoot = getTemplatePath()
   await listValidators('testnet')
@@ -26,7 +26,9 @@ const deployValidatorTestnet = async () => {
     console.log('Failed to update ubuntu. Skipping...')
   }
   const createUserYml = `${templateRoot}/ansible/testnet-validator/init.yml`
-  const result = await runAnsilbe(createUserYml, inventoryType)
+  const result = limit
+    ? await runAnsilbe(createUserYml, inventoryType, limit)
+    : await runAnsilbe(createUserYml, inventoryType)
   if (result) {
     console.log('Successfully deployed validator on testnet')
     rpcLog()

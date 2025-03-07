@@ -6,7 +6,7 @@ import type { Subscription } from '/src/metal/getStatus.ts'
 
 const statusAction = async () => {
   const apiKey = await getApiKeyFromYml()
-  console.log(colors.yellow('🔍 Searching for Bare Metals...'))
+  console.log(colors.yellow('🔍 Searching for SLV BareMetals...'))
   const metals = await getStatus(apiKey)
   if (!metals.success) {
     console.log(colors.red('Failed to get Metals\nPlease try again later'))
@@ -20,7 +20,7 @@ const statusAction = async () => {
     return true
   }
 
-  console.log(colors.white('Your Bare Metal Resources:'))
+  console.log(colors.white('Your SLV BareMetal Resources:'))
 
   // Display each metal in a table format
   for (const metal of myMetals) {

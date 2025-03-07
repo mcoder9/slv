@@ -6,45 +6,51 @@ import { colors } from '@cliffy/colors'
 import { DISCORD_LINK } from '@cmn/constants/url.ts'
 import { Row, Table } from '@cliffy/table'
 
-const listAction = async () => {
+const listAction = async (defaultMetalType?: string) => {
   const app = '📦 APP - For Trade Bot, DApp and More!'
   const rpc = '⚡️ RPC - For Solana RPC Node'
   const mainnet = '💰 For Solana Mainnet Validator'
   const testnet = '🧪 For Solana Testnet Validator'
-  const { bareMetalType } = await prompt([
-    {
-      name: 'bareMetalType',
-      message: '🛡️ Select Bare Metal Type',
-      type: Select,
-      options: [
-        app,
-        rpc,
-        mainnet,
-        testnet,
-      ],
-      default: 'validator',
-    },
-  ])
   let metalType = ''
-  switch (bareMetalType) {
-    case app:
-      metalType = 'app'
-      break
-    case rpc:
-      metalType = 'rpc'
-      break
-    case mainnet:
-      metalType = 'mainnet'
-      break
-    case testnet:
-      metalType = 'testnet'
-      break
-    default:
-      metalType = 'testnet'
-      break
+  if (defaultMetalType) {
+    metalType = defaultMetalType
+  } else {
+    const { bareMetalType } = await prompt([
+      {
+        name: 'bareMetalType',
+        message: '🛡️ Select SLV BareMetal Type',
+        type: Select,
+        options: [
+          app,
+          rpc,
+          mainnet,
+          testnet,
+        ],
+        default: 'validator',
+      },
+    ])
+
+    switch (bareMetalType) {
+      case app:
+        metalType = 'app'
+        break
+      case rpc:
+        metalType = 'rpc'
+        break
+      case mainnet:
+        metalType = 'mainnet'
+        break
+      case testnet:
+        metalType = 'testnet'
+        break
+      default:
+        metalType = 'testnet'
+        break
+    }
   }
+
   const apiKey = await getApiKeyFromYml()
-  console.log(colors.yellow('🔍 Searching for Bare Metals...'))
+  console.log(colors.yellow('🔍 Searching for SLV BareMetals...'))
   const metals = await getMetalsWithPaymentLink(apiKey, metalType as MetalType)
   if (!metals.success) {
     // @ts-ignore: First Time Payment Link
@@ -67,7 +73,7 @@ const listAction = async () => {
     await prompt([
       {
         name: 'paymentLink',
-        message: '🛡️ Select Bare Metal Type',
+        message: '🛡️ Select SLV BareMetal Type',
         type: Select,
         options,
       },
@@ -90,7 +96,7 @@ const listAction = async () => {
   const { productId } = await prompt([
     {
       name: 'productId',
-      message: '🛡️ Select a Bare Metal to Purchase',
+      message: '🛡️ Select a SLV BareMetal to Purchase',
       type: Select,
       options,
     },

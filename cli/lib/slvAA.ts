@@ -30,6 +30,14 @@ export const installClientMessage = (version: string) => {
   const msg2 = `
 SLV is a Toolkit for Solana Developers 🪄
 
+${
+    colors.yellow(
+      '🚀 SLV BareMetal: High-Performance Servers Built for Solana Nodes.',
+    )
+  }
+
+${colors.green('$ slv metal')}
+
 ${colors.bold.underline('One-line Launch:')}
 
 $ slv validator init

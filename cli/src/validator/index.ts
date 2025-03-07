@@ -186,6 +186,26 @@ validatorCmd.command('update:version')
     await runAnsilbe(playbook, inventoryType, options.pubkey)
   })
 
+validatorCmd.command('update:script')
+  .description('Update Validator Config - firedancer-config.toml')
+  .option('--pubkey <pubkey>', 'Public Key of Validator')
+  .option('-n, --network <network>', 'Network to deploy validators', {
+    default: 'testnet',
+  })
+  .action(async (options) => {
+    if (!options.pubkey) {
+      console.log(colors.yellow('⚠️ Public Key is required'))
+      return
+    }
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
+    const templateRoot = getTemplatePath()
+    const playbook =
+      `${templateRoot}/ansible/testnet-validator/update_startup_config.yml`
+    await runAnsilbe(playbook, inventoryType, options.pubkey)
+  })
+
 validatorCmd.command('apply')
   .description('Apply Ansiible Playbook')
   .option('-y, --yml <yml>', 'Playbook Yml File Path to Apply')
