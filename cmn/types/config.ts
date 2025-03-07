@@ -5,11 +5,6 @@ export type RpcType = 'minimal' | 'geyser-yellowstone'
 export type ValidatorTestnetType = 'firedancer' | 'agave'
 export type InventoryType = 'testnet_validators' | 'mainnet_validators'
 
-export const DEFAULT_SOLANA_CLI = 'agave'
-export const DEFAULT_SOLANA_VERSION = '2.1.14'
-export const DEFAULT_FIREDANCER_VERSION = '0.402.20113'
-export const DEFAULT_VALIDATOR_TYPE = 'firedancer'
-
 export interface HostData {
   ansible_user: string
   ansible_host: string

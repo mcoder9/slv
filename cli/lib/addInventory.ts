@@ -2,15 +2,13 @@ import { stringify } from 'https://deno.land/std@0.202.0/yaml/stringify.ts'
 import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 import { colors } from '@cliffy/colors'
-import {
-  DEFAULT_FIREDANCER_VERSION,
-  DEFAULT_SOLANA_CLI,
-  DEFAULT_SOLANA_VERSION,
-  DEFAULT_VALIDATOR_TYPE,
-  type InventoryType,
-} from '@cmn/types/config.ts'
+import type { InventoryType } from '@cmn/types/config.ts'
 import type { Inventory } from '@cmn/types/config.ts'
 import { getInventoryPath } from '@cmn/constants/path.ts'
+import {
+  VERSION_FIREDANCER_TESTNET,
+  VERSION_SOLANA_TESTNET,
+} from '@cmn/constants/version.ts'
 
 const addInventory = async (
   identityAccount: string,
@@ -51,10 +49,10 @@ const addInventory = async (
           identity_account: identityAccount,
           vote_account: '',
           authority_account: '',
-          solana_cli: DEFAULT_SOLANA_CLI,
-          solana_version: DEFAULT_SOLANA_VERSION,
-          validator_type: DEFAULT_VALIDATOR_TYPE,
-          version: DEFAULT_FIREDANCER_VERSION,
+          solana_cli: 'agave',
+          solana_version: VERSION_SOLANA_TESTNET,
+          validator_type: 'firedancer',
+          version: VERSION_FIREDANCER_TESTNET,
         },
       }
     } else {
@@ -66,10 +64,10 @@ const addInventory = async (
         name: identityAccount,
         vote_account: '',
         authority_account: '',
-        solana_cli: DEFAULT_SOLANA_CLI,
-        solana_version: DEFAULT_SOLANA_VERSION,
-        validator_type: DEFAULT_VALIDATOR_TYPE,
-        version: DEFAULT_FIREDANCER_VERSION,
+        solana_cli: 'agave',
+        solana_version: VERSION_SOLANA_TESTNET,
+        validator_type: 'firedancer',
+        version: VERSION_FIREDANCER_TESTNET,
       }
     }
     const inventoryPath = getInventoryPath(inventoryType)

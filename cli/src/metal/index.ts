@@ -1,6 +1,9 @@
 import { Command } from '@cliffy'
 import { colors } from '@cliffy/colors'
 import { listAction } from '@/metal/list/listAction.ts'
+import { DISCORD_LINK } from '@cmn/constants/url.ts'
+import { statusAction } from '/src/metal/status/statusAction.ts'
+import { cancelAction } from '/src/metal/cancel/cancelAction.ts'
 // metal Command
 const text = `📖 Steps After Payment Completion
 
@@ -13,7 +16,7 @@ const text = `📖 Steps After Payment Completion
 
 3. If Login Information Doesn’t Appear  
    If the login details don’t show up after some time, please reach out via a support ticket on Discord.
-   ValidatorsDAO Discord: https://discord.gg/C7ZQSrCkYR
+   ValidatorsDAO Discord: ${DISCORD_LINK}
 `
 
 export const metalCmd = new Command()
@@ -26,17 +29,16 @@ export const metalCmd = new Command()
   })
   .command('list', 'List   - 🛡️  Solana Compatible BareMetal Resources')
   .action(async () => {
-    const result = await listAction()
-    console.log(result)
+    await listAction()
     return
   })
   .command('status', 'Status - 🏠 My Bare Metal Resource Status')
   .action(async () => {
-    console.log('Coming soon...')
+    await statusAction()
     return
   })
   .command('cancel', 'Cancel - 🔄 Cancel Subscription')
   .action(async () => {
-    console.log('Coming soon...')
+    await cancelAction()
     return
   })
