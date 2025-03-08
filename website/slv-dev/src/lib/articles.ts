@@ -4,6 +4,8 @@ import { join } from 'path'
 import matter from 'gray-matter'
 import { uniqueArray, truncateContent } from './utils'
 import { locales } from '@/app/config'
+import appInfo from '@appInfo'
+import { getTranslations } from 'next-intl/server'
 
 type Items = {
   [key: string]: string | string[]
@@ -18,7 +20,7 @@ export const getArticleBySlug = (
   const articlesDirectory = join(
     process.cwd(),
     `articles/${articleDirPrefix}/${locale}`
-  ) 
+  )
   const matchedSlug = slugArray.join('/')
   const realSlug = matchedSlug.replace(/\.md$/, '')
   const fullPath = join(articlesDirectory, `${realSlug}.md`)
@@ -43,6 +45,15 @@ export const getArticleBySlug = (
   })
 
   return items
+}
+
+export const getArticleContentByPath = (pathname: string) => {
+  const articlePath = join(process.cwd(), pathname)
+
+  const fileContents = fs.readFileSync(articlePath, 'utf8')
+  const { content } = matter(fileContents)
+
+  return content
 }
 
 export const getAllArticles = (articleDirPrefix: string) => {
@@ -80,16 +91,65 @@ export const getDataForArticlePageByGroupDir = (groupDir: string) => {
         locale
       )
 
+      const t = await getTranslations({
+        locale,
+        namespaces: [groupDir, 'metadata']
+      })
+
       const description = truncateContent(metadata.content, 160)
 
       return {
-        title: metadata.title,
+        title: `${metadata.title} | ${t('metadata.appTitle')}`,
+        metadataBase: new URL(
+          process.env.NODE_ENV === 'production'
+            ? `https://${appInfo.domain}`
+            : 'http://localhost:4242'
+        ),
+        generator: appInfo.copyright,
+        keywords: t('metadata.keywords'),
+        applicationName: t('metadata.appTitle'),
         description,
+        alternates: {
+          canonical: `https://${appInfo.domain}/${locale}/${slug.join('/')}/`,
+          languages: locales.reduce(
+            (acc, lang) => {
+              acc[lang] = `https://${appInfo.domain}/${lang}/${slug.join('/')}/`
+              return acc
+            },
+            {} as Record<string, string>
+          )
+        },
         openGraph: {
-          images: [metadata.thumbnail]
+          title: `${metadata.title} | ${t(`metadata.appTitle`)}`,
+          description: `${metadata.description}`,
+          locale,
+          type: 'website',
+          images: [
+            metadata.thumbnail ??
+              new URL(
+                process.env.NODE_ENV === 'production'
+                  ? `https://${appInfo.domain}/opengraph-image.jpg`
+                  : 'http://localhost:4242/opengraph-image.jpg'
+              )
+          ]
         },
         twitter: {
-          images: [metadata.thumbnail]
+          card: 'summary_large_image',
+          title: `${metadata.title} | ${t(`metadata.appTitle`)}`,
+          creator: appInfo.twitterId,
+          site: appInfo.twitterId,
+          images: [
+            metadata.thumbnail ??
+              new URL(
+                process.env.NODE_ENV === 'production'
+                  ? `https://${appInfo.domain}/twitter-image.jpg`
+                  : 'http://localhost:4242/twitter-image.jpg'
+              )
+          ]
+        },
+        robots: {
+          index: true,
+          follow: true
         }
       }
     },

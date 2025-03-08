@@ -1,6 +1,7 @@
 {
   "staking": {
     "title": "SOL Staking",
+    "description": "Contribute to the decentralization and security enhancement of the Solana blockchain and earn rewards.",
     "staking": "Staking",
     "unstaking": "Unstaking",
     "withdraw": "Withdraw",

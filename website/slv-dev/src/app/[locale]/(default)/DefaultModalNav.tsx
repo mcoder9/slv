@@ -17,6 +17,7 @@ import {
   YouTubeLink
 } from '@/components/common/icons'
 import { defaultHeaderNav } from './defaultNavs'
+import { LanguageToggle } from '@/components/config/LanguageToggle'
 
 export default function DefaultModalNav() {
   const [open, setOpen] = useState(false)
@@ -38,7 +39,7 @@ export default function DefaultModalNav() {
             <HamburgerMenuIcon className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="top" className="flex h-screen flex-col">
+        <SheetContent side="top" className="flex h-screen flex-col p-5">
           <nav className="grid gap-2 text-lg font-medium">
             <div className="mb-6 flex flex-row items-start">
               <LogoHorizontalLink
@@ -65,7 +66,8 @@ export default function DefaultModalNav() {
             ))}
           </nav>
           <div className="mt-auto">
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row items-center gap-3">
+              <LanguageToggle />
               <GitHubLink />
               <TwitterIconLink />
               <DiscordIconLink />
