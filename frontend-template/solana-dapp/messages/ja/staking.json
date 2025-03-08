@@ -1,6 +1,7 @@
 {
   "staking": {
     "title": "SOL ステーキング",
+    "description": "Solana ブロックチェーンの分散化とセキュリティ向上に貢献し、報酬を獲得しましょう。",
     "staking": "ステーク",
     "unstaking": "アンステーク",
     "withdraw": "引き出し",

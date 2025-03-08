@@ -76,7 +76,7 @@ ERPC: https://erpc.global
 Setting Example (.env.local):
 
 ```
-NEXT_PUBLIC_SOLANA_ENDPOINT=https://rpc.validators.solutions/rpc?api-key=<your-api-key>
+NEXT_PUBLIC_SOLANA_ENDPOINT=https://edge.erpc.global?api-key=<your-api-key>
 ```
 
 ### GitHub Actions Deployment

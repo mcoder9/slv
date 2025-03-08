@@ -66,7 +66,7 @@ export default function DefaultModalNav() {
             ))}
           </nav>
           <div className="mt-auto">
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row items-center gap-3">
               <LanguageToggle />
               <GitHubLink />
               <TwitterIconLink />

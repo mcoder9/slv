@@ -1,5 +1,5 @@
 import { setRequestLocale } from 'next-intl/server'
-import { getDataForPageByGroupDir, PageProps } from '@/lib/pages'
+import { createMetadata, PageProps } from '@/lib/pages'
 import StakingHeroRow from './StakingHeroRow'
 import CTARow from '@/components/rows/CTARow'
 import VLDAirdropRow from '@/components/rows/VLDAirdropRow'
@@ -9,10 +9,16 @@ import InstantLiquidityRow from '@/components/rows/InstantLiquidityRow'
 import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
 import HavingLiquidityRow from './HavingLiquidityRow'
 import DirectStakingRow from './DirectStakingRow'
+import { DEFAULT_PATHS } from '../defaultNavs'
 
-const groupDir = 'staking'
-const { generateMetadata } = getDataForPageByGroupDir(groupDir)
-export { generateMetadata }
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params
+  return await createMetadata({
+    locale,
+    jsonNamespaces: ['staking'],
+    pathname: DEFAULT_PATHS.staking
+  })
+}
 
 export default async function StakingPage({ params }: PageProps) {
   const { locale } = await params

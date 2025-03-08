@@ -54,7 +54,7 @@ export default function TotalStakedSOL() {
     const fetchSOLPrice = async () => {
       try {
         const response = await fetch(
-          `${appInfo.proxyBaseURL}/price/get?pair=solana-usd`
+          `${process.env.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT}`
         )
         const data = await response.text()
         const price = Number(data)

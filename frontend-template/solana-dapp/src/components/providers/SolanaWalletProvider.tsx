@@ -10,18 +10,20 @@ import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 
 import type { Adapter } from '@solana/wallet-adapter-base'
-import { useToast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 
 type Props = {
   children: ReactNode
 }
 
 export const solanaNetwork = WalletAdapterNetwork.Mainnet
-export const solanaEndpoint = `https://gerry-bvjupr-fast-mainnet.helius-rpc.com/`
+export const solanaEndpoint =
+  process.env.NEXT_PUBLIC_SOLANA_ENDPOINT ??
+  'https://api.mainnet-beta.solana.com'
 
 export default function SolanaWalletProvider({ children }: Props) {
   const wallets = useMemo(() => [], [])
-  const { toast } = useToast()
 
   const onError = useCallback(
     (error: WalletError) => {
@@ -29,9 +31,9 @@ export default function SolanaWalletProvider({ children }: Props) {
         !error.message.includes('user rejected the request.') &&
         !error.message.includes('User rejected the request.')
       ) {
-        toast({
-          title: error.name,
-          description: error.message
+        toast(error.name, {
+          description: error.message,
+          icon: <ExclamationTriangleIcon />
         })
         console.error(error)
       }
@@ -47,9 +49,9 @@ export default function SolanaWalletProvider({ children }: Props) {
             !e.message.includes('user rejected the request.') &&
             !e.message.includes('User rejected the request.')
           ) {
-            toast({
-              title: e.name,
-              description: e.message
+            toast(e.name, {
+              description: e.message,
+              icon: <ExclamationTriangleIcon />
             })
           }
         }

@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js'
 import { ELSOL_TOKEN_MINT } from '@/constants/address'
 import { UpdateIcon } from '@radix-ui/react-icons'
+import { useTheme } from '@/hooks/utils/useTheme'
 
 export default function BlinksWalletIndicator() {
   const t = useTranslations()

@@ -55,6 +55,8 @@ export default function ArticleContents({ content }: Props) {
                     className="mt-4 mb-6 rounded-lg"
                     alt={props.alt as string}
                     src={props.src as string}
+                    width={1600}
+                    height={900}
                   />
                 </>
               )

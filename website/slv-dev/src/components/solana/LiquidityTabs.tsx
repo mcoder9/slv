@@ -17,7 +17,7 @@ export default function LiquidityTabs() {
     <>
       <div className="grid gap-6">
         <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
-          <TabsList className="mb-7 grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="SOL">SOL</TabsTrigger>
             <TabsTrigger value="USDC">USDC</TabsTrigger>
             <TabsTrigger value="EPCT">EPCT</TabsTrigger>
