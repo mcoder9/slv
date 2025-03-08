@@ -1,11 +1,11 @@
-name: SLV Frontend Template Web SSG
+name: SLV Frontend Template Solana dApp
 
 on:
   push:
     branches: ["main"]
     paths:
-      - "frontend-template/web-ssg/**"
-      - ".github/workflows/slv-frontend-template-web-ssg.yml"
+      - "frontend-template/solana-dapp/**"
+      - ".github/workflows/slv-frontend-template-solana-dapp.yml"
 
 jobs:
   build:
@@ -35,10 +35,11 @@ jobs:
 
       - name: Create .env.local file
         run: |
-          echo "NEXT_PUBLIC_SOLANA_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_ENDPOINT }}" > frontend-template/web-ssg/.env.local
+          echo "NEXT_PUBLIC_SOLANA_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_ENDPOINT }}" > frontend-template/solana-dapp/.env.local
+          echo "NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT=${{ secrets.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT }}" >> frontend-template/solana-dapp/.env.local
 
       - name: Deploy to Cloudflare
-        run: pnpm -F slv-frontend-template-web-ssg run deploy
+        run: pnpm -F slv-frontend-template-solana-dapp run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
