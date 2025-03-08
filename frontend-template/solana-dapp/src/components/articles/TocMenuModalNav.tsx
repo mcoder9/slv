@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { DiscordIconLink, TwitterIconLink } from '@/components/common/icons'
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
+import { LanguageToggle } from '../config/LanguageToggle'
 
 type Props = {
   articleContent: string
@@ -34,7 +35,7 @@ export default function TocMenuModalNav({ articleContent }: Props) {
             <CaretDownIcon className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="top" className="flex h-screen flex-col">
+        <SheetContent side="top" className="flex h-screen flex-col p-5">
           <nav className="grid gap-2 text-lg font-medium">
             <div className="mb-6 flex flex-row items-start">
               <LogoHorizontalLink
@@ -50,7 +51,8 @@ export default function TocMenuModalNav({ articleContent }: Props) {
             />
           </nav>
           <div className="mt-auto">
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row items-center gap-3">
+              <LanguageToggle />
               <TwitterIconLink />
               <DiscordIconLink />
             </div>

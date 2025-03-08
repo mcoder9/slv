@@ -15,6 +15,7 @@ import {
   TwitterIconLink
 } from '@/components/common/icons'
 import DocMenu from './DocMenu'
+import { LanguageToggle } from '@/components/config/LanguageToggle'
 
 export default function DocMenuModalNav() {
   const [open, setOpen] = useState(false)
@@ -39,7 +40,7 @@ export default function DocMenuModalNav() {
             <span className="ml-1 text-xs">{t('doc.nav.title')}</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="top" className="flex h-screen flex-col">
+        <SheetContent side="top" className="flex h-screen flex-col p-5">
           <nav className="grid gap-2 text-lg font-medium">
             <div className="mb-6 flex flex-row items-start">
               <LogoHorizontalLink
@@ -53,7 +54,8 @@ export default function DocMenuModalNav() {
             <DocMenu />
           </nav>
           <div className="mt-auto">
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row items-center gap-3">
+              <LanguageToggle />
               <GitHubLink />
               <TwitterIconLink />
               <DiscordIconLink />
