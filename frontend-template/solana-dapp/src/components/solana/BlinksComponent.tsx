@@ -17,9 +17,8 @@ type Props = {
 export default function BlinksComponent({ actionUrl }: Props) {
   const { publicKey } = useWallet()
   const { adapter } = useActionSolanaWalletAdapter(solanaEndpoint)
-  const { action } = useAction({
-    url: actionUrl,
-    adapter
+  const { action, isLoading } = useAction({
+    url: actionUrl
   })
   const [solanaBalance] = useAtom(solanaBalanceAtom)
   const { theme, mounted } = useTheme()
@@ -28,10 +27,11 @@ export default function BlinksComponent({ actionUrl }: Props) {
     <>
       {mounted && publicKey ? (
         <>
-          {action ? (
+          {action && !isLoading ? (
             <Blink
               key={solanaBalance.updated}
-              action={action}
+              blink={action}
+              adapter={adapter}
               stylePreset={theme === 'light' ? 'x-light' : 'x-dark'}
             />
           ) : (

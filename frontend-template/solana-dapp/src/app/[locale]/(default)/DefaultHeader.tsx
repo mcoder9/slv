@@ -1,18 +1,14 @@
 'use client'
 
 import LogoHorizontalLink from '@/components/common/LogoHorizontalLink'
-import {
-  DiscordIconLink,
-  GitHubLink,
-  TwitterIconLink,
-  YouTubeLink
-} from '@/components/common/icons'
+import { DiscordIconLink } from '@/components/common/icons'
 import DefaultModalNav from './DefaultModalNav'
 import { defaultHeaderNav } from './defaultNavs'
 import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import { useShowHeader } from '@/hooks/utils/useShowHeader'
+import { LanguageToggle } from '@/components/config/LanguageToggle'
 
 export default function DefaultHeader() {
   const t = useTranslations()
@@ -24,7 +20,7 @@ export default function DefaultHeader() {
     <>
       <header
         className={cn(
-          'sticky top-0 z-10 flex w-full flex-col gap-10 bg-white bg-opacity-80 px-6 py-4 backdrop-blur-xl transition-transform duration-300 ease-in-out dark:bg-zinc-950 dark:bg-opacity-20',
+          'sticky top-0 z-10 flex w-full flex-col gap-10 bg-white/60 px-6 py-4 backdrop-blur-xl transition-transform duration-300 ease-in-out dark:bg-zinc-950/40',
           showHeader ? 'translate-y-0' : '-translate-y-full'
         )}
       >
@@ -49,11 +45,9 @@ export default function DefaultHeader() {
           <div className="flex flex-grow" />
           <div className="flex flex-row items-start justify-center gap-3">
             <DefaultModalNav />
-            <div className="hidden gap-4 lg:flex lg:flex-row">
-              <GitHubLink />
-              <TwitterIconLink />
+            <div className="hidden items-center gap-4 lg:flex lg:flex-row">
+              <LanguageToggle />
               <DiscordIconLink />
-              <YouTubeLink />
             </div>
           </div>
         </div>

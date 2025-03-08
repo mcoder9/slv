@@ -33,7 +33,10 @@ export default function ArticleIndex({
         </h2>
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
           {displayedArticles.map(({ article, url }) => (
-            <Card key={article.title as string} className="flex flex-col">
+            <Card
+              key={article.title as string}
+              className="flex flex-col gap-0 py-0"
+            >
               <AspectRatio ratio={16 / 9}>
                 <Link href={url} className="hover:opacity-80">
                   <Image

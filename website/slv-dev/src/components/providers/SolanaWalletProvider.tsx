@@ -17,7 +17,9 @@ type Props = {
 }
 
 export const solanaNetwork = WalletAdapterNetwork.Mainnet
-export const solanaEndpoint = `https://gerry-bvjupr-fast-mainnet.helius-rpc.com/`
+export const solanaEndpoint =
+  process.env.NEXT_PUBLIC_SOLANA_ENDPOINT ??
+  'https://api.mainnet-beta.solana.com'
 
 export default function SolanaWalletProvider({ children }: Props) {
   const wallets = useMemo(() => [], [])

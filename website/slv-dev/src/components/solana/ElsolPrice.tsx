@@ -9,7 +9,6 @@ import { SOLV_STAKE_POOL_ADDRESS } from '@/constants/address'
 import { cn } from '@/lib/utils'
 import { mainShardGradation } from '@/lib/decoration'
 import { useTranslations } from 'next-intl'
-import appInfo from '@appInfo'
 
 const connection = new Connection(solanaEndpoint)
 
@@ -63,7 +62,7 @@ export default function ElsolPrice() {
     const fetchSOLPrice = async () => {
       try {
         const response = await fetch(
-          `${appInfo.proxyBaseURL}/price/get?pair=solana-usd`
+          `${process.env.NEXT_PUBLIC_SOLANA_PRICE_ENDPOINT}`
         )
         const data = await response.text()
         const price = Number(data)

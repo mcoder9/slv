@@ -19,7 +19,7 @@ export default function StakingTabs() {
     <>
       <div className="grid gap-6">
         <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
-          <TabsList className="mb-7 grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="staking">{t('staking.staking')}</TabsTrigger>
             <TabsTrigger value="unstaking">
               {t('staking.unstaking')}

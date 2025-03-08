@@ -18,7 +18,7 @@ export default function DirectStakingTabs() {
     <>
       <div className="grid gap-6">
         <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
-          <TabsList className="mb-7 grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="labo">ELSOUL</TabsTrigger>
             <TabsTrigger value="epics">Epics DAO</TabsTrigger>
             <TabsTrigger value="unstake">{t('staking.unstaking')}</TabsTrigger>
