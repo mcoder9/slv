@@ -1,6 +1,7 @@
 {
   "(home)": {
     "title": "ホーム",
+    "description": "Solana 開発に必要なすべてがここに。バリデータもRPCもdAppも爆速でスタート",
     "SLVCommands": {
       "title1": "インストール",
       "title2": "設定",

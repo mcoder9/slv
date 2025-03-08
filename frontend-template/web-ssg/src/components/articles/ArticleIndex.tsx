@@ -33,7 +33,10 @@ export default function ArticleIndex({
         </h2>
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
           {displayedArticles.map(({ article, url }) => (
-            <Card key={article.title as string} className="flex flex-col gap-0 py-0">
+            <Card
+              key={article.title as string}
+              className="flex flex-col gap-0 py-0"
+            >
               <AspectRatio ratio={16 / 9}>
                 <Link href={url} className="hover:opacity-80">
                   <Image
@@ -60,7 +63,7 @@ export default function ArticleIndex({
                 </Link>
               </div>
               <div className="flex-grow" />
-              <div className="px-4 pb-3 pt-1">
+              <div className="px-4 pt-1 pb-3">
                 <Link href={url}>
                   <Button size="sm" className="w-full">
                     {t('common.readThisArticle')}

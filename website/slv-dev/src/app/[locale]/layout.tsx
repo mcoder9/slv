@@ -5,7 +5,7 @@ import '../globals.css'
 import '@dialectlabs/blinks/index.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { cn } from '@/lib/utils'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@/components/ui/sonner'
 import { locales } from '@/app/config'
 import SolanaWalletProvider from '@/components/providers/SolanaWalletProvider'
 
