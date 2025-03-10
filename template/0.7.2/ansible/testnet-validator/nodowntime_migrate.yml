@@ -1,0 +1,25 @@
+---
+- name: Initialize and Transfer Tower Files
+  # 外部から指定した2つのホストを対象にする
+  hosts: "{{ source_host }},{{ target_host }}"
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Check connectivity to all hosts
+      ansible.builtin.ping:
+      register: ping_result
+
+    - name: Fail if any host is unreachable
+      ansible.builtin.fail:
+        msg: "Host {{ inventory_hostname }} is unreachable."
+      when: ping_result.ping is not defined
+
+# 以下で他のプレイブックを呼び出し、そこでさらに「どのホストを操作するか」を指定する
+- import_playbook: switch_off_identity.yml
+  vars:
+    off_host: "{{ source_host }}"
+
+- import_playbook: switch_on_identity.yml
+  vars:
+    on_host: "{{ target_host }}"
