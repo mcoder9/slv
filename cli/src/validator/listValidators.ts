@@ -2,7 +2,8 @@ import { colors } from '@cliffy/colors'
 import { Row, Table } from '@cliffy/table'
 import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 import type { NetworkType } from '@cmn/types/config.ts'
-const listValidators = async (network: NetworkType) => {
+
+const listValidators = async (network: NetworkType, pubkey?: string) => {
   const inventoryType = network === 'mainnet'
     ? 'mainnet_validators'
     : 'testnet_validators'
@@ -20,10 +21,18 @@ const listValidators = async (network: NetworkType) => {
     console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
     return
   }
-  const validators = Object.values(inventory.testnet_validators.hosts)
+  let validators = Object.values(inventory.testnet_validators.hosts)
   if (!validators) {
     console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
     return
+  }
+  if (pubkey) {
+    const validator = validators.find((v) => v.identity_account === pubkey)
+    if (!validator) {
+      console.log(colors.yellow('⚠️ Validator not found'))
+      return
+    }
+    validators = [validator]
   }
   for (const validator of validators) {
     const table = new Table()

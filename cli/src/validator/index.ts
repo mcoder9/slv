@@ -1,18 +1,13 @@
 import { Command } from '@cliffy'
 import { init } from '/src/validator/init/init.ts'
 import { deployValidatorTestnet } from '/src/validator/deploy/deployValidatorTestnet.ts'
-import { Confirm, prompt, Select } from '@cliffy/prompt'
+import { Input, prompt, Select } from '@cliffy/prompt'
 import { colors } from '@cliffy/colors'
 import { listValidators } from '/src/validator/listValidators.ts'
 import { getTemplatePath } from '/lib/getTemplatePath.ts'
 import { runAnsilbe } from '/lib/runAnsible.ts'
 import type { InventoryType, NetworkType } from '@cmn/types/config.ts'
-import { parse } from 'https://deno.land/std@0.202.0/yaml/parse.ts'
-import { addInventory } from '/lib/addInventory.ts'
-import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
-import { homeDir } from '@cmn/constants/path.ts'
-import { updateInventory } from '/lib/updateInventory.ts'
-import { VERSION_FIREDANCER_TESTNET } from '@cmn/constants/version.ts'
+import { switchValidator } from '/src/validator/switch/switchValidator.ts'
 
 export const validatorCmd = new Command()
   .description('Manage Solana Validator Nodes')
@@ -29,6 +24,7 @@ validatorCmd.command('init')
 validatorCmd.command('deploy')
   .description('Deploy Validators')
   .option('-n, --network <network>', 'Network to deploy validators')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     let network = options.network
     if (!options.network) {
@@ -44,7 +40,7 @@ validatorCmd.command('deploy')
       network = validator.network
     }
     if (network === 'testnet') {
-      await deployValidatorTestnet()
+      await deployValidatorTestnet(options.pubkey)
     } else {
       console.log(colors.blue('Coming soon...🌝'))
     }
@@ -65,7 +61,7 @@ validatorCmd.command('set:identity')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
-  .option('--pubkey <pubkey>', 'Public Key of Validator')
+  .option('--pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     // const network = options.network
     if (!options.pubkey) {
@@ -93,7 +89,7 @@ validatorCmd.command('set:unstaked')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
-  .option('--pubkey <pubkey>', 'Public Key of Validator')
+  .option('--pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     if (!options.pubkey) {
       console.log(colors.yellow('⚠️ Public Key is required'))
@@ -106,7 +102,9 @@ validatorCmd.command('set:unstaked')
     const templateRoot = getTemplatePath()
     const playbook =
       `${templateRoot}/ansible/testnet-validator/set_unstaked_key.yml`
-    const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
     if (result) {
       console.log(colors.white('✅ Successfully Set Unstaked Identity'))
       return
@@ -118,25 +116,24 @@ validatorCmd.command('restart')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
-  .option('--pubkey <pubkey>', 'Public Key of Validator')
+  .option('--pubkey <pubkey>', 'Public Key of Validator.')
   .option(
     '-r, --rm',
     'Remove Snapshot/Ledger Dirs and DL Snapshot with Snapshot Finder before Starting',
     { default: false },
   )
   .action(async (options) => {
-    if (!options.pubkey) {
-      console.log(colors.yellow('⚠️ Public Key is required'))
-      return
-    }
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
     const templateRoot = getTemplatePath()
-    const playbook =
-      `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
+    const playbook = options.rm
+      ? `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
+      : `${templateRoot}/ansible/testnet-validator/restart_firedancer.yml`
 
-    const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
     if (result) {
       console.log(colors.white('✅ Successfully Restarted Validator'))
       return
@@ -145,21 +142,16 @@ validatorCmd.command('restart')
 
 validatorCmd.command('setup:firedancer')
   .description('Setup Firedancer Validator')
-  .option('--pubkey <pubkey>', 'Public Key of Validator')
+  .option('--pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
-    if (!options.pubkey) {
-      console.log(colors.yellow('⚠️ Public Key is required'))
-      return
-    }
     const inventoryType: InventoryType = 'testnet_validators'
     const templateRoot = getTemplatePath()
     const playbook =
       `${templateRoot}/ansible/testnet-validator/setup_firedancer.yml`
-    const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
-    await updateInventory(options.pubkey, inventoryType, {
-      validator_type: 'firedancer',
-      version: VERSION_FIREDANCER_TESTNET,
-    })
+
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
     if (result) {
       console.log(colors.white('✅ Successfully Setup Firedancer Validator'))
       return
@@ -168,48 +160,48 @@ validatorCmd.command('setup:firedancer')
 
 validatorCmd.command('update:version')
   .description('Update Validator Version')
-  .option('--pubkey <pubkey>', 'Public Key of Validator')
+  .option('--pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
   .action(async (options) => {
-    if (!options.pubkey) {
-      console.log(colors.yellow('⚠️ Public Key is required'))
-      return
-    }
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
     const templateRoot = getTemplatePath()
     const playbook =
       `${templateRoot}/ansible/testnet-validator/install_agave.yml`
-    await runAnsilbe(playbook, inventoryType, options.pubkey)
+    if (options.pubkey) {
+      await runAnsilbe(playbook, inventoryType, options.pubkey)
+      return
+    }
+    await runAnsilbe(playbook, inventoryType)
   })
 
 validatorCmd.command('update:script')
   .description('Update Validator Config - firedancer-config.toml')
-  .option('--pubkey <pubkey>', 'Public Key of Validator')
+  .option('--pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
   .action(async (options) => {
-    if (!options.pubkey) {
-      console.log(colors.yellow('⚠️ Public Key is required'))
-      return
-    }
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
     const templateRoot = getTemplatePath()
     const playbook =
       `${templateRoot}/ansible/testnet-validator/update_startup_config.yml`
+    if (options.pubkey) {
+      await runAnsilbe(playbook, inventoryType, options.pubkey)
+      return
+    }
     await runAnsilbe(playbook, inventoryType, options.pubkey)
   })
 
 validatorCmd.command('apply')
   .description('Apply Ansiible Playbook')
   .option('-y, --yml <yml>', 'Playbook Yml File Path to Apply')
-  .option('-p, --pubkey <pubkey>', 'Public Key of Validator')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
@@ -218,81 +210,68 @@ validatorCmd.command('apply')
       console.log(colors.yellow('⚠️ Yml File is required'))
       return
     }
-    if (!options.pubkey) {
-      console.log(colors.yellow('⚠️ Public Key is required'))
-      return
-    }
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
-    const result = await runAnsilbe(options.yml, inventoryType, options.pubkey)
+    const result = options.pubkey
+      ? await runAnsilbe(options.yml, inventoryType, options.pubkey)
+      : await runAnsilbe(options.yml, inventoryType)
     if (result) {
       console.log(colors.white('✅ Successfully Applied Playbook'))
       return
     }
   })
 
-validatorCmd.command('codebot')
-  .description('CodeBot Validator Config')
-  .action(async () => {
-    const confirm = await prompt([{
-      type: Confirm,
-      name: 'continue',
-      message: 'Do you want to migrate to new inventory?',
-      default: true,
-    }])
-    if (!confirm.continue) {
-      console.log(colors.blue('Cancelled...🌝'))
+validatorCmd.command('switch')
+  .description('Switch Validator Identity - No DownTime Migration')
+  .option('-f, --from <from>', 'From Validator Identity')
+  .option('-t, --to <to>', 'To Validator Identity')
+  .option('-n, --network <network>', 'Network to deploy validators', {
+    default: 'testnet',
+  })
+  .action(async (options) => {
+    let from = options.from
+    let to = options.to
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
+    if (inventoryType === 'mainnet_validators') {
+      console.log(colors.blue('⚠️ Mainnet Switch is coming soon...'))
       return
     }
-    interface Validator {
-      identity_account: string
-      vote_account: string
-      authority_account: string
-      username: string
-      ip: string
-      rsa_key_path: string
-      solana_cli: string
-      solana_version: string
-      validator_type: string
-      version: string
+    console.log(colors.blue('✨ Switching Testnet Validator Identity...'))
+    if (!options.from) {
+      const fromValidator = await prompt([
+        {
+          name: 'from',
+          message: 'From Validator Identity',
+          type: Input,
+        },
+      ])
+      from = fromValidator.from
+    }
+    if (!options.to) {
+      const toValidator = await prompt([
+        {
+          name: 'to',
+          message: 'To Validator Identity',
+          type: Input,
+        },
+      ])
+      to = toValidator.to
+    }
+    if (!from || !to) {
+      console.log(colors.yellow('⚠️ From and To Validators are required'))
+      return
     }
 
-    interface Config {
-      validators: Validator[]
-    }
-    const inventoryType: InventoryType = 'testnet_validators'
-    const oldConfigPath = homeDir + '/.slv/config.validator.testnet.yml'
-    let fileContent = ''
-    try {
-      fileContent = await Deno.readTextFile(oldConfigPath)
-    } catch (_error) {
-      console.log(`No file found at ${oldConfigPath}`)
-      console.log(colors.white('Looks good...🌝'))
+    const result = await switchValidator(
+      inventoryType,
+      from,
+      to,
+    )
+    if (result) {
+      console.log(colors.white('✅ Successfully Switched Validator Identity'))
       return
     }
-    const config = parse(fileContent) as Config
-    for (const validator of config.validators) {
-      const sshConnection: SSHConnection = {
-        username: 'solv',
-        ip: validator.ip,
-        rsa_key_path: validator.rsa_key_path,
-      }
-      await addInventory(
-        validator.identity_account,
-        sshConnection,
-        inventoryType,
-      )
-      await updateInventory(
-        validator.identity_account,
-        inventoryType,
-        {
-          vote_account: validator.vote_account,
-          authority_account: validator.authority_account,
-          validator_type: validator.validator_type,
-          version: validator.version,
-        },
-      )
-    }
-    console.log(colors.white('✅ Successfully Migrated to New Inventory'))
   })

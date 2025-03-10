@@ -21,10 +21,10 @@ const listAction = async (defaultMetalType?: string) => {
         message: '🛡️ Select SLV BareMetal Type',
         type: Select,
         options: [
-          app,
-          rpc,
-          mainnet,
           testnet,
+          mainnet,
+          rpc,
+          app,
         ],
         default: 'validator',
       },
