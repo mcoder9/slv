@@ -81,3 +81,4 @@ build
 !settings.json
 !tsconfig.json
 !package.json
+!.eslintrc.json

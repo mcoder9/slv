@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { DiscordIconLink, TwitterIconLink } from '@/components/common/icons'
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
+import { LanguageToggle } from '../config/LanguageToggle'
 
 type Props = {
   articleContent: string
@@ -51,7 +52,8 @@ export default function TocMenuModalNav({ articleContent }: Props) {
             />
           </nav>
           <div className="mt-auto">
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row items-center gap-3">
+              <LanguageToggle />
               <TwitterIconLink />
               <DiscordIconLink />
             </div>

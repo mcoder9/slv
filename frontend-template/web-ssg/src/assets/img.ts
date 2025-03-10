@@ -88,7 +88,8 @@ import DeFiImg from '@/assets/img/icon/defi/DeFi.png'
 import ComputerIconImg from '@/assets/img/icon/home/ComputerIcon.png'
 import HammerIconImg from '@/assets/img/icon/home/HammerIcon.png'
 import StakingToOpenSourceImg from '@/assets/img/icon/home/StakingToOpenSource.png'
-import HolderBefefitsImg from '@/assets/img/icon/home/HolderBenefits.png'
+import HolderBenefitsImg from '@/assets/img/icon/home/HolderBenefits.png'
+import ContactEmailImg from '@/assets/img/icon/contact/ContactEmail.png'
 
 import TokenSwapOrca from '@/assets/img/page/defi/TokenSwapOrca.png'
 import TokenSwapJupiter from '@/assets/img/page/defi/TokenSwapJupiter.png'
@@ -230,7 +231,8 @@ export {
   ComputerIconImg,
   HammerIconImg,
   StakingToOpenSourceImg,
-  HolderBefefitsImg,
+  HolderBenefitsImg,
+  ContactEmailImg,
   EastVenturesLogoHorizontal,
   EastVenturesLogoInvertHorizontal,
   elSOLAngledLeft,

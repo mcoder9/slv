@@ -19,11 +19,7 @@ Demo: https://web-ssg.slv.dev/
 ## Features
 
 - Edge-Native
-- Static Site Generation
-- i18n Native
-- Next.js App Router
-- React Compiler (Always optimizes memoization for production)
-- Green Coding
+- React & Tailwind Email
 
 <a href="https://www.thegreenwebfoundation.org/green-web-check/?url=https%3A%2F%2Fweb-ssg.slv.dev%2F">
   <img src="https://app.greenweb.org/api/v3/greencheckimage/web-ssg.slv.dev?nocache=true" alt="This website runs on green hosting - verified by thegreenwebfoundation.org" width="200px" height="95px">
@@ -31,18 +27,12 @@ Demo: https://web-ssg.slv.dev/
 
 ## Built with
 
-- [Next.js](https://nextjs.org/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-- [Wrangler](https://developers.cloudflare.com/workers/wrangler/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [Cloudflare Workers](https://workers.cloudflare.com/)
+- [Hono](https://hono.dev/)
+- [Resend](https://resend.com/)
+- [React Email](https://react.email/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [next-intl](https://next-intl-docs.vercel.app/)
-- [React Compiler](https://react.dev/learn/react-compiler)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Origin UI](https://originui.com/)
-- [Prism UI](https://prismui.tech/)
-- [motion](https://motion.dev/)
-- [Next Sitemap](https://github.com/iamvishnusankar/next-sitemap)
+
 
 ## Getting Started
 
@@ -59,6 +49,7 @@ result.
 Api is running on [http://localhost:4422](http://localhost:4422)
 
 
+
 ### GitHub Actions Deployment
 
 If you're using GitHub Actions for auto-deployment, don't forget to set your
@@ -69,31 +60,15 @@ For example:
 - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
 - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
 
+### Cloudflare Workers
 
-### Add Components
+In development, you need to create `dev.vars` file from `dev.vars.example`
 
-<a href="https://ui.shadcn.com/">
-  <img src="https://storage.skeet.dev/shadcnUI.jpg" alt="shadcn/ui" />
-</a>
+In production, you need to add Secret Variables in Cloudflare Workers.
 
-You can add the high-quality UI components from
-[shadcn/ui](https://ui.shadcn.com/)
+We need:
 
-Also you can use [Origin UI](https://originui.com/) and
-[Prism UI](https://prismui.tech/) for more components.
-
-<a href="https://v0.dev/">
-  <img src="https://storage.skeet.dev/v0.jpg" alt="v0" />
-</a>
-
-You can also use [v0](https://v0.dev/) which is a UI generator with shadcn/ui
-from simple text prompts and images.
-
-## References
-
-- [Next.js App Routing](https://nextjs.org/docs/app/building-your-application/routing)
-- [Static Site Generation (SSG)](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)
-- [Static Exports](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
+- `RESEND_API_KEY`: Your Resend API key
 
 ## Contributing
 
