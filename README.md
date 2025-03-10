@@ -75,6 +75,31 @@ slv validator deploy
 slv v --help
 ```
 
+### New Features - No Downtime Migration for Firedancer Testnet Validator 🔥
+
+Now you can change the identity key from the unstaked key to the authorized
+identity key without downtime.
+
+```bash
+slv v switch
+```
+
+### Introducing SLV Metal – Optimized Bare Metal for Solana Nodes ⚡️
+
+SLV Metal is a high-performance bare metal server designed specifically for Solana nodes. 
+Choosing the right server for Solana can be challenging, so we provide a curated list of fully optimized servers.
+
+From hardware specs to network performance and Linux configuration, everything is fine-tuned for maximum efficiency. With SLV Metal, you can deploy Solana nodes in just a few commands.
+
+```bash
+slv metal list
+? 🛡️ Select SLV BareMetal Type (validator)
+❯ 🧪 For Solana Testnet Validator
+  💰 For Solana Mainnet Validator
+  ⚡️ RPC - For Solana RPC Node
+  📦 APP - For Trade Bot, DApp and More!
+```
+
 ## Deploy Solana Validator Testnet with Firedancer
 
 You must have Ubuntu 24.04 LTS clean installed on your server.
@@ -199,7 +224,7 @@ Now your configuration is saved to `~/.slv/inventory.testnet.validators.yml`.
 Once you confirm the configuration, the deployment will start.
 
 ```bash
-slv v deploy -n testnet
+slv v deploy -n testnet -p EjDwu2Czy8eWEYRuNwtjniYks47Du3KNJ6JY9rs3aFSV
 Your Testnet Validators Settings:
 ┌────────────────┬──────────────────────────────────────────────┐
 │ Identity Key   │ EjDwu2Czy8eWEYRuNwtjniYks47Du3KNJ6JY9rs3aFSV │
@@ -292,29 +317,32 @@ cp -r ~/.slv/template/$VERSION/jinja/testnet-validator/* ~/.slv/testnet-validato
 ### slv Validator Commands
 
 ```bash
-Usage:   slv validator
-Version: 0.5.0        
+Usage:   slv  
+Version: 0.7.1
 
 Description:
 
-  Manage Solana Validator Nodes
+  slv is a Toolkit for Solana Developers
 
 Options:
 
-  -h, --help  - Show this help.  
+  -h, --help     - Show this help.                            
+  -V, --version  - Show the version number for this program.  
+  -P, --print    - Print slv ASCII Art                        
 
 Commands:
 
-  init              - Initialize a new validator                                       
-  deploy            - Deploy Validators                                                
-  list              - List validators                                                  
-  set:identity      - Set Validator Identity                                           
-  set:unstaked      - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
-  restart           - Restart validator                                                
-  setup:firedancer  - Setup Firedancer Validator                                       
-  update:version    - Update Validator Version                                         
-  apply             - Apply Ansible Playbook                                          
-  codebot           - CodeBot Validator Config
+  upgrade       - Upgrade slv to the latest version                                
+  bot, b        - Manage Solana gRPC Geyser Client                                 
+  app           - Manage Solana Applications                                       
+  validator, v  - Manage Solana Validator Nodes                                    
+  rpc, r        - Manage Solana RPC Nodes                                          
+  cloud, c      - Manage Solana Cloud-based Applications                           
+  swap, s       - Manage Solana Swap                                               
+  metal, m      - 🚀 SLV BareMetal: High-Performance Servers Built for Solana Nodes
+  signup        - Signup to SLV using Discord                                      
+  login         - Login to SLV using Discord                                       
+  check         - Check RPC and gRPC endpoints 
 ```
 
 ### Community Support

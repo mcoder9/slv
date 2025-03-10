@@ -8,7 +8,7 @@ import { listValidators } from '/src/validator/listValidators.ts'
 const deployValidatorTestnet = async (limit?: string) => {
   const inventoryType = 'testnet_validators'
   const templateRoot = getTemplatePath()
-  await listValidators('testnet')
+  await listValidators('testnet', limit)
   const confirm = await prompt([{
     type: Confirm,
     name: 'continue',
@@ -18,12 +18,6 @@ const deployValidatorTestnet = async (limit?: string) => {
   if (!confirm.continue) {
     console.log(colors.blue('Cancelled...🌝'))
     return false
-  }
-  const updateUbuntuYml = `${templateRoot}/ansible/cmn/update_ubuntu.yml`
-  try {
-    await runAnsilbe(updateUbuntuYml, inventoryType)
-  } catch (_error) {
-    console.log('Failed to update ubuntu. Skipping...')
   }
   const createUserYml = `${templateRoot}/ansible/testnet-validator/init.yml`
   const result = limit

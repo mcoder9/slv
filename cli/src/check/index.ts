@@ -1,48 +1,11 @@
 import { Command } from '@cliffy'
-import { Confirm, Input, Select } from '@cliffy/prompt'
+import { Input } from '@cliffy/prompt'
 import { colors } from '@cliffy/colors'
 import { exec } from '@elsoul/child-process'
 import { join } from '@std/path'
-import { exists } from '@std/fs'
 
 // Define the path for the scripts
 const userBinDir = join(Deno.env.get('HOME') || '', '.slv', 'bin')
-
-// Function to create a shell script for gRPC testing
-async function createGrpcTestScript(
-  endpoint: string,
-  token: string,
-): Promise<string> {
-  // Create the directory if it doesn't exist
-  try {
-    await Deno.mkdir(userBinDir, { recursive: true })
-  } catch (error) {
-    if (!(error instanceof Deno.errors.AlreadyExists)) {
-      throw error
-    }
-  }
-
-  const scriptPath = join(userBinDir, 'grpc_test.sh')
-  const scriptContent = `#!/bin/bash
-# Simple gRPC test script
-echo "Testing gRPC endpoint: ${endpoint} with token: ${token}"
-echo "Sending request..."
-
-# Use curl to make a gRPC-like request
-curl -s -X POST "${endpoint}" \\
-  -H "Content-Type: application/json" \\
-  -H "X-Token: ${token}" \\
-  -d '{"jsonrpc":"2.0","id":1,"method":"getStatus"}' \\
-  | jq . 2>/dev/null || echo "Response is not valid JSON"
-
-echo "gRPC test completed."
-`
-
-  await Deno.writeTextFile(scriptPath, scriptContent)
-  await Deno.chmod(scriptPath, 0o755)
-
-  return scriptPath
-}
 
 // check Command
 export const checkCmd = new Command()
@@ -69,17 +32,21 @@ checkCmd.command('rpc')
     console.log(colors.blue(`Checking RPC endpoint: ${endpoint}`))
 
     try {
-      // Execute the curl command
+      // Execute the curl command with stderr redirected to stdout to capture time output
+      // Ensure the URL is properly formatted
+      const formattedEndpoint = endpoint.trim()
       const command =
-        `curl ${endpoint} --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","id":1,"method":"getBlockHeight"}'`
+        `curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1,"method":"getEpochInfo","params":[]}' -w "Total time: %{time_total}s" -o /dev/null -s ${formattedEndpoint}`
 
       const process = await exec(command)
 
-      if (!process.success) {
-        console.error(colors.red('Error:'), process.message)
-      } else {
-        console.log(colors.green('Response:'))
-        console.log(process.message)
+      // Extract and format the real time from the output regardless of success/failure
+      const output = process.message
+      const timeMatch = output.match(/Total time: (\d+\.\d+)s/)
+      if (timeMatch) {
+        const time = parseFloat(timeMatch[1])
+        const timeColor = time < 1 ? colors.green : colors.red
+        console.log(timeColor(`Total time: ${time}s`))
       }
     } catch (error: unknown) {
       const errorMessage = error instanceof Error
@@ -110,32 +77,5 @@ checkCmd.command('grpc')
       xToken = await Input.prompt({
         message: 'Enter X-Token for authentication:',
       })
-    }
-
-    console.log(
-      colors.blue(`Checking gRPC endpoint: ${endpoint} with token: ${xToken}`),
-    )
-
-    try {
-      // Create a shell script for gRPC testing
-      const scriptPath = await createGrpcTestScript(endpoint, xToken)
-
-      // Execute the script
-      const process = await exec(scriptPath)
-
-      if (!process.success) {
-        console.error(colors.red('Error:'), process.message)
-      } else {
-        console.log(colors.green('Response:'))
-        console.log(process.message)
-      }
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error
-        ? error.message
-        : String(error)
-      console.error(
-        colors.red('Error executing grpc_test command:'),
-        errorMessage,
-      )
     }
   })
