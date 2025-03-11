@@ -5,6 +5,9 @@
     },
     {
       "path": "../frontend-template"
+    },
+    {
+      "path": "../cf-workers-template"
     }
   ],
   "settings": {

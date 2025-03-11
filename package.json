@@ -3,7 +3,8 @@
   "author": "Validators DAO",
   "type": "module",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "web-ssg:dev": "pnpm -F slv-frontend-template-web-ssg -F slv-cf-workers-template-contact-email run dev"
   },
   "devDependencies": {
     "husky": "9.0.11",
