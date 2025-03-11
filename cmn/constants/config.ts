@@ -15,3 +15,11 @@ export const getOSTarget = () => {
 }
 
 export const DEFAULT_COMMISSION_RATE = 5 // 5%
+
+export const JITO_BLOCK_ENGINE_REGIONS = [
+  'amsterdam',
+  'frankfurt',
+  'ny',
+  'salt_lake_city',
+  'tokyo'
+]

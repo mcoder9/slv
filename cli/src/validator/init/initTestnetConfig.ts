@@ -73,7 +73,7 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   )
   console.log(colors.white(`Now you can deploy with:
 
-$ slv v deploy -n testnet    
+$ slv v deploy -n testnet -p ${identityAccount}
 `))
   return configTestnet
 }

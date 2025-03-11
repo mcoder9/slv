@@ -6,6 +6,7 @@ export const configRoot = homeDir
   ? join(homeDir, '.slv')
   : join(Deno.cwd(), '.slv')
 export const testnetValidatorConfigDir = join(configRoot, 'testnet-validator')
+export const mainnetValidatorConfigDir = join(configRoot, 'mainnet-validator')
 export const getInventoryPath = (
   inventoryType: InventoryType,
 ) => {

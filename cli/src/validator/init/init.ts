@@ -12,7 +12,7 @@ const init = async () => {
       name: 'network',
       message: 'Select Solana Network',
       type: Select,
-      options: ['testnet', 'mainnet'],
+      options: ['testnet'],
       default: 'testnet',
     },
   ])
@@ -44,7 +44,7 @@ const init = async () => {
   if (validator.network === 'testnet') {
     await initTestnetConfig(ubuntu)
   } else {
-    await initMainnetConfig()
+    await initMainnetConfig(ubuntu)
   }
 }
 

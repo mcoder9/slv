@@ -68,7 +68,7 @@ const genVoteKey = async (identityAccount: string): Promise<{
     if (!result.success) {
       // Get 1 SOL to Validators DAO's Discord Channel if airdrop fails
       const msg = `Failed to airdrop to identity account: ${identityAccount}
-Add 1 SOL to Your Identity Account: ${identityAccount}
+Add Some SOL to Your Identity Account: ${identityAccount}
 
 If you don't have SOL, ask for it in the Validators DAO's Discord Channel: https://discord.gg/VX38HynP7Y`
       console.log(colors.yellow(msg))

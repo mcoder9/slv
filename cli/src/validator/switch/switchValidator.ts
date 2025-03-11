@@ -1,4 +1,4 @@
-import { exec } from '@elsoul/child-process'
+import { spawnSync } from '@elsoul/child-process'
 import { getInventoryPath } from '@cmn/constants/path.ts'
 import type { InventoryType } from '@cmn/types/config.ts'
 import { getTemplatePath } from '/lib/getTemplatePath.ts'
@@ -14,7 +14,7 @@ const switchValidator = async (
     `${templateRoot}/ansible/testnet-validator/nodowntime_migrate.yml`
   const cmd =
     `ansible-playbook -i ${inventoryPath} ${filePath} -e source_host=${from} -e target_host=${to}`
-  const result = await exec(cmd)
+  const result = await spawnSync(cmd)
   return result.success
 }
 

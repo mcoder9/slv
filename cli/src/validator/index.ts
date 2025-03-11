@@ -42,7 +42,7 @@ validatorCmd.command('deploy')
     if (network === 'testnet') {
       await deployValidatorTestnet(options.pubkey)
     } else {
-      console.log(colors.blue('Coming soon...🌝'))
+      // await deployValidatorMainnet(options.pubkey)
     }
   })
 

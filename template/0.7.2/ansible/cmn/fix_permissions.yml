@@ -15,24 +15,6 @@
         - /usr/bin/wget
         - /bin/curl
         - /bin/wget
-        - /usr/bin/gcc
-        - /bin/gcc
-        - /usr/bin/g++
-        - /bin/g++
-        - /usr/bin/make
-        - /bin/make
-        - /usr/bin/cc
-        - /bin/cc
-        - /usr/bin/ld
-        - /bin/ld
-        - /usr/bin/ar
-        - /bin/ar
-        - /usr/bin/as
-        - /bin/as
-        - /usr/bin/ranlib
-        - /bin/ranlib
-        - /usr/bin/strip
-        - /bin/strip
       ignore_errors: yes
 
     - name: Fix permissions for directories

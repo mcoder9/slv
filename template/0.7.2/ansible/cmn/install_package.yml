@@ -3,9 +3,6 @@
   hosts: all
   become: yes
   tasks:
-    - name: Fix broken packages (optional)
-      become: yes
-      command: apt-get dist-upgrade -y
     - name: Update apt cache
       apt:
         update_cache: yes
@@ -16,6 +13,7 @@
         name: fail2ban
         state: present
       tags: setup_lib
+      ignore_errors: yes
 
     - name: Ensure fail2ban is started and enabled
       service:
@@ -23,6 +21,7 @@
         state: started
         enabled: yes
       tags: setup_lib
+      ignore_errors: yes
 
     - name: Install development tools and libraries
       apt:
@@ -43,3 +42,4 @@
           - protobuf-compiler
         state: present
       tags: setup_lib
+      ignore_errors: yes
