@@ -87,6 +87,12 @@ const listAction = async (defaultMetalType?: string) => {
     return false
   }
   const metalProducts = metals.message
+  if (metalProducts.length === 0) {
+    console.log(
+      colors.white(`🙇 Sold out❗️ Please wait for the next arrival 🙏`),
+    )
+    return false
+  }
   const options = metalProducts.map((product) => {
     return {
       name: colors.white(product.name + ' - ' + product.price + ' €/month'),
