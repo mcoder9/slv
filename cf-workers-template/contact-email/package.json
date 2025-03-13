@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "lint": "eslint --ext .ts,.js --fix .",
+    "format": "prettier --write .",
     "dev": "wrangler dev --port 4422 --config wrangler.dev.toml",
     "deploy": "wrangler deploy",
     "update:packages": "pnpm update --latest"
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "4.20250303.0",
+    "@eslint/js": "9.22.0",
     "@types/react": "19.0.10",
     "@typescript-eslint/eslint-plugin": "8.26.0",
     "@typescript-eslint/parser": "8.26.0",
@@ -33,7 +35,9 @@
     "eslint-config-prettier": "10.1.1",
     "eslint-plugin-react": "7.37.4",
     "prettier": "3.5.3",
+    "prettier-plugin-tailwindcss": "0.6.11",
     "typescript": "5.8.2",
+    "typescript-eslint": "8.26.1",
     "wrangler": "3.114.0"
   }
 }

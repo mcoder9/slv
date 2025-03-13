@@ -18,8 +18,6 @@ contactRouter.post('/send', async (c: Context) => {
     const { name, email, message, locale } =
       await c.req.json<ContactRequestBody>()
 
-    
-
     const resend = new Resend(c.env.RESEND_API_KEY)
 
     const res = await resend.emails.send({
@@ -30,7 +28,11 @@ contactRouter.post('/send', async (c: Context) => {
         locale === 'ja'
           ? `お問い合わせありがとうございます | ${orgName}`
           : `Thank you for contacting us | ${orgName}`,
-      react: <ContactFormEmail contactRequestBody={{ name, email, message,locale }} />,
+      react: (
+        <ContactFormEmail
+          contactRequestBody={{ name, email, message, locale }}
+        />
+      )
     })
     console.log(res)
 

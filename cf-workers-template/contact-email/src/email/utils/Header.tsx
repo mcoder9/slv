@@ -5,7 +5,7 @@ type Props = {
   lang: 'ja' | 'en'
 }
 
-export default function Header({lang}: Props) { 
+export default function Header({ lang }: Props) {
   return (
     <Head>
       <Fonts lang={lang} />
