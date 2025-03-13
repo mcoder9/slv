@@ -97,9 +97,10 @@ export const getDataForArticlePageByGroupDir = (groupDir: string) => {
       })
 
       const description = truncateContent(metadata.content, 160)
-
+      const thumbnail = metadata.thumbnail
+      const title = `${metadata.title} | ${t('metadata.appTitle')}`
       return {
-        title: `${metadata.title} | ${t('metadata.appTitle')}`,
+        title,
         metadataBase: new URL(
           process.env.NODE_ENV === 'production'
             ? `https://${appInfo.domain}`
@@ -120,12 +121,12 @@ export const getDataForArticlePageByGroupDir = (groupDir: string) => {
           )
         },
         openGraph: {
-          title: `${metadata.title} | ${t(`metadata.appTitle`)}`,
-          description: `${metadata.description}`,
+          title,
+          description,
           locale,
           type: 'website',
           images: [
-            metadata.thumbnail ??
+            thumbnail ??
               new URL(
                 process.env.NODE_ENV === 'production'
                   ? `https://${appInfo.domain}/opengraph-image.jpg`
@@ -135,11 +136,12 @@ export const getDataForArticlePageByGroupDir = (groupDir: string) => {
         },
         twitter: {
           card: 'summary_large_image',
-          title: `${metadata.title} | ${t(`metadata.appTitle`)}`,
+          title,
+          description,
           creator: appInfo.twitterId,
           site: appInfo.twitterId,
           images: [
-            metadata.thumbnail ??
+            thumbnail ??
               new URL(
                 process.env.NODE_ENV === 'production'
                   ? `https://${appInfo.domain}/twitter-image.jpg`
