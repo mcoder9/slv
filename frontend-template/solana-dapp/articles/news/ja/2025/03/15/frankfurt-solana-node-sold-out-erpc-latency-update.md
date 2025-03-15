@@ -1,72 +1,41 @@
 ---
-id: solana-node-restock-and-erpc-update
-title: 完売御礼のSolana特化型ベアメタルクラウドサーバーが仕入れ拡大・再販開始、ERPCもアップデート
+id: frankfurt-solana-node-sold-out-erpc-latency-update
+title: フランクフルトのSolana dApp用サーバー即日完売御礼。ERPCはレイテンシ5ms台へ
 category: プレスリリース
-thumbnail: /news/2025/03/14/SolanaNodeRestockERPCUpdateJA.jpg
+thumbnail: /news/2025/03/15/FrankfurtSolanaSoldOutERPCUpdateJA.jpg
 ---
 
-ELSOUL LABO B.V.（本社：オランダ・アムステルダム、代表取締役CEO：川崎文武）は、前回のセールで完売したSolana特化型ベアメタルクラウドサーバーについて、仕入れ規模を拡大し、ご利用可能なリージョンおよびバリエーションの拡充を実施いたしました。これに伴い、待望の再販開始セールを開催いたします。
+ELSOUL LABO B.V.（本社：オランダ・アムステルダム、代表取締役CEO：川崎文武）は、再販開始と同時に、フランクフルトリージョンのSolana dApp用サーバーが即日完売となりましたことをお知らせいたします。多数のご利用誠にありがとうございます。
 
-## 人気ラインが大幅拡充、特にテストネット用ノードを追加
+## フランクフルトリージョン即日完売、再入荷手続き中
 
-前回セールでは特にテストネット用バリデータマシンの需要が強く、即完売となりました。この度、大規模な仕入れに成功したことで人気のテストネット用マシンを追加。即購入可能なラインナップを大幅に増やしています。
-
-新たに追加されたリージョンとバリエーションには、以下のような特別価格プランが含まれています。
+前回の再販開始セールで大きな注目を集めた以下のサーバープランは、販売開始直後に完売となりました。
 
 - **FRANKFURT | Solana Node - App**
+  - CPU: Intel Xeon E-2276G @ 3.80GHz（6コア）/ RAM: 32 GB / Disk: 480 GB SSD
+  - 特別価格: 月額 €160 → **€99**（完売御礼）
 
-  - CPU: Xeon E-2276G @ 3.80GHz（6コア）/ RAM: 32 GB / Disk: 480 GB SSD
-  - 月額 €160 → **€99**
+現在、再入荷に向けた手続きを進めており、仕入れ体制をさらに強化することで、より多くのお客様にご提供できるよう努力しております。
 
-- **AMSTERDAM | Solana Node - App**
+他のリージョンおよびバリエーションにつきましても数量限定のため、ご希望のお客様はお早めにご確認ください。
 
-  - CPU: Intel Xeon Gold 6138 @ 3.7GHz（20コアx2）/ RAM: 256 GB / Disk: 960GB NVMe
-  - 月額 €160 → **€99**
+- **購入・お問い合わせ先**: https://discord.gg/C7ZQSrCkYR
 
-- **CHICAGO | Solana Node - App, Firedancer(Testnet Validator), Jito-Relayer**
+## ERPCエンドポイントが更に高速化、レイテンシ5ms台へ
 
-  - CPU: AMD Ryzen 7950X @ 4.5GHz（16コア）/ RAM: 128GB 4800MHz / Disk: 2x NVMe 1TB
-  - 月額 €330 → **€198**
+![ERPC Latency](/news/2025/03/15/ERPCLatency.jpg)
 
-- **STOCKHOLM | Solana Node - App, Firedancer(Testnet Validator), Jito-Relayer**
+ELSOUL LABOが提供する専用RPCサービス「ERPC」は、デイリーアクセス数 1,000万（10M）を突破。さらなる最適化を実施した結果、平均レイテンシが5ms台へと向上しました。これにより、Solana dApp開発者の皆様にはさらに快適かつ迅速な環境をご提供可能となっています。
 
-  - CPU: AMD Ryzen 7950X @ 4.5GHz（16コア）/ RAM: 128GB 4800MHz / Disk: 2x NVMe 1TB
-  - 月額 €330 → **€198**
-
-- **TOKYO | Solana Node - App**
-
-  - CPU: Xeon E-2276G @ 3.80GHz（6コア）/ RAM: 32 GB / Disk: 480 GB SSD
-  - 月額 €160 → **€99**
-
-- **FRANKFURT | Solana Node - App, Firedancer(Testnet Validator), Jito-Relayer**
-  - CPU: AMD Ryzen 7950X @ 4.5GHz（16コア）/ RAM: 128GB 4800MHz / Disk: 2x NVMe 1TB
-  - 月額 €330 → **€198**
-
-簡単かつ迅速な購入手続きで、注文後わずか数分でサーバーが利用可能となります。購入後はマイノード一覧からSSH公開鍵を登録し、すぐに運用を開始できます。
-
-数量限定ですので、お早めにご確認ください。
-
-購入やご質問は公式Discordで承っています。お気軽にお問い合わせください。
-
-- **公式Discord**: https://discord.gg/C7ZQSrCkYR
-
-![ERPC Discord Solana Node](/news/2025/03/14/ERPCDiscordSolanaNodeJA.jpg)
-
-## ERPCエンドポイントのアップデートも同時実施
-
-また、同時にERPCエンドポイントのチューンナップアップデートも実施いたしました。
-
-### ERPCアップデート内容
-
-- シンガポールリージョンにgRPCエンドポイント追加
-- far-point判定アルゴリズムを改善
-- Frankfurtリージョンのバグ修正
-
-シンガポールリージョンに新規gRPCエンドポイントを追加し、アジア圏のレイテンシ軽減を実現しました。far-point判定アルゴリズムの改善により、以前遠方ノードと判定されたIPも再登録することで最寄りノードへの接続が可能になり、パフォーマンス向上が期待できます。Frankfurtリージョンの接続問題についても修正済みです。
-
-引き続き、ELSOUL LABO B.V.はSolanaエコシステムの安定的かつ高速なインフラ提供を目指してまいります。今後ともよろしくお願いいたします。
-
-### 関連リンク
+また、専有RPCノードおよび専有RPCゼロブロックプレミアムノードについても、今月中の入荷を予定しております。現在、新料金体系の構築を目指して、ノード最適化テストを継続的に実施しています。準備が整い次第、公式Discordおよびウェブサイトにて順次ご案内いたします。
 
 - **ERPCウェブサイト**: https://erpc.global/ja
 - **公式Discord**: https://discord.gg/C7ZQSrCkYR
+
+## Solanaネットワーク革新への取り組み
+
+私たちELSOUL LABO B.V.は、今後も最高品質のSolanaネットワークを提供し、より高いコストパフォーマンスを実現するため日々研究開発を進めています。お客様からの貴重なフィードバックを元に、改善と最適化を迅速に行い、随時アップデートを発信してまいります。
+
+いつも多大なご支援をいただき、誠にありがとうございます。
+
+引き続き、何卒よろしくお願いいたします。
