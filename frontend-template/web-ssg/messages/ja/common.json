@@ -1,5 +1,6 @@
 {
   "common": {
+    "navigationMenu": "ナビゲーションメニュー",
     "toggleTheme": "テーマ変更",
     "lightMode": "ライトモード",
     "darkMode": "ダークモード",
