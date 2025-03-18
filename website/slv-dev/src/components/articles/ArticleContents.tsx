@@ -61,6 +61,12 @@ export default function ArticleContents({ content }: Props) {
                 </>
               )
             },
+            p({ children }) {
+              return <div className="my-4">{children}</div>
+            },
+            div({ children }) {
+              return <div className="my-4">{children}</div>
+            },
             a({ children, href, ...props }) {
               if (!href) return null
               const isYouTube = isYouTubeUrl(href)

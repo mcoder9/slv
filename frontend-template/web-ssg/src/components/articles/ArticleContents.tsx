@@ -61,6 +61,12 @@ export default function ArticleContents({ content }: Props) {
                 </>
               )
             },
+            p({ children }) {
+              return <div className="my-4">{children}</div>
+            },
+            div({ children }) {
+              return <div className="my-4">{children}</div>
+            },
             a({ children, href, ...props }) {
               if (!href) return null
               const isYouTube = isYouTubeUrl(href)
@@ -95,10 +101,10 @@ export default function ArticleContents({ content }: Props) {
             code({ node, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '')
               const fileMatch = /:(.*)/.exec(className || '')
-              const { ref, ...restProps } = props
+
               if (!match) {
                 return (
-                  <code className={cn(className)} {...restProps}>
+                  <code className={cn(className)} {...props}>
                     {children}
                   </code>
                 )

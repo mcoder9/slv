@@ -15,7 +15,7 @@ type Props = {
 export default function ArticleContents({ content }: Props) {
   return (
     <>
-      <div className="prose my-8 w-full break-words dark:prose-invert">
+      <div className="prose dark:prose-invert my-8 w-full break-words">
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath, remarkSlug as Pluggable]}
           components={{
@@ -52,7 +52,7 @@ export default function ArticleContents({ content }: Props) {
               return (
                 <>
                   <Image
-                    className="mb-6 mt-4 rounded-lg"
+                    className="mt-4 mb-6 rounded-lg"
                     alt={props.alt as string}
                     src={props.src as string}
                     width={1600}
@@ -60,6 +60,12 @@ export default function ArticleContents({ content }: Props) {
                   />
                 </>
               )
+            },
+            p({ children }) {
+              return <div className="my-4">{children}</div>
+            },
+            div({ children }) {
+              return <div className="my-4">{children}</div>
             },
             a({ children, href, ...props }) {
               if (!href) return null
