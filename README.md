@@ -18,6 +18,10 @@
 
 **Launch validators, RPCs, and dApps at blazing speed⚡️**
 
+<a href="https://solana.com/">
+  <img src="https://storage.slv.dev/PoweredBySolana.svg" alt="Powered By Solana" width="200px" height="95px">
+</a>
+
 ## The Toolkit for Solana Devs
 
 SLV is a toolkit for Solana developers. It provides a set of tools to help
