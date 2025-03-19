@@ -23,3 +23,13 @@ export const JITO_BLOCK_ENGINE_REGIONS = [
   'salt_lake_city',
   'tokyo'
 ]
+
+export const SHREDSTREAM_ADDRESS = {
+  amsterdam: '74.118.140.240:1002',
+  ny: '141.98.216.96:1002',
+  frankfurt: '64.130.50.14:1002',
+  tokyo: '202.8.9.160:1002',
+  salt_lake_city: '64.130.53.8:1002',
+}
+
+export const DEFAULT_RPC_ADDRESS = '3YgDq4EbniJZGeshHuYxg8KQfpDiawkuEp17DvQeGWhL'

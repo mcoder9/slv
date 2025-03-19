@@ -3,6 +3,8 @@
   hosts: all
   become: true
   become_user: solv
+  vars_files:
+    - ~/.slv/versions.yml
   tasks:
     - name: Clone Firedancer repository
       git:
@@ -10,7 +12,7 @@
         dest: /home/solv/firedancer
         update: yes
         force: yes
-        version: v{{ hostvars[inventory_hostname].version }}
+        version: v{{ testnet_validators.version_firedancer }}
 
     - name: Initialize git submodules
       command: git submodule update --init --recursive

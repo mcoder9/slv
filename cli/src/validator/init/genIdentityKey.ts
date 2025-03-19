@@ -42,10 +42,6 @@ const genIdentityKey = async (): Promise<string> => {
       message: 'Please Enter Your Identity Public Key',
       type: Input,
     }])
-
-    console.log(colors.yellow(`⚠️ Please place your identity key in 
-        
-  ~/.slv/keys/${res.identityAccount}.json`))
     identityAccount = res.identityAccount || ''
   }
 

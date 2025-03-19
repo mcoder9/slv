@@ -12,7 +12,7 @@ const init = async () => {
       name: 'network',
       message: 'Select Solana Network',
       type: Select,
-      options: ['testnet'],
+      options: ['testnet', 'mainnet'],
       default: 'testnet',
     },
   ])

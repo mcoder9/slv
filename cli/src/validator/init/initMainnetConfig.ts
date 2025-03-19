@@ -8,13 +8,20 @@ import {
   mainnetValidatorConfigDir,
 } from '@cmn/constants/path.ts'
 import { genIdentityKey } from '/src/validator/init/genIdentityKey.ts'
-import { addInventory } from '/lib/addInventory.ts'
 import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { genSolvUser } from '/src/validator/init/genSolvUser.ts'
 import { genVoteKey } from '/src/validator/init/genVoteKey.ts'
-import { updateInventory } from '/lib/updateInventory.ts'
-import type { HostData } from '@cmn/types/config.ts'
-import { JITO_BLOCK_ENGINE_REGIONS } from '@cmn/constants/config.ts'
+import type {
+  ValidatorMainnetConfig,
+  ValidatorMainnetType,
+} from '@cmn/types/config.ts'
+import {
+  DEFAULT_RPC_ADDRESS,
+  JITO_BLOCK_ENGINE_REGIONS,
+  SHREDSTREAM_ADDRESS,
+} from '@cmn/constants/config.ts'
+import { addMainnetInventory } from '/lib/addMainnetInventory.ts'
+import { updateMainnetInventory } from '/lib/updateMainnetInventory.ts'
 
 const initMainnetConfig = async (sshConnection: SSHConnection) => {
   try {
@@ -27,61 +34,87 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
       `cp -r ${configRoot}/template/${denoJson.version}/jinja/mainnet-validator ${configRoot}`,
     )
   }
-  const { validatorType, blockEngineRegion, relayerUrl, stakedRPCIdentity } =
-    await prompt([
-      {
-        name: 'validatorType',
-        message: 'Select Validator Type',
-        type: Select,
-        options: ['jito'],
-        default: 'jito',
-      },
-      {
-        name: 'blockEngineRegion',
-        message: '🌐 Select Block Engine Region',
-        type: Select,
-        options: JITO_BLOCK_ENGINE_REGIONS,
-        default: 'amsterdam',
-      },
-      {
-        name: 'relayerUrl',
-        message: 'Enter Relayer URL',
-        type: Input,
-        default: 'http://localhost:11226',
-      },
-      {
-        name: 'stakedRPCIdentity',
-        message: 'Enter Staked RPC Identity(Optional)',
-        type: Input,
-        default: 'staked_rpc_identity_account',
-      },
-    ])
+  const {
+    validatorType,
+    blockEngineRegion,
+    relayerUrl,
+    stakedRPCIdentity,
+    snapshotUrl,
+    relayerAccount,
+  } = await prompt([
+    {
+      name: 'validatorType',
+      message: 'Select Validator Type',
+      type: Select,
+      options: ['jito'],
+      default: 'jito',
+    },
+    {
+      name: 'blockEngineRegion',
+      message: '🌐 Select Block Engine Region',
+      type: Select,
+      options: JITO_BLOCK_ENGINE_REGIONS,
+      default: 'amsterdam',
+    },
+    {
+      name: 'relayerUrl',
+      message: 'Enter Relayer URL',
+      type: Input,
+      default: 'http://localhost:11226',
+    },
+    {
+      name: 'relayerAccount',
+      message: 'Enter Relayer Account(Optional)',
+      type: Input,
+      default: '',
+    },
+    {
+      name: 'stakedRPCIdentity',
+      message: 'Enter Staked RPC Identity(Optional)',
+      type: Input,
+      default: '',
+    },
+    {
+      name: 'snapshotUrl',
+      message: 'Enter Snapshot URL(Optional)',
+      type: Input,
+      default: '',
+    },
+  ])
   if (!validatorType) {
     return
   }
+  const rpcAccount = stakedRPCIdentity || DEFAULT_RPC_ADDRESS
   const inventoryType = 'mainnet_validators'
   const identityAccount = await genIdentityKey()
   const inventoryPath = getInventoryPath(inventoryType)
+  const shredstream_address =
+    SHREDSTREAM_ADDRESS[blockEngineRegion as keyof typeof SHREDSTREAM_ADDRESS]
   // Generate or Add Inventory
-  const inventoryCheck = await addInventory(
+  const inventoryCheck = await addMainnetInventory(
     identityAccount,
     sshConnection,
-    inventoryType,
   )
   if (!inventoryCheck) {
     console.log(colors.yellow('⚠️ Inventory check failed'))
     return
   }
-  // Create solv User on Ubuntu Server
-  await genSolvUser(identityAccount, inventoryType)
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
-  const configMainnet: Partial<HostData> = {
+  const configMainnet: Partial<ValidatorMainnetConfig> = {
     vote_account: voteAccount,
     authority_account: authAccount,
-    validator_type: validatorType,
+    validator_type: validatorType as ValidatorMainnetType,
+    relayer_url: relayerUrl,
+    relayer_account: relayerAccount,
+    block_engine_region: blockEngineRegion,
+    shredstream_address,
+    staked_rpc_identity_account: rpcAccount,
+    snapshot_url: snapshotUrl,
   }
-  await updateInventory(identityAccount, inventoryType, configMainnet)
+  await updateMainnetInventory(identityAccount, configMainnet)
+  // Create solv User on Ubuntu Server
+  await genSolvUser(identityAccount, inventoryType)
   console.log(
     `✔︎ Validator Mainnet Config Saved To ${inventoryPath}`,
   )

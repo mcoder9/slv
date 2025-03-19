@@ -42,9 +42,7 @@ const addMainnetInventory = async (
     }
 
     // Get versions from versions.yml
-    const versions = await genOrReadVersions()
-    const { solana_cli, solana_version, validator_type, version } =
-      versions.mainnet_validators
+    await genOrReadVersions()
 
     if (!inventory[inventoryType].hosts) {
       inventory[inventoryType].hosts = {
@@ -56,18 +54,16 @@ const addMainnetInventory = async (
           identity_account: identityAccount,
           vote_account: '',
           authority_account: '',
-          relayer_account: '',
-          username: sshConnection.username,
           ip: sshConnection.ip,
           validator_type: 'jito',
           port_rpc: 8899,
           relayer_url: 'http://localhost:11226',
+          relayer_account: '',
           block_engine_region: 'amsterdam',
           shredstream_address: '',
-          shredstream_desired_regions: '',
-          limit_ledger_size: 50000000,
+          limit_ledger_size: 200000000,
           staked_rpc_identity_account: '',
-          staked_rpc_amount: 0,
+          staked_rpc_amount: 50000000000000,
           snapshot_url: '',
         } as ValidatorMainnetConfig,
       }
@@ -89,9 +85,9 @@ const addMainnetInventory = async (
         block_engine_region: 'amsterdam',
         shredstream_address: '',
         shredstream_desired_regions: '',
-        limit_ledger_size: 50000000,
+        limit_ledger_size: 200000000,
         staked_rpc_identity_account: '',
-        staked_rpc_amount: 0,
+        staked_rpc_amount: 50000000000000,
         snapshot_url: '',
       } as ValidatorMainnetConfig
     }

@@ -3,6 +3,8 @@
   hosts: all
   become: true
   become_user: solv
+  vars_files:
+    - ~/.slv/versions.yml
   tasks:
     - name: Clone Firedancer repository
       git:
@@ -10,7 +12,7 @@
         dest: /home/solv/firedancer
         update: yes
         force: yes
-        version: v{{ hostvars[inventory_hostname].version }}
+        version: v{{ testnet_validators.version_firedancer }}
 
     - name: Initialize git submodules
       command: git submodule update --init --recursive
@@ -65,34 +67,3 @@
         group: solv
       vars:
         vote_account: '{{ hostvars[inventory_hostname].vote_account }}'
-
-    - name: Create Firedancer systemd service file with sudo tee
-      shell: |
-        echo "[Unit]
-        Description=Firedancer Solana
-        After=network.target
-        StartLimitIntervalSec=0
-
-        [Service]
-        Type=simple
-        Restart=always
-        RestartSec=1
-        User=solv
-        LimitNOFILE=1000000
-        LogRateLimitIntervalSec=0
-        ExecStart=/home/solv/start-firedancer.sh
-
-        [Install]
-        WantedBy=multi-user.target" | sudo tee /etc/systemd/system/firedancer.service > /dev/null
-      become: yes
-      become_user: solv
-
-    - name: Reload systemd daemon
-      command: systemctl daemon-reload
-      become: yes
-      become_user: root
-
-    - name: Enable Firedancer
-      shell: sudo systemctl enable firedancer
-      become: yes
-      become_user: root
