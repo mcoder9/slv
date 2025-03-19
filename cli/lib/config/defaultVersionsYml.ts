@@ -9,23 +9,21 @@ const defaultVersionsYml = (): string => {
   const defaultVersions: CmnType = {
     mainnet_validators: {
       solana_cli: 'agave',
-      solana_version: VERSION_SOLANA_MAINNET,
-      validator_type: 'jito',
-      version: VERSION_SOLANA_MAINNET,
+      version_agave: VERSION_SOLANA_MAINNET,
+      version_jito: VERSION_SOLANA_MAINNET,
       allowed_ssh_ips: [],
       allowed_ips: [],
     },
     testnet_validators: {
       solana_cli: 'agave',
-      solana_version: VERSION_SOLANA_TESTNET,
-      validator_type: 'firedancer',
-      version: VERSION_FIREDANCER_TESTNET,
+      version_agave: VERSION_SOLANA_TESTNET,
+      version_firedancer: VERSION_FIREDANCER_TESTNET,
+      allowed_ssh_ips: [],
     },
     mainnet_rpcs: {
       solana_cli: 'agave',
-      solana_version: VERSION_SOLANA_MAINNET,
-      rpc_type: 'minimal',
-      version: VERSION_SOLANA_MAINNET,
+      version_agave: VERSION_SOLANA_MAINNET,
+      version_jito: VERSION_SOLANA_MAINNET,
       geyser_version: '0.1.0',
       x_token: '',
       port_rpc: 8899,
@@ -38,9 +36,8 @@ const defaultVersionsYml = (): string => {
 
   return `mainnet_validators:
   solana_cli: ${defaultVersions.mainnet_validators.solana_cli}
-  solana_version: ${defaultVersions.mainnet_validators.solana_version}
-  validator_type: ${defaultVersions.mainnet_validators.validator_type}
-  version: ${defaultVersions.mainnet_validators.version}
+  version_agave: ${defaultVersions.mainnet_validators.version_agave}
+  version_jito: ${defaultVersions.mainnet_validators.version_jito}
   allowed_ssh_ips:
     - '1.1.1.1'
   allowed_ips:
@@ -48,15 +45,15 @@ const defaultVersionsYml = (): string => {
 
 testnet_validators:
   solana_cli: ${defaultVersions.testnet_validators.solana_cli}
-  solana_version: ${defaultVersions.testnet_validators.solana_version}
-  validator_type: ${defaultVersions.testnet_validators.validator_type}
-  version: ${defaultVersions.testnet_validators.version}
+  version_agave: ${defaultVersions.testnet_validators.version_agave}
+  version_firedancer: ${defaultVersions.testnet_validators.version_firedancer}
+  allowed_ssh_ips:
+    - '1.1.1.1'
 
 mainnet_rpcs:
   solana_cli: ${defaultVersions.mainnet_rpcs.solana_cli}
-  solana_version: ${defaultVersions.mainnet_rpcs.solana_version}
-  rpc_type: ${defaultVersions.mainnet_rpcs.rpc_type}
-  version: ${defaultVersions.mainnet_rpcs.version}
+  version_agave: ${defaultVersions.mainnet_rpcs.version_agave}
+  version_jito: ${defaultVersions.mainnet_rpcs.version_jito}
   geyser_version: ${defaultVersions.mainnet_rpcs.geyser_version}
   x_token: ""
   port_rpc: ${defaultVersions.mainnet_rpcs.port_rpc}

@@ -2,6 +2,7 @@ import { colors } from '@cliffy/colors'
 import { Row, Table } from '@cliffy/table'
 import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 import type { NetworkType } from '@cmn/types/config.ts'
+import { genOrReadVersions } from '/lib/genOrReadVersions.ts'
 
 const listValidators = async (network: NetworkType, pubkey?: string) => {
   const inventoryType = network === 'mainnet'
@@ -16,23 +17,49 @@ const listValidators = async (network: NetworkType, pubkey?: string) => {
     'Validator Type',
     'Version',
   ]
-  console.log(colors.white('Your Testnet Validators Settings:'))
-  if (!inventory.testnet_validators || !inventory.testnet_validators.hosts) {
-    console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
-    return
-  }
-  let validators = Object.values(inventory.testnet_validators.hosts)
-  if (!validators) {
-    console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
-    return
-  }
-  if (pubkey) {
-    const validator = validators.find((v) => v.identity_account === pubkey)
-    if (!validator) {
-      console.log(colors.yellow('⚠️ Validator not found'))
+  let validators = [] as any
+  const version = await genOrReadVersions()
+  let validatorVersion = ''
+  if (network === 'mainnet') {
+    console.log(colors.white('Your Mainnet Validators Settings:'))
+    if (!inventory.mainnet_validators || !inventory.mainnet_validators.hosts) {
+      console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
       return
     }
-    validators = [validator]
+    validators = Object.values(inventory.mainnet_validators.hosts)
+    if (!validators) {
+      console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
+      return
+    }
+    if (pubkey) {
+      const validator = inventory.mainnet_validators.hosts[pubkey]
+      if (!validator) {
+        console.log(colors.yellow('⚠️ Validator not found'))
+        return
+      }
+      validators = [validator]
+      validatorVersion = version.mainnet_validators.version_jito
+    }
+  } else {
+    console.log(colors.white('Your Testnet Validators Settings:'))
+    if (!inventory.testnet_validators || !inventory.testnet_validators.hosts) {
+      console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
+      return
+    }
+    validators = Object.values(inventory.testnet_validators.hosts)
+    if (!validators) {
+      console.log(colors.yellow('⚠️ No validators found\n\n $ slv v init'))
+      return
+    }
+    if (pubkey) {
+      const validator = inventory.testnet_validators.hosts[pubkey]
+      if (!validator) {
+        console.log(colors.yellow('⚠️ Validator not found'))
+        return
+      }
+      validators = [validator]
+      validatorVersion = version.testnet_validators.version_firedancer
+    }
   }
   for (const validator of validators) {
     const table = new Table()
@@ -67,7 +94,7 @@ const listValidators = async (network: NetworkType, pubkey?: string) => {
           .border(true),
         new Row(
           colors.blue(header[5]),
-          colors.white(validator.version),
+          colors.white(validatorVersion),
         ).border(
           true,
         ),

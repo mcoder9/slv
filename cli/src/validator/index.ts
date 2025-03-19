@@ -1,6 +1,7 @@
 import { Command } from '@cliffy'
 import { init } from '/src/validator/init/init.ts'
 import { deployValidatorTestnet } from '/src/validator/deploy/deployValidatorTestnet.ts'
+import { deployValidatorMainnet } from '/src/validator/deploy/deployValidatorMainnet.ts'
 import { Input, prompt, Select } from '@cliffy/prompt'
 import { colors } from '@cliffy/colors'
 import { listValidators } from '/src/validator/listValidators.ts'
@@ -8,6 +9,7 @@ import { getTemplatePath } from '/lib/getTemplatePath.ts'
 import { runAnsilbe } from '/lib/runAnsible.ts'
 import type { InventoryType, NetworkType } from '@cmn/types/config.ts'
 import { switchValidator } from '/src/validator/switch/switchValidator.ts'
+import { updateDefaultVersion } from '/lib/config/updateDefaultVersion.ts'
 
 export const validatorCmd = new Command()
   .description('Manage Solana Validator Nodes')
@@ -42,7 +44,7 @@ validatorCmd.command('deploy')
     if (network === 'testnet') {
       await deployValidatorTestnet(options.pubkey)
     } else {
-      // await deployValidatorMainnet(options.pubkey)
+      await deployValidatorMainnet(options.pubkey)
     }
   })
 
@@ -61,20 +63,18 @@ validatorCmd.command('set:identity')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
-  .option('--pubkey <pubkey>', 'Public Key of Validator.')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     // const network = options.network
-    if (!options.pubkey) {
-      console.log(colors.yellow('⚠️ Public Key is required'))
-      return
-    }
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
-
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
     const templateRoot = getTemplatePath()
     const playbook =
-      `${templateRoot}/ansible/testnet-validator/change_identity_and_restart.yml`
+      `${templateRoot}/ansible/${networkPath}/set_identity_to_active.yml`
     const result = await runAnsilbe(playbook, inventoryType, options.pubkey)
     if (result) {
       console.log(colors.white('✅ Successfully Set Validator Identity'))
@@ -89,13 +89,8 @@ validatorCmd.command('set:unstaked')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
-  .option('--pubkey <pubkey>', 'Public Key of Validator.')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
-    if (!options.pubkey) {
-      console.log(colors.yellow('⚠️ Public Key is required'))
-      return
-    }
-
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
@@ -165,22 +160,34 @@ validatorCmd.command('update:version')
     default: 'testnet',
   })
   .action(async (options) => {
+    await updateDefaultVersion()
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
     const templateRoot = getTemplatePath()
-    const playbook =
-      `${templateRoot}/ansible/testnet-validator/install_agave.yml`
-    if (options.pubkey) {
-      await runAnsilbe(playbook, inventoryType, options.pubkey)
+    if (options.network === 'mainnet') {
+      const playbook =
+        `${templateRoot}/ansible/mainnet-validator/install_jito.yml`
+      if (options.pubkey) {
+        await runAnsilbe(playbook, inventoryType, options.pubkey)
+        return
+      }
+      await runAnsilbe(playbook, inventoryType)
       return
+    } else {
+      const playbook =
+        `${templateRoot}/ansible/testnet-validator/install_agave.yml`
+      if (options.pubkey) {
+        await runAnsilbe(playbook, inventoryType, options.pubkey)
+        return
+      }
+      await runAnsilbe(playbook, inventoryType)
     }
-    await runAnsilbe(playbook, inventoryType)
   })
 
 validatorCmd.command('update:script')
   .description('Update Validator Config - firedancer-config.toml')
-  .option('--pubkey <pubkey>', 'Public Key of Validator.')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
@@ -188,9 +195,12 @@ validatorCmd.command('update:script')
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
     const templateRoot = getTemplatePath()
     const playbook =
-      `${templateRoot}/ansible/testnet-validator/update_startup_config.yml`
+      `${templateRoot}/ansible/${networkPath}/update_startup_config.yml`
     if (options.pubkey) {
       await runAnsilbe(playbook, inventoryType, options.pubkey)
       return
@@ -226,20 +236,30 @@ validatorCmd.command('switch')
   .description('Switch Validator Identity - No DownTime Migration')
   .option('-f, --from <from>', 'From Validator Identity')
   .option('-t, --to <to>', 'To Validator Identity')
-  .option('-n, --network <network>', 'Network to deploy validators', {
-    default: 'testnet',
-  })
+  .option('-n, --network <network>', 'Network to deploy validators')
   .action(async (options) => {
     let from = options.from
     let to = options.to
-    const inventoryType: InventoryType = options.network === 'mainnet'
+    let network = options.network
+    if (!options.network) {
+      const validator = await prompt([
+        {
+          name: 'network',
+          message: 'Select Solana Network',
+          type: Select,
+          options: ['testnet', 'mainnet'],
+          default: 'testnet',
+        },
+      ])
+      network = validator.network || 'testnet'
+    }
+    const inventoryType: InventoryType = network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
-    if (inventoryType === 'mainnet_validators') {
-      console.log(colors.blue('⚠️ Mainnet Switch is coming soon...'))
-      return
-    }
-    console.log(colors.blue('✨ Switching Testnet Validator Identity...'))
+    const networkString = network === 'mainnet' ? 'Mainnet' : 'Testnet'
+    console.log(
+      colors.blue(`✨ Switching ${networkString} Validator Identity...`),
+    )
     if (!options.from) {
       const fromValidator = await prompt([
         {

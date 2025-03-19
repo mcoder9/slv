@@ -5,11 +5,7 @@ import { colors } from '@cliffy/colors'
 import type { InventoryType } from '@cmn/types/config.ts'
 import type { Inventory } from '@cmn/types/config.ts'
 import { getInventoryPath } from '@cmn/constants/path.ts'
-import {
-  VERSION_FIREDANCER_TESTNET,
-  VERSION_SOLANA_MAINNET,
-  VERSION_SOLANA_TESTNET,
-} from '@cmn/constants/version.ts'
+import { genOrReadVersions } from '/lib/genOrReadVersions.ts'
 
 const addInventory = async (
   identityAccount: string,
@@ -21,37 +17,11 @@ const addInventory = async (
     if (!inventory[inventoryType].hosts) {
       inventory[inventoryType].hosts = {}
     }
-    const findIdentity = Object.keys(inventory[inventoryType].hosts).find(
-      (key) => String(key) === identityAccount,
-    )
+    await genOrReadVersions()
 
-    if (findIdentity) {
-      console.log(
-        colors.yellow(`⚠️ The same Identity already exists
-        
-  Please remove the existing Identity Account from inventory and try again`),
-      )
-      return false
-    }
-    const checkIdentityKey = Object.values(
-      inventory[inventoryType].hosts,
-    ).find((key) => key.identity_account === identityAccount)
-    if (checkIdentityKey) {
-      console.log(colors.yellow(`⚠️ Identity account already exists`))
-      return false
-    }
-    const solana_cli = inventoryType === 'testnet_validators'
-      ? 'agave'
-      : 'agave'
-    const solana_version = inventoryType === 'testnet_validators'
-      ? VERSION_SOLANA_TESTNET
-      : VERSION_SOLANA_MAINNET
     const validator_type = inventoryType === 'testnet_validators'
       ? 'firedancer'
       : 'jito'
-    const version = inventoryType === 'testnet_validators'
-      ? VERSION_FIREDANCER_TESTNET
-      : VERSION_SOLANA_MAINNET
     if (!inventory[inventoryType].hosts) {
       inventory[inventoryType].hosts = {
         [identityAccount]: {
@@ -62,10 +32,7 @@ const addInventory = async (
           identity_account: identityAccount,
           vote_account: '',
           authority_account: '',
-          solana_cli,
-          solana_version,
           validator_type,
-          version,
         },
       }
     } else {
@@ -77,10 +44,7 @@ const addInventory = async (
         name: identityAccount,
         vote_account: '',
         authority_account: '',
-        solana_cli,
-        solana_version,
         validator_type,
-        version,
       }
     }
     const inventoryPath = getInventoryPath(inventoryType)

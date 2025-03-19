@@ -10,8 +10,11 @@ const switchValidator = async (
 ): Promise<boolean> => {
   const inventoryPath = getInventoryPath(inventoryType)
   const templateRoot = getTemplatePath()
+  const networkPath = inventoryType === 'mainnet_validators'
+    ? 'mainnet-validator'
+    : 'testnet-validator'
   const filePath =
-    `${templateRoot}/ansible/testnet-validator/nodowntime_migrate.yml`
+    `${templateRoot}/ansible/${networkPath}/nodowntime_migrate.yml`
   const cmd =
     `ansible-playbook -i ${inventoryPath} ${filePath} -e source_host=${from} -e target_host=${to}`
   const result = await spawnSync(cmd)

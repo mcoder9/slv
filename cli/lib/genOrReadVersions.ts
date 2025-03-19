@@ -1,5 +1,4 @@
 import { parse } from 'https://deno.land/std@0.202.0/yaml/parse.ts'
-import { stringify } from 'https://deno.land/std@0.202.0/yaml/stringify.ts'
 import type { CmnType } from '@cmn/types/config.ts'
 import { defaultVersionsYml } from '/lib/config/defaultVersionsYml.ts'
 import { configRoot } from '@cmn/constants/path.ts'
