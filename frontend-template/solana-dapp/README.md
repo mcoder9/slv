@@ -28,6 +28,10 @@ Demo: https://solana-dapp.slv.dev/
 - Solana Blinks Actions Interface
 - Green Coding
 
+<a href="https://solana.com/">
+  <img src="https://storage.slv.dev/PoweredBySolana.svg" alt="Powered By Solana" width="200px" height="95px">
+</a>
+
 <a href="https://www.thegreenwebfoundation.org/green-web-check/?url=https%3A%2F%2Fsolana-dapp.slv.dev%2F">
   <img src="https://app.greenweb.org/api/v3/greencheckimage/solana-dapp.slv.dev?nocache=true" alt="This website runs on green hosting - verified by thegreenwebfoundation.org" width="200px" height="95px">
 </a>
