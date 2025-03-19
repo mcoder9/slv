@@ -22,6 +22,7 @@ import {
   VALIDATORS_DAO_WEB_LINK,
   VALIDATORS_SOLUTIONS_WEB_LINK
 } from '@/constants/links'
+import PoweredBySolanaBadge from '@/components/common/PoweredBySolanaBadge'
 
 export default function DefaultFooter() {
   const t = useTranslations()
@@ -100,7 +101,10 @@ export default function DefaultFooter() {
               elSOL - Solana Incentivized LST
             </Link>
           </div>
-          <div className="flex w-full flex-col">
+         <div className="flex w-full flex-col gap-8">
+            <div className="max-w-40 sm:ml-auto">
+              <PoweredBySolanaBadge />
+            </div>
             <div className="max-w-40 sm:ml-auto">
               <GreenHostingBadge />
             </div>
