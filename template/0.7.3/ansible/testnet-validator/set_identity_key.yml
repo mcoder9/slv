@@ -1,5 +1,5 @@
 ---
-- name: Set Symbolic Link to Authoried Identity
+- name: Set Authoried Key to Identity
   hosts: all
   become: true
   become_user: solv

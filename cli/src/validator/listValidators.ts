@@ -38,8 +38,8 @@ const listValidators = async (network: NetworkType, pubkey?: string) => {
         return
       }
       validators = [validator]
-      validatorVersion = version.mainnet_validators.version_jito
     }
+    validatorVersion = version.mainnet_validators.version_jito
   } else {
     console.log(colors.white('Your Testnet Validators Settings:'))
     if (!inventory.testnet_validators || !inventory.testnet_validators.hosts) {
@@ -58,8 +58,8 @@ const listValidators = async (network: NetworkType, pubkey?: string) => {
         return
       }
       validators = [validator]
-      validatorVersion = version.testnet_validators.version_firedancer
     }
+    validatorVersion = version.testnet_validators.version_firedancer
   }
   for (const validator of validators) {
     const table = new Table()

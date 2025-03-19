@@ -94,9 +94,12 @@ validatorCmd.command('set:unstaked')
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
     const templateRoot = getTemplatePath()
     const playbook =
-      `${templateRoot}/ansible/testnet-validator/set_unstaked_key.yml`
+      `${templateRoot}/ansible/${networkPath}/set_unstaked_key.yml`
     const result = options.pubkey
       ? await runAnsilbe(playbook, inventoryType, options.pubkey)
       : await runAnsilbe(playbook, inventoryType)
@@ -107,11 +110,11 @@ validatorCmd.command('set:unstaked')
   })
 
 validatorCmd.command('restart')
-  .description('Restart validator')
+  .description('Stop and Start Validator')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
-  .option('--pubkey <pubkey>', 'Public Key of Validator.')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option(
     '-r, --rm',
     'Remove Snapshot/Ledger Dirs and DL Snapshot with Snapshot Finder before Starting',
@@ -122,22 +125,34 @@ validatorCmd.command('restart')
       ? 'mainnet_validators'
       : 'testnet_validators'
     const templateRoot = getTemplatePath()
-    const playbook = options.rm
-      ? `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
-      : `${templateRoot}/ansible/testnet-validator/restart_firedancer.yml`
+    if (options.network === 'mainnet') {
+      const playbook =
+        `${templateRoot}/ansible/mainnet-validator/restart_node.yml`
+      const result = options.pubkey
+        ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+        : await runAnsilbe(playbook, inventoryType)
+      if (result) {
+        console.log(colors.white('✅ Successfully Restarted Validator'))
+        return
+      }
+    } else {
+      const playbook = options.rm
+        ? `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
+        : `${templateRoot}/ansible/testnet-validator/restart_firedancer.yml`
 
-    const result = options.pubkey
-      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
-      : await runAnsilbe(playbook, inventoryType)
-    if (result) {
-      console.log(colors.white('✅ Successfully Restarted Validator'))
-      return
+      const result = options.pubkey
+        ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+        : await runAnsilbe(playbook, inventoryType)
+      if (result) {
+        console.log(colors.white('✅ Successfully Restarted Validator'))
+        return
+      }
     }
   })
 
 validatorCmd.command('setup:firedancer')
-  .description('Setup Firedancer Validator')
-  .option('--pubkey <pubkey>', 'Public Key of Validator.')
+  .description('Setup Firedancer Validator - Testnet Only')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     const inventoryType: InventoryType = 'testnet_validators'
     const templateRoot = getTemplatePath()
@@ -155,7 +170,7 @@ validatorCmd.command('setup:firedancer')
 
 validatorCmd.command('update:version')
   .description('Update Validator Version')
-  .option('--pubkey <pubkey>', 'Public Key of Validator.')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
@@ -186,7 +201,7 @@ validatorCmd.command('update:version')
   })
 
 validatorCmd.command('update:script')
-  .description('Update Validator Config - firedancer-config.toml')
+  .description('Update Validator Startup Config')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',

@@ -4,7 +4,7 @@ import type {
   InventoryType,
   ValidatorMainnetConfig,
 } from '@cmn/types/config.ts'
-import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
+import { genOrReadMainnetInventory } from '/lib/genOrReadMainnetInventory.ts'
 
 const updateMainnetInventory = async (
   identityAccount: string,
@@ -12,7 +12,7 @@ const updateMainnetInventory = async (
 ) => {
   const inventoryType: InventoryType = 'mainnet_validators'
   const inventoryPath = getInventoryPath(inventoryType)
-  const inventory = await genOrReadInventory(inventoryType)
+  const inventory = await genOrReadMainnetInventory()
   inventory[inventoryType].hosts[identityAccount] = {
     ...inventory[inventoryType].hosts[identityAccount],
     ...body,

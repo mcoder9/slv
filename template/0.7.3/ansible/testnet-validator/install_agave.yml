@@ -5,11 +5,11 @@
   vars_files:
     - ~/.slv/versions.yml
   vars:
-    solana_bin_dir: '/home/solv/.local/share/solana/install/active_release/bin' # Solana CLI のインストール先
+    solana_bin_dir: '/home/solv/.local/share/solana/install/active_release/bin'
   tasks:
     - name: Install Agave from the specified version
       shell: |
-        tag=v{{ versions.testnet_validator.version_agave }}
+        tag=v{{ testnet_validators.version_agave }}
         curl -sSfL https://release.anza.xyz/${tag}/install | sh
       args:
         executable: /bin/bash

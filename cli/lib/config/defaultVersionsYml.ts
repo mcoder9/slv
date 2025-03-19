@@ -39,16 +39,16 @@ const defaultVersionsYml = (): string => {
   version_agave: ${defaultVersions.mainnet_validators.version_agave}
   version_jito: ${defaultVersions.mainnet_validators.version_jito}
   allowed_ssh_ips:
-    - '1.1.1.1'
+    - ''
   allowed_ips:
-    - '1.1.1.1'
+    - ''
 
 testnet_validators:
   solana_cli: ${defaultVersions.testnet_validators.solana_cli}
   version_agave: ${defaultVersions.testnet_validators.version_agave}
   version_firedancer: ${defaultVersions.testnet_validators.version_firedancer}
   allowed_ssh_ips:
-    - '1.1.1.1'
+    - ''
 
 mainnet_rpcs:
   solana_cli: ${defaultVersions.mainnet_rpcs.solana_cli}
@@ -60,9 +60,9 @@ mainnet_rpcs:
   port_grpc: ${defaultVersions.mainnet_rpcs.port_grpc}
   port_jupiter: ${defaultVersions.mainnet_rpcs.port_jupiter}
   allowed_ssh_ips:
-    - '1.1.1.1'
+    - ''
   allowed_ips:
-    - '1.1.1.1'`
+    - ''`
 }
 
 export { defaultVersionsYml }
