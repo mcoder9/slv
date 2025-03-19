@@ -219,7 +219,10 @@ import EdgeComputeNetworkImg from '@/assets/img/merit/EdgeComputeNetwork.png'
 import MonorepoArchitectureImg from '@/assets/img/merit/MonorepoArchitecture.png'
 import Web3CompatibleImg from '@/assets/img/merit/Web3Compatible.png'
 
+import PoweredBySolana from '@/assets/img/logo/partners/solana/PoweredBySolana.svg'
+
 export {
+  PoweredBySolana,
   logoHorizontal,
   logoHorizontalInvert,
   AgaveLogoHorizontal,
