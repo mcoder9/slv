@@ -14,10 +14,7 @@ export interface HostData {
   identity_account: string
   vote_account: string
   authority_account: string
-  solana_cli: string
-  solana_version: string
   validator_type: string
-  version: string
 }
 
 export interface GroupData {
@@ -54,25 +51,23 @@ export interface CmnType {
 
 export interface CmnTestnetValidatorType {
   solana_cli: string
-  solana_version: string
-  validator_type: ValidatorTestnetType
-  version: string
+  version_firedancer: string
+  version_agave: string
+  allowed_ssh_ips: string[]
 }
 
 export interface CmnMainnetValidatorType {
   solana_cli: string
-  solana_version: string
-  validator_type: ValidatorMainnetType
-  version: string
+  version_agave: string
+  version_jito: string
   allowed_ssh_ips: string[]
   allowed_ips: string[]
 }
 
 export interface CmnMainnetRpcType {
   solana_cli: string
-  solana_version: string
-  rpc_type: RpcType
-  version: string
+  version_agave: string
+  version_jito: string
   geyser_version: string
   x_token: string
   port_rpc: number
@@ -83,28 +78,24 @@ export interface CmnMainnetRpcType {
 }
 
 export interface ValidatorMainnetConfig {
-  name: string
-  ansible_user: string
   ansible_host: string
+  ansible_user: string
   ansible_ssh_private_key_file: string
   identity_account: string
+  name: string
   vote_account: string
   authority_account: string
-  relayer_account: string
-  username: string
-  ip: string
   validator_type: ValidatorMainnetType
-  port_rpc: number
   relayer_url: string
+  relayer_account: string
   block_engine_region: string
   shredstream_address: string
-  shredstream_desired_regions: string
+  port_rpc: number
   limit_ledger_size: number
   staked_rpc_identity_account: string
   staked_rpc_amount: number
   snapshot_url: string
 }
-
 
 
 export interface ValidatorTestnetConfig {
@@ -117,9 +108,5 @@ export interface ValidatorTestnetConfig {
   authority_account: string
   username: string
   ip: string
-  rsa_key_path: string
-  solana_cli: string
-  solana_version: string
   validator_type: ValidatorTestnetType
-  version: string
 }

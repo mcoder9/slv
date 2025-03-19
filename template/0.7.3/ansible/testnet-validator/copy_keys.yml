@@ -1,5 +1,5 @@
 ---
-- name: Copy validator and vote key pairs
+- name: Copy Validator Identity Key
   hosts: all
   gather_facts: no
   vars_files:

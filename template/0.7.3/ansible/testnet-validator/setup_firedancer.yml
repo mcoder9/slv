@@ -3,6 +3,8 @@
   hosts: all
   become: true
   become_user: solv
+  vars_files:
+    - ~/.slv/versions.yml
   tasks:
     - name: Clone Firedancer repository
       git:
@@ -10,7 +12,7 @@
         dest: /home/solv/firedancer
         update: yes
         force: yes
-        version: v{{ hostvars[inventory_hostname].version }}
+        version: v{{ versions.testnet_validator.firedancer }}
 
     - name: Initialize git submodules
       command: git submodule update --init --recursive
@@ -50,7 +52,7 @@
     - name: Create config.toml
       template:
         src: ~/.slv/testnet-validator/firedancer-config.toml.j2
-        dest: /home/solv/firedancer/firedancer-config.toml
+        dest: /home/solv/firedancer-config.toml
         owner: solv
         group: solv
         mode: '0644'
@@ -65,26 +67,21 @@
       vars:
         vote_account: '{{ hostvars[inventory_hostname].vote_account }}'
 
-    - name: Create Firedancer systemd service file with sudo tee
-      shell: |
-        echo "[Unit]
-        Description=Firedancer Solana
-        After=network.target
-        StartLimitIntervalSec=0
+    - name: Create Firedancer systemd service file with Jinja2 template
+      template:
+        src: ~/.slv/testnet-validator/firedancer.service.j2
+        dest: /etc/systemd/system/firedancer.service
+        owner: root
+        group: root
+        mode: '0644'
 
-        [Service]
-        Type=simple
-        Restart=always
-        RestartSec=1
-        User=solv
-        LimitNOFILE=1000000
-        LogRateLimitIntervalSec=0
-        ExecStart=/home/solv/start-firedancer.sh
-
-        [Install]
-        WantedBy=multi-user.target" | sudo tee /etc/systemd/system/firedancer.service > /dev/null
-      become: yes
-      become_user: solv
+    - name: Ensure /mnt directory has correct permissions
+      file:
+        path: '/mnt'
+        state: directory
+        owner: solv
+        group: solv
+        mode: '0755'
 
     - name: Reload systemd daemon
       command: systemctl daemon-reload

@@ -18,6 +18,7 @@
       timeout: 20
       args:
         executable: /bin/bash
+      ignore_errors: yes
 
     - name: Show captured output
       debug:

@@ -2,12 +2,14 @@
 - name: Install Agave
   hosts: all
   become: true
+  vars_files:
+    - ~/.slv/versions.yml
   vars:
     solana_bin_dir: '/home/solv/.local/share/solana/install/active_release/bin' # Solana CLI のインストール先
   tasks:
     - name: Install Agave from the specified version
       shell: |
-        tag=v{{ hostvars[inventory_hostname].solana_version }}
+        tag=v{{ versions.testnet_validator.version_agave }}
         curl -sSfL https://release.anza.xyz/${tag}/install | sh
       args:
         executable: /bin/bash
