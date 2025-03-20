@@ -9,6 +9,13 @@ const updateInventoryUser = async (
   inventoryType: InventoryType,
 ) => {
   const inventory = await genOrReadInventory(inventoryType)
+
+  // Initialize hosts if it's null or undefined
+  if (!inventory[inventoryType].hosts) {
+    console.log(`⚠️ No hosts found in inventory for ${inventoryType}`)
+    return
+  }
+
   // Find the same identityAccount in inventory
   const findKey = Object.keys(inventory[inventoryType].hosts).find(
     (key) => key.toString() === identityAccount.toString(),

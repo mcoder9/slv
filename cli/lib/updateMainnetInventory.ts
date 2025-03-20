@@ -13,6 +13,12 @@ const updateMainnetInventory = async (
   const inventoryType: InventoryType = 'mainnet_validators'
   const inventoryPath = getInventoryPath(inventoryType)
   const inventory = await genOrReadMainnetInventory()
+
+  // Initialize hosts if it's null or undefined
+  if (!inventory[inventoryType].hosts) {
+    inventory[inventoryType].hosts = {}
+  }
+
   inventory[inventoryType].hosts[identityAccount] = {
     ...inventory[inventoryType].hosts[identityAccount],
     ...body,

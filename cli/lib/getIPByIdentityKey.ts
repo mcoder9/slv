@@ -23,11 +23,9 @@ const getIPByIdentityKey = async (
       throw new Error('❌ No inventory found')
     }
     const ip = Object.keys(inventory[inventoryType].hosts).find(
-      (key) => {
-        inventory[inventoryType].hosts[key].identity_account === identityAccount
-          ? inventory[inventoryType].hosts[key].ansible_host
-          : null
-      },
+      (key) =>
+        inventory[inventoryType].hosts[key].identity_account ===
+          identityAccount,
     )
     if (!ip) {
       console.log(colors.yellow('❌ No IP found'))

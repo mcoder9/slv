@@ -10,6 +10,12 @@ const updateInventory = async (
 ) => {
   const inventoryPath = getInventoryPath(inventoryType)
   const inventory = await genOrReadInventory(inventoryType)
+
+  // Initialize hosts if it's null or undefined
+  if (!inventory[inventoryType].hosts) {
+    inventory[inventoryType].hosts = {}
+  }
+
   inventory[inventoryType].hosts[identityAccount] = {
     ...inventory[inventoryType].hosts[identityAccount],
     ...hostData,

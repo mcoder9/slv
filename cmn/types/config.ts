@@ -4,7 +4,7 @@ export type NetworkType = 'mainnet' | 'testnet'
 export type RpcType = 'minimal' | 'geyser-yellowstone'
 export type ValidatorTestnetType = 'firedancer' | 'agave'
 export type ValidatorMainnetType = 'jito'
-export type InventoryType = 'testnet_validators' | 'mainnet_validators'
+export type InventoryType = 'testnet_validators' | 'mainnet_validators' | 'relayer'
 
 export interface HostData {
   ansible_user: string
@@ -25,8 +25,13 @@ export interface MainnetData {
   hosts: Record<string, ValidatorMainnetConfig>
 }
 
+export interface RelayerData {
+  hosts: Record<string, RelayerConfig>
+}
+
 export type Inventory = Record<InventoryType, GroupData>
 export type InventoryMainnet = Record<'mainnet_validators', MainnetData>
+export type InventoryRelayer = Record<'relayer', RelayerData>
 
 export interface RpcConfig {
   identity_account: string
@@ -95,6 +100,16 @@ export interface ValidatorMainnetConfig {
   staked_rpc_identity_account: string
   staked_rpc_amount: number
   snapshot_url: string
+}
+
+export interface RelayerConfig {
+  ansible_host: string
+  ansible_user: string
+  ansible_ssh_private_key_file: string
+  identity_account: string
+  block_engine_region: string
+  rpc_urls: string
+  rpc_ws_urls: string
 }
 
 
