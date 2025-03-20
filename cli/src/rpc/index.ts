@@ -21,7 +21,6 @@ export const rpcCmd = new Command()
 rpcCmd.command('init')
   .description('Initialize a new RPC node configuration')
   .action(async () => {
-    console.log(colors.blue('Coming soon...🌝'))
     await init()
   })
 

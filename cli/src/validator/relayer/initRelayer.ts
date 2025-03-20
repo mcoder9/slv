@@ -67,11 +67,13 @@ const initRelayer = async () => {
       name: 'rpcUrls',
       message: 'Enter RPC URLs',
       type: Input,
+      default: 'http://localhost:8899',
     },
     {
       name: 'websocketUrls',
       message: 'Enter Websocket URLs',
       type: Input,
+      default: 'ws://localhost:8900',
     },
   ])
   if (!answer) {

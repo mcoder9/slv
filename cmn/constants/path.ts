@@ -22,7 +22,6 @@ export const getInventoryPath = (
     const splitString = inventoryType.split('_')
     if (splitString.length !== 2) {
       const path = join(configRoot, `inventory.${splitString[0]}.yml`)
-      console.log('path', path)
       return path
     }
     return join(configRoot, `inventory.${splitString[0]}.${splitString[1]}.yml`)

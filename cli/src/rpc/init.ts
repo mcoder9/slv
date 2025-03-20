@@ -29,9 +29,15 @@ const init = async () => {
     await exec(
       `cp -r ${configRoot}/template/${denoJson.version}/jinja/mainnet-rpc ${configRoot}`,
     )
+    await exec(
+      `cp -r ${configRoot}/template/${denoJson.version}/jinja/mainnet-validator ${configRoot}`,
+    )
   } catch (_error) {
     await exec(
       `cp -r ${configRoot}/template/${denoJson.version}/jinja/mainnet-rpc ${configRoot}`,
+    )
+    await exec(
+      `cp -r ${configRoot}/template/${denoJson.version}/jinja/mainnet-validator ${configRoot}`,
     )
   }
   const hasBareMetal = await prompt([{

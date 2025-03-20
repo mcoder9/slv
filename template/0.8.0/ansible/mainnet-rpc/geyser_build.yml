@@ -7,7 +7,7 @@
   vars:
     working_dir: "/home/solv"
     repo_url: "https://github.com/rpcpool/yellowstone-grpc.git"
-    geyser_config_template: "templates/geyser.json.j2"
+    geyser_config_template: "~/.slv/mainnet-rpc/geyser.json.j2"
     geyser_config_path: "/home/solv/geyser.json"
   tasks:
     - name: Ensure Cargo and Rust environment is loaded

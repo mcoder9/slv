@@ -54,7 +54,6 @@ const addMainnetInventory = async (
       authority_account: '',
       relayer_account: '',
       username: sshConnection.username,
-      ip: sshConnection.ip,
       validator_type: 'jito',
       port_rpc: 8899,
       relayer_url: 'http://localhost:11226',

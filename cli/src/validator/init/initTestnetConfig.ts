@@ -62,15 +62,6 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
     console.log(colors.yellow('⚠️ Inventory check failed'))
     return
   }
-  // Check if the same host already exists
-  const findIdentity = Object.keys(inventoryCheck[inventoryType].hosts).find(
-    (key) => String(key) === identityAccount,
-  )
-  if (findIdentity) {
-    console.log(colors.yellow(`⚠️ The same Identity already exists
-Please remove the existing Identity Account from inventory and try again`))
-    return false
-  }
   console.log(colors.yellow(`⚠️ Please place your identity key in 
         
 ~/.slv/keys/${identityAccount}.json`))

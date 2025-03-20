@@ -22,6 +22,10 @@
   <img src="https://storage.slv.dev/PoweredBySolana.svg" alt="Powered By Solana" width="200px" height="95px">
 </a>
 
+# SLV Official Documentation
+
+Doc Link: [https://slv.dev/](https://slv.dev/)
+
 ## The Toolkit for Solana Devs
 
 SLV is a toolkit for Solana developers. It provides a set of tools to help
@@ -79,14 +83,25 @@ slv validator deploy
 slv v --help
 ```
 
-### New Features - No Downtime Migration for Firedancer Testnet Validator 🔥
+### New Features - Solana RPC Init & Deploy
 
-Now you can change the identity key from the unstaked key to the authorized
-identity key without downtime.
+Now you can deploy Solana RPC nodes with SLV.
 
 ```bash
-slv v switch
+slv rpc init
 ```
+
+### New Features - Solana Validator Init & Deploy Mainnet Available
+
+Now you can deploy Solana Mainnet Validators with SLV.
+
+```bash
+slv v init
+? Select Solana Network (testnet)
+  testnet
+❯ mainnet
+```
+
 
 ### Introducing SLV Metal – Optimized Bare Metal for Solana Nodes ⚡️
 
@@ -115,6 +130,7 @@ This is the best practice to avoid double voting, and etc.
 
 So Please make sure to set the authorized identity key with `slv v set:identity`
 after the deployment.
+
 
 ### Input Server's Default Username
 
@@ -241,7 +257,7 @@ Your Testnet Validators Settings:
 ├────────────────┼──────────────────────────────────────────────┤
 │ Validator Type │ firedancer                                   │
 ├────────────────┼──────────────────────────────────────────────┤
-│ Version        │ 0.305.20111                                  │
+│ Version        │ 0.406.20113                                  │
 └────────────────┴──────────────────────────────────────────────┘
 ? Do you want to continue? (Y/n) › Yes
 ```
@@ -251,32 +267,6 @@ catch up with the Solana network.
 
 Next, You need to change the identity key from the unstaked key to the
 authorized identity key.
-
-### If your firedancer deployment freezes during firedancer compile
-
-If your Firedancer deployment stops responding during the compile process, it
-may be due to a network issue. To resolve this, please try setting it up again
-by running the following command:
-
-```bash
-slv v setup:firedancer --pubkey <your-identity-pubkey>
-```
-
-(Please try a few times if the issue persists.)
-
-And then, start firedancer.
-
-You can run Ansible Playbook with the following command.
-
-```bash
-slv v apply -n testnet --pubkey <your-identity-pubkey> --yml <path-to-yml>
-```
-
-So start firedancer with the following command.
-
-```bash
-slv v apply -n testnet --pubkey <your-identity-pubkey> --yml ~/.slv/template/0.5.0/ansible/testnet-validator/start_firedancer.yml
-```
 
 ### Change the Identity Key from Unstaked Key to Authorized Identity Key
 
@@ -305,24 +295,22 @@ and snapshot dirs, and Download Snapshot with the snapshot finder and start the
 validator.
 
 ```bash
-slv v restart -n testnet --pubkey <your-identity-pubkey> --rm
+slv v restart -n testnet --pubkey <your-identity-pubkey>
 ```
 
-### Update slv Template
+### Update slv
 
 If you want to update the slv template, you can use the following command.
 
 ```bash
 slv upgrade
-mkdir -p ~/.slv/testnet-validator
-cp -r ~/.slv/template/$VERSION/jinja/testnet-validator/* ~/.slv/testnet-validator/
 ```
 
 ### slv Validator Commands
 
 ```bash
 Usage:   slv  
-Version: 0.7.1
+Version: 0.8.0
 
 Description:
 
@@ -346,7 +334,7 @@ Commands:
   metal, m      - 🚀 SLV BareMetal: High-Performance Servers Built for Solana Nodes
   signup        - Signup to SLV using Discord                                      
   login         - Login to SLV using Discord                                       
-  check         - Check RPC and gRPC endpoints 
+  check         - Check RPC and gRPC endpoints
 ```
 
 ### Community Support
@@ -358,13 +346,13 @@ If you have any questions or need help, please join our Discord community.
 ## Roadmap
 
 - [x] Add `slv validator init` for Solana Validator Deploy (in progress)
-- [] Add `slv rpc init` for Solana RPC Build (in progress)
+- [x] Add `slv rpc init` for Solana RPC Build (in progress)
 - [x] Add CI/CD pipeline (Github Actions) for `slv` Release
 - [] Add `slv bot` for gRPC Geyser Client (in progress)
 - [] Add `slv swap` for Solana Token Swap (in progress)
 - [] Add `slv cloud` for configuring Solana App on Cloud (in progress)
 - [] Add `slv app` for Solana App Development (in progress)
-- [] Add `test` for keeping the codebase stable (in progress)
+- [x] Add `test` for keeping the codebase stable (in progress)
 
 ## For Developers
 
