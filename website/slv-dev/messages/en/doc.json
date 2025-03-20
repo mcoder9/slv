@@ -6,8 +6,8 @@
       "general": {
         "getting-started": "Getting Started"
       },
-      "validator": {
-        "title": "Validator",
+      "testnet-validator": {
+        "title": "Testnet Validator",
         "quickstart": "Quickstart"
       },
       "rpc": {

@@ -6,10 +6,10 @@ export const docMenuData: Section[] = [
     route: '/doc/general/getting-started',
     items: [
       {
-        title: 'doc.nav.validator.title',
+        title: 'doc.nav.testnet-validator.title',
         subItems: [
           {
-            title: 'doc.nav.validator.quickstart',
+            title: 'doc.nav.testnet-validator.quickstart',
             route: '/doc/validator/quickstart'
           }
         ]
