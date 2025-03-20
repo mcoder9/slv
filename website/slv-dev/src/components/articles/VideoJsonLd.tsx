@@ -32,7 +32,9 @@ export default function VideoJsonLd({
       name: title,
       description: 'This page contains a YouTube video.',
       thumbnailUrl: `https://img.youtube.com/vi/${id}/hqdefault.jpg`,
-      uploadDate: date || new Date().toISOString(),
+      uploadDate: date
+        ? new Date(date).toISOString()
+        : new Date().toISOString(),
       embedUrl: `https://www.youtube.com/embed/${id}`,
       publisher: {
         '@type': 'Organization',
