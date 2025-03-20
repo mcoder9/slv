@@ -9,6 +9,8 @@ const addInventory = async (
   identityAccount: string,
   sshConnection: SSHConnection,
   inventoryType: InventoryType,
+  voteAccount: string,
+  authorityAccount: string,
 ) => {
   try {
     const inventory = await genOrReadInventory(inventoryType)
@@ -27,8 +29,8 @@ const addInventory = async (
       ansible_ssh_private_key_file: sshConnection.rsa_key_path,
       identity_account: identityAccount,
       name: identityAccount,
-      vote_account: '',
-      authority_account: '',
+      vote_account: voteAccount,
+      authority_account: authorityAccount,
       validator_type,
     }
     const inventoryPath = getInventoryPath(inventoryType)

@@ -52,21 +52,24 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   }
   const identityAccount = await genIdentityKey()
   const inventoryPath = getInventoryPath(inventoryType)
-  // Generate or Add Inventory
-  const inventoryCheck = await addInventory(
-    identityAccount,
-    sshConnection,
-    inventoryType,
-  )
-  if (!inventoryCheck) {
-    console.log(colors.yellow('⚠️ Inventory check failed'))
-    return
-  }
+
   console.log(colors.yellow(`⚠️ Please place your identity key in 
         
 ~/.slv/keys/${identityAccount}.json`))
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
+  // Generate or Add Inventory
+  const inventoryCheck = await addInventory(
+    identityAccount,
+    sshConnection,
+    inventoryType,
+    voteAccount,
+    authAccount,
+  )
+  if (!inventoryCheck) {
+    console.log(colors.yellow('⚠️ Inventory check failed'))
+    return
+  }
   const configTestnet: Partial<ValidatorTestnetConfig> = {
     vote_account: voteAccount,
     authority_account: authAccount,
