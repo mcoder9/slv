@@ -12,6 +12,7 @@ import QualityOperationsRow from './QualityOperationsRow'
 import RocketStartRow from './RocketStartRow'
 import GlobalEdgeServersRow from './GlobalEdgeServersRow'
 import { DEFAULT_PATHS } from '../defaultNavs'
+import GlobalDCPartnerRow from './GlobalDCPartnerRow'
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params
@@ -34,6 +35,7 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <HomeHeroRow />
+      <GlobalDCPartnerRow />
       <EasyStartValidatorRow />
       <AdaptiveSolutionsRow />
       <QualityOperationsRow />
