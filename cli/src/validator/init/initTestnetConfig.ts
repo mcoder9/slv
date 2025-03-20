@@ -65,8 +65,6 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   console.log(colors.yellow(`⚠️ Please place your identity key in 
         
 ~/.slv/keys/${identityAccount}.json`))
-  // Create solv User on Ubuntu Server
-  await genSolvUser(identityAccount, inventoryType)
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
   const configTestnet: Partial<ValidatorTestnetConfig> = {
@@ -76,7 +74,8 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   }
   await updateAllowedSshIps('testnet_validators')
   await updateInventory(identityAccount, configTestnet)
-
+  // Create solv User on Ubuntu Server
+  await genSolvUser(identityAccount, inventoryType)
   console.log(
     `✔︎ Validator testnet config saved to ${inventoryPath}`,
   )
