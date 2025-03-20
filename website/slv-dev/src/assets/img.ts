@@ -39,6 +39,23 @@ import AgaveLogoInvertHorizontal from '@/assets/img/logo/partners/validator/Agav
 import FiredancerLogoHorizontal from '@/assets/img/logo/partners/validator/FiredancerLogoHorizontal.svg'
 import FiredancerLogoInvertHorizontal from '@/assets/img/logo/partners/validator/FiredancerLogoInvertHorizontal.svg'
 
+import AlibabaCloudLogoHorizontal from '@/assets/img/logo/partners/data-center/AlibabaCloudLogoHorizontal.png'
+import AlibabaCloudLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/AlibabaCloudLogoInvertHorizontal.png'
+import AWSLogoHorizontal from '@/assets/img/logo/partners/data-center/AWSLogoHorizontal.svg'
+import AWSLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/AWSLogoInvertHorizontal.svg'
+import CherryServersLogoHorizontal from '@/assets/img/logo/partners/data-center/CherryServersLogoHorizontal.svg'
+import CherryServersLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/CherryServersLogoInvertHorizontal.svg'
+import EquinixLogoHorizontal from '@/assets/img/logo/partners/data-center/EquinixLogoHorizontal.svg'
+import EquinixLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/EquinixLogoInvertHorizontal.svg'
+import HivelocityLogoHorizontal from '@/assets/img/logo/partners/data-center/HivelocityLogoHorizontal.svg'
+import HivelocityLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/HivelocityLogoInvertHorizontal.svg'
+import HostCircleLogoHorizontal from '@/assets/img/logo/partners/data-center/HostCircleLogoHorizontal.png'
+import HostCircleLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/HostCircleLogoInvertHorizontal.png'
+import LatitudeLogoHorizontal from '@/assets/img/logo/partners/data-center/LatitudeLogoHorizontal.svg'
+import LatitudeLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/LatitudeLogoInvertHorizontal.svg'
+import MecarneLogoHorizontal from '@/assets/img/logo/partners/data-center/MecarneLogoHorizontal.svg'
+import MecarneLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/MecarneLogoInvertHorizontal.svg'
+
 import CloudflareLogoHorizontal from '@/assets/img/logo/partners/cloud/CloudflareLogoHorizontal.svg'
 import CloudflareLogoInvertHorizontal from '@/assets/img/logo/partners/cloud/CloudflareLogoInvertHorizontal.svg'
 import GoogleCloudLogoHorizontal from '@/assets/img/logo/partners/cloud/GoogleCloudLogoHorizontal.svg'
@@ -416,5 +433,21 @@ export {
   QualityOperationsImg,
   EdgeComputeNetworkImg,
   MonorepoArchitectureImg,
-  Web3CompatibleImg
+  Web3CompatibleImg,
+  AlibabaCloudLogoHorizontal,
+  AlibabaCloudLogoInvertHorizontal,
+  AWSLogoHorizontal,
+  AWSLogoInvertHorizontal,
+  CherryServersLogoHorizontal,
+  CherryServersLogoInvertHorizontal,
+  EquinixLogoHorizontal,
+  EquinixLogoInvertHorizontal,
+  HivelocityLogoHorizontal,
+  HivelocityLogoInvertHorizontal,
+  HostCircleLogoHorizontal,
+  HostCircleLogoInvertHorizontal,
+  LatitudeLogoHorizontal,
+  LatitudeLogoInvertHorizontal,
+  MecarneLogoHorizontal,
+  MecarneLogoInvertHorizontal
 }
