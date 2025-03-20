@@ -25,6 +25,13 @@
       loop: "{{ mainnet_validators.allowed_ssh_ips }}"
       when: mainnet_validators.allowed_ssh_ips is defined
 
+    - name: Allow SSH from all IPs
+      ufw:
+        rule: allow
+        port: 22
+        proto: tcp
+      when: mainnet_validators.allowed_ssh_ips is not defined
+
     - name: Allow ports 8000-8020 TCP
       ufw:
         rule: allow
@@ -43,3 +50,4 @@
         proto: any
         from_ip: "{{ item }}"
       loop: "{{ mainnet_validators.allowed_ips }}"
+      when: mainnet_validators.allowed_ips is defined

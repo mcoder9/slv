@@ -22,6 +22,8 @@ import {
 } from '@cmn/constants/config.ts'
 import { addMainnetInventory } from '/lib/addMainnetInventory.ts'
 import { updateMainnetInventory } from '/lib/updateMainnetInventory.ts'
+import { updateAllowedSshIps } from '/lib/config/updateAllowedSshIps.ts'
+import { updateAllowedIps } from '/lib/config/updateAllowedIps.ts'
 
 const initMainnetConfig = async (sshConnection: SSHConnection) => {
   try {
@@ -112,6 +114,8 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
     staked_rpc_identity_account: rpcAccount,
     snapshot_url: snapshotUrl,
   }
+  await updateAllowedSshIps()
+  await updateAllowedIps()
   await updateMainnetInventory(identityAccount, configMainnet)
   // Create solv User on Ubuntu Server
   await genSolvUser(identityAccount, inventoryType)

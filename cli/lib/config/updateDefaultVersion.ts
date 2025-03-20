@@ -1,5 +1,6 @@
 import {
   VERSION_FIREDANCER_TESTNET,
+  VERSION_GEYSER_YELLOWSTONE,
   VERSION_JITO_MAINNET,
   VERSION_SOLANA_MAINNET,
   VERSION_SOLANA_TESTNET,
@@ -55,6 +56,7 @@ export const updateDefaultVersion = async () => {
     mainnet_rpcs: {
       version_agave: currentVersion.mainnet_rpcs.version_agave,
       version_jito: currentVersion.mainnet_rpcs.version_jito,
+      geyser_version: currentVersion.mainnet_rpcs.geyser_version,
     },
   }
 
@@ -66,6 +68,7 @@ export const updateDefaultVersion = async () => {
     VERSION_FIREDANCER_TESTNET
   currentVersion.mainnet_rpcs.version_agave = VERSION_SOLANA_MAINNET
   currentVersion.mainnet_rpcs.version_jito = VERSION_JITO_MAINNET
+  currentVersion.mainnet_rpcs.geyser_version = VERSION_GEYSER_YELLOWSTONE
 
   // Display versions with changes highlighted
   console.log('')
@@ -111,6 +114,11 @@ export const updateDefaultVersion = async () => {
     'Jito',
     oldVersions.mainnet_rpcs.version_jito,
     currentVersion.mainnet_rpcs.version_jito,
+  )
+  displayVersionChange(
+    'Geyser',
+    oldVersions.mainnet_rpcs.geyser_version,
+    currentVersion.mainnet_rpcs.geyser_version,
   )
   console.log('')
 

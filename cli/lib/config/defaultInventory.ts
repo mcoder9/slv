@@ -4,6 +4,6 @@ const defaultInventory = (
   inventoryType: InventoryType,
 ) =>
   `${inventoryType}:
-  hosts: null`
+  hosts: {}`
 
 export { defaultInventory }

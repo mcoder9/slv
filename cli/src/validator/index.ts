@@ -4,12 +4,15 @@ import { deployValidatorTestnet } from '/src/validator/deploy/deployValidatorTes
 import { deployValidatorMainnet } from '/src/validator/deploy/deployValidatorMainnet.ts'
 import { Input, prompt, Select } from '@cliffy/prompt'
 import { colors } from '@cliffy/colors'
-import { listValidators } from '/src/validator/listValidators.ts'
 import { getTemplatePath } from '/lib/getTemplatePath.ts'
 import { runAnsilbe } from '/lib/runAnsible.ts'
 import type { InventoryType, NetworkType } from '@cmn/types/config.ts'
 import { switchValidator } from '/src/validator/switch/switchValidator.ts'
 import { updateDefaultVersion } from '/lib/config/updateDefaultVersion.ts'
+import { listValidators } from '/src/validator/listValidators.ts'
+import { initRelayer } from '/src/validator/relayer/initRelayer.ts'
+import { updateAllowedIps } from '/lib/config/updateAllowedIps.ts'
+import rpcLog from '/lib/config/rpcLog.ts'
 
 export const validatorCmd = new Command()
   .description('Manage Solana Validator Nodes')
@@ -168,6 +171,30 @@ validatorCmd.command('setup:firedancer')
     }
   })
 
+validatorCmd.command('setup:relayer')
+  .description('Setup Jito Relayer - Mainnet Only')
+  .action(async () => {
+    await initRelayer()
+  })
+
+validatorCmd.command('deploy:relayer')
+  .description('Setup Jito Relayer - Mainnet Only')
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
+  .action(async (options) => {
+    const inventoryType: InventoryType = 'relayer'
+    const templateRoot = getTemplatePath()
+    const playbook = `${templateRoot}/ansible/relayer/init.yml`
+
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
+    if (result) {
+      console.log(colors.white('✅ Successfully Setup Jito Relayer'))
+      rpcLog()
+      return
+    }
+  })
+
 validatorCmd.command('update:version')
   .description('Update Validator Version')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
@@ -245,6 +272,12 @@ validatorCmd.command('apply')
       console.log(colors.white('✅ Successfully Applied Playbook'))
       return
     }
+  })
+
+validatorCmd.command('update:allowed-ips')
+  .description('Update allowed IPs for mainnet validator nodes')
+  .action(async () => {
+    await updateAllowedIps('mainnet_validators')
   })
 
 validatorCmd.command('switch')
