@@ -1,6 +1,9 @@
 import type { CmnType } from '@cmn/types/config.ts'
 import {
   VERSION_FIREDANCER_TESTNET,
+  VERSION_GEYSER_YELLOWSTONE,
+  VERSION_JITO_MAINNET,
+  VERSION_JUPITER_API,
   VERSION_SOLANA_MAINNET,
   VERSION_SOLANA_TESTNET,
 } from '@cmn/constants/version.ts'
@@ -10,7 +13,7 @@ const defaultVersionsYml = (): string => {
     mainnet_validators: {
       solana_cli: 'agave',
       version_agave: VERSION_SOLANA_MAINNET,
-      version_jito: VERSION_SOLANA_MAINNET,
+      version_jito: VERSION_JITO_MAINNET,
       allowed_ssh_ips: [],
       allowed_ips: [],
     },
@@ -23,12 +26,16 @@ const defaultVersionsYml = (): string => {
     mainnet_rpcs: {
       solana_cli: 'agave',
       version_agave: VERSION_SOLANA_MAINNET,
-      version_jito: VERSION_SOLANA_MAINNET,
-      geyser_version: '0.1.0',
+      version_jito: VERSION_JITO_MAINNET,
+      geyser_version: VERSION_GEYSER_YELLOWSTONE,
       x_token: '',
       port_rpc: 8899,
       port_grpc: 10000,
-      port_jupiter: 8080,
+      allowed_ssh_ips: [],
+      allowed_ips: [],
+    },
+    jupiter: {
+      jupiter_api_version: VERSION_JUPITER_API,
       allowed_ssh_ips: [],
       allowed_ips: [],
     },
@@ -38,17 +45,14 @@ const defaultVersionsYml = (): string => {
   solana_cli: ${defaultVersions.mainnet_validators.solana_cli}
   version_agave: ${defaultVersions.mainnet_validators.version_agave}
   version_jito: ${defaultVersions.mainnet_validators.version_jito}
-  allowed_ssh_ips:
-    - ''
-  allowed_ips:
-    - ''
+  allowed_ssh_ips: null
+  allowed_ips: null
 
 testnet_validators:
   solana_cli: ${defaultVersions.testnet_validators.solana_cli}
   version_agave: ${defaultVersions.testnet_validators.version_agave}
   version_firedancer: ${defaultVersions.testnet_validators.version_firedancer}
-  allowed_ssh_ips:
-    - ''
+  allowed_ssh_ips: null
 
 mainnet_rpcs:
   solana_cli: ${defaultVersions.mainnet_rpcs.solana_cli}
@@ -58,11 +62,14 @@ mainnet_rpcs:
   x_token: ""
   port_rpc: ${defaultVersions.mainnet_rpcs.port_rpc}
   port_grpc: ${defaultVersions.mainnet_rpcs.port_grpc}
-  port_jupiter: ${defaultVersions.mainnet_rpcs.port_jupiter}
-  allowed_ssh_ips:
-    - ''
-  allowed_ips:
-    - ''`
+  allowed_ssh_ips: null
+  allowed_ips: null
+
+jupiter:
+  jupiter_api_version: ${defaultVersions.jupiter.jupiter_api_version}
+  allowed_ssh_ips: null
+  allowed_ips: null
+`
 }
 
 export { defaultVersionsYml }

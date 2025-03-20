@@ -5,11 +5,23 @@ import { VERSIONS_PATH } from '@cmn/constants/path.ts'
 import { genOrReadVersions } from '/lib/genOrReadVersions.ts'
 
 /**
+ * Type for the section to update in versions.yml
+ * Only includes sections that have allowed_ips
+ */
+export type VersionSection =
+  | 'mainnet_validators'
+  | 'mainnet_rpcs'
+  | 'jupiter'
+
+/**
  * Updates the allowed IPs in versions.yml
  * This function handles both prompting for IPs and updating the file
+ * @param section The section to update (defaults to 'mainnet_validators')
  */
-export const updateAllowedIps = async (): Promise<boolean> => {
-  console.log(colors.blue('🔒 Updating Allowed IPs'))
+export const updateAllowedIps = async (
+  section: VersionSection = 'mainnet_validators',
+): Promise<boolean> => {
+  console.log(colors.blue(`🔒 Updating Allowed IPs for ${section}`))
 
   try {
     // Read current versions
@@ -17,12 +29,11 @@ export const updateAllowedIps = async (): Promise<boolean> => {
 
     // Get current IPs to show as defaults
     // Handle case where allowed_ips might not be an array or might be undefined
-    const currentIps =
-      Array.isArray(versionsData.mainnet_validators.allowed_ips)
-        ? [...versionsData.mainnet_validators.allowed_ips].filter((ip) =>
-          ip && ip.trim() !== ''
-        )
-        : []
+    const currentIps = Array.isArray(versionsData[section].allowed_ips)
+      ? [...versionsData[section].allowed_ips].filter((ip) =>
+        ip && ip.trim() !== ''
+      )
+      : []
 
     // Show current IPs if any exist
     if (currentIps.length > 0) {
@@ -143,11 +154,10 @@ export const updateAllowedIps = async (): Promise<boolean> => {
       }
     }
 
-    // Update all allowed_ips
+    // Update allowed_ips for the specified section
     // Ensure empty arrays are properly formatted in YAML
     const ipsList = ips.length === 0 ? [''] : ips
-    versionsData.mainnet_validators.allowed_ips = ipsList
-    versionsData.mainnet_rpcs.allowed_ips = ipsList
+    versionsData[section].allowed_ips = ipsList
 
     // Write the updated version to the file
     await Deno.writeTextFile(
@@ -158,7 +168,9 @@ export const updateAllowedIps = async (): Promise<boolean> => {
     )
 
     console.log('')
-    console.log(colors.green.bold('✅ Allowed IPs updated successfully'))
+    console.log(
+      colors.green.bold(`✅ Allowed IPs for ${section} updated successfully`),
+    )
 
     return true
   } catch (error) {

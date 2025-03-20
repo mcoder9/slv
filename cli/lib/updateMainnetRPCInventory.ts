@@ -1,18 +1,15 @@
 import { getInventoryPath } from '@cmn/constants/path.ts'
 import { stringify } from 'https://deno.land/std@0.202.0/yaml/stringify.ts'
-import type {
-  InventoryType,
-  ValidatorTestnetConfig,
-} from '@cmn/types/config.ts'
-import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
+import type { InventoryType, RpcConfig } from '@cmn/types/config.ts'
+import { genOrReadMainnetRPCInventory } from '/lib/genOrReadMainnetRPCInventory.ts'
 
-const updateInventory = async (
+const updateMainnetRPCInventory = async (
   identityAccount: string,
-  hostData: Partial<ValidatorTestnetConfig>,
+  body: Partial<RpcConfig>,
 ) => {
-  const inventoryType: InventoryType = 'testnet_validators'
+  const inventoryType: InventoryType = 'mainnet_rpcs'
   const inventoryPath = getInventoryPath(inventoryType)
-  const inventory = await genOrReadInventory(inventoryType)
+  const inventory = await genOrReadMainnetRPCInventory()
 
   // Initialize hosts if it's null or undefined
   if (!inventory[inventoryType].hosts) {
@@ -21,10 +18,10 @@ const updateInventory = async (
 
   inventory[inventoryType].hosts[identityAccount] = {
     ...inventory[inventoryType].hosts[identityAccount],
-    ...hostData,
+    ...body,
   }
   await Deno.writeTextFile(inventoryPath, stringify(inventory))
   console.log(`✔ Inventory updated to ${inventoryPath}`)
 }
 
-export { updateInventory }
+export { updateMainnetRPCInventory }

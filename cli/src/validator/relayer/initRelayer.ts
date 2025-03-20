@@ -5,8 +5,22 @@ import { colors } from '@cliffy/colors'
 import { listAction } from '/src/metal/list/listAction.ts'
 import { JITO_BLOCK_ENGINE_REGIONS } from '@cmn/constants/config.ts'
 import { addRelayerInventory } from '/lib/addRelayerInventory.ts'
+import { genSolvUser } from '/src/validator/init/genSolvUser.ts'
+import { configRoot, RelayerConfigDir } from '@cmn/constants/path.ts'
+import { exec } from '@elsoul/child-process'
+import denoJson from '/deno.json' with { type: 'json' }
 
 const initRelayer = async () => {
+  try {
+    await Deno.stat(RelayerConfigDir)
+    await exec(
+      `cp -r ${configRoot}/template/${denoJson.version}/jinja/relayer ${configRoot}`,
+    )
+  } catch (_error) {
+    await exec(
+      `cp -r ${configRoot}/template/${denoJson.version}/jinja/relayer ${configRoot}`,
+    )
+  }
   const hasBareMetal = await prompt([{
     name: 'bareMetal',
     message: '🛡️ Do you have a Solana Node Compatabile Server?',
@@ -21,7 +35,7 @@ const initRelayer = async () => {
       ),
     )
     console.log(colors.green('🟢 You can get one from the following list:'))
-    await listAction('app')
+    await listAction('testnet')
     return
   }
   const ubuntu = await checkSSHConnection()
@@ -70,6 +84,7 @@ const initRelayer = async () => {
     answer.rpcUrls!,
     answer.websocketUrls!,
   )
+  await genSolvUser(answer.identity!, 'relayer')
   console.log(colors.green('🟢 Relayer Inventory Added'))
   console.log(
     colors.yellow(

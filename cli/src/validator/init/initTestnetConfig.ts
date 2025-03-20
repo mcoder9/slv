@@ -1,6 +1,10 @@
 import { genVoteKey } from '/src/validator/init/genVoteKey.ts'
 import { genIdentityKey } from '/src/validator/init/genIdentityKey.ts'
-import type { HostData, InventoryType } from '@cmn/types/config.ts'
+import type {
+  InventoryType,
+  ValidatorTestnetConfig,
+  ValidatorTestnetType,
+} from '@cmn/types/config.ts'
 import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { configRoot, getInventoryPath } from '@cmn/constants/path.ts'
 import { colors } from '@cliffy/colors'
@@ -11,6 +15,7 @@ import denoJson from '/deno.json' with { type: 'json' }
 import { updateInventory } from '/lib/updateInventory.ts'
 import { prompt, Select } from '@cliffy/prompt'
 import { testnetValidatorConfigDir } from '@cmn/constants/path.ts'
+import { updateAllowedSshIps } from '/lib/config/updateAllowedSshIps.ts'
 
 const initTestnetConfig = async (sshConnection: SSHConnection) => {
   try {
@@ -73,12 +78,13 @@ Please remove the existing Identity Account from inventory and try again`))
   await genSolvUser(identityAccount, inventoryType)
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
-  const configTestnet: Partial<HostData> = {
+  const configTestnet: Partial<ValidatorTestnetConfig> = {
     vote_account: voteAccount,
     authority_account: authAccount,
-    validator_type: validatorType,
+    validator_type: validatorType as ValidatorTestnetType,
   }
-  await updateInventory(identityAccount, inventoryType, configTestnet)
+  await updateAllowedSshIps('testnet_validators')
+  await updateInventory(identityAccount, configTestnet)
 
   console.log(
     `✔︎ Validator testnet config saved to ${inventoryPath}`,

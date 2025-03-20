@@ -5,11 +5,24 @@ import { VERSIONS_PATH } from '@cmn/constants/path.ts'
 import { genOrReadVersions } from '/lib/genOrReadVersions.ts'
 
 /**
+ * Type for the section to update in versions.yml
+ * Only includes sections that have allowed_ssh_ips
+ */
+export type VersionSection =
+  | 'mainnet_validators'
+  | 'testnet_validators'
+  | 'mainnet_rpcs'
+  | 'jupiter'
+
+/**
  * Updates the allowed SSH IPs in versions.yml
  * This function handles both prompting for IPs and updating the file
+ * @param section The section to update (defaults to 'mainnet_validators')
  */
-export const updateAllowedSshIps = async (): Promise<boolean> => {
-  console.log(colors.blue('🔒 Updating Allowed SSH IPs'))
+export const updateAllowedSshIps = async (
+  section: VersionSection = 'mainnet_validators',
+): Promise<boolean> => {
+  console.log(colors.blue(`🔒 Updating Allowed SSH IPs for ${section}`))
 
   try {
     // Read current versions
@@ -17,12 +30,11 @@ export const updateAllowedSshIps = async (): Promise<boolean> => {
 
     // Get current IPs to show as defaults
     // Handle case where allowed_ssh_ips might not be an array or might be undefined
-    const currentIps =
-      Array.isArray(versionsData.mainnet_validators.allowed_ssh_ips)
-        ? [...versionsData.mainnet_validators.allowed_ssh_ips].filter((ip) =>
-          ip && ip.trim() !== ''
-        )
-        : []
+    const currentIps = Array.isArray(versionsData[section].allowed_ssh_ips)
+      ? [...versionsData[section].allowed_ssh_ips].filter((ip) =>
+        ip && ip.trim() !== ''
+      )
+      : []
 
     // Show current IPs if any exist
     if (currentIps.length > 0) {
@@ -143,12 +155,10 @@ export const updateAllowedSshIps = async (): Promise<boolean> => {
       }
     }
 
-    // Update all allowed_ssh_ips
+    // Update allowed_ssh_ips for the specified section
     // Ensure empty arrays are properly formatted in YAML
     const ipsList = ips.length === 0 ? [''] : ips
-    versionsData.mainnet_validators.allowed_ssh_ips = ipsList
-    versionsData.testnet_validators.allowed_ssh_ips = ipsList
-    versionsData.mainnet_rpcs.allowed_ssh_ips = ipsList
+    versionsData[section].allowed_ssh_ips = ipsList
 
     // Write the updated version to the file
     await Deno.writeTextFile(
@@ -159,7 +169,11 @@ export const updateAllowedSshIps = async (): Promise<boolean> => {
     )
 
     console.log('')
-    console.log(colors.green.bold('✅ Allowed SSH IPs updated successfully'))
+    console.log(
+      colors.green.bold(
+        `✅ Allowed SSH IPs for ${section} updated successfully`,
+      ),
+    )
 
     return true
   } catch (error) {

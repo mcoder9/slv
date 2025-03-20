@@ -1,3 +1,3 @@
 import { RpcType } from '@cmn/types/config.ts'
 
-export const RPC_TYPE: RpcType[] = ['minimal', 'geyser-yellowstone']
+export const RPC_TYPE: RpcType[] = ['geyser-yellowstone']

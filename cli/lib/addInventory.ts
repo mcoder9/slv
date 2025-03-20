@@ -1,9 +1,7 @@
 import { stringify } from 'https://deno.land/std@0.202.0/yaml/stringify.ts'
 import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
-import { colors } from '@cliffy/colors'
-import type { InventoryType } from '@cmn/types/config.ts'
-import type { Inventory } from '@cmn/types/config.ts'
+import type { InventoryType, ValidatorTestnetType } from '@cmn/types/config.ts'
 import { getInventoryPath } from '@cmn/constants/path.ts'
 import { genOrReadVersions } from '/lib/genOrReadVersions.ts'
 
@@ -13,16 +11,14 @@ const addInventory = async (
   inventoryType: InventoryType,
 ) => {
   try {
-    const inventory: Inventory = await genOrReadInventory(inventoryType)
+    const inventory = await genOrReadInventory(inventoryType)
     // Initialize hosts if it's null or undefined
     if (!inventory[inventoryType].hosts) {
       inventory[inventoryType].hosts = {}
     }
     await genOrReadVersions()
 
-    const validator_type = inventoryType === 'testnet_validators'
-      ? 'firedancer'
-      : 'jito'
+    const validator_type = 'firedancer' as ValidatorTestnetType
 
     // Add the new host
     inventory[inventoryType].hosts[identityAccount] = {

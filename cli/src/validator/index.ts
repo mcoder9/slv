@@ -11,6 +11,8 @@ import { switchValidator } from '/src/validator/switch/switchValidator.ts'
 import { updateDefaultVersion } from '/lib/config/updateDefaultVersion.ts'
 import { listValidators } from '/src/validator/listValidators.ts'
 import { initRelayer } from '/src/validator/relayer/initRelayer.ts'
+import { updateAllowedIps } from '/lib/config/updateAllowedIps.ts'
+import rpcLog from '/lib/config/rpcLog.ts'
 
 export const validatorCmd = new Command()
   .description('Manage Solana Validator Nodes')
@@ -188,6 +190,7 @@ validatorCmd.command('deploy:relayer')
       : await runAnsilbe(playbook, inventoryType)
     if (result) {
       console.log(colors.white('✅ Successfully Setup Jito Relayer'))
+      rpcLog()
       return
     }
   })
@@ -269,6 +272,12 @@ validatorCmd.command('apply')
       console.log(colors.white('✅ Successfully Applied Playbook'))
       return
     }
+  })
+
+validatorCmd.command('update:allowed-ips')
+  .description('Update allowed IPs for mainnet validator nodes')
+  .action(async () => {
+    await updateAllowedIps('mainnet_validators')
   })
 
 validatorCmd.command('switch')
