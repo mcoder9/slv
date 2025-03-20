@@ -83,9 +83,10 @@ slv validator deploy
 slv v --help
 ```
 
-### New Features - Solana RPC Init & Deploy
+### New Features - Solana RPC Init & Deploy (Geyser Yellowstone gRPC Plugin)
 
 Now you can deploy Solana RPC nodes with SLV.
+This feature includes the ability to deploy Geyser gRPC Plugin.
 
 ```bash
 slv rpc init
@@ -100,6 +101,23 @@ slv v init
 ? Select Solana Network (testnet)
   testnet
 ❯ mainnet
+```
+
+### New Features - Jito Relayer Init & Deploy
+
+Now you can deploy Jito Relayer with SLV.
+
+```bash
+slv v setup:relayer
+```
+
+### New Features - Jupiter Self-Hosted SWAP Init & Deploy
+
+Now you can deploy Jupiter Self-Host
+ed SWAP with SLV.
+
+```bash
+slv r setup:jupiter
 ```
 
 
