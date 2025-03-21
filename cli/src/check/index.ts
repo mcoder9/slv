@@ -1,7 +1,7 @@
 import { Command } from '@cliffy'
 import { Input } from '@cliffy/prompt'
 import { colors } from '@cliffy/colors'
-import { exec } from '@elsoul/child-process'
+import { exec, spawnSync } from '@elsoul/child-process'
 import { join } from '@std/path'
 
 // Define the path for the scripts
@@ -60,10 +60,10 @@ checkCmd.command('rpc')
 checkCmd.command('grpc')
   .description('Check gRPC endpoint')
   .option('--endpoint <endpoint:string>', 'gRPC endpoint URL')
-  .option('--x-token <x_token:string>', 'X-Token for authentication')
+  .option('--token <token:string>', 'Token for authentication')
   .action(async (options) => {
     let endpoint = options.endpoint
-    let xToken = options.xToken
+    let token = options.token
 
     // If no endpoint is provided, prompt for it
     if (!endpoint) {
@@ -72,10 +72,27 @@ checkCmd.command('grpc')
       })
     }
 
-    // If no x-token is provided, prompt for it
-    if (!xToken) {
-      xToken = await Input.prompt({
-        message: 'Enter X-Token for authentication:',
+    // If no token is provided, prompt for it
+    if (!token) {
+      token = await Input.prompt({
+        message: 'Enter Token for authentication:',
       })
+    }
+
+    console.log(colors.blue(`Checking gRPC endpoint: ${endpoint}`))
+
+    try {
+      // Path to the gRPC test binary
+      const grpcTestPath = join(userBinDir, 'grpc_test')
+
+      // Execute the gRPC test binary with the provided token and endpoint
+      const command = `env TOKEN=${token} ENDPOINT=${endpoint} ${grpcTestPath}`
+
+      await spawnSync(command)
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error
+        ? error.message
+        : String(error)
+      console.error(colors.red('Error executing gRPC test:'), errorMessage)
     }
   })

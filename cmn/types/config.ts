@@ -116,6 +116,7 @@ export interface ValidatorMainnetConfig {
   vote_account: string
   authority_account: string
   validator_type: ValidatorMainnetType
+  commission_bps: number
   relayer_url: string
   relayer_account: string
   block_engine_region: string
@@ -132,6 +133,7 @@ export interface RelayerConfig {
   ansible_user: string
   ansible_ssh_private_key_file: string
   identity_account: string
+  relayer_account: string
   block_engine_region: string
   rpc_urls: string
   rpc_ws_urls: string

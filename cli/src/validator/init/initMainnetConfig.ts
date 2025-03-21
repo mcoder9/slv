@@ -18,6 +18,7 @@ import type {
 import {
   DEFAULT_RPC_ADDRESS,
   JITO_BLOCK_ENGINE_REGIONS,
+  RELAYER_URL,
   SHREDSTREAM_ADDRESS,
 } from '@cmn/constants/config.ts'
 import { addMainnetInventory } from '/lib/addMainnetInventory.ts'
@@ -38,11 +39,8 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
   }
   const {
     validatorType,
+    commissionBps,
     blockEngineRegion,
-    relayerUrl,
-    stakedRPCIdentity,
-    snapshotUrl,
-    relayerAccount,
   } = await prompt([
     {
       name: 'validatorType',
@@ -52,17 +50,30 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
       default: 'jito',
     },
     {
+      name: 'commissionBps',
+      message: 'Enter Commission Rate',
+      type: Input,
+      default: '500',
+    },
+    {
       name: 'blockEngineRegion',
       message: '🌐 Select Block Engine Region',
       type: Select,
       options: JITO_BLOCK_ENGINE_REGIONS,
       default: 'amsterdam',
     },
+  ])
+  const {
+    relayerUrl,
+    stakedRPCIdentity,
+    snapshotUrl,
+    relayerAccount,
+  } = await prompt([
     {
       name: 'relayerUrl',
       message: 'Enter Relayer URL',
       type: Input,
-      default: 'http://localhost:11226',
+      default: RELAYER_URL[blockEngineRegion as keyof typeof RELAYER_URL],
     },
     {
       name: 'relayerAccount',
@@ -107,6 +118,7 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
     vote_account: voteAccount,
     authority_account: authAccount,
     validator_type: validatorType as ValidatorMainnetType,
+    commission_bps: Number(commissionBps),
     relayer_url: relayerUrl,
     relayer_account: relayerAccount,
     block_engine_region: blockEngineRegion,

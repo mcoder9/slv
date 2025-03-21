@@ -32,4 +32,12 @@ export const SHREDSTREAM_ADDRESS = {
   salt_lake_city: '64.130.53.8:1002',
 }
 
+export const RELAYER_URL = {
+  amsterdam: 'http://amsterdam.mainnet.relayer.jito.wtf:8100',
+  ny: 'http://ny.mainnet.relayer.jito.wtf:8100',
+  frankfurt: 'http://frankfurt.mainnet.relayer.jito.wtf:8100',
+  tokyo: 'http://tokyo.mainnet.relayer.jito.wtf:8100',
+  salt_lake_city: 'http://slc.mainnet.relayer.jito.wtf:8100',
+}
+
 export const DEFAULT_RPC_ADDRESS = '3YgDq4EbniJZGeshHuYxg8KQfpDiawkuEp17DvQeGWhL'
