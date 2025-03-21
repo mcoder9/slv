@@ -32,7 +32,7 @@ export function getPagerData({ slug, groupDir, locale, articlePaths }: Props) {
     )
     return {
       nextRoute: {
-        path: `/${groupDir}/${nextRoutePath}`,
+        path: `/${groupDir}${nextRoutePath}`,
         title: nextRouteTitle.title as string
       },
       previousRoute: null
@@ -51,7 +51,7 @@ export function getPagerData({ slug, groupDir, locale, articlePaths }: Props) {
     return {
       nextRoute: null,
       previousRoute: {
-        path: `/${groupDir}/${previousRoutePath}`,
+        path: `/${groupDir}${previousRoutePath}`,
         title: previousRouteTitle.title as string
       }
     }
@@ -76,11 +76,11 @@ export function getPagerData({ slug, groupDir, locale, articlePaths }: Props) {
 
   return {
     nextRoute: {
-      path: `/${groupDir}/${nextRoutePath}`,
+      path: `/${groupDir}${nextRoutePath}`,
       title: nextRouteTitle.title as string
     },
     previousRoute: {
-      path: `/${groupDir}/${previousRoutePath}`,
+      path: `/${groupDir}${previousRoutePath}`,
       title: previousRouteTitle.title as string
     }
   }
