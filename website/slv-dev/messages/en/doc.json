@@ -6,15 +6,23 @@
       "general": {
         "getting-started": "Getting Started"
       },
-      "validator": {
-        "title": "Validator",
+      "testnet-validator": {
+        "title": "Testnet Validator",
+        "quickstart": "Quickstart"
+      },
+      "mainnet-validator": {
+        "title": "Mainnet Validator",
         "quickstart": "Quickstart"
       },
       "rpc": {
         "title": "RPC",
         "quickstart": "Quickstart"
       },
-      "bot": {
+      "metal": {
+        "title": "Metal",
+        "quickstart": "Quickstart"
+      },
+      "geyser": {
         "title": "Geyser gRPC",
         "quickstart": "Quickstart"
       },
@@ -26,12 +34,8 @@
         "title": "App",
         "quickstart": "Quickstart"
       },
-      "cloud": {
-        "title": "Cloud",
-        "quickstart": "Quickstart"
-      },
-      "ai": {
-        "title": "AI",
+      "bot": {
+        "title": "Bot",
         "quickstart": "Quickstart"
       }
     }
