@@ -1,7 +1,7 @@
 ---
 id: bot-quickstart
-title: Solana Geyser gRPC - クイックスタート
-description: SLV - Solana Geyser gRPC - クイックスタート
+title: Solana bot - クイックスタート
+description: SLV - Solana bot - クイックスタート
 ---
 
 Soon.

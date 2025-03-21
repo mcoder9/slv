@@ -1,7 +1,7 @@
 ---
-id: bot-quickstart
-title: Solana bot - クイックスタート
-description: SLV - Solana bot - クイックスタート
+id: metal-quickstart
+title: SLV メタル - クイックスタート
+description: SLV メタル - クイックスタート
 ---
 
 Soon.

@@ -1,7 +1,7 @@
 ---
-id: bot-quickstart
-title: Solana bot - Quickstart
-description: SLV - Solana bot - Quickstart
+id: metal-quickstart
+title: SLV Metal - Quickstart
+description: SLV Metal - Quickstart
 ---
 
 Soon.

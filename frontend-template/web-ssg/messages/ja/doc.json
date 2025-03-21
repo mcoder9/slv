@@ -1,38 +1,37 @@
 {
   "doc": {
     "title": "ドキュメント",
-    "description": "SLV ドキュメント",
     "nav": {
       "title": "ドキュメント一覧",
       "general": {
         "getting-started": "Getting Started"
       },
-      "validator": {
-        "title": "Validator",
+      "testnet-validator": {
+        "title": "テストネットバリデータ",
         "quickstart": "クイックスタート"
       },
-      "rpc": {
-        "title": "RPC",
+      "mainnet-validator": {
+        "title": "メインネットバリデータ",
         "quickstart": "クイックスタート"
       },
-      "bot": {
+      "mainnet-rpc": {
+        "title": "メインネット RPC",
+        "quickstart": "クイックスタート"
+      },
+      "metal": {
+        "title": "Metal",
+        "quickstart": "クイックスタート"
+      },
+      "geyser-grpc": {
         "title": "Geyser gRPC",
-        "quickstart": "クイックスタート"
-      },
-      "swap": {
-        "title": "Swap",
         "quickstart": "クイックスタート"
       },
       "app": {
         "title": "App",
         "quickstart": "クイックスタート"
       },
-      "cloud": {
-        "title": "Cloud",
-        "quickstart": "クイックスタート"
-      },
-      "ai": {
-        "title": "AI",
+      "bot": {
+        "title": "Bot",
         "quickstart": "クイックスタート"
       }
     }
