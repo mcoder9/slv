@@ -10,11 +10,19 @@
         "title": "Testnet Validator",
         "quickstart": "クイックスタート"
       },
+      "mainnet-validator": {
+        "title": "Mainnet Validator",
+        "quickstart": "クイックスタート"
+      },
       "rpc": {
         "title": "RPC",
         "quickstart": "クイックスタート"
       },
-      "bot": {
+      "metal": {
+        "title": "Metal",
+        "quickstart": "クイックスタート"
+      },
+      "geyser": {
         "title": "Geyser gRPC",
         "quickstart": "クイックスタート"
       },
@@ -26,12 +34,8 @@
         "title": "App",
         "quickstart": "クイックスタート"
       },
-      "cloud": {
-        "title": "Cloud",
-        "quickstart": "クイックスタート"
-      },
-      "ai": {
-        "title": "AI",
+      "bot": {
+        "title": "Bot",
         "quickstart": "クイックスタート"
       }
     }

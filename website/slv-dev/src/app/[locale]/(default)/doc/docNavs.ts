@@ -10,7 +10,16 @@ export const docMenuData: Section[] = [
         subItems: [
           {
             title: 'doc.nav.testnet-validator.quickstart',
-            route: '/doc/validator/quickstart'
+            route: '/doc/testnet-validator/quickstart'
+          }
+        ]
+      },
+      {
+        title: 'doc.nav.mainnet-validator.title',
+        subItems: [
+          {
+            title: 'doc.nav.mainnet-validator.quickstart',
+            route: '/doc/mainnet-validator/quickstart'
           }
         ]
       },
@@ -24,11 +33,20 @@ export const docMenuData: Section[] = [
         ]
       },
       {
-        title: 'doc.nav.bot.title',
+        title: 'doc.nav.metal.title',
         subItems: [
           {
-            title: 'doc.nav.bot.quickstart',
-            route: '/doc/bot/quickstart'
+            title: 'doc.nav.metal.quickstart',
+            route: '/doc/metal/quickstart'
+          }
+        ]
+      },
+      {
+        title: 'doc.nav.geyser.title',
+        subItems: [
+          {
+            title: 'doc.nav.geyser.quickstart',
+            route: '/doc/geyser/quickstart'
           }
         ]
       },
@@ -51,20 +69,11 @@ export const docMenuData: Section[] = [
         ]
       },
       {
-        title: 'doc.nav.cloud.title',
+        title: 'doc.nav.bot.title',
         subItems: [
           {
-            title: 'doc.nav.cloud.quickstart',
-            route: '/doc/cloud/quickstart'
-          }
-        ]
-      },
-      {
-        title: 'doc.nav.ai.title',
-        subItems: [
-          {
-            title: 'doc.nav.ai.quickstart',
-            route: '/doc/ai/quickstart'
+            title: 'doc.nav.bot.quickstart',
+            route: '/doc/bot/quickstart'
           }
         ]
       }

@@ -1,26 +1,41 @@
 ---
 id: validator-quickstart
-title: Solana バリデータ - クイックスタート
-description: SLV - Solana バリデータ - クイックスタート
+title: Solana メインネット バリデータ - クイックスタート
+description: SLV - Solana メインネットバリデータ - クイックスタート
 ---
 
-## Installation & Validator Launch
+## はじめに
 
-```bash
-curl -fsSL https://storage.slv.dev/slv/install | sh
-slv validator init
-slv validator deploy
-```
-
-## Usage
-
-```bash
-slv v --help
-```
-
-## Solana テストネットに Firedancer バリデータをデプロイ
+Solana メインネット バリデータのデプロイには、SLV コマンドラインツールを使用します。
+このクイックスタートではメインネットバリデーターのスペアを起動し、デプロイする方法を説明します。
+SLV メインネットバリデーターでは `キーレスオペレーション` がサポートされています。
+バリデーターのノード内には、大切な情報は一切保存されません。
 
 サーバーには Ubuntu 24.04 LTS がクリーンインストールされている必要があります。
+
+### ベアメタルサーバーの準備
+
+Solana公式はベアメタルサーバーでの使用を推奨しています。
+ベアメタルサーバーは、他の仮想化された環境よりも高いパフォーマンスを提供します。
+Solana のノードは高い CPU とメモリの要件があります。通常、最低でも 24 コアの CPU と 384 GB のメモリが必要です。
+安定した収益を得るためには 768 GB 以上のメモリが推奨されます。
+
+`slv v init` コマンドを実行すると、ベアメタルがすでにセットアップされているかどうかを確認するための質問が表示されます。
+
+```bash
+➜  .slv slv v init
+? Select Solana Network (testnet) › mainnet
+? 🛡️ Do you have a Solana Node Compatabile Server? (no)
+❯ yes
+  no
+```
+
+ここでは `yes` のチュートリアルを進めます。
+まだベアメタルサーバーがセットアップされていない場合は、`no` を選択してください。
+こちらの[ガイド](/running-validator/validator-start)を参考に、
+ベアメタルサーバーを確保してください。
+
+## Solana メインネット Jito バリデーターのデプロイ
 
 このコマンドを実行すると、デプロイに必要な情報を入力するよう求められます。
 
@@ -29,14 +44,26 @@ slv v --help
 
 そのため、デプロイ後に `slv v set:identity` を使用して認証済みのアイデンティティキーをセットしてください。
 
-### デフォルトのユーザー名を入力
 
-通常、デフォルトのユーザー名は `ubuntu` です。
+### Solana ネットワークを選択
+
+デプロイしたい Solana ネットワークを選択します。
 
 ```bash
 slv v init
+? Select Solana Network (mainnet)
+  testnet
+❯ mainnet
+```
+
+### デフォルトのユーザー名を入力
+
+通常、デフォルトのユーザー名は `ubuntu` または `root` であることが多いです。
+
+```bash
 ? What's the user for the server? (ubuntu) › ubuntu
 ```
+
 
 ### サーバーの IP アドレスを入力
 
@@ -49,7 +76,6 @@ slv v init
 ### SSH 用の RSA キーを設定
 
 ※ ご自身の RSA キーのパスを設定してください。デフォルトのパスは `~/.ssh/id_rsa` です。
-現在はデフォルトパスのみサポートされているため、そのまま設定してください。
 
 ```bash
 ? What's the path to your RSA key? (~/.ssh/id_rsa) › ~/.ssh/id_rsa
@@ -59,31 +85,61 @@ slv v init
 
 その後、SLV がサーバーへの接続をチェックします。接続が成功すると、次のステップへ進みます。
 
-### solv ユーザーのパスワードを設定
 
-サーバー上の `solv` ユーザー用のパスワードを設定してください。
+### Solana バリデータタイプの選択
 
-8文字以上で、数字・大文字・小文字の英字を含めてください。
-
-```bash
-? Please enter your password › *********
-? Please confirm your password › *********
-✔︎ Password saved to ~/.slv/config.pwd.yml
-```
-
-暗号化されたパスワードは `~/.slv/config.pwd.yml` に保存されます。
-
-### Solana ネットワークを選択
-
-デプロイしたい Solana ネットワークを選択します。
+Solana バリデータのタイプを選択します。
 
 ```bash
-? Select Solana Network (testnet)
-❯ testnet
-  mainnet
+? Select Validator Type (jito)
+❯ jito
 ```
 
-※ 現在は testnet のみサポートされています。
+※現在は Jito バリデータのみサポートされています。
+
+### コミッションレートの設定
+
+バリデータのコミッションレートを設定します。
+※ 1000の場合は 10% になります。
+
+```bash
+? Enter Commission Bps (1000) › 1000
+```
+
+### Relayer URL の設定
+
+Relayer URL を入力します。
+
+```bash
+? Enter Relayer URL (http://localhost:11226) › http://localhost:11226
+```
+
+### Relayer アカウントの設定
+
+Relayer アカウントを入力します。
+
+```bash
+? Enter Relayer Account(Optional) () › xxxxxxxxxxxPubkeyxxxxxxxxxxxxxxxxxxxx
+```
+
+### Staked RPC Identity の設定（オプショナル）
+
+Staked RPC Identity を入力します。
+特に設定がない場合は Enter キーを押してスキップしてください。
+
+```bash
+? Enter Staked RPC Identity(Optional) () ›
+```
+
+### Snapshot URL の設定（オプショナル）
+
+Snapshot URL を入力します。
+特に設定がない場合は Enter キーを押してスキップしてください。
+
+```bash
+? Enter Snapshot URL(Optional) () › http://
+```
+
 
 ### Solana バリデータのアイデンティティキーを生成または設定
 
@@ -103,7 +159,10 @@ slv v init
 ✔ Successfully created solv user on x.x.x.x
 ```
 
-アイデンティティキーを `~/.slv/keys/<your-pubkey>.json` に配置してください。その後、SLV がパスワードを用いて `solv` ユーザーを作成します。
+アイデンティティキーを `~/.slv/keys/<your-pubkey>.json` に配置してください。
+※この鍵はノード内にはコピーされませんが、のちに認証済みのアイデンティティキーに変更するために必要です。
+
+その後、SLV がパスワードを用いて `solv` ユーザーを作成します。
 
 ### Solana バリデータの投票アカウントキーを生成または設定
 
@@ -113,12 +172,7 @@ slv v init
 ```bash
 ? Do you want to create a new vote account key now? (Y/n) › No
 ? Please Enter Your Vote Account Public Key > <your-vote-account>
-⚠️ Please place your voteAccount pubkey in
-
-  ~/.slv/keys/<your-vote-account>.json
 ```
-
-投票アカウントキーを `~/.slv/keys/<your-vote-account>.json` に配置してください。
 
 ### 投票アカウントの Authority キーを入力
 
@@ -135,27 +189,79 @@ $ slv v deploy -n testnet
 
 これで設定内容が `~/.slv/inventory.testnet.validators.yml` に保存されました。
 
+### UFW ファイアウォールの設定
+
+UFW ファイアウォールは、特定の IP アドレスからの SSH 接続のみを許可するように設定されます。
+既存のホワイトリストに追加するには `Keep and add more` を選択します。
+
+```bash
+🔒 Updating Allowed SSH IPs for mainnet_validators
+
+Current Allowed SSH IPs:
+  - x.x.x.x
+  - x.x.x.x
+? What would you like to do with the current IPs?
+❯ Keep and add more
+  Replace all
+  Keep as is
+```
+
+次に、ノードへの接続を許可する IP アドレスを入力します。
+
+```bash
+🔒 Updating Allowed IPs for mainnet_validators
+
+Current Allowed IPs:
+  - x.x.x.x
+  - x.x.x.x
+? What would you like to do with the current IPs?
+❯ Keep and add more
+  Replace all
+  Keep as is
+```
+
+このようにして、ファイアウォールの設定が完了しました。
+あとでホワイトリストを更新するには以下のコマンドを実行します。
+
+```bash
+slv v  update:allowed-ips
+```
+
 ### バリデータのデプロイ
 
 設定を確認したら、デプロイを開始します。
 
 ```bash
-slv v deploy -n testnet
-Your Testnet Validators Settings:
+slv v deploy -n mainnet -p elsoul-spare
+Your Mainnet Validators Settings:
 ┌────────────────┬──────────────────────────────────────────────┐
-│ Identity Key   │ EjDwu2Czy8eWEYRuNwtjniYks47Du3KNJ6JY9rs3aFSV │
+│ Identity Key   │ elsoul-spare                                 │
 ├────────────────┼──────────────────────────────────────────────┤
-│ Vote Key       │ EwoVPLUhdhm722e7QWk8GMQ43917qRXiC9HFyefEMiSV │
+│ Vote Key       │ ELLB9W7ZCwRCV3FzWcCWoyKP6NjZJKArLyGtkqefnHcG │
 ├────────────────┼──────────────────────────────────────────────┤
-│ Authority Key  │ EcT4NsMPwxanusdy3dza5nznqwuKo9Pz3GzW5GPD32SV │
+│ Authority Key  │ auth                                         │
 ├────────────────┼──────────────────────────────────────────────┤
-│ IP             │ x.x.x.x                                      │
+│ IP             │ 185.209.178.39                               │
 ├────────────────┼──────────────────────────────────────────────┤
-│ Validator Type │ firedancer                                   │
+│ Validator Type │ jito                                         │
 ├────────────────┼──────────────────────────────────────────────┤
-│ Version        │ 0.302.20104                                  │
+│ Version        │ 2.1.16                                       │
 └────────────────┴──────────────────────────────────────────────┘
 ? Do you want to continue? (Y/n) › Yes
+.
+.
+.
+Successfully deployed validator on mainnet
+⚡️⚡️⚡️ Enhanced Solana RPC Connection API Key ⚡️⚡️⚡️
+
+We're excited to offer a free API key exclusively for the Validators DAO community 🎉
+It's our way of supporting the community and empowering you with fast, reliable connections.
+
+To get your Free API key, simply join us through the link below:
+
+Validators DAO: `https://discord.gg/X4BgkBHavp`
+
+Unlock fast connections and elevate your experience with your very own API key 🚀
 ```
 
 完了です！Solana バリデータがデプロイされました。Solana ネットワークとの同期には少し時間がかかります。
@@ -167,29 +273,18 @@ Your Testnet Validators Settings:
 デプロイ後、アンステーク済みのキーを認証済みのアイデンティティキーに変更する必要があります。
 
 ```bash
-slv v set:identity -n testnet --pubkey <your-identity-pubkey>
+slv v set:identity -n mainnet --pubkey <your-identity-pubkey>
 ```
 
 このコマンドにより、アイデンティティキーが認証済みのキーに変更されます。
-コマンドは firedancer を停止し、アイデンティティキーを変更して再起動します。
 
-※ Firedancer では現時点でノーダウンタイム・マイグレーションは利用できません。対応が可能になり次第アップデートします。
-
-### Firedancer の再起動
-
-バリデータに問題がある場合は、以下のコマンドで firedancer を再起動できます。
-
-`--rm` オプションを使用すると、バリデータが停止し、ledger と snapshot ディレクトリが削除された後、snapshot finder でスナップショットをダウンロードしてからバリデータを起動します。
-
-```bash
-slv v restart -n testnet --pubkey <your-identity-pubkey> --rm
-```
+※ノーダウンタイムマイグレーションを行う場合は、こちらの[ガイド](/running-validator/validator-migration)を参照してください。
 
 ### SLV Validator コマンド
 
 ```bash
 Usage:   slv validator
-Version: 0.3.1
+Version: 0.8.0        
 
 Description:
 
@@ -197,14 +292,22 @@ Description:
 
 Options:
 
-  -h, --help  - Show this help.
+  -h, --help  - Show this help.  
 
 Commands:
 
-  init          - Initialize a new validator
-  deploy        - Deploy Validators
-  list          - List validators
-  set:identity  - Set Validator Identity
-  set:unstaked  - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
-  restart       - Restart validator
+  init                - Initialize a new validator                                       
+  deploy              - Deploy Validators                                                
+  list                - List validators                                                  
+  set:identity        - Set Validator Identity                                           
+  set:unstaked        - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
+  restart             - Stop and Start Validator                                         
+  setup:firedancer    - Setup Firedancer Validator - Testnet Only                        
+  setup:relayer       - Setup Jito Relayer - Mainnet Only                                
+  deploy:relayer      - Setup Jito Relayer - Mainnet Only                                
+  update:version      - Update Validator Version                                         
+  update:script       - Update Validator Startup Config                                  
+  apply               - Apply Ansiible Playbook                                          
+  update:allowed-ips  - Update allowed IPs for mainnet validator nodes                   
+  switch              - Switch Validator Identity - No DownTime Migration       
 ```
