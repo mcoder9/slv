@@ -85,6 +85,7 @@ const initRelayer = async () => {
     answer.blockEngineRegion!,
     answer.rpcUrls!,
     answer.websocketUrls!,
+    answer.relayerAccount!,
   )
   await genSolvUser(answer.identity!, 'relayer')
   console.log(colors.green('🟢 Relayer Inventory Added'))

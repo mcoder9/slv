@@ -52,6 +52,7 @@ const addMainnetInventory = async (
       identity_account: identityAccount,
       vote_account: '',
       authority_account: '',
+      commission_bps: 0,
       relayer_account: '',
       username: sshConnection.username,
       validator_type: 'jito',

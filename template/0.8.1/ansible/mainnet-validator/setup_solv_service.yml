@@ -21,12 +21,8 @@
         mode: '0644'
 
     - name: Ensure /mnt directory has correct permissions
-      file:
-        path: '/mnt'
-        state: directory
-        owner: solv
-        group: solv
-        mode: '0755'
+      shell: chown -R solv:solv /mnt
+      become_user: root
 
     - name: Reload systemd daemon
       command: systemctl daemon-reload

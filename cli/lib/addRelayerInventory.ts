@@ -11,6 +11,7 @@ const addRelayerInventory = async (
   blockEngineRegion: string,
   rpcUrls: string,
   rpcWsUrls: string,
+  relayerAccount: string,
 ) => {
   try {
     const inventoryType = 'relayer'
@@ -40,6 +41,7 @@ const addRelayerInventory = async (
       ansible_user: sshConnection.username,
       ansible_ssh_private_key_file: sshConnection.rsa_key_path,
       identity_account: identityAccount,
+      relayer_account: relayerAccount,
       block_engine_region: blockEngineRegion,
       rpc_urls: rpcUrls,
       rpc_ws_urls: rpcWsUrls,
