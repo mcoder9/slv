@@ -24,11 +24,11 @@ export const docMenuData: Section[] = [
         ]
       },
       {
-        title: 'doc.nav.rpc.title',
+        title: 'doc.nav.mainnet-rpc.title',
         subItems: [
           {
-            title: 'doc.nav.rpc.quickstart',
-            route: '/doc/rpc/quickstart'
+            title: 'doc.nav.mainnet-rpc.quickstart',
+            route: '/doc/mainnet-rpc/quickstart'
           }
         ]
       },
@@ -42,20 +42,11 @@ export const docMenuData: Section[] = [
         ]
       },
       {
-        title: 'doc.nav.geyser.title',
+        title: 'doc.nav.geyser-grpc.title',
         subItems: [
           {
-            title: 'doc.nav.geyser.quickstart',
-            route: '/doc/geyser/quickstart'
-          }
-        ]
-      },
-      {
-        title: 'doc.nav.swap.title',
-        subItems: [
-          {
-            title: 'doc.nav.swap.quickstart',
-            route: '/doc/swap/quickstart'
+            title: 'doc.nav.geyser-grpc.quickstart',
+            route: '/doc/geyser-grpc/quickstart'
           }
         ]
       },

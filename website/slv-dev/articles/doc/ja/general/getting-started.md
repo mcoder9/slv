@@ -1,6 +1,6 @@
 ---
 id: general-getting-started
-title: SLV - Getting Started
+title: Getting Started
 description: SLV - Getting Started
 ---
 

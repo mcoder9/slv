@@ -1,38 +1,37 @@
 {
   "doc": {
     "title": "Doc",
-    "description": "SLV documentation",
     "nav": {
       "title": "Doc Index",
       "general": {
         "getting-started": "Getting Started"
       },
-      "validator": {
-        "title": "Validator",
+      "testnet-validator": {
+        "title": "Testnet Validator",
         "quickstart": "Quickstart"
       },
-      "rpc": {
-        "title": "RPC",
+      "mainnet-validator": {
+        "title": "Mainnet Validator",
         "quickstart": "Quickstart"
       },
-      "bot": {
+      "mainnet-rpc": {
+        "title": "Mainnet RPC",
+        "quickstart": "Quickstart"
+      },
+      "metal": {
+        "title": "Metal",
+        "quickstart": "Quickstart"
+      },
+      "geyser-grpc": {
         "title": "Geyser gRPC",
-        "quickstart": "Quickstart"
-      },
-      "swap": {
-        "title": "Swap",
         "quickstart": "Quickstart"
       },
       "app": {
         "title": "App",
         "quickstart": "Quickstart"
       },
-      "cloud": {
-        "title": "Cloud",
-        "quickstart": "Quickstart"
-      },
-      "ai": {
-        "title": "AI",
+      "bot": {
+        "title": "Bot",
         "quickstart": "Quickstart"
       }
     }

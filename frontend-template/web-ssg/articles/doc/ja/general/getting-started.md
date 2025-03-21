@@ -1,6 +1,6 @@
 ---
 id: general-getting-started
-title: SLV - Getting Started
+title: Getting Started
 description: SLV - Getting Started
 ---
 
@@ -27,10 +27,61 @@ Windows 10向け WSL2のインストール: https://docs.microsoft.com/en-us/win
 ### Libraries
 
 - Python3 [Install](https://www.python.org/downloads/)
-- Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html/)
+- Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
 
 ## Installation
 
 ```bash
 curl -fsSL https://storage.slv.dev/slv/install | sh
 ```
+
+## バリデーターのデプロイ
+
+バリデーターを起動するのに必要な設定を入力します。
+
+```bash
+slv v init
+```
+
+### デフォルトのユーザー名を入力
+
+通常、デフォルトのユーザー名は `ubuntu` または `root` であることが多いです。
+
+```bash
+slv v init
+? What's the user for the server? (ubuntu) › ubuntu
+```
+
+### サーバーの IP アドレスを入力
+
+サーバーの IP アドレスを入力します。
+
+```bash
+? What's the IP address of the server? ›
+```
+
+### SSH 用の RSA キーを設定
+
+※ ご自身の RSA キーのパスを設定してください。デフォルトのパスは `~/.ssh/id_rsa` です。
+
+```bash
+? What's the path to your RSA key? (~/.ssh/id_rsa) › ~/.ssh/id_rsa
+🔍 Checking SSH connection...
+✔︎ SSH connection succeeded
+```
+
+その後、SLV がサーバーへの接続をチェックします。接続が成功すると、次のステップへ進みます。
+
+### solv ユーザーのパスワードを設定
+
+サーバー上の `solv` ユーザー用のパスワードを設定してください。
+
+8文字以上で、数字・大文字・小文字の英字を含めてください。
+
+```bash
+? Please enter your password › *********
+? Please confirm your password › *********
+✔︎ Password saved to ~/.slv/config.pwd.yml
+```
+
+暗号化されたパスワードは `~/.slv/config.pwd.yml` に保存されます。

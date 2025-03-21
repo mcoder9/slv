@@ -7,27 +7,23 @@
         "getting-started": "Getting Started"
       },
       "testnet-validator": {
-        "title": "Testnet Validator",
+        "title": "テストネットバリデータ",
         "quickstart": "クイックスタート"
       },
       "mainnet-validator": {
-        "title": "Mainnet Validator",
+        "title": "メインネットバリデータ",
         "quickstart": "クイックスタート"
       },
-      "rpc": {
-        "title": "RPC",
+      "mainnet-rpc": {
+        "title": "メインネット RPC",
         "quickstart": "クイックスタート"
       },
       "metal": {
         "title": "Metal",
         "quickstart": "クイックスタート"
       },
-      "geyser": {
+      "geyser-grpc": {
         "title": "Geyser gRPC",
-        "quickstart": "クイックスタート"
-      },
-      "swap": {
-        "title": "Swap",
         "quickstart": "クイックスタート"
       },
       "app": {

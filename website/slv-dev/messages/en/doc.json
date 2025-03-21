@@ -14,20 +14,16 @@
         "title": "Mainnet Validator",
         "quickstart": "Quickstart"
       },
-      "rpc": {
-        "title": "RPC",
+      "mainnet-rpc": {
+        "title": "Mainnet RPC",
         "quickstart": "Quickstart"
       },
       "metal": {
         "title": "Metal",
         "quickstart": "Quickstart"
       },
-      "geyser": {
+      "geyser-grpc": {
         "title": "Geyser gRPC",
-        "quickstart": "Quickstart"
-      },
-      "swap": {
-        "title": "Swap",
         "quickstart": "Quickstart"
       },
       "app": {
