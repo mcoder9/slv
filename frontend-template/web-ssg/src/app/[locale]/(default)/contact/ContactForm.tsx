@@ -25,7 +25,9 @@ import {
   FormItem,
   FormMessage
 } from '@/components/ui/form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useAtom } from 'jotai/react'
+import { contactFormAtom, ContactFormData } from '@/store/form/contactForm'
 
 const contactApiURL =
   process.env.NODE_ENV === 'production'
@@ -36,6 +38,8 @@ export default function ContactForm() {
   const t = useTranslations()
   const locale = useLocale()
   const [isSucceeded, setSucceeded] = useState(false)
+
+  const [storedData, setStoredData] = useAtom(contactFormAtom)
 
   const FormSchema = z.object({
     name: z.string().min(1, { message: t('contact.ContactFormRow.nameError') }),
@@ -49,13 +53,16 @@ export default function ContactForm() {
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      message: ''
-    }
+    defaultValues: storedData
   })
   const { isSubmitting, isValid } = form.formState
+
+  useEffect(() => {
+    const subscription = form.watch((values) => {
+      setStoredData(values as ContactFormData)
+    })
+    return () => subscription.unsubscribe()
+  }, [form.watch, setStoredData])
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
@@ -70,6 +77,7 @@ export default function ContactForm() {
         throw new Error('Failed to send message')
       }
       form.reset()
+      setStoredData({ name: '', email: '', message: '' })
       setSucceeded(true)
       toast(t('contact.ContactFormRow.successTitle'), {
         description: `${t('contact.ContactFormRow.successMessage', {
