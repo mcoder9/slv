@@ -81,7 +81,7 @@ export default function ContactForm() {
         throw new Error('Failed to send message')
       }
       setStoredData(contactFormAtomDefault)
-      form.reset()
+      form.reset(contactFormAtomDefault)
       setSucceeded(true)
       toast(t('contact.ContactFormRow.successTitle'), {
         description: `${t('contact.ContactFormRow.successMessage', {
