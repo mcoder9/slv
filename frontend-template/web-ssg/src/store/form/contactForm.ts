@@ -6,13 +6,15 @@ export interface ContactFormData {
   message: string
 }
 
+export const contactFormAtomDefault = {
+  name: '',
+  email: '',
+  message: ''
+}
+
 export const contactFormAtom = atomWithStorage<ContactFormData>(
   'contactFormData',
-  {
-    name: '',
-    email: '',
-    message: ''
-  },
+  contactFormAtomDefault,
   undefined,
   { getOnInit: true }
 )

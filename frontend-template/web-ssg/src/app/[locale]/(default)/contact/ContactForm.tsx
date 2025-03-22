@@ -27,7 +27,11 @@ import {
 } from '@/components/ui/form'
 import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai/react'
-import { contactFormAtom, ContactFormData } from '@/store/form/contactForm'
+import {
+  contactFormAtom,
+  contactFormAtomDefault,
+  ContactFormData
+} from '@/store/form/contactForm'
 
 const contactApiURL =
   process.env.NODE_ENV === 'production'
@@ -77,7 +81,7 @@ export default function ContactForm() {
         throw new Error('Failed to send message')
       }
       form.reset()
-      setStoredData({ name: '', email: '', message: '' })
+      setStoredData(contactFormAtomDefault)
       setSucceeded(true)
       toast(t('contact.ContactFormRow.successTitle'), {
         description: `${t('contact.ContactFormRow.successMessage', {
