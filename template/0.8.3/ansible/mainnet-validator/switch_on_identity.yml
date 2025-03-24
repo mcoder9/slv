@@ -6,20 +6,25 @@
   gather_facts: no
   vars:
     key_name: "{{ hostvars[inventory_hostname].identity_account }}.json"
-    local_key_path: "~/.slv/{{ key_name }}"
+    local_key_path: "~/.slv/keys/{{ key_name }}"
 
   tasks:
-    - name: Read local validator key file securely (base64)
-      delegate_to: localhost
-      slurp:
-        src: "{{ local_key_path }}"
-      register: key_file
-      no_log: true
-
     - name: Upload Tower File
       ansible.builtin.copy:
         src: ~/.slv/tower/tower-1_9-{{ hostvars[inventory_hostname].identity_account }}.bin
         dest: /mnt/ledger/tower-1_9-{{ hostvars[inventory_hostname].identity_account }}.bin
+
+    - name: Read local validator key file securely (base64)
+      become: false
+      delegate_to: localhost
+      slurp:
+        src: "{{ local_key_path }}"
+      register: key_file
+
+    - name: Stop if key file not found
+      fail:
+        msg: "Key file not found: {{ local_key_path }}"
+      when: key_file is not defined
 
     - name: Set Identity to Validator Key via stdin
       shell: . ~/.profile && agave-validator -l /mnt/ledger set-identity

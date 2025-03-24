@@ -4,15 +4,31 @@
   become: true
   become_user: solv
   gather_facts: no
+  vars:
+    key_name: "{{ hostvars[inventory_hostname].identity_account }}.json"
+    local_key_path: "~/.slv/keys/{{ key_name }}"
   tasks:
     - name: Upload Tower File
       ansible.builtin.copy:
         src: ~/.slv/tower/tower-1_9-{{ hostvars[inventory_hostname].identity_account }}.bin
         dest: /mnt/ledger/tower-1_9-{{ hostvars[inventory_hostname].identity_account }}.bin
 
-    - name: Set Identity to Testnet Validator Key
-      shell: |
-        . ~/.profile
-        sudo fdctl set-identity --config /home/solv/firedancer/firedancer-config.toml /home/solv/testnet-validator-keypair.json
+    - name: Read local validator key file securely (base64)
+      become: false
+      delegate_to: localhost
+      slurp:
+        src: "{{ local_key_path }}"
+      register: key_file
+
+    - name: Stop if key file not found
+      fail:
+        msg: "Key file not found: {{ local_key_path }}"
+      when: key_file is not defined
+
+    - name: Set Identity to Validator Key via stdin
+      shell: . ~/.profile && sudo fdctl set-identity --config /home/solv/firedancer/firedancer-config.toml
       args:
+        stdin: "{{ key_file.content | b64decode }}"
         executable: /bin/bash
+      register: set_identity_result
+      timeout: 20

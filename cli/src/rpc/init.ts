@@ -161,7 +161,6 @@ const init = async () => {
   colors.green('✔︎ RPC configuration completed')
   const rpcs: RpcConfig[] = []
   rpcs.push(rpcConfig)
-  console.log(rpcConfig)
   await updateAllowedSshIps('mainnet_rpcs')
   await updateAllowedIps('mainnet_rpcs')
   await updateMainnetRPCInventory(
