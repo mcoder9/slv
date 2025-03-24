@@ -1,6 +1,5 @@
 ---
 - import_playbook: ../cmn/fix_permissions.yml
-- import_playbook: copy_keys.yml
 - import_playbook: add_solv.yml
 - import_playbook: ../cmn/install_package.yml
 - import_playbook: ../cmn/setup_ufw.yml

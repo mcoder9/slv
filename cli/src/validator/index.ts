@@ -154,7 +154,7 @@ validatorCmd.command('restart')
   })
 
 validatorCmd.command('setup:firedancer')
-  .description('Setup Firedancer Validator - Testnet Only')
+  .description('Setup/Update Firedancer Validator - Testnet Only')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     const inventoryType: InventoryType = 'testnet_validators'
@@ -197,12 +197,16 @@ validatorCmd.command('deploy:relayer')
 
 validatorCmd.command('update:version')
   .description('Update Validator Version')
+  .option('-c, --config-only', 'Update Config Only', { default: false })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
   .action(async (options) => {
     await updateDefaultVersion()
+    if (options.configOnly) {
+      return
+    }
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
