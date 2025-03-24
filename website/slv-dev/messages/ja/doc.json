@@ -31,7 +31,8 @@
       },
       "geyser-grpc": {
         "title": "Geyser gRPC",
-        "quickstart": "クイックスタート"
+        "quickstart": "クイックスタート",
+        "test": "gRPC レイテンシーテスト"
       },
       "app": {
         "title": "App",

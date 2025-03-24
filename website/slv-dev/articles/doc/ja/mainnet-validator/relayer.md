@@ -4,267 +4,128 @@ title: Solana Mainnet Validator - Setup Relayer
 description: SLV - Solana Mainnet Validator - Setup Relayer
 ---
 
-## Introduction
+`slv v setup:relayer` コマンドは、Jito Relayer をセットアップするために使用されます。
 
-To deploy a Solana mainnet validator, you'll use the SLV command-line tool.
-This quickstart guide explains how to launch and deploy a mainnet validator spare.
-SLV mainnet validators support `keyless operation`.
-No sensitive information is stored within the validator node.
+## Usage
 
-You must have Ubuntu 24.04 LTS clean installed on your server.
-
-### Bare Metal Server Preparation
-
-Solana officially recommends using bare metal servers.
-Bare metal servers provide higher performance than other virtualized environments.
-Solana nodes have high CPU and memory requirements. Typically, a minimum of 24 CPU cores and 384 GB of memory is required.
-For stable earnings, 768 GB or more of memory is recommended.
-
-When you run the `slv v init` command, you'll be asked if you already have a bare metal server set up.
+以下のコマンドを実行します:
 
 ```bash
-➜  .slv slv v init
-? Select Solana Network (testnet) › mainnet
+slv v setup:relayer
 ? 🛡️ Do you have a Solana Node Compatabile Server? (no)
-❯ yes
-  no
+❯  yes
+   no
 ```
 
-We'll proceed with the `yes` tutorial here.
-If you haven't set up a bare metal server yet, select `no`.
-Please refer to this [guide](/en/doc/metal/quickstart) to secure a bare metal server.
+ここでは `yes` のチュートリアルを進めます。
+まだベアメタルサーバーがセットアップされていない場合は、`no` を選択してください。
+こちらの[ガイド](/ja/doc/metal/quickstart)を参考に、
+ベアメタルサーバーを確保してください。
 
-## Deploy Solana Mainnet Jito Validator
 
-This command will prompt you to provide necessary information to deploy.
+## Mainnet Validator の アイデンティティキーを設定
 
-New SLV Deployment is always use `unstaked-keypair.json` for the identity key.
-This is the best practice to avoid double voting, and etc.
-
-So Please make sure to set the authorized identity key with `slv v set:identity`
-after the deployment.
-
-### Select the Solana Network
-
-Select the Solana Network you want to deploy.
+Relayer が使用する Mainnet Validator のアイデンティティキーを設定します。
 
 ```bash
-slv v init
-? Select Solana Network (mainnet)
-  testnet
-❯ mainnet
+? Enter Validator Identity › gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV
 ```
 
-### Input Server's Default Username
+⚠️ あなたの Relayer 秘密鍵を ~/.slv/keys/<your-relayer-pubkey>.json に配置してください
 
-Most of the time, the default username is `ubuntu`.
+
+## Relayer のアイデンティティキーを設定
+
+Relayer のアイデンティティキーを設定します。
 
 ```bash
-? What's the user for the server? (ubuntu) › ubuntu
+? Enter Relayer Account Address › 3QJmZ2tJ4p7W3U7b7zj1Z8YXf2J6JZ8F1
 ```
 
-### Input Server's IP Address
+## Jito ブロックエンジンリージョンの選択
 
-Input the IP address of the server.
+Jito ブロックエンジンのリージョンを選択します。
 
 ```bash
-? What's the IP address of the server? ›
+? 🌐 Select Block Engine Region
+❯ amsterdam
+  frankfurt
+  ny
+  salt_lake_city
+  tokyo
 ```
 
-### Set RSA Key for SSH
+## Solana RPC エンドポイントの設定
 
-※ Please set the path to your RSA key. The default path is `~/.ssh/id_rsa`.
-Currently, only the default path is supported.
+Solana RPC エンドポイントを設定します。
+複数のエンドポイントを設定する場合は、半角スペースで区切って入力してください。
 
 ```bash
-? What's the path to your RSA key? (~/.ssh/id_rsa) › ~/.ssh/id_rsa
-🔍 Checking SSH connection...
-✔︎ SSH connection succeeded
+? Enter Solana RPC Endpoint › http://localhost:8899 https://pro.erpc.global
 ```
 
-Then SLV will check the connection to the server. If the connection is
-successful, the next step will be prompted.
+## Solana RPC Websocket エンドポイントの設定
 
-### Set the solv user password
+Solana RPC Websocket エンドポイントを設定します。
+複数のエンドポイントを設定する場合は、半角スペースで区切って入力してください。
 
-Please set the password for the `solv` user of the server.
-
-**8 characters or more, including numbers, uppercase and lowercase letters**
+※ 複数のエンドポイントを設定する場合は、RPC エンドポイントと同じ順番で入力してください。
 
 ```bash
-? Please enter your password › *********
-? Please confirm your password › *********
-✔︎ Password saved to ~/.slv/config.pwd.yml
-```
-
-Encrypted password will be saved to `~/.slv/config.pwd.yml`.
-
-### Select Solana Validator Type
-
-Select the type of Solana validator.
-
-```bash
-? Select Validator Type (jito)
-❯ jito
-```
-
-※ Currently, only Jito validator is supported.
-
-### Set Commission Rate
-
-Set the commission rate for your validator.
-※ 1000 equals 10%.
-
-```bash
-? Enter Commission Bps (1000) › 1000
-```
-
-### Set Relayer URL
-
-Enter the Relayer URL.
-
-```bash
-? Enter Relayer URL (http://localhost:11226) › http://localhost:11226
-```
-
-### Set Relayer Account
-
-Enter the Relayer Account.
-
-```bash
-? Enter Relayer Account(Optional) () › xxxxxxxxxxxPubkeyxxxxxxxxxxxxxxxxxxxx
-```
-
-### Set Staked RPC Identity (Optional)
-
-Enter the Staked RPC Identity.
-If you don't have a specific setting, press Enter to skip.
-
-```bash
-? Enter Staked RPC Identity(Optional) () ›
-```
-
-### Set Snapshot URL (Optional)
-
-Enter the Snapshot URL.
-If you don't have a specific setting, press Enter to skip.
-
-```bash
-? Enter Snapshot URL(Optional) () › http://
-```
-
-### Generate or Set the Solana Validator Identity
-
-You can generate a new identity key or set an existing identity key. This
-example shows how to set an existing identity key.
-
-```bash
-? Do you want to create a new identity key now? (Y/n) › No
-? Please Enter Your Identity Public Key › EjDwu2Czy8eWEYRuNwtjniYks47Du3KNJ6JY9rs3aFSV
-⚠️ Please place your identity key in
-
-  ~/.slv/keys/EjDwu2Czy8eWEYRuNwtjniYks47Du3KNJ6JY9rs3aFSV.json
+? Enter Solana RPC Websocket Endpoint › ws://localhost:8900 wss://pro.erpc.global
+.
 .
 .
 ✔︎ Success
-✔ Inventory updated to ~/.slv/inventory.yml
-✔ Successfully created solv user on x.x.x.x
-```
-
-Please place your identity key in `~/.slv/keys/<your-pubkey>.json`.
-※ This key is not copied into the node, but is needed to later change to an authorized identity key.
-
-Then, SLV will create the solv user with your password.
-
-### Generate or Set the Solana Vote Account
-
-You can generate a new vote account key or set an existing vote account key.
-This example shows how to set an existing vote account key.
-
-```bash
-? Do you want to create a new vote account key now? (Y/n) › No
-? Please Enter Your Vote Account Public Key > <your-vote-account>
-```
-
-### Set Your Authority Public Key
-
-Please input your authority public key. This key is used to withdraw rewards
-from the vote account.
-
-```bash
-? Please Enter Your Vote Account's Authority Key › <your-authority-pubkey>
-✔︎ Validator mainnet config saved to ~/.slv/inventory.mainnet.validators.yml
+✔ Inventory updated to /Users/fumi/.slv/inventory.relayer.yml
+✔ Successfully created solv user on gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV
+🟢 Relayer Inventory Added
+⚠️ Please place your identity key in ~/.slv/keys/3QJmZ2tJ4p7W3U7b7zj1Z8YXf2J6JZ8F1.json
 
 Now you can deploy with:
 
-$ slv v deploy -n mainnet
+$ slv v deploy:relayer -p gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV
 ```
 
-Now your configuration is saved to `~/.slv/inventory.mainnet.validators.yml`.
+その後、ベアメタルサーバーに `solv` ユーザーが作成され、
+`~/.slv/inventory.relayer.yml` ディレクトリに Relayer の設定ファイルが作成されます。
 
-### Set UFW Firewall
+Relayer の設定ファイルは、`slv v deploy:relayer` コマンドを実行する際に使用されます。
 
-The UFW firewall is configured to allow SSH connections only from specific IP addresses.
-To add to the existing whitelist, select `Keep and add more`.
+## ファイアウォールの設定
 
-```bash
-🔒 Updating Allowed SSH IPs for mainnet_validators
+Relayer に関するポートの設定は
 
-Current Allowed SSH IPs:
-  - x.x.x.x
-  - x.x.x.x
-? What would you like to do with the current IPs?
-❯ Keep and add more
-  Replace all
-  Keep as is
+`~/.slv/versions.yml` ファイルの `mainnet-validators` セクションに記載されています。
+
+```yaml
+mainnet_validators:
+  solana_cli: jito
+  version_agave: 2.1.16
+  version_jito: 2.1.16
+  allowed_ssh_ips:
+    - x.x.x.x
+  allowed_ips:
+    - x.x.x.x
 ```
 
-Next, enter the IP addresses that are allowed to connect to the node.
-
-```bash
-🔒 Updating Allowed IPs for mainnet_validators
-
-Current Allowed IPs:
-  - x.x.x.x
-  - x.x.x.x
-? What would you like to do with the current IPs?
-❯ Keep and add more
-  Replace all
-  Keep as is
-```
-
-This completes the firewall configuration.
-To update the whitelist later, run the following command:
+必要に応じて、Relayer に必要なIPアドレスを追加してください。
 
 ```bash
 slv v update:allowed-ips
 ```
 
-### Deploy the Validator
 
-Once you confirm the configuration, the deployment will start.
+## Jito Relayer のデプロイ
+
+上記ログで示されているように、以下のコマンドを実行して Relayer をデプロイします。
 
 ```bash
-slv v deploy -n mainnet -p elsoul-spare
-Your Mainnet Validators Settings:
-┌────────────────┬──────────────────────────────────────────────┐
-│ Identity Key   │ elsoul-spare                                 │
-├────────────────┼──────────────────────────────────────────────┤
-│ Vote Key       │ ELLB9W7ZCwRCV3FzWcCWoyKP6NjZJKArLyGtkqefnHcG │
-├────────────────┼──────────────────────────────────────────────┤
-│ Authority Key  │ auth                                         │
-├────────────────┼──────────────────────────────────────────────┤
-│ IP             │ 185.209.178.39                               │
-├────────────────┼──────────────────────────────────────────────┤
-│ Validator Type │ jito                                         │
-├────────────────┼──────────────────────────────────────────────┤
-│ Version        │ 2.1.16                                       │
-└────────────────┴──────────────────────────────────────────────┘
-? Do you want to continue? (Y/n) › Yes
+slv v deploy:relayer -p gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV
 .
 .
 .
-Successfully deployed validator on mainnet
+Successfully deployed Jito Relayer on mainnet
 ⚡️⚡️⚡️ Enhanced Solana RPC Connection API Key ⚡️⚡️⚡️
 
 We're excited to offer a free API key exclusively for the Validators DAO community 🎉
@@ -277,52 +138,4 @@ Validators DAO: `https://discord.gg/X4BgkBHavp`
 Unlock fast connections and elevate your experience with your very own API key 🚀
 ```
 
-It's done! Your Solana Validator is now deployed. It will take some time to
-catch up with the Solana network.
-
-Next, you need to change the identity key from the unstaked key to the
-authorized identity key.
-
-### Change the Identity Key
-
-After the deployment, you need to change the identity key from the unstaked key to the authorized identity key.
-
-```bash
-slv v set:identity -n mainnet --pubkey <your-identity-pubkey>
-```
-
-This command will change the identity key to the authorized identity key.
-
-※ For no-downtime migration, please refer to this [guide](/running-validator/validator-migration).
-
-### SLV Validator Commands
-
-```bash
-Usage:   slv validator
-Version: 0.8.0
-
-Description:
-
-  Manage Solana Validator Nodes
-
-Options:
-
-  -h, --help  - Show this help.
-
-Commands:
-
-  init                - Initialize a new validator
-  deploy              - Deploy Validators
-  list                - List validators
-  set:identity        - Set Validator Identity
-  set:unstaked        - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
-  restart             - Stop and Start Validator
-  setup:firedancer    - Setup Firedancer Validator - Testnet Only
-  setup:relayer       - Setup Jito Relayer - Mainnet Only
-  deploy:relayer      - Setup Jito Relayer - Mainnet Only
-  update:version      - Update Validator Version
-  update:script       - Update Validator Startup Config
-  apply               - Apply Ansiible Playbook
-  update:allowed-ips  - Update allowed IPs for mainnet validator nodes
-  switch              - Switch Validator Identity - No DownTime Migration
-```
+Relayer のデプロイが完了しました。
