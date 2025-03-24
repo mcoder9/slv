@@ -31,7 +31,8 @@
       },
       "geyser-grpc": {
         "title": "Geyser gRPC",
-        "quickstart": "Quickstart"
+        "quickstart": "Quickstart",
+        "test": "gRPC Latency Test"
       },
       "app": {
         "title": "App",
