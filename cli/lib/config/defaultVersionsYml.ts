@@ -35,7 +35,7 @@ const defaultVersionsYml = (): string => {
       allowed_ips: [],
     },
     jupiter: {
-      jupiter_api_version: VERSION_JUPITER_API,
+      api_version: VERSION_JUPITER_API,
       allowed_ssh_ips: [],
       allowed_ips: [],
     },
@@ -66,7 +66,7 @@ mainnet_rpcs:
   allowed_ips: null
 
 jupiter:
-  jupiter_api_version: ${defaultVersions.jupiter.jupiter_api_version}
+  api_version: ${defaultVersions.jupiter.api_version}
   allowed_ssh_ips: null
   allowed_ips: null
 `

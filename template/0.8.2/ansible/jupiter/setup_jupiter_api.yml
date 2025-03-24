@@ -2,12 +2,14 @@
 - name: Install and configure Jupiter Swap API
   hosts: all
   become: true
+  vars_files:
+    - ~/.slv/versions.yml
   vars:
-    working_dir: '/home/solv'
-    api_version: '{{ jupiter.api_version }}'
-    download_url: 'https://github.com/jup-ag/jupiter-swap-api/releases/download'
+    working_dir: "/home/solv"
+    api_version: "{{ jupiter.api_version }}"
+    download_url: "https://github.com/jup-ag/jupiter-swap-api/releases/download"
     service_template: ~/.slv/jupiter/jupiter-api.service.j2
-    service_file_path: '/etc/systemd/system/jupiter-api.service'
+    service_file_path: "/etc/systemd/system/jupiter-api.service"
   tasks:
     - name: Install required packages
       apt:
@@ -20,24 +22,24 @@
       shell: |
         wget {{ download_url }}/{{ api_version }}/jupiter-swap-api-x86_64-unknown-linux-gnu.zip -O jupiter-swap-api.zip
       args:
-        chdir: '{{ working_dir }}'
+        chdir: "{{ working_dir }}"
 
     - name: Unzip Jupiter Swap API binary
       unarchive:
-        src: '{{ working_dir }}/jupiter-swap-api.zip'
-        dest: '{{ working_dir }}'
+        src: "{{ working_dir }}/jupiter-swap-api.zip"
+        dest: "{{ working_dir }}"
         remote_src: yes
 
     - name: Set executable permissions and ownership for Jupiter Swap API
       file:
-        path: '{{ working_dir }}/jupiter-swap-api'
-        mode: '0755'
+        path: "{{ working_dir }}/jupiter-swap-api"
+        mode: "0755"
         owner: solv
         group: solv
 
     - name: Remove the downloaded zip file
       file:
-        path: '{{ working_dir }}/jupiter-swap-api.zip'
+        path: "{{ working_dir }}/jupiter-swap-api.zip"
         state: absent
 
     - name: Check if Jupiter API service is running
@@ -53,18 +55,18 @@
 
     - name: Replace existing Jupiter Swap API binary
       copy:
-        src: '{{ working_dir }}/jupiter-swap-api'
-        dest: '{{ working_dir }}/jupiter-swap-api'
+        src: "{{ working_dir }}/jupiter-swap-api"
+        dest: "{{ working_dir }}/jupiter-swap-api"
         remote_src: yes
-        mode: '0755'
+        mode: "0755"
         owner: solv
         group: solv
 
     - name: Create the Jupiter API systemd service file
       template:
-        src: '{{ service_template }}'
-        dest: '{{ service_file_path }}'
-        mode: '0644'
+        src: "{{ service_template }}"
+        dest: "{{ service_file_path }}"
+        mode: "0644"
 
     - name: Reload systemd to apply the new service file
       shell: systemctl daemon-reload
