@@ -86,12 +86,18 @@ rpcCmd.command('restart')
 
 rpcCmd.command('update:version')
   .description('Update RPC Version')
+  .option('-c, --config-only', 'Update only the config file', {
+    default: false,
+  })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'mainnet',
   })
   .action(async (options) => {
     await updateDefaultVersion()
+    if (options.configOnly) {
+      return
+    }
     const inventoryType: InventoryType = 'mainnet_rpcs'
     const templateRoot = getTemplatePath()
 
