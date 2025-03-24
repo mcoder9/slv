@@ -32,7 +32,7 @@ Solana のノードは高い CPU とメモリの要件があります。通常�
 
 ここでは `yes` のチュートリアルを進めます。
 まだベアメタルサーバーがセットアップされていない場合は、`no` を選択してください。
-こちらの[ガイド](/running-validator/validator-start)を参考に、
+こちらの[ガイド](/ja/doc/metal/quickstart)を参考に、
 ベアメタルサーバーを確保してください。
 
 ## Solana メインネット Jito バリデーターのデプロイ
@@ -93,6 +93,19 @@ Solana バリデータのタイプを選択します。
 ```
 
 ※現在は Jito バリデータのみサポートされています。
+
+### リージョンの選択
+
+Jito ブロックエンジンのリージョンを選択します。
+
+```bash
+? 🌐 Select Block Engine Region
+❯ amsterdam
+  frankfurt
+  ny
+  salt_lake_city
+  tokyo
+```
 
 ### コミッションレートの設定
 
@@ -262,6 +275,19 @@ Unlock fast connections and elevate your experience with your very own API key �
 
 完了です！Solana バリデータがデプロイされました。Solana ネットワークとの同期には少し時間がかかります。
 
+### デバッグ・モニタリング
+
+デプロイ後、Solana RPC ノード内でデバッグとモニタリングを行うことができます。
+以下のコマンドを使用して、Solana RPC ノードの状態を確認できます。
+
+```bash
+$ solv m
+```
+
+`solv` は `agave-validator -l /mnt/ledger` のエイリアスです。
+RPCノードデプロイ時に この設定が `~/.profile` に追加されています。
+
+
 次に、アンステーク済みのキーから認証済みのアイデンティティキーに変更する必要があります。
 
 ### アイデンティティキーの変更
@@ -280,7 +306,7 @@ slv v set:identity -n mainnet --pubkey <your-identity-pubkey>
 
 ```bash
 Usage:   slv validator
-Version: 0.8.0
+Version: 0.8.2
 
 Description:
 

@@ -8,15 +8,22 @@
       },
       "testnet-validator": {
         "title": "テストネットバリデータ",
-        "quickstart": "クイックスタート"
+        "quickstart": "クイックスタート",
+        "update": "バージョンの更新",
+        "migrate": "サーバーの移行"
       },
       "mainnet-validator": {
         "title": "メインネットバリデータ",
-        "quickstart": "クイックスタート"
+        "quickstart": "クイックスタート",
+        "update": "バージョンの更新",
+        "migrate": "サーバーの移行",
+        "relayer": "Jito Relayer"
       },
       "mainnet-rpc": {
         "title": "メインネット RPC",
-        "quickstart": "クイックスタート"
+        "quickstart": "クイックスタート",
+        "update": "バージョンの更新",
+        "jupiter": "Jupiter Self-Hosted API"
       },
       "metal": {
         "title": "Metal",

@@ -32,7 +32,7 @@ When you run the `slv v init` command, you'll be asked if you already have a bar
 
 We'll proceed with the `yes` tutorial here.
 If you haven't set up a bare metal server yet, select `no`.
-Please refer to this [guide](/running-validator/validator-start) to secure a bare metal server.
+Please refer to this [guide](/en/doc/metal/quickstart) to secure a bare metal server.
 
 ## Deploy Solana Mainnet Jito Validator
 

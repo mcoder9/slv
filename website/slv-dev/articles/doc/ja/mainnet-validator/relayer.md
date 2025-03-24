@@ -1,7 +1,7 @@
 ---
-id: mainnet-validator-quickstart
-title: Solana Mainnet Validator - Quickstart
-description: SLV - Solana Mainnet Validator - Quickstart
+id: mainnet-validator-relayer
+title: Solana Mainnet Validator - Setup Relayer
+description: SLV - Solana Mainnet Validator - Setup Relayer
 ---
 
 ## Introduction
@@ -280,18 +280,8 @@ Unlock fast connections and elevate your experience with your very own API key ð
 It's done! Your Solana Validator is now deployed. It will take some time to
 catch up with the Solana network.
 
-
-### Debugging & Monitoring
-
-You can debug and monitor the Solana RPC node after deployment.
-
-```bash
-$ solv m
-```
-
-`solv` is an alias for `agave-validator -l /mnt/ledger`.
-This setting is added to `~/.profile` during the RPC node deployment.
-
+Next, you need to change the identity key from the unstaked key to the
+authorized identity key.
 
 ### Change the Identity Key
 
