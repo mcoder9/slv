@@ -78,7 +78,7 @@ export interface CmnMainnetRpcType {
 }
 
 export interface CmnJupiterType {
-  jupiter_api_version: string
+  api_version: string
   allowed_ssh_ips: string[]
   allowed_ips: string[]
 }
