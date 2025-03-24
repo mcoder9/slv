@@ -12,22 +12,47 @@ slv validator init
 slv validator deploy
 ```
 
-## Usage
-
-```bash
-slv v --help
-```
 
 ## Solana テストネットに Firedancer バリデータをデプロイ
 
-サーバーには Ubuntu 24.04 LTS がクリーンインストールされている必要があります。
+🚀 事前準備
+Ubuntu 24.04 LTS のクリーンインストール済みサーバーを準備してください。
 
-このコマンドを実行すると、デプロイに必要な情報を入力するよう求められます。
+🔑 キーの取り扱いについて
+Firedancerの新規SLVデプロイでは、安全確保のため最初は常に **unstaked-keypair.json** がアイデンティティキーとして使用されます。
 
-新しい SLV デプロイでは、常に unstaked-keypair.json がアイデンティティキーとして使用されます。
-これは二重投票などを防ぐためのベストプラクティスです。
+これは二重投票など重大な問題を防止するためのベストプラクティスです。
 
-そのため、デプロイ後に `slv v set:identity` を使用して認証済みのアイデンティティキーをセットしてください。
+SLV は「キーレスオペレーション」をサポートしており、バリデータのノード内には機密キーなどの重要な情報を一切保存しません。
+
+✅ デプロイ後のアイデンティティ設定
+デプロイ後は必ず次のコマンドで認証済みのアイデンティティキーを設定してください:
+
+```bash
+slv v set:identity -n testnet --pubkey <your-identity-pubkey>
+```
+
+### ベアメタルサーバーの準備
+
+Solana公式はベアメタルサーバーでの使用を推奨しています。
+ベアメタルサーバーは、他の仮想化された環境よりも高いパフォーマンスを提供します。
+Solana のノードは高い CPU とメモリの要件があります。
+テストネットバリデーターでは通常、最低でも 16 コアの CPU と 128 GB のメモリが必要です。
+
+`slv v init` コマンドを実行すると、ベアメタルがすでにセットアップされているかどうかを確認するための質問が表示されます。
+
+```bash
+➜ slv v init
+? Select Solana Network (testnet) › mainnet
+? 🛡️ Do you have a Solana Node Compatabile Server? (no)
+❯ yes
+  no
+```
+
+ここでは `yes` のチュートリアルを進めます。
+まだベアメタルサーバーがセットアップされていない場合は、`no` を選択してください。
+こちらの[ガイド](/ja/doc/metal/quickstart)を参考に、
+ベアメタルサーバーを確保してください。
 
 ### デフォルトのユーザー名を入力
 
@@ -58,32 +83,6 @@ slv v init
 ```
 
 その後、SLV がサーバーへの接続をチェックします。接続が成功すると、次のステップへ進みます。
-
-### solv ユーザーのパスワードを設定
-
-サーバー上の `solv` ユーザー用のパスワードを設定してください。
-
-8文字以上で、数字・大文字・小文字の英字を含めてください。
-
-```bash
-? Please enter your password › *********
-? Please confirm your password › *********
-✔︎ Password saved to ~/.slv/config.pwd.yml
-```
-
-暗号化されたパスワードは `~/.slv/config.pwd.yml` に保存されます。
-
-### Solana ネットワークを選択
-
-デプロイしたい Solana ネットワークを選択します。
-
-```bash
-? Select Solana Network (testnet)
-❯ testnet
-  mainnet
-```
-
-※ 現在は testnet のみサポートされています。
 
 ### Solana バリデータのアイデンティティキーを生成または設定
 
@@ -181,10 +180,11 @@ RPCノードデプロイ時に この設定が `~/.profile` に追加されて�
 slv v set:identity -n testnet --pubkey <your-identity-pubkey>
 ```
 
-このコマンドにより、アイデンティティキーが認証済みのキーに変更されます。
-コマンドは firedancer を停止し、アイデンティティキーを変更して再起動します。
+このコマンドを実行すると、ローカルコンピューターにある以下のアイデンティティキーがバリデータノードに設定されます。
 
-※ Firedancer では現時点でノーダウンタイム・マイグレーションは利用できません。対応が可能になり次第アップデートします。
+`~/.slv/keys/<your-identity-pubkey>.json`
+
+セキュリティ保護のため、鍵に関する情報はバリデータノード内には一切保存されません。🛡️
 
 ### Firedancer の再起動
 
@@ -200,7 +200,7 @@ slv v restart -n testnet --pubkey <your-identity-pubkey> --rm
 
 ```bash
 Usage:   slv validator
-Version: 0.3.1
+Version: 0.8.2        
 
 Description:
 
@@ -208,14 +208,22 @@ Description:
 
 Options:
 
-  -h, --help  - Show this help.
+  -h, --help  - Show this help.  
 
 Commands:
 
-  init          - Initialize a new validator
-  deploy        - Deploy Validators
-  list          - List validators
-  set:identity  - Set Validator Identity
-  set:unstaked  - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
-  restart       - Restart validator
+  init                - Initialize a new validator                                       
+  deploy              - Deploy Validators                                                
+  list                - List validators                                                  
+  set:identity        - Set Validator Identity                                           
+  set:unstaked        - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
+  restart             - Stop and Start Validator                                         
+  setup:firedancer    - Setup Firedancer Validator - Testnet Only                        
+  setup:relayer       - Setup Jito Relayer - Mainnet Only                                
+  deploy:relayer      - Setup Jito Relayer - Mainnet Only                                
+  update:version      - Update Validator Version                                         
+  update:script       - Update Validator Startup Config                                  
+  apply               - Apply Ansiible Playbook                                          
+  update:allowed-ips  - Update allowed IPs for mainnet validator nodes                   
+  switch              - Switch Validator Identity - No DownTime Migration 
 ```
