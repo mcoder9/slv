@@ -8,15 +8,22 @@
       },
       "testnet-validator": {
         "title": "Testnet Validator",
-        "quickstart": "Quickstart"
+        "quickstart": "Quickstart",
+        "update": "Update Version",
+        "migrate": "Server Migration"
       },
       "mainnet-validator": {
         "title": "Mainnet Validator",
-        "quickstart": "Quickstart"
+        "quickstart": "Quickstart",
+        "update": "Update Version",
+        "migrate": "Server Migration",
+        "relayer": "Jito Relayer"
       },
       "mainnet-rpc": {
         "title": "Mainnet RPC",
-        "quickstart": "Quickstart"
+        "quickstart": "Quickstart",
+        "update": "Update Version",
+        "jupiter": "Jupiter Self-Hosted API"
       },
       "metal": {
         "title": "Metal",

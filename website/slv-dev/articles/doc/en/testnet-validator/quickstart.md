@@ -165,8 +165,17 @@ Your Testnet Validators Settings:
 It's done! Your Solana Validator is now deployed. It will take some time to
 catch up with the Solana network.
 
-Next, You need to change the identity key from the unstaked key to the
-authorized identity key.
+### Debugging & Monitoring
+
+You can debug and monitor the Solana RPC node after deployment.
+
+```bash
+$ solv m
+```
+
+`solv` is an alias for `agave-validator -l /mnt/ledger`.
+This setting is added to `~/.profile` during the RPC node deployment.
+
 
 ### Change the Identity Key from Unstaked Key to Authorized Identity Key
 

@@ -23,7 +23,7 @@ Solana のノードは高い CPU とメモリの要件があります。通常�
 `slv v init` コマンドを実行すると、ベアメタルがすでにセットアップされているかどうかを確認するための質問が表示されます。
 
 ```bash
-➜  .slv slv v init
+➜ slv v init
 ? Select Solana Network (testnet) › mainnet
 ? 🛡️ Do you have a Solana Node Compatabile Server? (no)
 ❯ yes
@@ -32,17 +32,24 @@ Solana のノードは高い CPU とメモリの要件があります。通常�
 
 ここでは `yes` のチュートリアルを進めます。
 まだベアメタルサーバーがセットアップされていない場合は、`no` を選択してください。
-こちらの[ガイド](/running-validator/validator-start)を参考に、
+こちらの[ガイド](/ja/doc/metal/quickstart)を参考に、
 ベアメタルサーバーを確保してください。
 
 ## Solana メインネット Jito バリデーターのデプロイ
 
 このコマンドを実行すると、デプロイに必要な情報を入力するよう求められます。
 
+```bash
+slv v init
+```
+
 新しい SLV デプロイでは、常に unstaked-keypair.json がアイデンティティキーとして使用されます。
 これは二重投票などを防ぐためのベストプラクティスです。
 
 そのため、デプロイ後に `slv v set:identity` を使用して認証済みのアイデンティティキーをセットしてください。
+
+メインネットバリデーター運用の場合、ほとんどの場合 `slv v switch` を使用してアイデンティティキーを変更します。
+ノーダウンタイムマイグレーションについては、[こちらのガイド](/ja/doc/mainnet-rpc/update/)を参照してください。
 
 ### Solana ネットワークを選択
 
@@ -103,6 +110,19 @@ Solana バリデータのタイプを選択します。
 ? Enter Commission Bps (1000) › 1000
 ```
 
+### リージョンの選択
+
+Jito ブロックエンジンのリージョンを選択します。
+
+```bash
+? 🌐 Select Block Engine Region
+❯ amsterdam
+  frankfurt
+  ny
+  salt_lake_city
+  tokyo
+```
+
 ### Relayer URL の設定
 
 Relayer URL を入力します。
@@ -111,12 +131,13 @@ Relayer URL を入力します。
 ? Enter Relayer URL (http://localhost:11226) › http://localhost:11226
 ```
 
-### Relayer アカウントの設定
+### Relayer アカウントの設定(オプショナル)
 
 Relayer アカウントを入力します。
+特に設定がない場合は Enter キーを押してスキップしてください。
 
 ```bash
-? Enter Relayer Account(Optional) () › xxxxxxxxxxxPubkeyxxxxxxxxxxxxxxxxxxxx
+? Enter Relayer Account(Optional) () ›
 ```
 
 ### Staked RPC Identity の設定（オプショナル）
@@ -176,14 +197,8 @@ Snapshot URL を入力します。
 
 ```bash
 ? Please Enter Your Vote Account's Authority Key › <your-authority-pubkey>
-✔︎ Validator testnet config saved to ~/.slv/inventory.testnet.validators.yml
-
-Now you can deploy with:
-
-$ slv v deploy -n testnet
+✔︎ Validator mainnet config saved to ~/.slv/inventory.mainnet.validators.yml
 ```
-
-これで設定内容が `~/.slv/inventory.testnet.validators.yml` に保存されました。
 
 ### UFW ファイアウォールの設定
 
@@ -222,6 +237,10 @@ Current Allowed IPs:
 ```bash
 slv v  update:allowed-ips
 ```
+
+IP やバージョン情報などの設定内容が `~/.slv/versions.yml` に保存されます。
+
+そしてバリデーターノードの情報は `~/.slv/inventory.mainnet.validators.yml` に保存されます。
 
 ### バリデータのデプロイ
 
@@ -262,6 +281,19 @@ Unlock fast connections and elevate your experience with your very own API key �
 
 完了です！Solana バリデータがデプロイされました。Solana ネットワークとの同期には少し時間がかかります。
 
+### デバッグ・モニタリング
+
+デプロイ後、Solana RPC ノード内でデバッグとモニタリングを行うことができます。
+以下のコマンドを使用して、Solana RPC ノードの状態を確認できます。
+
+```bash
+$ solv m
+```
+
+`solv` は `agave-validator -l /mnt/ledger` のエイリアスです。
+RPCノードデプロイ時に この設定が `~/.profile` に追加されています。
+
+
 次に、アンステーク済みのキーから認証済みのアイデンティティキーに変更する必要があります。
 
 ### アイデンティティキーの変更
@@ -274,13 +306,13 @@ slv v set:identity -n mainnet --pubkey <your-identity-pubkey>
 
 このコマンドにより、アイデンティティキーが認証済みのキーに変更されます。
 
-※ノーダウンタイムマイグレーションを行う場合は、こちらの[ガイド](/running-validator/validator-migration)を参照してください。
+※ノーダウンタイムマイグレーションを行う場合は、こちらの[ガイド](/ja/doc/mainnet-rpc/update)を参照してください。
 
 ### SLV Validator コマンド
 
 ```bash
 Usage:   slv validator
-Version: 0.8.0
+Version: 0.8.2
 
 Description:
 
