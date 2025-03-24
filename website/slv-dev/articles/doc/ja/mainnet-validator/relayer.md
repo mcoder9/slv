@@ -125,7 +125,7 @@ slv v deploy:relayer -p gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV
 .
 .
 .
-Successfully deployed validator on mainnet
+Successfully deployed Jito Relayer on mainnet
 ⚡️⚡️⚡️ Enhanced Solana RPC Connection API Key ⚡️⚡️⚡️
 
 We're excited to offer a free API key exclusively for the Validators DAO community 🎉
