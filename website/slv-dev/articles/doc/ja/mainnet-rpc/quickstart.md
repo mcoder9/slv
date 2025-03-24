@@ -21,11 +21,10 @@ Solana のRPCノードは高い CPU とメモリの要件があります。
 特にインデックスを有効にする場合、通常、最低でも 24 コアの CPU と 768 GB のメモリが必要です。
 安定したパフォーマンスを得るためには 1 TB 以上のメモリが推奨されます。
 
-`slv v init` コマンドを実行すると、ベアメタルがすでにセットアップされているかどうかを確認するための質問が表示されます。
+`slv rpc init` コマンドを実行すると、ベアメタルがすでにセットアップされているかどうかを確認するための質問が表示されます。
 
 ```bash
-➜  .slv slv v init
-? Select Solana Network (testnet) › mainnet
+➜ slv rpc init
 ? 🛡️ Do you have a Solana Node Compatabile Server? (no)
 ❯ yes
   no
@@ -39,6 +38,10 @@ Solana のRPCノードは高い CPU とメモリの要件があります。
 ## Solana メインネット Jito RPC のデプロイ
 
 このコマンドを実行すると、デプロイに必要な情報を入力するよう求められます。
+
+```bash
+slv rpc init
+```
 
 ### Solana バリデータのアイデンティティキーを生成または設定
 
@@ -179,7 +182,7 @@ Your Mainnet RPC Nodes Settings:
 ├──────────────┼─────────────────────────────────────────────┤
 │ Name         │ gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV │
 ├──────────────┼─────────────────────────────────────────────┤
-│ IP           │ 84.32.70.26                                 │
+│ IP           │ x.x.x.x                                     │
 ├──────────────┼─────────────────────────────────────────────┤
 │ Region       │ amsterdam                                   │
 ├──────────────┼─────────────────────────────────────────────┤
@@ -210,10 +213,12 @@ Solana ネットワークとの同期には少し時間がかかります。
 ### デバッグ・モニタリング
 
 デプロイ後、Solana RPC ノード内でデバッグとモニタリングを行うことができます。
+サーバーへログイン後、
 以下のコマンドを使用して、Solana RPC ノードの状態を確認できます。
 
 ```bash
-$ solv m
+ssh solv@<your-server-ip>
+solv m
 ```
 
 `solv` は `agave-validator -l /mnt/ledger` のエイリアスです。

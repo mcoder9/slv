@@ -19,11 +19,10 @@ Solana RPC nodes have high CPU and memory requirements.
 Especially when enabling indexing, typically a minimum of 24 CPU cores and 768 GB of memory is required.
 For stable performance, 1 TB or more of memory is recommended.
 
-When you run the `slv v init` command, you'll be asked if you already have a bare metal server set up.
+When you run the `slv rpc init` command, you'll be asked if you already have a bare metal server set up.
 
 ```bash
-➜  .slv slv v init
-? Select Solana Network (testnet) › mainnet
+➜ slv rpc init
 ? 🛡️ Do you have a Solana Node Compatabile Server? (no)
 ❯ yes
   no
@@ -36,6 +35,11 @@ Please refer to this [Guide](/en/doc/metal/quickstart) to secure a bare metal se
 ## Deploy Solana Mainnet Jito RPC
 
 This command will prompt you to provide necessary information to deploy.
+
+```bash
+slv rpc init
+```
+
 
 ### Generate or Set the Solana Validator Identity Key
 
@@ -176,7 +180,7 @@ Your Mainnet RPC Nodes Settings:
 ├──────────────┼─────────────────────────────────────────────┤
 │ Name         │ gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV │
 ├──────────────┼─────────────────────────────────────────────┤
-│ IP           │ 84.32.70.26                                 │
+│ IP           │ x.x.x.x                                     │
 ├──────────────┼─────────────────────────────────────────────┤
 │ Region       │ amsterdam                                   │
 ├──────────────┼─────────────────────────────────────────────┤
@@ -206,11 +210,11 @@ It will take some time to synchronize with the Solana network.
 
 ### Debugging & Monitoring
 
-You can debug and monitor the Solana RPC node after deployment.
-You can use the following command to check the status of the Solana RPC node:
+After deployment, you can check the status of the Solana RPC node with the following command:
 
 ```bash
-$ solv m
+ssh solv@<your-server-ip>
+solv m
 ```
 
 `solv` is an alias for `agave-validator -l /mnt/ledger`.

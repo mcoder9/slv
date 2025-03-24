@@ -7,7 +7,7 @@ description: SLV - Solana Mainnet Validator - Quickstart
 ## Introduction
 
 To deploy a Solana mainnet validator, you'll use the SLV command-line tool.
-This quickstart guide explains how to launch and deploy a mainnet validator spare.
+This quickstart guide explains how to launch and deploy a mainnet validator hot spare.
 SLV mainnet validators support `keyless operation`.
 No sensitive information is stored within the validator node.
 
@@ -17,13 +17,14 @@ You must have Ubuntu 24.04 LTS clean installed on your server.
 
 Solana officially recommends using bare metal servers.
 Bare metal servers provide higher performance than other virtualized environments.
-Solana nodes have high CPU and memory requirements. Typically, a minimum of 24 CPU cores and 384 GB of memory is required.
+Solana nodes have high CPU and memory requirements. 
+Typically, a minimum of 24 CPU cores and 384 GB of memory is required.
 For stable earnings, 768 GB or more of memory is recommended.
 
 When you run the `slv v init` command, you'll be asked if you already have a bare metal server set up.
 
 ```bash
-➜  .slv slv v init
+➜ slv v init
 ? Select Solana Network (testnet) › mainnet
 ? 🛡️ Do you have a Solana Node Compatabile Server? (no)
 ❯ yes
@@ -38,11 +39,17 @@ Please refer to this [guide](/en/doc/metal/quickstart) to secure a bare metal se
 
 This command will prompt you to provide necessary information to deploy.
 
+```bash
+slv v init
+```
+
 New SLV Deployment is always use `unstaked-keypair.json` for the identity key.
 This is the best practice to avoid double voting, and etc.
 
 So Please make sure to set the authorized identity key with `slv v set:identity`
 after the deployment.
+Most of the mainnet case you use `slv v switch` to change the identity key with no downtime.
+Please refer to this [guide](/en/doc/mainnet-rpc/update/) for more information.
 
 ### Select the Solana Network
 
@@ -85,20 +92,6 @@ Currently, only the default path is supported.
 Then SLV will check the connection to the server. If the connection is
 successful, the next step will be prompted.
 
-### Set the solv user password
-
-Please set the password for the `solv` user of the server.
-
-**8 characters or more, including numbers, uppercase and lowercase letters**
-
-```bash
-? Please enter your password › *********
-? Please confirm your password › *********
-✔︎ Password saved to ~/.slv/config.pwd.yml
-```
-
-Encrypted password will be saved to `~/.slv/config.pwd.yml`.
-
 ### Select Solana Validator Type
 
 Select the type of Solana validator.
@@ -119,6 +112,18 @@ Set the commission rate for your validator.
 ? Enter Commission Bps (1000) › 1000
 ```
 
+### Set Region
+
+Enter the region where the server is located.
+
+```bash
+? 🌐 Select Block Engine Region
+❯ amsterdam
+  frankfurt
+  ny
+  salt_lake_city
+  tokyo
+```
 ### Set Relayer URL
 
 Enter the Relayer URL.
@@ -194,13 +199,7 @@ from the vote account.
 ```bash
 ? Please Enter Your Vote Account's Authority Key › <your-authority-pubkey>
 ✔︎ Validator mainnet config saved to ~/.slv/inventory.mainnet.validators.yml
-
-Now you can deploy with:
-
-$ slv v deploy -n mainnet
 ```
-
-Now your configuration is saved to `~/.slv/inventory.mainnet.validators.yml`.
 
 ### Set UFW Firewall
 
@@ -239,6 +238,10 @@ To update the whitelist later, run the following command:
 ```bash
 slv v update:allowed-ips
 ```
+
+`~/.slv/versions.yml` saves the configuration, including IP and version information.
+
+`~/.slv/inventory.mainnet.validators.yml` saves the validator node information.
 
 ### Deploy the Validator
 
@@ -303,7 +306,7 @@ slv v set:identity -n mainnet --pubkey <your-identity-pubkey>
 
 This command will change the identity key to the authorized identity key.
 
-※ For no-downtime migration, please refer to this [guide](/running-validator/validator-migration).
+※ For no-downtime migration - Please refer to this [guide](/en/doc/mainnet-rpc/update) for more information.
 
 ### SLV Validator Commands
 
