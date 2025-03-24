@@ -111,10 +111,11 @@ export const getDataForArticlePageByGroupDir = (groupDir: string) => {
         applicationName: t('metadata.appTitle'),
         description,
         alternates: {
-          canonical: `https://${appInfo.domain}/${locale}/${slug.join('/')}/`,
+          canonical: `https://${appInfo.domain}/${locale}/${groupDir}/${slug.join('/')}/`,
           languages: locales.reduce(
             (acc, lang) => {
-              acc[lang] = `https://${appInfo.domain}/${lang}/${slug.join('/')}/`
+              acc[lang] =
+                `https://${appInfo.domain}/${lang}/${groupDir}/${slug.join('/')}/`
               return acc
             },
             {} as Record<string, string>
