@@ -58,7 +58,6 @@ result.
 
 Api is running on [http://localhost:4422](http://localhost:4422)
 
-
 ### GitHub Actions Deployment
 
 If you're using GitHub Actions for auto-deployment, don't forget to set your
@@ -68,7 +67,6 @@ For example:
 
 - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
 - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-
 
 ### Add Components
 
