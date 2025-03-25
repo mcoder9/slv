@@ -1,20 +1,12 @@
-<p align="center">
-  <a href="https://slv.dev/" target="_blank">
-    <img src="https://storage.slv.dev/SLVogp.jpg" alt="SLV" />
-  </a>
-
-<a href="https://twitter.com/intent/follow?screen_name=slvSOLANA" target="_blank">
-    <img src="https://img.shields.io/twitter/follow/slvSOLANA.svg?label=Follow%20@slvSOLANA" alt="Follow @slvSOLANA" />
-  </a>
-<a aria-label="License" href="https://github.com/ValidatorsDAO/slv/blob/master/LICENSE.txt">
-    <img alt="" src="https://badgen.net/badge/license/Apache/blue">
-  </a>
-    <a aria-label="Code of Conduct" href="https://github.com/ValidatorsDAO/slv/blob/master/CODE_OF_CONDUCT.md">
-    <img alt="" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg">
-  </a>
-</p>
+---
+id: app-web-ssg
+title: Web SSG クイックスタート
+description: SLV - Web SSG クイックスタート
+---
 
 Demo: https://web-ssg.slv.dev/
+
+Code: https://github.com/ValidatorsDAO/slv/tree/main/frontend-template/web-ssg
 
 ## Features
 
@@ -24,10 +16,6 @@ Demo: https://web-ssg.slv.dev/
 - Next.js App Router
 - React Compiler (Always optimizes memoization for production)
 - Green Coding
-
-<a href="https://www.thegreenwebfoundation.org/green-web-check/?url=https%3A%2F%2Fweb-ssg.slv.dev%2F">
-  <img src="https://app.greenweb.org/api/v3/greencheckimage/web-ssg.slv.dev?nocache=true" alt="This website runs on green hosting - verified by thegreenwebfoundation.org" width="200px" height="95px">
-</a>
 
 ## Built with
 
@@ -70,19 +58,11 @@ For example:
 
 ### Add Components
 
-<a href="https://ui.shadcn.com/">
-  <img src="https://storage.skeet.dev/shadcnUI.jpg" alt="shadcn/ui" />
-</a>
-
 You can add the high-quality UI components from
 [shadcn/ui](https://ui.shadcn.com/)
 
 Also you can use [Origin UI](https://originui.com/) and
 [Prism UI](https://prismui.tech/) for more components.
-
-<a href="https://v0.dev/">
-  <img src="https://storage.skeet.dev/v0.jpg" alt="v0" />
-</a>
 
 You can also use [v0](https://v0.dev/) which is a UI generator with shadcn/ui
 from simple text prompts and images.

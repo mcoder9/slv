@@ -36,7 +36,9 @@
       },
       "app": {
         "title": "App",
-        "quickstart": "クイックスタート"
+        "solana-dapp": "Solana dApp",
+        "web-ssg": "Web SSG",
+        "react-tailwind-email": "React Tailwind Email"
       },
       "bot": {
         "title": "Bot",

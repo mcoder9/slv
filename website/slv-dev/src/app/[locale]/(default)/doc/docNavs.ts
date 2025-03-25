@@ -86,8 +86,16 @@ export const docMenuData: Section[] = [
         title: 'doc.nav.app.title',
         subItems: [
           {
-            title: 'doc.nav.app.quickstart',
-            route: '/doc/app/quickstart'
+            title: 'doc.nav.app.solana-dapp',
+            route: '/doc/app/solana-dapp'
+          },
+          {
+            title: 'doc.nav.app.web-ssg',
+            route: '/doc/app/web-ssg'
+          },
+          {
+            title: 'doc.nav.app.react-tailwind-email',
+            route: '/doc/app/react-tailwind-email'
           }
         ]
       },

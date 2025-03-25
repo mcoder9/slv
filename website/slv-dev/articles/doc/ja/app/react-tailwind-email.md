@@ -1,29 +1,17 @@
-<p align="center">
-  <a href="https://slv.dev/" target="_blank">
-    <img src="https://storage.slv.dev/SLVogp.jpg" alt="SLV" />
-  </a>
-
-<a href="https://twitter.com/intent/follow?screen_name=slvSOLANA" target="_blank">
-    <img src="https://img.shields.io/twitter/follow/slvSOLANA.svg?label=Follow%20@slvSOLANA" alt="Follow @slvSOLANA" />
-  </a>
-<a aria-label="License" href="https://github.com/ValidatorsDAO/slv/blob/master/LICENSE.txt">
-    <img alt="" src="https://badgen.net/badge/license/Apache/blue">
-  </a>
-    <a aria-label="Code of Conduct" href="https://github.com/ValidatorsDAO/slv/blob/master/CODE_OF_CONDUCT.md">
-    <img alt="" src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg">
-  </a>
-</p>
+---
+id: app-react-tailwind-email
+title: React Tailwind Email クイックスタート
+description: SLV - Solana App - React Tailwind Email クイックスタート
+---
 
 Demo: https://web-ssg.slv.dev/
+
+Code: https://github.com/ValidatorsDAO/slv/tree/main/cf-workers-template/contact-email
 
 ## Features
 
 - Edge-Native
 - React & Tailwind Email
-
-<a href="https://www.thegreenwebfoundation.org/green-web-check/?url=https%3A%2F%2Fweb-ssg.slv.dev%2F">
-  <img src="https://app.greenweb.org/api/v3/greencheckimage/web-ssg.slv.dev?nocache=true" alt="This website runs on green hosting - verified by thegreenwebfoundation.org" width="200px" height="95px">
-</a>
 
 ## Built with
 
