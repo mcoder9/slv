@@ -23,6 +23,8 @@
     "balance": "残高",
     "updated": "更新完了!",
     "priceDataFromCoingecko": "※ 価格データは CoinGecko より取得",
+    "openInPhantomTitle": "Phantom ウォレットで開くことでモバイルでも Solana 機能が使えます。",
+    "openInPhantomButton": "Phantom で開く",
     "CTARow": {
       "title": "Discord コミュニティに参加しましょう",
       "body": "最新のアップデート、ニュース、限定情報等を公式 Discord サーバーでチェックしてください。",

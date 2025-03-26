@@ -10,6 +10,7 @@ import ProductsSlideRow from '@/components/rows/ProductsSlideRow'
 import HavingLiquidityRow from './HavingLiquidityRow'
 import DirectStakingRow from './DirectStakingRow'
 import { DEFAULT_PATHS } from '../defaultNavs'
+import MobileSuggestPhantom from '@/components/solana/MobileSuggestPhantom'
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params
@@ -26,6 +27,7 @@ export default async function StakingPage({ params }: PageProps) {
 
   return (
     <>
+      <MobileSuggestPhantom pathname={DEFAULT_PATHS.staking} locale={locale} />
       <DirectStakingRow />
       <StakingHeroRow />
       <ElsolMetricsRow />
