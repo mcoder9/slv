@@ -17,8 +17,8 @@ import {
   LatitudeLogoInvertHorizontal,
   MecarneLogoHorizontal,
   MecarneLogoInvertHorizontal,
-  // HivelocityLogoHorizontal,
-  // HivelocityLogoInvertHorizontal,
+  HivelocityLogoHorizontal,
+  HivelocityLogoInvertHorizontal,
 } from '@/assets/img'
 import { mainShardGradation } from '@/lib/decoration'
 import { cn } from '@/lib/utils'
@@ -71,11 +71,11 @@ export const globalDCPartnerLogos = [
     src: AlibabaCloudLogoHorizontal,
     invertSrc: AlibabaCloudLogoInvertHorizontal,
   },
-  // {
-  //   name: 'Hivelocity',
-  //   src: HivelocityLogoHorizontal,
-  //   invertSrc: HivelocityLogoInvertHorizontal,
-  // },
+  {
+    name: 'Hivelocity',
+    src: HivelocityLogoHorizontal,
+    invertSrc: HivelocityLogoInvertHorizontal,
+  },
 ]
 
 export default function GlobalDCPartnerRow() {
