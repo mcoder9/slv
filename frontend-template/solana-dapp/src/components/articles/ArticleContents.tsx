@@ -7,6 +7,8 @@ import { Pluggable } from 'unified'
 import { CodeBlock } from './CodeBlock'
 import { cn, getYouTubeVideoId, isYouTubeUrl } from '@/lib/utils'
 import Image from 'next/image'
+import { Link } from '@/i18n/routing'
+import { locales } from '@/app/config'
 
 type Props = {
   content: string
@@ -85,16 +87,27 @@ export default function ArticleContents({ content }: Props) {
                 )
               }
 
+              const localeRegex = new RegExp(`^/(${locales.join('|')})`)
+              const processedHref = localeRegex.test(href)
+                ? href.replace(localeRegex, '')
+                : href
+
               return (
-                <a
+                <Link
                   className="underline hover:opacity-70"
                   id={props.id}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={processedHref}
+                  target={
+                    processedHref.startsWith('http') ? '_blank' : undefined
+                  }
+                  rel={
+                    processedHref.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
                 >
                   {children as React.ReactNode}
-                </a>
+                </Link>
               )
             },
 
@@ -104,7 +117,13 @@ export default function ArticleContents({ content }: Props) {
 
               if (!match) {
                 return (
-                  <code className={cn(className)} {...props}>
+                  <code
+                    className={cn(
+                      className,
+                      `rounded-sm bg-zinc-100 px-1.5 py-1 dark:bg-zinc-700`
+                    )}
+                    {...props}
+                  >
                     {children}
                   </code>
                 )

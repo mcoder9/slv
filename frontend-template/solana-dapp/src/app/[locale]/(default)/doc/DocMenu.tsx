@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, usePathname } from '@/i18n/routing'
 import { docMenuData } from './docNavs'
 import { Item, Section } from '@/lib/articles'
@@ -33,7 +33,7 @@ const DocMenuSection = ({ section }: DocMenuSectionProps) => {
           <span
             className={cn(
               isActivePath(section.route) && 'text-blue-500 dark:text-blue-300',
-              'flex-1 text-sm font-bold',
+              'flex-1 text-sm font-bold'
             )}
           >
             {t(section.title)}
@@ -61,6 +61,18 @@ const DocMenuItem = ({ item }: DocMenuItemProps) => {
   const pathname = usePathname()
   const isActivePath = (path: string) => pathname.includes(path)
 
+  useEffect(() => {
+    if (item.subItems) {
+      const parentActive = isActivePath(item.route as string)
+      const subActive = item.subItems.some((subItem) =>
+        isActivePath(subItem.route)
+      )
+      if (parentActive || subActive) {
+        setIsOpen(true)
+      }
+    }
+  }, [pathname, item])
+
   return (
     <li className="mt-4 w-full">
       <div
@@ -86,7 +98,7 @@ const DocMenuItem = ({ item }: DocMenuItemProps) => {
                   isActivePath(item.route as string)
                     ? 'text-blue-500 dark:text-blue-300'
                     : 'text-zinc-500 dark:text-zinc-300',
-                  'flex-1 text-sm',
+                  'flex-1 text-sm'
                 )}
               >
                 {t(item.title)}
@@ -105,7 +117,7 @@ const DocMenuItem = ({ item }: DocMenuItemProps) => {
                     isActivePath(subItem.route)
                       ? 'text-blue-500 dark:text-blue-300'
                       : 'text-zinc-400 dark:text-zinc-400',
-                    'w-full py-2 text-sm hover:opacity-70',
+                    'w-full py-2 text-sm hover:opacity-70'
                   )}
                 >
                   {t(subItem.title)}

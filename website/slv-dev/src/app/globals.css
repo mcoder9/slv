@@ -165,6 +165,11 @@
   margin: 0;
 }
 
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
