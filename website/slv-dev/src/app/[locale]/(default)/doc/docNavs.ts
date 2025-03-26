@@ -73,10 +73,6 @@ export const docMenuData: Section[] = [
         title: 'doc.nav.geyser-grpc.title',
         subItems: [
           {
-            title: 'doc.nav.geyser-grpc.quickstart',
-            route: '/doc/geyser-grpc/quickstart'
-          },
-          {
             title: 'doc.nav.geyser-grpc.test',
             route: '/doc/geyser-grpc/test'
           }
