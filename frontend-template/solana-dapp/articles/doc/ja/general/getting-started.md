@@ -6,15 +6,39 @@ description: SLV - Getting Started
 
 ![SLV](https://storage.slv.dev/SLVogp.jpg)
 
-## The Toolkit for Solana Devs
+## 🔨 ソラナ開発者のためのツールキット
 
 SLVはSolana開発者向けのツールキットです。SolanaバリデータやRPC、Solanaベースのアプリケーションを開発、テスト、デプロイするためのツール一式を提供します。
 
-リニューアルされた新しい SLV では、リモートマシンからすべての設定を完結できるようになり、ノードへの直接ログインが不要になりました。この方法により、ノードには必要最低限のパッケージのみがインストールされるため、不要なものが一切残りません。また、Linuxの設定にAnsible PlaybooksとJinja Templateを導入し、複数のバリデーターをより効率的かつ安全に管理・移行できるようになりました。
+リニューアルされた新しい SLV では、リモートマシンからすべての設定を完結できるようになり、ノードへの直接ログインが不要になりました。この方法により、ノードには必要最低限のパッケージのみがインストールされるため、不要なものが一切残りません。
 
-さらに、新しい SLV は起動時に常にダミーキー（「unstaked-identity.json」という無効なキー）を使用します。すべてが問題なく動作していることを確認したら、本番用のIdentityを設定し、アクティブキーに切り替えるだけです。この流れを徹底することで二重投票を防止し、ノードにアクセスできなくなった場合等の非常事態に備えることができます。
+## 🔑 キーレスオペレーション標準化
 
-## Dependencies
+新規SLVデプロイでは、安全確保のため最初は常に **unstaked-keypair.json** がアイデンティティキーとして使用されます。
+
+これは二重投票など重大な問題を防止するためのベストプラクティスです。
+
+すべてが問題なく動作していることを確認したら、本番用のIdentityを設定し、アクティブキーに切り替えるだけです。
+この流れを徹底することで二重投票を防止し、ノードにアクセスできなくなった場合等の非常事態に備えることができます。
+
+鍵に関する情報はバリデータノード内には一切保存されません。🛡️
+
+## ♻️ ノーダウンタイム移行
+
+もうメンテナンスのためにノードを停止する必要はありません！
+SLVでデプロイされたバリデーターノードなら、Solanaのバリデーターをダウンタイムなしでシームレスに移行可能です。
+
+シンプルなコマンドひとつで、安全かつスムーズなサーバー移転が実現します。
+
+```bash
+slv v switch
+```
+
+🔍 移行手順の詳細は [こちらのドキュメント](/ja/doc/mainnet-validator/migrate/)をご覧ください。
+
+## 🌐 複数ノードの管理
+
+Linuxの設定にAnsible PlaybooksとJinja Templateを導入し、複数のバリデーターをより効率的かつ安全に管理・移行できるようになりました。
 
 ### OS
 
@@ -24,12 +48,12 @@ MacOS または Linux
 
 Windows 10向け WSL2のインストール: https://docs.microsoft.com/en-us/windows/wsl/install
 
-### Libraries
+### 必要パッケージ
 
 - Python3 [Install](https://www.python.org/downloads/)
 - Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
 
-## Installation
+## SLV インストール
 
 ```bash
 curl -fsSL https://storage.slv.dev/slv/install | sh
@@ -85,3 +109,11 @@ slv v init
 ```
 
 暗号化されたパスワードは `~/.slv/config.pwd.yml` に保存されます。
+
+### Solana ノードのデプロイ
+
+- メインネットバリデーターをデプロイする方はこちら: [メインネットバリデーターのデプロイ](/ja/doc/mainnet-validator/quickstart)
+
+- テストネットバリデーターをデプロイする方はこちら: [テストネットバリデーターのデプロイ](/ja/doc/testnet-validator/quickstart)
+
+- RPCサーバーをデプロイする方はこちら: [RPCサーバーのデプロイ](/ja/doc/mainnet-rpc/quickstart)

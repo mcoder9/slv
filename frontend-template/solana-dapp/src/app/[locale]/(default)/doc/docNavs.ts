@@ -11,6 +11,14 @@ export const docMenuData: Section[] = [
           {
             title: 'doc.nav.testnet-validator.quickstart',
             route: '/doc/testnet-validator/quickstart'
+          },
+          {
+            title: 'doc.nav.testnet-validator.update',
+            route: '/doc/testnet-validator/update'
+          },
+          {
+            title: 'doc.nav.testnet-validator.migrate',
+            route: '/doc/testnet-validator/migrate'
           }
         ]
       },
@@ -20,6 +28,18 @@ export const docMenuData: Section[] = [
           {
             title: 'doc.nav.mainnet-validator.quickstart',
             route: '/doc/mainnet-validator/quickstart'
+          },
+          {
+            title: 'doc.nav.mainnet-validator.update',
+            route: '/doc/mainnet-validator/update'
+          },
+          {
+            title: 'doc.nav.mainnet-validator.migrate',
+            route: '/doc/mainnet-validator/migrate'
+          },
+          {
+            title: 'doc.nav.mainnet-validator.relayer',
+            route: '/doc/mainnet-validator/relayer'
           }
         ]
       },
@@ -29,6 +49,14 @@ export const docMenuData: Section[] = [
           {
             title: 'doc.nav.mainnet-rpc.quickstart',
             route: '/doc/mainnet-rpc/quickstart'
+          },
+          {
+            title: 'doc.nav.mainnet-rpc.update',
+            route: '/doc/mainnet-rpc/update'
+          },
+          {
+            title: 'doc.nav.mainnet-rpc.jupiter',
+            route: '/doc/mainnet-rpc/jupiter'
           }
         ]
       },
@@ -45,8 +73,8 @@ export const docMenuData: Section[] = [
         title: 'doc.nav.geyser-grpc.title',
         subItems: [
           {
-            title: 'doc.nav.geyser-grpc.quickstart',
-            route: '/doc/geyser-grpc/quickstart'
+            title: 'doc.nav.geyser-grpc.test',
+            route: '/doc/geyser-grpc/test'
           }
         ]
       },
@@ -54,8 +82,16 @@ export const docMenuData: Section[] = [
         title: 'doc.nav.app.title',
         subItems: [
           {
-            title: 'doc.nav.app.quickstart',
-            route: '/doc/app/quickstart'
+            title: 'doc.nav.app.solana-dapp',
+            route: '/doc/app/solana-dapp'
+          },
+          {
+            title: 'doc.nav.app.web-ssg',
+            route: '/doc/app/web-ssg'
+          },
+          {
+            title: 'doc.nav.app.react-tailwind-email',
+            route: '/doc/app/react-tailwind-email'
           }
         ]
       },

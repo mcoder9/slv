@@ -12,23 +12,44 @@ slv validator init
 slv validator deploy
 ```
 
-## Usage
-
-```bash
-slv v --help
-```
-
 ## Deploy Solana Validator Testnet with Firedancer
 
-You must have Ubuntu 24.04 LTS clean installed on your server.
+🚀 Prerequisites
+Ensure your server has a clean installation of Ubuntu 24.04 LTS.
 
-This command will prompt you to provide necessary information to deploy.
+🔑 About Validator Keys
+For new SLV deployments, the initial identity key will always be unstaked-keypair.json, as a best practice to avoid critical issues like double voting.
 
-New SLV Deployment is always use `unstaked-keypair.json` for the identity key.
-This is the best practice to avoid double voting, and etc.
+SLV supports keyless operation, meaning no sensitive validator keys or confidential data are ever stored on your validator node.
 
-So Please make sure to set the authorized identity key with `slv v set:identity`
-after the deployment.
+✅ Setting Your Validator Identity
+After deployment, make sure to set your verified validator identity key using the following command:
+
+```bash
+slv v set:identity -n testnet --pubkey <your-identity-pubkey>
+```
+
+### Bare Metal Server Preparation
+
+Solana officially recommends using bare metal servers.
+Bare metal servers provide higher performance than other virtualized environments.
+Solana nodes have high CPU and memory requirements. 
+Typically, a minimum of 24 CPU cores and 384 GB of memory is required.
+For stable earnings, 768 GB or more of memory is recommended.
+
+When you run the `slv v init` command, you'll be asked if you already have a bare metal server set up.
+
+```bash
+➜ slv v init
+? Select Solana Network (testnet) › mainnet
+? 🛡️ Do you have a Solana Node Compatabile Server? (no)
+❯ yes
+  no
+```
+
+We'll proceed with the `yes` tutorial here.
+If you haven't set up a bare metal server yet, select `no`.
+Please refer to this [guide](/en/doc/metal/quickstart) to secure a bare metal server.
 
 ### Input Server's Default Username
 
@@ -62,30 +83,6 @@ key. The default path is `~/.ssh/id_rsa`.
 Then SLV will check the connection to the server. If the connection is
 successful, the next step will be prompted.
 
-### Set the solv user password
-
-Please set the password for the `solv` user of the server.
-
-**8 characters or more, including numbers, uppercase and lowercase letters**
-
-```bash
-? Please enter your password › *********
-? Please confirm your password › *********
-✔︎ Password saved to ~/.slv/config.pwd.yml
-```
-
-Encrypted password will be saved to `~/.slv/config.pwd.yml`.
-
-### Select the Solana Network
-
-Select the Solana Network you want to deploy. ※ Currently, only the testnet is
-supported.
-
-```bash
-? Select Solana Network (testnet)
-❯ testnet
-  mainnet
-```
 
 ### Generate or Set the Solana Validator Identity
 
@@ -165,8 +162,17 @@ Your Testnet Validators Settings:
 It's done! Your Solana Validator is now deployed. It will take some time to
 catch up with the Solana network.
 
-Next, You need to change the identity key from the unstaked key to the
-authorized identity key.
+### Debugging & Monitoring
+
+You can debug and monitor the Solana RPC node after deployment.
+
+```bash
+$ solv m
+```
+
+`solv` is an alias for `agave-validator -l /mnt/ledger`.
+This setting is added to `~/.profile` during the RPC node deployment.
+
 
 ### Change the Identity Key from Unstaked Key to Authorized Identity Key
 
@@ -178,12 +184,13 @@ to the authorized identity key.
 slv v set:identity -n testnet --pubkey <your-identity-pubkey>
 ```
 
-Then, the identity key will be changed to the authorized identity key. This
-command will stop firedancer, change the identity key, and restart the
-firedancer.
+This command sets your identity key from your local computer at:
 
-※ No downtime Migration is not available with Firedancer yet. We will updated as
-soon as it's available.
+`~/.slv/keys/<your-identity-pubkey>.json`
+
+to your validator node.
+
+No key information is stored on the validator node 🛡️
 
 ### Restart Firedancer
 
@@ -201,8 +208,8 @@ slv v restart -n testnet --pubkey <your-identity-pubkey> --rm
 ### SLV Validator Commands
 
 ```bash
-Usage:   SLV validator
-Version: 0.3.1
+Usage:   slv validator
+Version: 0.8.2        
 
 Description:
 
@@ -210,14 +217,22 @@ Description:
 
 Options:
 
-  -h, --help  - Show this help.
+  -h, --help  - Show this help.  
 
 Commands:
 
-  init          - Initialize a new validator
-  deploy        - Deploy Validators
-  list          - List validators
-  set:identity  - Set Validator Identity
-  set:unstaked  - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
-  restart       - Restart validator
+  init                - Initialize a new validator                                       
+  deploy              - Deploy Validators                                                
+  list                - List validators                                                  
+  set:identity        - Set Validator Identity                                           
+  set:unstaked        - Set Validator Identity to Unstaked Key Stop/Change Identity/Start
+  restart             - Stop and Start Validator                                         
+  setup:firedancer    - Setup Firedancer Validator - Testnet Only                        
+  setup:relayer       - Setup Jito Relayer - Mainnet Only                                
+  deploy:relayer      - Setup Jito Relayer - Mainnet Only                                
+  update:version      - Update Validator Version                                         
+  update:script       - Update Validator Startup Config                                  
+  apply               - Apply Ansiible Playbook                                          
+  update:allowed-ips  - Update allowed IPs for mainnet validator nodes                   
+  switch              - Switch Validator Identity - No DownTime Migration 
 ```
