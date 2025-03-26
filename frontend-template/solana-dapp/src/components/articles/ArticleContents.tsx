@@ -87,7 +87,7 @@ export default function ArticleContents({ content }: Props) {
                 )
               }
 
-              const localeRegex = new RegExp(`^/(${locales.join('|')})`)
+              const localeRegex = new RegExp(`^/(${locales.join('|')})(?=/|$)`)
               const processedHref = localeRegex.test(href)
                 ? href.replace(localeRegex, '')
                 : href
