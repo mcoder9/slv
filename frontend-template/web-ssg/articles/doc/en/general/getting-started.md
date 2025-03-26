@@ -1,40 +1,51 @@
 ---
 id: general-getting-started
-title: SLV - Getting Started
+title: Getting Started
 description: SLV - Getting Started
 ---
 
 ![SLV](https://storage.slv.dev/SLVogp.jpg)
 
-## The Toolkit for Solana Devs
+## 🔨 The Toolkit for Solana Devs
 
-SLV is a toolkit for Solana developers. It provides a set of tools to help
-developers build, test, and deploy Solana Validators and Solana-based
-applications.
+SLV is a toolkit for Solana developers. It provides a complete set of tools for developing, testing, and deploying Solana validators, RPCs, and Solana-based applications.
 
-In the newly revamped slv, you can complete all configurations from a remote
-machine—no more direct node logins required. This approach ensures that only
-essential packages are installed on the node, leaving behind no unnecessary
-clutter. We’ve also introduced Ansible Playbooks & Jinja Template for Linux
-configuration, allowing us to manage and migrate multiple validators with
-greater efficiency and security.
+The renewed SLV allows you to complete all configurations from a remote machine, eliminating the need to log in directly to the node. With this method, only the minimum necessary packages are installed on the node, leaving nothing unnecessary behind.
 
-Additionally, the new SLV always uses a dummy key (an invalid key named
-“unstaked-identity.json”) for its initial startup. Once you confirm everything
-is running smoothly, you simply set the actual Identity and switch to the active
-key. Following this consistent flow helps prevent double votes and ensures
-you’re prepared in case the node ever becomes unreachable.
+## 🔑 Keyless Operation Standardization
 
-## Dependencies
+For new SLV deployments, **unstaked-keypair.json** is always used initially as the identity key for security purposes.
+
+This is a best practice to prevent serious issues such as double voting.
+
+Once you've confirmed that everything is working properly, you can set up your production Identity and switch to the active key.
+By thoroughly following this process, you can prevent double voting and prepare for emergencies such as when you lose access to your node.
+
+No key information is stored on the validator node. 🛡️
+
+## ♻️ Zero-Downtime Migration
+No more stopping your nodes for maintenance!
+Validator nodes deployed with SLV can seamlessly migrate your Solana validator without any downtime.
+
+A simple command ensures a safe, smooth, and uninterrupted server migration:
+
+```bash
+slv v switch
+```
+
+🔍 For detailed migration instructions, see the migration documentation.
+
+## 🌐 Multiple Node Management
+
+By introducing Ansible Playbooks and Jinja Templates for Linux configuration, you can now manage and migrate multiple validators more efficiently and securely.
 
 ### OS
 
 MacOS or Linux
 
-※ Please use WSL2 for Windows users.
+※ Windows users should use WSL2.
 
-Download WSL2 For Windows 10
-[https://docs.microsoft.com/en-us/windows/wsl/install](https://docs.microsoft.com/en-us/windows/wsl/install)
+WSL2 installation for Windows 10: https://docs.microsoft.com/en-us/windows/wsl/install
 
 ### Libraries
 
@@ -47,32 +58,32 @@ Download WSL2 For Windows 10
 curl -fsSL https://storage.slv.dev/slv/install | sh
 ```
 
-## Deploying Validators
+## Validator Deployment
 
-Enter the necessary settings to launch a validator.
+Enter the necessary settings to start a validator.
 
 ```bash
 slv v init
 ```
 
-### Input Server's Default Username
+### Enter the default username
 
-Most of the time, the default username is `ubuntu` or `root`.
+Typically, the default username is often `ubuntu` or `root`.
 
 ```bash
 slv v init
 ? What's the user for the server? (ubuntu) › ubuntu
 ```
 
-### Input Server's IP Address
+### Enter the server's IP address
 
-Input the IP address of the server.
+Enter the IP address of your server.
 
 ```bash
 ? What's the IP address of the server? ›
 ```
 
-### Set RSA Key for SSH
+### Set up RSA key for SSH
 
 ※ Please set the path to your RSA key. The default path is `~/.ssh/id_rsa`.
 
@@ -82,13 +93,13 @@ Input the IP address of the server.
 ✔︎ SSH connection succeeded
 ```
 
-Then SLV will check the connection to the server. If the connection is successful, the next step will be prompted.
+After that, SLV will check the connection to the server. If the connection is successful, you will proceed to the next step.
 
-### Set the solv user password
+### Set a password for the solv user
 
-Please set the password for the `solv` user of the server.
+Please set a password for the `solv` user on the server.
 
-**8 characters or more, including numbers, uppercase and lowercase letters**
+It should be at least 8 characters and include numbers, uppercase and lowercase letters.
 
 ```bash
 ? Please enter your password › *********
@@ -96,4 +107,12 @@ Please set the password for the `solv` user of the server.
 ✔︎ Password saved to ~/.slv/config.pwd.yml
 ```
 
-Encrypted password will be saved to `~/.slv/config.pwd.yml`.
+The encrypted password is saved to `~/.slv/config.pwd.yml`.
+
+### Deploy a Solana node
+
+- To deploy a mainnet validator: [Deploy a Mainnet Validator](/en/doc/mainnet-validator/quickstart)
+
+- To deploy a testnet validator: [Deploy a Testnet Validator](/en/doc/testnet-validator/quickstart)
+
+- To deploy an RPC server: [Deploy an RPC Server](/en/doc/mainnet-rpc/quickstart)
