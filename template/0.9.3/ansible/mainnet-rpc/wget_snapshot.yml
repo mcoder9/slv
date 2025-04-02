@@ -1,0 +1,16 @@
+---
+- name: Wget Snapshot
+  hosts: all
+  become: true
+  vars_files: ../cmn/config/config.yml
+  become_user: solv
+
+  tasks:
+    - name: Wget Snapshot
+      shell: |
+        wget --trust-server-names {{ snapshot_url }}/snapshot.tar.bz2 && wget --trust-server-names {{ snapshot_url }}/incremental-snapshot.tar.bz2
+      args:
+        chdir: /mnt/snapshot
+        executable: /bin/bash
+      vars:
+        snapshot_url: '{{ config.snapshot_url[hostvars[inventory_hostname].region] }}'
