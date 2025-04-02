@@ -33,8 +33,8 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
       name: 'validatorType',
       message: 'Select Validator Type',
       type: Select,
-      options: ['firedancer'],
-      default: 'firedancer',
+      options: ['agave', 'firedancer'],
+      default: 'agave',
     },
   ])
   if (!validatorType) {
