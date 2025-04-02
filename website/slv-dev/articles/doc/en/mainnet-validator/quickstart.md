@@ -102,8 +102,6 @@ Select the type of Solana validator.
   firedancer
 ```
 
-※ Currently, only Jito validator is supported.
-
 ### Set Commission Rate
 
 Set the commission rate for your validator.
