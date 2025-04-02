@@ -1,4 +1,5 @@
 import {
+  VERSION_FIREDANCER_MAINNET,
   VERSION_FIREDANCER_TESTNET,
   VERSION_GEYSER_YELLOWSTONE,
   VERSION_JITO_MAINNET,
@@ -48,6 +49,7 @@ export const updateDefaultVersion = async () => {
     mainnet_validators: {
       version_agave: currentVersion.mainnet_validators.version_agave,
       version_jito: currentVersion.mainnet_validators.version_jito,
+      version_firedancer: currentVersion.mainnet_validators.version_firedancer,
     },
     testnet_validators: {
       version_agave: currentVersion.testnet_validators.version_agave,
@@ -56,6 +58,7 @@ export const updateDefaultVersion = async () => {
     mainnet_rpcs: {
       version_agave: currentVersion.mainnet_rpcs.version_agave,
       version_jito: currentVersion.mainnet_rpcs.version_jito,
+      version_firedancer: currentVersion.mainnet_rpcs.version_firedancer,
       geyser_version: currentVersion.mainnet_rpcs.geyser_version,
     },
   }
@@ -63,11 +66,14 @@ export const updateDefaultVersion = async () => {
   // Update to new versions
   currentVersion.mainnet_validators.version_agave = VERSION_SOLANA_MAINNET
   currentVersion.mainnet_validators.version_jito = VERSION_JITO_MAINNET
+  currentVersion.mainnet_validators.version_firedancer =
+    VERSION_FIREDANCER_MAINNET
   currentVersion.testnet_validators.version_agave = VERSION_SOLANA_TESTNET
   currentVersion.testnet_validators.version_firedancer =
     VERSION_FIREDANCER_TESTNET
   currentVersion.mainnet_rpcs.version_agave = VERSION_SOLANA_MAINNET
   currentVersion.mainnet_rpcs.version_jito = VERSION_JITO_MAINNET
+  currentVersion.mainnet_rpcs.version_firedancer = VERSION_FIREDANCER_MAINNET
   currentVersion.mainnet_rpcs.geyser_version = VERSION_GEYSER_YELLOWSTONE
 
   // Display versions with changes highlighted
@@ -84,6 +90,11 @@ export const updateDefaultVersion = async () => {
     'Jito',
     oldVersions.mainnet_validators.version_jito,
     currentVersion.mainnet_validators.version_jito,
+  )
+  displayVersionChange(
+    'Firedancer',
+    oldVersions.mainnet_validators.version_firedancer,
+    currentVersion.mainnet_validators.version_firedancer,
   )
 
   console.log('')
@@ -114,6 +125,11 @@ export const updateDefaultVersion = async () => {
     'Jito',
     oldVersions.mainnet_rpcs.version_jito,
     currentVersion.mainnet_rpcs.version_jito,
+  )
+  displayVersionChange(
+    'Firedancer',
+    oldVersions.mainnet_rpcs.version_firedancer,
+    currentVersion.mainnet_rpcs.version_firedancer,
   )
   displayVersionChange(
     'Geyser',
