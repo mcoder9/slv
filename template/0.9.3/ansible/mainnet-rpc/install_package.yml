@@ -36,5 +36,6 @@
           - make
           - libprotobuf-dev
           - protobuf-compiler
+          - aria2
         state: present
       tags: setup_lib

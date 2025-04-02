@@ -87,11 +87,6 @@ const init = async () => {
       default: 8899,
     },
     {
-      name: 'snapshot_url',
-      message: 'Enter Snapshot URL(Optional)',
-      type: Input,
-    },
-    {
       name: 'rpc_type',
       message: 'Select an RPC type',
       type: Select,
@@ -124,7 +119,7 @@ const init = async () => {
     name: identity_account,
     rpc_type: rpcTypes.rpc_type as RpcType,
     region: rpcTypes.blockEngineRegion!,
-    snapshot_url: rpcTypes.snapshot_url!,
+    snapshot_url: '',
     limit_ledger_size: 200000000,
     shredstream_address: SHREDSTREAM_ADDRESS[
       rpcTypes.blockEngineRegion as keyof typeof SHREDSTREAM_ADDRESS
@@ -152,7 +147,7 @@ const init = async () => {
     result,
     rpcTypes.rpc_type as RpcType,
     rpcTypes.blockEngineRegion!,
-    rpcTypes.snapshot_url!,
+    '',
   )
   if (!inventoryCheck) {
     console.log(colors.yellow('⚠️ Inventory check failed'))
