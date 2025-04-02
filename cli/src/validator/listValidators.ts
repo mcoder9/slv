@@ -61,9 +61,13 @@ const listValidators = async (network: NetworkType, pubkey?: string) => {
     validatorVersion = version.testnet_validators.version_firedancer
   }
   for (const validator of validators) {
-    validatorVersion = validator.validator_type === 'jito'
-      ? version.mainnet_validators.version_jito
-      : version.mainnet_validators.version_firedancer
+    validatorVersion = network === 'mainnet'
+      ? validator.validator_type === 'jito'
+        ? version.mainnet_validators.version_jito
+        : version.mainnet_validators.version_firedancer
+      : validator.validator_type === 'agave'
+      ? version.testnet_validators.version_agave
+      : version.testnet_validators.version_firedancer
     const table = new Table()
     table
       .body([
