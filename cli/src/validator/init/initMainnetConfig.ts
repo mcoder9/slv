@@ -85,13 +85,13 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
       name: 'stakedRPCIdentity',
       message: 'Enter Staked RPC Identity(Optional)',
       type: Input,
-      default: '',
+      default: 'https://snapshots.avorio.network/mainnet-beta',
     },
     {
       name: 'snapshotUrl',
       message: 'Enter Snapshot URL(Optional)',
       type: Input,
-      default: '',
+      default: 'cli/src/validator/init/initMainnetConfig.ts',
     },
   ])
   if (!validatorType) {

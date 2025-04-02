@@ -21,13 +21,13 @@ export const validatorCmd = new Command()
   })
 
 validatorCmd.command('init')
-  .description('Initialize a new validator')
+  .description('🚀 Initialize a new validator')
   .action(async () => {
     await init()
   })
 
 validatorCmd.command('deploy')
-  .description('Deploy Validators')
+  .description('📦 Deploy Validators')
   .option('-n, --network <network>', 'Network to deploy validators')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
@@ -52,7 +52,7 @@ validatorCmd.command('deploy')
   })
 
 validatorCmd.command('list')
-  .description('List validators')
+  .description('📋 List validators')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
@@ -62,7 +62,7 @@ validatorCmd.command('list')
   })
 
 validatorCmd.command('set:identity')
-  .description('Set Validator Identity')
+  .description('🪪  Set Validator Identity')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
@@ -87,7 +87,7 @@ validatorCmd.command('set:identity')
 
 validatorCmd.command('set:unstaked')
   .description(
-    'Set Validator Identity to Unstaked Key Stop/Change Identity/Start',
+    '🔄 Set Validator Identity to Unstaked Key Stop/Change Identity/Start',
   )
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
@@ -113,7 +113,7 @@ validatorCmd.command('set:unstaked')
   })
 
 validatorCmd.command('restart')
-  .description('Stop and Start Validator')
+  .description('♻️  Restart Validator')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
@@ -154,7 +154,7 @@ validatorCmd.command('restart')
   })
 
 validatorCmd.command('setup:firedancer')
-  .description('Setup/Update Firedancer Validator')
+  .description('🔥 Setup/Update Firedancer Validator')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
   })
@@ -178,13 +178,13 @@ validatorCmd.command('setup:firedancer')
   })
 
 validatorCmd.command('setup:relayer')
-  .description('Setup Jito Relayer - Mainnet Only')
+  .description('⚡ Setup Jito Relayer - Mainnet Only')
   .action(async () => {
     await initRelayer()
   })
 
 validatorCmd.command('deploy:relayer')
-  .description('Setup Jito Relayer - Mainnet Only')
+  .description('⚡ Setup Jito Relayer - Mainnet Only')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     const inventoryType: InventoryType = 'relayer'
@@ -202,7 +202,7 @@ validatorCmd.command('deploy:relayer')
   })
 
 validatorCmd.command('update:version')
-  .description('Update Validator Version')
+  .description('⬆️  Update Validator Version')
   .option('-c, --config-only', 'Update Config Only', { default: false })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
@@ -238,7 +238,7 @@ validatorCmd.command('update:version')
   })
 
 validatorCmd.command('update:script')
-  .description('Update Validator Startup Config')
+  .description('⚙️  Update Validator Startup Config')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
     default: 'testnet',
@@ -261,7 +261,7 @@ validatorCmd.command('update:script')
   })
 
 validatorCmd.command('apply')
-  .description('Apply Ansiible Playbook')
+  .description('📥 Apply Ansiible Playbook')
   .option('-y, --yml <yml>', 'Playbook Yml File Path to Apply')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .option('-n, --network <network>', 'Network to deploy validators', {
@@ -285,13 +285,112 @@ validatorCmd.command('apply')
   })
 
 validatorCmd.command('update:allowed-ips')
-  .description('Update allowed IPs for mainnet validator nodes')
+  .description('🛡️  Update allowed IPs for mainnet validator nodes')
   .action(async () => {
     await updateAllowedIps('mainnet_validators')
   })
 
+validatorCmd.command('stop')
+  .description('🔴 Stop Validator')
+  .option('-n, --network <network>', 'Solana Network', {
+    default: 'testnet',
+  })
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
+  .action(async (options) => {
+    // const network = options.network
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
+    const templateRoot = getTemplatePath()
+    const playbook = `${templateRoot}/ansible/${networkPath}/stop_node.yml`
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
+    if (result) {
+      console.log(colors.white('✅ Successfully Stopped Validator'))
+      return
+    }
+  })
+
+validatorCmd.command('start')
+  .description('🟢 Start Validator')
+  .option('-n, --network <network>', 'Solana Network', {
+    default: 'testnet',
+  })
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
+  .action(async (options) => {
+    // const network = options.network
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
+    const templateRoot = getTemplatePath()
+    const playbook = `${templateRoot}/ansible/${networkPath}/start_node.yml`
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
+    if (result) {
+      console.log(colors.white('✅ Successfully Started Validator'))
+      return
+    }
+  })
+
+validatorCmd.command('cleanup')
+  .description(
+    '🧹 Cleanup Validator - Remove Ledger/Snapshot Unnecessary Files',
+  )
+  .option('-n, --network <network>', 'Solana Network', {
+    default: 'testnet',
+  })
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
+  .action(async (options) => {
+    // const network = options.network
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
+    const templateRoot = getTemplatePath()
+    const playbook = `${templateRoot}/ansible/cmn/rm_ledger.yml`
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
+    if (result) {
+      console.log(colors.white('✅ Successfully Cleaned Up Validator'))
+      return
+    }
+  })
+
+validatorCmd.command('get:snapshot')
+  .description('⚡️ Download Snapshot with aria2c ⚡️')
+  .option('-n, --network <network>', 'Solana Network', {
+    default: 'testnet',
+  })
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
+  .action(async (options) => {
+    // const network = options.network
+    const inventoryType: InventoryType = options.network === 'mainnet'
+      ? 'mainnet_validators'
+      : 'testnet_validators'
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
+    const templateRoot = getTemplatePath()
+    const playbook = `${templateRoot}/ansible/${networkPath}/wget_snapshot.yml`
+    const result = options.pubkey
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
+    if (result) {
+      console.log(colors.white('✅ Successfully Downloaded Snapshot'))
+      return
+    }
+  })
+
 validatorCmd.command('switch')
-  .description('Switch Validator Identity - No DownTime Migration')
+  .description('🔁 Switch Validator Identity - No DownTime Migration')
   .option('-f, --from <from>', 'From Validator Identity')
   .option('-t, --to <to>', 'To Validator Identity')
   .option('-n, --network <network>', 'Network to deploy validators')
