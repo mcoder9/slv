@@ -83,6 +83,20 @@ slv validator deploy
 slv v --help
 ```
 
+### New Features - Firedancer Mainnet Validator Init & Deploy
+
+Now you can deploy Solana Mainnet Validators with SLV.
+
+```bash
+slv v init
+? Select Solana Network (testnet)
+  testnet
+❯ mainnet
+? Select Validator Type (jito) › firedancer
+  jito
+> firedancer
+```
+
 ### New Features - Solana RPC Init & Deploy (Geyser Yellowstone gRPC Plugin)
 
 Now you can deploy Solana RPC nodes with SLV.
@@ -92,33 +106,6 @@ This feature includes the ability to deploy Geyser gRPC Plugin.
 slv rpc init
 ```
 
-### New Features - Solana Validator Init & Deploy Mainnet Available
-
-Now you can deploy Solana Mainnet Validators with SLV.
-
-```bash
-slv v init
-? Select Solana Network (testnet)
-  testnet
-❯ mainnet
-```
-
-### New Features - Jito Relayer Init & Deploy
-
-Now you can deploy Jito Relayer with SLV.
-
-```bash
-slv v setup:relayer
-```
-
-### New Features - Jupiter Self-Hosted SWAP Init & Deploy
-
-Now you can deploy Jupiter Self-Host
-ed SWAP with SLV.
-
-```bash
-slv r setup:jupiter
-```
 
 
 ### Introducing SLV Metal – Optimized Bare Metal for Solana Nodes ⚡️
@@ -234,12 +221,7 @@ This example shows how to set an existing vote account key.
 ```bash
 ? Do you want to create a new vote account key now? (Y/n) › No
 ? Please Enter Your Vote Account Public Key > <your-vote-account>
-⚠️ Please place your voteAccount pubkey in 
-        
-  ~/.slv/keys/<your-vote-account>.json
 ```
-
-Please place your vote account key in `~/.slv/keys/<your-vote-account>.json`.
 
 ### Set Your Authority Public Key
 
@@ -300,22 +282,6 @@ Then, the identity key will be changed to the authorized identity key. This
 command will stop firedancer, change the identity key, and restart the
 firedancer.
 
-※ No downtime Migration is not available with Firedancer yet. We will updated as
-soon as it's available.
-
-### Restart Firedancer
-
-If you have any issues with the validator, you can restart the firedancer with
-the following command.
-
-If you use the `--rm` option, the validator will be stopped and removed ledger
-and snapshot dirs, and Download Snapshot with the snapshot finder and start the
-validator.
-
-```bash
-slv v restart -n testnet --pubkey <your-identity-pubkey>
-```
-
 ### Update slv
 
 If you want to update the slv template, you can use the following command.
@@ -328,7 +294,7 @@ slv upgrade
 
 ```bash
 Usage:   slv  
-Version: 0.8.0
+Version: 0.9.2
 
 Description:
 
@@ -352,7 +318,7 @@ Commands:
   metal, m      - 🚀 SLV BareMetal: High-Performance Servers Built for Solana Nodes
   signup        - Signup to SLV using Discord                                      
   login         - Login to SLV using Discord                                       
-  check         - Check RPC and gRPC endpoints
+  check         - Check RPC and gRPC endpoints  
 ```
 
 ### Community Support

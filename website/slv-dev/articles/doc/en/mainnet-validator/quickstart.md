@@ -99,6 +99,7 @@ Select the type of Solana validator.
 ```bash
 ? Select Validator Type (jito)
 ❯ jito
+  firedancer
 ```
 
 ※ Currently, only Jito validator is supported.

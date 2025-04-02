@@ -97,6 +97,7 @@ Solana バリデータのタイプを選択します。
 ```bash
 ? Select Validator Type (jito)
 ❯ jito
+  firedancer
 ```
 
 ※現在は Jito バリデータのみサポートされています。
