@@ -70,7 +70,7 @@ Firedancer の場合、新しいパッケージをマシンの中でビルドす
 アップデートを適応するには、上記のフローに加え、以下のコマンドを実行します。
 
 ```bash
-slv v setup:firedancer -p <your-validator-pubkey>
+slv v setup:firedancer -n testnet -p <your-validator-pubkey>
 ```
 
 ## Solana バージョンのアップデートの再起動

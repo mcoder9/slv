@@ -64,6 +64,15 @@ Running the above command will update the Solana CLI version on your node.
 
 At this point, the update has not yet been applied, so you'll need to either perform a zero-downtime migration or restart your node.
 
+## Update Firedancer Version
+
+For Firedancer, since new packages need to be built on the machine,
+to apply the update, in addition to the above flow, run the following command:
+
+```bash
+slv v setup:firedancer -n mainnet -p <your-validator-pubkey>
+```
+
 ## Restart After Solana Version Update
 
 ※ ⚠️ Restarting your node will cause it to lose synchronization with the network, so please restart with caution. If you want to perform a zero-downtime migration, please refer to [this guide](/en/doc/mainnet-validator/migrate).

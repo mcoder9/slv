@@ -73,6 +73,16 @@ $ slv v update:version -n mainnet -p <your-validator-pubkey>
 $ slv v restart -n mainnet -p <your-validator-pubkey>
 ```
 
+## Firedancer バージョンのアップデート
+
+Firedancer の場合、新しいパッケージをマシンの中でビルドする必要があるため、
+アップデートを適応するには、上記のフローに加え、以下のコマンドを実行します。
+
+```bash
+slv v setup:firedancer -n mainnet -p <your-validator-pubkey>
+```
+
+
 ## デバッグ・モニタリング
 
 デプロイ後、Solana ノード内でデバッグとモニタリングを行うことができます。

@@ -70,7 +70,7 @@ For Firedancer, since new packages need to be built on the machine,
 to apply the update, in addition to the above flow, run the following command:
 
 ```bash
-slv v setup:firedancer -p <your-validator-pubkey>
+slv v setup:firedancer -n testnet -p <your-validator-pubkey>
 ```
 
 ## Restart After Solana Version Update
