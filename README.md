@@ -123,6 +123,20 @@ slv v get:snapshot
 ```
 This command will download the latest snapshot.
 
+### New Features - Agave Testnet Validator Init & Deploy
+
+Now you can deploy Solana Agave Testnet Validators with SLV.
+
+```bash
+slv v init
+? Select Solana Network (testnet)
+❯ testnet
+  mainnet
+? Select Validator Type (agave) › agave
+> agave
+  firedancer
+```
+
 
 ### New Features - Firedancer Mainnet Validator Init & Deploy
 
@@ -146,7 +160,6 @@ This feature includes the ability to deploy Geyser gRPC Plugin.
 ```bash
 slv rpc init
 ```
-
 
 
 ### Introducing SLV Metal – Optimized Bare Metal for Solana Nodes ⚡️
