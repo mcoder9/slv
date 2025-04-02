@@ -39,7 +39,6 @@ const listValidators = async (network: NetworkType, pubkey?: string) => {
       }
       validators = [validator]
     }
-    validatorVersion = version.mainnet_validators.version_jito
   } else {
     console.log(colors.white('Your Testnet Validators Settings:'))
     if (!inventory.testnet_validators || !inventory.testnet_validators.hosts) {
@@ -62,6 +61,9 @@ const listValidators = async (network: NetworkType, pubkey?: string) => {
     validatorVersion = version.testnet_validators.version_firedancer
   }
   for (const validator of validators) {
+    validatorVersion = validator.validator_type === 'jito'
+      ? version.mainnet_validators.version_jito
+      : version.mainnet_validators.version_firedancer
     const table = new Table()
     table
       .body([

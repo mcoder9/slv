@@ -46,7 +46,7 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
       name: 'validatorType',
       message: 'Select Validator Type',
       type: Select,
-      options: ['jito'],
+      options: ['jito', 'firedancer'],
       default: 'jito',
     },
     {

@@ -154,13 +154,19 @@ validatorCmd.command('restart')
   })
 
 validatorCmd.command('setup:firedancer')
-  .description('Setup/Update Firedancer Validator - Testnet Only')
+  .description('Setup/Update Firedancer Validator')
+  .option('-n, --network <network>', 'Network to deploy validators', {
+    default: 'testnet',
+  })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     const inventoryType: InventoryType = 'testnet_validators'
     const templateRoot = getTemplatePath()
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
     const playbook =
-      `${templateRoot}/ansible/testnet-validator/setup_firedancer.yml`
+      `${templateRoot}/ansible/${networkPath}/setup_firedancer.yml`
 
     const result = options.pubkey
       ? await runAnsilbe(playbook, inventoryType, options.pubkey)
