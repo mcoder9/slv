@@ -3,7 +3,7 @@ export type KeyDirType = 'rpc' | 'validator' | 'relayer' | 'shreadstream'
 export type NetworkType = 'mainnet' | 'testnet'
 export type RpcType = 'minimal' | 'geyser-yellowstone'
 export type ValidatorTestnetType = 'firedancer' | 'agave'
-export type ValidatorMainnetType = 'jito'
+export type ValidatorMainnetType = 'jito' | 'firedancer'
 export type InventoryType = 'testnet_validators' | 'mainnet_validators' | 'relayer' | 'mainnet_rpcs' | 'jupiter'
 
 export interface ValidatorTestnetConfig {
@@ -60,6 +60,7 @@ export interface CmnTestnetValidatorType {
 export interface CmnMainnetValidatorType {
   solana_cli: string
   version_agave: string
+  version_firedancer: string
   version_jito: string
   allowed_ssh_ips: string[]
   allowed_ips: string[]
@@ -69,6 +70,7 @@ export interface CmnMainnetRpcType {
   solana_cli: string
   version_agave: string
   version_jito: string
+  version_firedancer: string
   geyser_version: string
   x_token: string
   port_rpc: number
