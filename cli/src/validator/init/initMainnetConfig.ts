@@ -66,7 +66,6 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
   const {
     relayerUrl,
     stakedRPCIdentity,
-    snapshotUrl,
     relayerAccount,
   } = await prompt([
     {
@@ -86,12 +85,6 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
       message: 'Enter Staked RPC Identity(Optional)',
       type: Input,
       default: 'https://snapshots.avorio.network/mainnet-beta',
-    },
-    {
-      name: 'snapshotUrl',
-      message: 'Enter Snapshot URL(Optional)',
-      type: Input,
-      default: 'cli/src/validator/init/initMainnetConfig.ts',
     },
   ])
   if (!validatorType) {
@@ -124,7 +117,6 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
     block_engine_region: blockEngineRegion,
     shredstream_address,
     staked_rpc_identity_account: rpcAccount,
-    snapshot_url: snapshotUrl,
   }
   await updateAllowedSshIps()
   await updateAllowedIps()
