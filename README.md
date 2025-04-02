@@ -81,7 +81,48 @@ slv validator deploy
 
 ```bash
 slv v --help
+Usage:   slv validator
+Version: 0.9.4        
+
+Description:
+
+  Manage Solana Validator Nodes
+
+Options:
+
+  -h, --help  - Show this help.  
+
+Commands:
+
+  init                - 🚀 Initialize a new validator                                       
+  deploy              - 📦 Deploy Validators                                                
+  list                - 📋 List validators                                                  
+  set:identity        - 🪪  Set Validator Identity                                          
+  set:unstaked        - 🔄 Set Validator Identity to Unstaked Key
+  restart             - ♻️  Restart Validator                                                
+  setup:firedancer    - 🔥 Setup/Update Firedancer Validator                                
+  setup:relayer       - ⚡ Setup Jito Relayer - Mainnet Only                                
+  deploy:relayer      - ⚡ Setup Jito Relayer - Mainnet Only                                
+  update:version      - ⬆️  Update Validator Version                                         
+  update:script       - ⚙️  Update Validator Startup Config                                  
+  apply               - 📥 Apply Ansiible Playbook                                          
+  update:allowed-ips  - 🛡️  Update allowed IPs for mainnet validator nodes                   
+  stop                - 🔴 Stop Validator                                                   
+  start               - 🟢 Start Validator                                                  
+  cleanup             - 🧹 Cleanup Validator - Remove Ledger/Snapshot Unnecessary Files     
+  get:snapshot        - ⚡️ Download Snapshot with aria2c ⚡️                                 
+  switch              - 🔁 Switch Validator Identity - No DownTime Migration
 ```
+
+### New Features - Snapshots Download with aria2
+
+SLV now supports downloading snapshots with aria2.
+
+```bash
+slv v get:snapshot
+```
+This command will download the latest snapshot.
+
 
 ### New Features - Firedancer Mainnet Validator Init & Deploy
 

@@ -28,7 +28,7 @@ validatorCmd.command('init')
 
 validatorCmd.command('deploy')
   .description('📦 Deploy Validators')
-  .option('-n, --network <network>', 'Network to deploy validators')
+  .option('-n, --network <network>', 'Solana Network')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
     let network = options.network
@@ -53,7 +53,7 @@ validatorCmd.command('deploy')
 
 validatorCmd.command('list')
   .description('📋 List validators')
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .action(async (options) => {
@@ -63,7 +63,7 @@ validatorCmd.command('list')
 
 validatorCmd.command('set:identity')
   .description('🪪  Set Validator Identity')
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
@@ -87,9 +87,9 @@ validatorCmd.command('set:identity')
 
 validatorCmd.command('set:unstaked')
   .description(
-    '🔄 Set Validator Identity to Unstaked Key Stop/Change Identity/Start',
+    '🔄 Set Validator Identity to Unstaked Key',
   )
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
@@ -114,7 +114,7 @@ validatorCmd.command('set:unstaked')
 
 validatorCmd.command('restart')
   .description('♻️  Restart Validator')
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
@@ -155,7 +155,7 @@ validatorCmd.command('restart')
 
 validatorCmd.command('setup:firedancer')
   .description('🔥 Setup/Update Firedancer Validator')
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
@@ -205,7 +205,7 @@ validatorCmd.command('update:version')
   .description('⬆️  Update Validator Version')
   .option('-c, --config-only', 'Update Config Only', { default: false })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .action(async (options) => {
@@ -240,7 +240,7 @@ validatorCmd.command('update:version')
 validatorCmd.command('update:script')
   .description('⚙️  Update Validator Startup Config')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .action(async (options) => {
@@ -264,7 +264,7 @@ validatorCmd.command('apply')
   .description('📥 Apply Ansiible Playbook')
   .option('-y, --yml <yml>', 'Playbook Yml File Path to Apply')
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
-  .option('-n, --network <network>', 'Network to deploy validators', {
+  .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .action(async (options) => {
@@ -393,7 +393,7 @@ validatorCmd.command('switch')
   .description('🔁 Switch Validator Identity - No DownTime Migration')
   .option('-f, --from <from>', 'From Validator Identity')
   .option('-t, --to <to>', 'To Validator Identity')
-  .option('-n, --network <network>', 'Network to deploy validators')
+  .option('-n, --network <network>', 'Solana Network')
   .action(async (options) => {
     let from = options.from
     let to = options.to
