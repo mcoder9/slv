@@ -26,7 +26,10 @@
   when: validator_type in ['agave', 'firedancer']
 
 - import_playbook: ../cmn/setup_ufw.yml
-  when: validator_type in ['agave', 'firedancer']
+  when: validator_type in ['firedancer']
+
+- import_playbook: ../cmn/setup_agave_ufw.yml
+  when: validator_type in ['agave']
 
 - import_playbook: ../cmn/install_rust.yml
   when: validator_type in ['agave', 'firedancer']

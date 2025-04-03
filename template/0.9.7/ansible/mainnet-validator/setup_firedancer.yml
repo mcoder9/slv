@@ -84,6 +84,10 @@
       become: yes
       become_user: root
 
+    - name: Ensure /mnt directory has correct permissions
+      shell: chown -R solv:solv /mnt
+      become_user: root
+
   handlers:
     - name: Reload systemd daemon
       command: systemctl daemon-reload
