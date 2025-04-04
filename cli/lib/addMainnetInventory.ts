@@ -2,11 +2,11 @@ import { stringify } from 'https://deno.land/std@0.202.0/yaml/stringify.ts'
 import type { SSHConnection } from '@cmn/prompt/checkSSHConnection.ts'
 import { genOrReadMainnetInventory } from '/lib/genOrReadMainnetInventory.ts'
 import { genOrReadVersions } from '/lib/genOrReadVersions.ts'
-import { colors } from '@cliffy/colors'
 import { getInventoryPath } from '@cmn/constants/path.ts'
 import type { ValidatorMainnetConfig } from '@cmn/types/config.ts'
 
 const addMainnetInventory = async (
+  name: string,
   identityAccount: string,
   sshConnection: SSHConnection,
 ) => {
@@ -18,34 +18,12 @@ const addMainnetInventory = async (
       inventory[inventoryType].hosts = {}
     }
 
-    const findIdentity = Object.keys(inventory[inventoryType].hosts).find(
-      (key) => String(key) === identityAccount,
-    )
-
-    if (findIdentity) {
-      console.log(
-        colors.yellow(`⚠️ The same Identity already exists
-        
-  Please remove the existing Identity Account from inventory and try again`),
-      )
-      return false
-    }
-
-    const checkIdentityKey = Object.values(
-      inventory[inventoryType].hosts,
-    ).find((key) => key.identity_account === identityAccount)
-
-    if (checkIdentityKey) {
-      console.log(colors.yellow(`⚠️ Identity account already exists`))
-      return false
-    }
-
     // Get versions from versions.yml
     await genOrReadVersions()
 
     // Add the new host
-    inventory[inventoryType].hosts[identityAccount] = {
-      name: identityAccount,
+    inventory[inventoryType].hosts[name] = {
+      name,
       ansible_host: sshConnection.ip,
       ansible_user: sshConnection.username,
       ansible_ssh_private_key_file: sshConnection.rsa_key_path,
@@ -64,7 +42,7 @@ const addMainnetInventory = async (
       limit_ledger_size: 200000000,
       staked_rpc_identity_account: '',
       staked_rpc_amount: 50000000000000,
-      snapshot_url: '',
+      snapshot_url: 'https://snapshots.avorio.network/mainnet-beta',
     } as ValidatorMainnetConfig
 
     const inventoryPath = getInventoryPath(inventoryType)

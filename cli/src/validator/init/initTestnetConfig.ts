@@ -13,7 +13,7 @@ import { addInventory } from '/lib/addInventory.ts'
 import { exec } from '@elsoul/child-process'
 import denoJson from '/deno.json' with { type: 'json' }
 import { updateInventory } from '/lib/updateInventory.ts'
-import { prompt, Select } from '@cliffy/prompt'
+import { Input, prompt, Select } from '@cliffy/prompt'
 import { testnetValidatorConfigDir } from '@cmn/constants/path.ts'
 import { updateAllowedSshIps } from '/lib/config/updateAllowedSshIps.ts'
 
@@ -51,6 +51,18 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
     )
   }
   const identityAccount = await genIdentityKey()
+  const { name } = await prompt([
+    {
+      name: 'name',
+      message: 'Enter Inventory Name',
+      type: Input,
+      default: identityAccount,
+    },
+  ])
+  if (!name) {
+    console.log(colors.red('⚠️ Inventory Name is required'))
+    return
+  }
   const inventoryPath = getInventoryPath(inventoryType)
 
   console.log(colors.yellow(`⚠️ Please place your identity key in 
@@ -60,6 +72,7 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
   // Generate or Add Inventory
   const inventoryCheck = await addInventory(
+    name,
     identityAccount,
     sshConnection,
     inventoryType,
@@ -71,6 +84,8 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
     return
   }
   const configTestnet: Partial<ValidatorTestnetConfig> = {
+    name,
+    identity_account: identityAccount,
     vote_account: voteAccount,
     authority_account: authAccount,
     validator_type: validatorType as ValidatorTestnetType,
@@ -84,7 +99,7 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
   )
   console.log(colors.white(`Now you can deploy with:
 
-$ slv v deploy -n testnet -p ${identityAccount}
+$ slv v deploy -n testnet -p ${name}
 `))
   return configTestnet
 }

@@ -6,6 +6,7 @@ import { getInventoryPath } from '@cmn/constants/path.ts'
 import { genOrReadVersions } from '/lib/genOrReadVersions.ts'
 
 const addInventory = async (
+  name: string,
   identityAccount: string,
   sshConnection: SSHConnection,
   inventoryType: InventoryType,
@@ -23,12 +24,12 @@ const addInventory = async (
     const validator_type = 'firedancer' as ValidatorTestnetType
 
     // Add the new host
-    inventory[inventoryType].hosts[identityAccount] = {
+    inventory[inventoryType].hosts[name] = {
+      name,
       ansible_host: sshConnection.ip,
       ansible_user: sshConnection.username,
       ansible_ssh_private_key_file: sshConnection.rsa_key_path,
       identity_account: identityAccount,
-      name: identityAccount,
       vote_account: voteAccount,
       authority_account: authorityAccount,
       validator_type,

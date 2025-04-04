@@ -110,11 +110,11 @@ export interface JupiterConfig {
 }
 
 export interface ValidatorMainnetConfig {
+  name: string
   ansible_host: string
   ansible_user: string
   ansible_ssh_private_key_file: string
   identity_account: string
-  name: string
   vote_account: string
   authority_account: string
   validator_type: ValidatorMainnetType

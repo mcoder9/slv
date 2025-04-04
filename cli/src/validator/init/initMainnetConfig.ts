@@ -84,7 +84,7 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
       name: 'stakedRPCIdentity',
       message: 'Enter Staked RPC Identity(Optional)',
       type: Input,
-      default: 'https://snapshots.avorio.network/mainnet-beta',
+      default: DEFAULT_RPC_ADDRESS,
     },
   ])
   if (!validatorType) {
@@ -93,11 +93,24 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
   const rpcAccount = stakedRPCIdentity || DEFAULT_RPC_ADDRESS
   const inventoryType = 'mainnet_validators'
   const identityAccount = await genIdentityKey()
+  const { name } = await prompt([
+    {
+      name: 'name',
+      message: 'Enter Inventory Name',
+      type: Input,
+      default: identityAccount,
+    },
+  ])
+  if (!name) {
+    console.log(colors.red('⚠️ Inventory Name is required'))
+    return
+  }
   const inventoryPath = getInventoryPath(inventoryType)
   const shredstream_address =
     SHREDSTREAM_ADDRESS[blockEngineRegion as keyof typeof SHREDSTREAM_ADDRESS]
   // Generate or Add Inventory
   const inventoryCheck = await addMainnetInventory(
+    name,
     identityAccount,
     sshConnection,
   )
@@ -108,6 +121,7 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
   // Generate Vote Key
   const { voteAccount, authAccount } = await genVoteKey(identityAccount)
   const configMainnet: Partial<ValidatorMainnetConfig> = {
+    name,
     vote_account: voteAccount,
     authority_account: authAccount,
     validator_type: validatorType as ValidatorMainnetType,
@@ -128,7 +142,7 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
   )
   console.log(colors.white(`Now you can deploy with:
 
-$ slv v deploy -n mainnet -p ${identityAccount}    
+$ slv v deploy -n mainnet -p ${name}    
 `))
 }
 
