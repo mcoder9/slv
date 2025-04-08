@@ -111,47 +111,6 @@ validatorCmd.command('set:unstaked')
     }
   })
 
-validatorCmd.command('restart')
-  .description('♻️  Restart Validator')
-  .option('-n, --network <network>', 'Solana Network', {
-    default: 'testnet',
-  })
-  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
-  .option(
-    '-r, --rm',
-    'Remove Snapshot/Ledger Dirs and DL Snapshot with Snapshot Finder before Starting',
-    { default: false },
-  )
-  .action(async (options) => {
-    const inventoryType: InventoryType = options.network === 'mainnet'
-      ? 'mainnet_validators'
-      : 'testnet_validators'
-    const templateRoot = getTemplatePath()
-    if (options.network === 'mainnet') {
-      const playbook =
-        `${templateRoot}/ansible/mainnet-validator/restart_node.yml`
-      const result = options.pubkey
-        ? await runAnsilbe(playbook, inventoryType, options.pubkey)
-        : await runAnsilbe(playbook, inventoryType)
-      if (result) {
-        console.log(colors.white('✅ Successfully Restarted Validator'))
-        return
-      }
-    } else {
-      const playbook = options.rm
-        ? `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
-        : `${templateRoot}/ansible/testnet-validator/restart_firedancer.yml`
-
-      const result = options.pubkey
-        ? await runAnsilbe(playbook, inventoryType, options.pubkey)
-        : await runAnsilbe(playbook, inventoryType)
-      if (result) {
-        console.log(colors.white('✅ Successfully Restarted Validator'))
-        return
-      }
-    }
-  })
-
 validatorCmd.command('setup:firedancer')
   .description('🔥 Setup/Update Firedancer Validator')
   .option('-n, --network <network>', 'Solana Network', {
@@ -235,34 +194,29 @@ validatorCmd.command('update:script')
     await runAnsilbe(playbook, inventoryType, options.pubkey)
   })
 
-validatorCmd.command('apply')
-  .description('📥 Apply Ansiible Playbook')
-  .option('-y, --yml <yml>', 'Playbook Yml File Path to Apply')
-  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
+validatorCmd.command('start')
+  .description('🟢 Start Validator')
   .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
+  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
   .action(async (options) => {
-    if (!options.yml) {
-      console.log(colors.yellow('⚠️ Yml File is required'))
-      return
-    }
+    // const network = options.network
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
+    const networkPath = options.network === 'mainnet'
+      ? 'mainnet-validator'
+      : 'testnet-validator'
+    const templateRoot = getTemplatePath()
+    const playbook = `${templateRoot}/ansible/${networkPath}/start_node.yml`
     const result = options.pubkey
-      ? await runAnsilbe(options.yml, inventoryType, options.pubkey)
-      : await runAnsilbe(options.yml, inventoryType)
+      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+      : await runAnsilbe(playbook, inventoryType)
     if (result) {
-      console.log(colors.white('✅ Successfully Applied Playbook'))
+      console.log(colors.white('✅ Successfully Started Validator'))
       return
     }
-  })
-
-validatorCmd.command('update:allowed-ips')
-  .description('🛡️  Update allowed IPs for mainnet validator nodes')
-  .action(async () => {
-    await updateAllowedIps('mainnet_validators')
   })
 
 validatorCmd.command('stop')
@@ -290,28 +244,44 @@ validatorCmd.command('stop')
     }
   })
 
-validatorCmd.command('start')
-  .description('🟢 Start Validator')
+validatorCmd.command('restart')
+  .description('♻️  Restart Validator')
   .option('-n, --network <network>', 'Solana Network', {
     default: 'testnet',
   })
   .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
+  .option(
+    '-r, --rm',
+    'Remove Snapshot/Ledger Dirs and DL Snapshot with Snapshot Finder before Starting',
+    { default: false },
+  )
   .action(async (options) => {
-    // const network = options.network
     const inventoryType: InventoryType = options.network === 'mainnet'
       ? 'mainnet_validators'
       : 'testnet_validators'
-    const networkPath = options.network === 'mainnet'
-      ? 'mainnet-validator'
-      : 'testnet-validator'
     const templateRoot = getTemplatePath()
-    const playbook = `${templateRoot}/ansible/${networkPath}/start_node.yml`
-    const result = options.pubkey
-      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
-      : await runAnsilbe(playbook, inventoryType)
-    if (result) {
-      console.log(colors.white('✅ Successfully Started Validator'))
-      return
+    if (options.network === 'mainnet') {
+      const playbook =
+        `${templateRoot}/ansible/mainnet-validator/restart_node.yml`
+      const result = options.pubkey
+        ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+        : await runAnsilbe(playbook, inventoryType)
+      if (result) {
+        console.log(colors.white('✅ Successfully Restarted Validator'))
+        return
+      }
+    } else {
+      const playbook = options.rm
+        ? `${templateRoot}/ansible/testnet-validator/restart_firedancer_with_rm_ledger.yml`
+        : `${templateRoot}/ansible/testnet-validator/restart_firedancer.yml`
+
+      const result = options.pubkey
+        ? await runAnsilbe(playbook, inventoryType, options.pubkey)
+        : await runAnsilbe(playbook, inventoryType)
+      if (result) {
+        console.log(colors.white('✅ Successfully Restarted Validator'))
+        return
+      }
     }
   })
 
@@ -362,6 +332,12 @@ validatorCmd.command('get:snapshot')
       console.log(colors.white('✅ Successfully Downloaded Snapshot'))
       return
     }
+  })
+
+validatorCmd.command('update:allowed-ips')
+  .description('🛡️  Update allowed IPs for mainnet validator nodes')
+  .action(async () => {
+    await updateAllowedIps('mainnet_validators')
   })
 
 validatorCmd.command('switch')
