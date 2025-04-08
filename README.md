@@ -82,7 +82,7 @@ slv validator deploy
 ```bash
 slv v --help
 Usage:   slv validator
-Version: 0.9.4        
+Version: 0.9.10  
 
 Description:
 
@@ -94,24 +94,22 @@ Options:
 
 Commands:
 
-  init                - 🚀 Initialize a new validator                                       
-  deploy              - 📦 Deploy Validators                                                
-  list                - 📋 List validators                                                  
-  set:identity        - 🪪  Set Validator Identity                                          
-  set:unstaked        - 🔄 Set Validator Identity to Unstaked Key
-  restart             - ♻️  Restart Validator                                                
-  setup:firedancer    - 🔥 Setup/Update Firedancer Validator                                
-  setup:relayer       - ⚡ Setup Jito Relayer - Mainnet Only                                
-  deploy:relayer      - ⚡ Setup Jito Relayer - Mainnet Only                                
-  update:version      - ⬆️  Update Validator Version                                         
-  update:script       - ⚙️  Update Validator Startup Config                                  
-  apply               - 📥 Apply Ansiible Playbook                                          
-  update:allowed-ips  - 🛡️  Update allowed IPs for mainnet validator nodes                   
-  stop                - 🔴 Stop Validator                                                   
-  start               - 🟢 Start Validator                                                  
-  cleanup             - 🧹 Cleanup Validator - Remove Ledger/Snapshot Unnecessary Files     
-  get:snapshot        - ⚡️ Download Snapshot with aria2c ⚡️                                 
-  switch              - 🔁 Switch Validator Identity - No DownTime Migration
+  init                - 🚀 Initialize a new validator                                  
+  deploy              - 📦 Deploy Validators                                           
+  list                - 📋 List validators                                             
+  set:identity        - 🪪  Set Validator Identity                                     
+  set:unstaked        - 🔄 Set Validator Identity to Unstaked Key                      
+  setup:firedancer    - 🔥 Setup/Update Firedancer Validator                           
+  update:version      - ⬆️  Update Validator Version                                    
+  update:script       - ⚙️  Update Validator Startup Config                             
+  start               - 🟢 Start Validator                                             
+  stop                - 🔴 Stop Validator                                              
+  restart             - ♻️  Restart Validator                                           
+  cleanup             - 🧹 Cleanup Validator - Remove Ledger/Snapshot Unnecessary Files
+  get:snapshot        - ⚡️ Download Snapshot with aria2c ⚡️                            
+  update:allowed-ips  - 🛡️  Update allowed IPs for mainnet validator nodes              
+  switch              - 🔁 Switch Validator Identity - No DownTime Migration           
+  run:api             - 🚀 Run Validator API         
 ```
 
 ### New Features - Snapshots Download with aria2

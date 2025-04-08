@@ -5,6 +5,7 @@ export const homeDir = Deno.env.get('HOME')
 export const configRoot = homeDir
   ? join(homeDir, '.slv')
   : join(Deno.cwd(), '.slv')
+export const API_KEY_YML_PATH = join(configRoot, 'api.yml')
 export const testnetValidatorConfigDir = join(configRoot, 'testnet-validator')
 export const mainnetValidatorConfigDir = join(configRoot, 'mainnet-validator')
 export const MainnetRPCConfigDir = join(configRoot, 'mainnet-rpc')

@@ -20,6 +20,9 @@
 - import_playbook: copy_restart_sh.yml
   when: validator_type in ['jito', 'firedancer']
 
+- import_playbook: copy_keys.yml
+  when: validator_type in ['firedancer']
+
 - import_playbook: ../cmn/add_solv.yml
   when: validator_type in ['jito', 'firedancer']
 

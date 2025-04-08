@@ -19,6 +19,9 @@
 - import_playbook: ../cmn/fix_permissions.yml
   when: validator_type in ['agave', 'firedancer']
 
+- import_playbook: copy_keys.yml
+  when: validator_type in ['firedancer']
+
 - import_playbook: add_solv.yml
   when: validator_type in ['agave', 'firedancer']
 
