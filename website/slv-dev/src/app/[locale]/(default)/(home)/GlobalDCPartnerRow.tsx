@@ -11,10 +11,6 @@ import {
   EquinixLogoInvertHorizontal,
   GoogleCloudLogoHorizontal,
   GoogleCloudLogoInvertHorizontal,
-  HostCircleLogoHorizontal,
-  HostCircleLogoInvertHorizontal,
-  LatitudeLogoHorizontal,
-  LatitudeLogoInvertHorizontal,
   MecarneLogoHorizontal,
   MecarneLogoInvertHorizontal,
   HivelocityLogoHorizontal,
@@ -26,11 +22,6 @@ import { useTranslations } from 'next-intl'
 import { LogoCarousel } from '@/components/common/LogoCarousel'
 
 export const globalDCPartnerLogos = [
-  {
-    name: 'Latitude',
-    src: LatitudeLogoHorizontal,
-    invertSrc: LatitudeLogoInvertHorizontal,
-  },
   {
     name: 'Equinix',
     src: EquinixLogoHorizontal,
@@ -45,11 +36,6 @@ export const globalDCPartnerLogos = [
     name: 'Mecarne',
     src: MecarneLogoHorizontal,
     invertSrc: MecarneLogoInvertHorizontal,
-  },
-  {
-    name: 'HostCircle',
-    src: HostCircleLogoHorizontal,
-    invertSrc: HostCircleLogoInvertHorizontal,
   },
   {
     name: 'Cloudflare',
