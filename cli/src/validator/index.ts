@@ -10,9 +10,8 @@ import type { InventoryType, NetworkType } from '@cmn/types/config.ts'
 import { switchValidator } from '/src/validator/switch/switchValidator.ts'
 import { updateDefaultVersion } from '/lib/config/updateDefaultVersion.ts'
 import { listValidators } from '/src/validator/listValidators.ts'
-import { initRelayer } from '/src/validator/relayer/initRelayer.ts'
 import { updateAllowedIps } from '/lib/config/updateAllowedIps.ts'
-import rpcLog from '/lib/config/rpcLog.ts'
+import { app } from '/src/validator/api/index.ts'
 
 export const validatorCmd = new Command()
   .description('Manage Solana Validator Nodes')
@@ -177,30 +176,6 @@ validatorCmd.command('setup:firedancer')
     }
   })
 
-validatorCmd.command('setup:relayer')
-  .description('⚡ Setup Jito Relayer - Mainnet Only')
-  .action(async () => {
-    await initRelayer()
-  })
-
-validatorCmd.command('deploy:relayer')
-  .description('⚡ Setup Jito Relayer - Mainnet Only')
-  .option('-p, --pubkey <pubkey>', 'Public Key of Validator.')
-  .action(async (options) => {
-    const inventoryType: InventoryType = 'relayer'
-    const templateRoot = getTemplatePath()
-    const playbook = `${templateRoot}/ansible/relayer/init.yml`
-
-    const result = options.pubkey
-      ? await runAnsilbe(playbook, inventoryType, options.pubkey)
-      : await runAnsilbe(playbook, inventoryType)
-    if (result) {
-      console.log(colors.white('✅ Successfully Setup Jito Relayer'))
-      rpcLog()
-      return
-    }
-  })
-
 validatorCmd.command('update:version')
   .description('⬆️  Update Validator Version')
   .option('-c, --config-only', 'Update Config Only', { default: false })
@@ -209,8 +184,8 @@ validatorCmd.command('update:version')
     default: 'testnet',
   })
   .action(async (options) => {
-    await updateDefaultVersion()
     if (options.configOnly) {
+      await updateDefaultVersion()
       return
     }
     const inventoryType: InventoryType = options.network === 'mainnet'
@@ -437,11 +412,29 @@ validatorCmd.command('switch')
       ])
       to = toValidator.to
     }
+    const confirm = await prompt([
+      {
+        name: 'confirm',
+        message:
+          `Are you sure you want to switch ${networkString} Validator Identity from ${from} to ${to}?`,
+        type: Select,
+        options: ['yes', 'no'],
+        default: 'no',
+      },
+    ])
+    if (confirm.confirm === 'no') {
+      console.log(colors.red('❌ Switch Cancelled'))
+      return
+    }
     if (!from || !to) {
       console.log(colors.yellow('⚠️ From and To Validators are required'))
       return
     }
-
+    console.log(
+      colors.blue(
+        `✨ Switching ${networkString} Validator Identity from ${from} to ${to}...`,
+      ),
+    )
     const result = await switchValidator(
       inventoryType,
       from,
@@ -451,4 +444,11 @@ validatorCmd.command('switch')
       console.log(colors.white('✅ Successfully Switched Validator Identity'))
       return
     }
+  })
+
+validatorCmd.command('run:api')
+  .description('🚀 Run Validator API')
+  .action(() => {
+    const port = Number(Deno.env.get('PORT')) || 2010
+    Deno.serve({ port }, app.fetch)
   })

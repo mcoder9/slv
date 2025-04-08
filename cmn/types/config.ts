@@ -4,7 +4,7 @@ export type NetworkType = 'mainnet' | 'testnet'
 export type RpcType = 'minimal' | 'geyser-yellowstone'
 export type ValidatorTestnetType = 'firedancer' | 'agave'
 export type ValidatorMainnetType = 'jito' | 'firedancer'
-export type InventoryType = 'testnet_validators' | 'mainnet_validators' | 'relayer' | 'mainnet_rpcs' | 'jupiter'
+export type InventoryType = 'testnet_validators' | 'mainnet_validators' | 'mainnet_rpcs'
 
 export interface ValidatorTestnetConfig {
   ansible_user: string
@@ -15,6 +15,10 @@ export interface ValidatorTestnetConfig {
   vote_account: string
   authority_account: string
   validator_type: ValidatorTestnetType
+}
+
+export type InventoryTestnetValidatorType = {
+  testnet_validators: TestnetData
 }
 
 export interface TestnetData {
