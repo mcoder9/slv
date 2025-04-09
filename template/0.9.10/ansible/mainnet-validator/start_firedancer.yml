@@ -9,6 +9,11 @@
       shell: . ~/.profile && sudo systemctl start firedancer
       register: command_output
 
+    - name: Ensure /mnt directory has correct permissions
+      shell: sudo chown -R solv:solv /mnt && sudo chmod -R 700 /mnt
+      become: true
+      become_user: solv
+
     - name: Display Command output
       debug:
         msg: '{{ inventory_hostname }} ({{ hostvars[inventory_hostname].name }}): Start Firedancer: {{ command_output.stdout }}'

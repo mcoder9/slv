@@ -38,7 +38,7 @@
   when: validator_type in ['agave', 'firedancer']
 
 - import_playbook: install_agave.yml
-  when: validator_type == 'agave'
+  when: validator_type in ['agave', 'firedancer']
 
 - import_playbook: setup_firedancer.yml
   when: validator_type == 'firedancer'

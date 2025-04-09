@@ -19,14 +19,14 @@
         rule: allow
         name: OpenSSH
 
-    - name: Allow ports 8000-9000 TCP
+    - name: Allow ports 8900-9000 TCP
       ufw:
         rule: allow
-        port: '8000:9000'
+        port: '8900:9000'
         proto: tcp
 
-    - name: Allow ports 8000-9000 UDP
+    - name: Allow ports 8900-9000 UDP
       ufw:
         rule: allow
-        port: '8000:9000'
+        port: '8900:9000'
         proto: udp

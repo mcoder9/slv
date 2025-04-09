@@ -12,8 +12,8 @@ dynamic_port_range = "8900-9000"
 
 [rpc]
     port = 8899
-    full_api = true
-    private = true
+    full_api = false
+    private = false
 
 [reporting]
     solana_metrics_config = "host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password"
@@ -68,6 +68,7 @@ dynamic_port_range = "8900-9000"
 [tiles.gui]
     enabled = true
     gui_listen_port = 6001
+    gui_listen_address = "0.0.0.0"
 
 [tiles.metric]
     prometheus_listen_address = "127.0.0.1"
