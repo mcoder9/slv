@@ -17,12 +17,12 @@ Development」につきまして、2024 年 4 月 28 日(日)、29
 
 ![ENASE 2024 - Skeet](/news/2024/04/24/ENASE2024SkeetDetail.jpg)
 
-エルソウルラボの Skeet 開発チーム(ジェームス ニーヴ、川崎 文武、岸
+エルソウルラボの Skeet 開発チーム(ジェームズ ニーヴ、川崎 文武、岸
 正太)による研究論文「Skeet: Towards a Lightweight Serverless Framework
 Supporting Modern AI-Driven App Development」につきまして、2024 年 4 月 28
 日(日)、29 日(月)にフランス・Angers
 にて開催されるソフトウェアエンジニアリングに関する国際カンファレンス ENASE 2024
-に採択され、現地会場にてジェームス博士が登壇いたします。
+に採択され、現地会場にてジェームズ博士が登壇いたします。
 
 ENASE24-PP-65: Short Paper - Skeet: Towards a Lightweight Serverless Framework
 Supporting Modern AI-Driven App Development
@@ -39,7 +39,7 @@ https://scholar.google.be/citations?user=-OrfMvMAAAAJ
 - ブリストル大学にて機械学習に関する博士号(PhD)取得
 - エルソウルラボには技術顧問及び研究論文執筆者として参画
 
-また、ジェームス博士は同じく ENASE 2024
+また、ジェームズ博士は同じく ENASE 2024
 内のセッションチェアーに就任いたしました。
 
 ![James ENASE Chairman](/news/2024/04/24/ENASE2024JamesChairman.jpg)

@@ -145,7 +145,7 @@ Skeet 公式ドキュメント: https://skeet.dev
 Serverless Framework Supporting Modern AI-Driven App Development」が、2024 年 4
 月 28 日と 29 日にフランス・Angers
 で開催された国際ソフトウェアエンジニアリングカンファレンス、ENASE 2024
-で発表されました。ジェームス博士が代表として登壇し、その発表は多くの参加者から高い評価を受けました。
+で発表されました。ジェームズ博士が代表として登壇し、その発表は多くの参加者から高い評価を受けました。
 
 ENASE 2024: https://enase.scitevents.org
 

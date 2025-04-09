@@ -29,7 +29,7 @@ ENASE 2024: https://enase.scitevents.org/
 
 ![ENASE 2024](/news/2024/03/04/enase2024.jpg)
 
-この度、エルソウルラボの Skeet 開発チーム(ジェームス ニーヴ、川崎 文武、岸
+この度、エルソウルラボの Skeet 開発チーム(ジェームズ ニーヴ、川崎 文武、岸
 正太)による研究論文「Skeet: Towards a Lightweight Serverless Framework
 Supporting Modern AI-Driven App Development」について、ENASE 2024
 に採択されました。
