@@ -1,11 +1,11 @@
 ---
 id: dr-james-reciprocal-recommender-systems
-title: ジェームス博士、Springerより新著「Reciprocal Recommender Systems」を出版
+title: ジェームズ博士、Springerより新著「Reciprocal Recommender Systems」を出版
 category: プレスリリース
 thumbnail: /news/2025/04/09/DrJamesReciprocalRecommenderSystemsJA.jpg
 ---
 
-ELSOUL LABO B.V.（本社: オランダ・アムステルダム、代表取締役 CEO: 川崎文武）の技術顧問を務めるジェームス博士(James Neve)が、Springer社より新著『Reciprocal Recommender Systems』を出版いたしましたので、お知らせいたします。
+ELSOUL LABO B.V.（本社: オランダ・アムステルダム、代表取締役 CEO: 川崎文武）の技術顧問を務めるジェームズ博士(James Neve)が、Springer社より新著『Reciprocal Recommender Systems』を出版いたしましたので、お知らせいたします。
 
 ## 新著「Reciprocal Recommender Systems」概要
 
@@ -40,8 +40,8 @@ ELSOUL LABO B.V.（本社: オランダ・アムステルダム、代表取締�
 
 ### 著者紹介: Dr. James Neve
 
-ジェームス博士(Dr. James Neve)は機械学習研究者として、オンラインマッチングサービス向けのAIシステム、特に**Reciprocal Recommender Systems**（相互推薦システム）の開発に携わってきており、アムステルダムに拠点を置く ELSOUL LABO B.V. の技術顧問も務めています。イギリス・ブリストル大学で相互推薦システムを専門とする機械学習分野の博士号を取得後、ACM RecSysをはじめとする主要カンファレンスで相互推薦に関する研究成果を数多く発表してきました。
+ジェームズ博士(Dr. James Neve)は機械学習研究者として、オンラインマッチングサービス向けのAIシステム、特に**Reciprocal Recommender Systems**（相互推薦システム）の開発に携わってきており、アムステルダムに拠点を置く ELSOUL LABO B.V. の技術顧問も務めています。イギリス・ブリストル大学で相互推薦システムを専門とする機械学習分野の博士号を取得後、ACM RecSysをはじめとする主要カンファレンスで相互推薦に関する研究成果を数多く発表してきました。
 
-また、ジェームス博士は2025年に Aisara 株式会社を東京に設立し、様々な組織が抱える課題に対し、最適なAI・機械学習技術の導入支援を行っています。設計から実装までを一貫して手掛けた知識と経験で、高い解像度をもった精度の高いアドバイスと実践的なソリューションを提供します。
+また、ジェームズ博士は2025年に Aisara 株式会社を東京に設立し、様々な組織が抱える課題に対し、最適なAI・機械学習技術の導入支援を行っています。設計から実装までを一貫して手掛けた知識と経験で、高い解像度をもった精度の高いアドバイスと実践的なソリューションを提供します。
 
 Aisara 株式会社公式サイト: https://aisara.jp/ja/
