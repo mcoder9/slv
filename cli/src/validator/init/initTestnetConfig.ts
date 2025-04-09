@@ -91,9 +91,9 @@ const initTestnetConfig = async (sshConnection: SSHConnection) => {
     validator_type: validatorType as ValidatorTestnetType,
   }
   await updateAllowedSshIps('testnet_validators')
-  await updateInventory(identityAccount, configTestnet)
+  await updateInventory(name, configTestnet)
   // Create solv User on Ubuntu Server
-  await genSolvUser(identityAccount, inventoryType)
+  await genSolvUser(name, inventoryType)
   console.log(
     `✔︎ Validator testnet config saved to ${inventoryPath}`,
   )

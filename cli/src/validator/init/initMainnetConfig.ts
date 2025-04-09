@@ -18,7 +18,6 @@ import type {
 import {
   DEFAULT_RPC_ADDRESS,
   JITO_BLOCK_ENGINE_REGIONS,
-  RELAYER_URL,
   SHREDSTREAM_ADDRESS,
 } from '@cmn/constants/config.ts'
 import { addMainnetInventory } from '/lib/addMainnetInventory.ts'
@@ -64,22 +63,8 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
     },
   ])
   const {
-    relayerUrl,
     stakedRPCIdentity,
-    relayerAccount,
   } = await prompt([
-    {
-      name: 'relayerUrl',
-      message: 'Enter Relayer URL',
-      type: Input,
-      default: RELAYER_URL[blockEngineRegion as keyof typeof RELAYER_URL],
-    },
-    {
-      name: 'relayerAccount',
-      message: 'Enter Relayer Account(Optional)',
-      type: Input,
-      default: '',
-    },
     {
       name: 'stakedRPCIdentity',
       message: 'Enter Staked RPC Identity(Optional)',
@@ -126,17 +111,17 @@ const initMainnetConfig = async (sshConnection: SSHConnection) => {
     authority_account: authAccount,
     validator_type: validatorType as ValidatorMainnetType,
     commission_bps: Number(commissionBps),
-    relayer_url: relayerUrl,
-    relayer_account: relayerAccount,
+    relayer_url: 'http://localhost:11226',
+    relayer_account: '',
     block_engine_region: blockEngineRegion,
     shredstream_address,
     staked_rpc_identity_account: rpcAccount,
   }
   await updateAllowedSshIps()
   await updateAllowedIps()
-  await updateMainnetInventory(identityAccount, configMainnet)
+  await updateMainnetInventory(name, configMainnet)
   // Create solv User on Ubuntu Server
-  await genSolvUser(identityAccount, inventoryType)
+  await genSolvUser(name, inventoryType)
   console.log(
     `✔︎ Validator Mainnet Config Saved To ${inventoryPath}`,
   )

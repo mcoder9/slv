@@ -2,7 +2,6 @@ import { getInventoryPath } from '@cmn/constants/path.ts'
 import { genOrReadInventory } from '/lib/genOrReadInventory.ts'
 import { genOrReadMainnetRPCInventory } from '/lib/genOrReadMainnetRPCInventory.ts'
 import { genOrReadMainnetInventory } from '/lib/genOrReadMainnetInventory.ts'
-import { genOrReadRelayerInventory } from '/lib/genOrReadRelayerInventory.ts'
 import { stringify } from 'https://deno.land/std@0.202.0/yaml/stringify.ts'
 import { colors } from '@cliffy/colors'
 import type { InventoryType } from '@cmn/types/config.ts'
@@ -18,8 +17,6 @@ const updateInventoryUser = async (
     inventory = await genOrReadMainnetRPCInventory()
   } else if (inventoryType === 'mainnet_validators') {
     inventory = await genOrReadMainnetInventory()
-  } else if (inventoryType === 'relayer') {
-    inventory = await genOrReadRelayerInventory()
   } else {
     inventory = await genOrReadInventory(inventoryType)
   }
