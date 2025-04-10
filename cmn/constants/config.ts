@@ -24,6 +24,8 @@ export const JITO_BLOCK_ENGINE_REGIONS = [
   'tokyo'
 ]
 
+export const FB_TESTNET_UI_PROXY = '35.204.43.53'
+
 export const SHREDSTREAM_ADDRESS = {
   amsterdam: '74.118.140.240:1002',
   ny: '141.98.216.96:1002',
