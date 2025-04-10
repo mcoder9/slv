@@ -57,6 +57,7 @@ export interface CmnType {
 export interface CmnTestnetValidatorType {
   solana_cli: string
   version_firedancer: string
+  version_jito: string
   version_agave: string
   allowed_ssh_ips: string[]
 }

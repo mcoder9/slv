@@ -4,6 +4,7 @@ import {
   VERSION_FIREDANCER_TESTNET,
   VERSION_GEYSER_YELLOWSTONE,
   VERSION_JITO_MAINNET,
+  VERSION_JITO_TESTNET,
   VERSION_JUPITER_API,
   VERSION_SOLANA_MAINNET,
   VERSION_SOLANA_TESTNET,
@@ -22,6 +23,7 @@ const defaultVersionsYml = (): string => {
     testnet_validators: {
       solana_cli: 'agave',
       version_agave: VERSION_SOLANA_TESTNET,
+      version_jito: VERSION_JITO_TESTNET,
       version_firedancer: VERSION_FIREDANCER_TESTNET,
       allowed_ssh_ips: [],
     },
@@ -55,6 +57,7 @@ const defaultVersionsYml = (): string => {
 testnet_validators:
   solana_cli: ${defaultVersions.testnet_validators.solana_cli}
   version_agave: ${defaultVersions.testnet_validators.version_agave}
+  version_jito: ${defaultVersions.testnet_validators.version_jito}
   version_firedancer: ${defaultVersions.testnet_validators.version_firedancer}
   allowed_ssh_ips: null
 
