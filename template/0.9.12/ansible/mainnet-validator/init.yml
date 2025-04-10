@@ -41,8 +41,11 @@
 - import_playbook: install_jito.yml
   when: validator_type in ['jito', 'firedancer']
 
+- import_playbook: setup_fb_ufw.yml
+  when: validator_type in ['firedancer']
+
 - import_playbook: setup_ufw.yml
-  when: validator_type in ['jito', 'firedancer']
+  when: validator_type in ['jito']
 
 - import_playbook: fail2ban_solana_rate_limit.yml
   when: validator_type in ['jito', 'firedancer']
