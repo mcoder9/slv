@@ -8,12 +8,7 @@
       systemd:
         name: firedancer
         state: started
-      register: command_output
-      until: command_output.rc == 0
+      register: firedancer_result
       retries: 3
       delay: 10
-
-    - name: Display Command output
-      debug:
-        msg: '{{ inventory_hostname }} ({{ hostvars[inventory_hostname].name }}): Start Firedancer: {{ command_output.stdout }}'
-      ignore_errors: yes
+      until: firedancer_result is succeeded

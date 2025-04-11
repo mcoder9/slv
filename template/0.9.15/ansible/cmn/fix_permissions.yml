@@ -15,6 +15,7 @@
         - /usr/bin/wget
         - /bin/curl
         - /bin/wget
+        - /usr/bin/gcc
       ignore_errors: yes
 
     - name: Fix permissions for directories
