@@ -29,7 +29,10 @@ export const defaultFooterNav1 = [
   {
     path: DEFAULT_PATHS.staking,
     label: 'staking.title'
-  },
+  }
+]
+
+export const defaultFooterNav2 = [
   {
     path: DEFAULT_PATHS.news,
     label: 'news.title'
@@ -39,5 +42,3 @@ export const defaultFooterNav1 = [
     label: 'legal.privacy'
   }
 ]
-
-export const defaultFooterNav2 = []
