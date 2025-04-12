@@ -129,7 +129,7 @@ function LogoColumn({ logos, columnIndex, currentTime }: LogoColumnProps) {
               alt={currentLogo.name}
               width={120}
               height={40}
-              className="h-auto max-h-[80%] w-auto max-w-[80%] object-contain"
+              className="h-auto max-h-[60%] w-auto max-w-[80%] object-contain"
             />
           )}
         </motion.div>
