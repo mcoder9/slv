@@ -65,7 +65,8 @@ Download WSL2 For Windows 10
 
 - Python3 [Install](https://www.python.org/downloads/)
 - Ansible
-  [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
+  [Install](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+- Solana [Install](https://docs.anza.xyz/cli/install)
 
 ## Installation & Validator Launch
 

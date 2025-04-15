@@ -61,8 +61,8 @@
       "button2": "Validators Solutions"
     },
     "ProductsElsolRow": {
-      "title": "elSOL: Solana Incentivized LST",
-      "body": "elSOLは、Solanaのステーキング報酬と追加インセンティブを同時に獲得できるLiquid Staking Token (LST) です。常に流動性を保ち、いつでもSOLなどの暗号通貨に交換可能です。OrcaなどのDeFiプラットフォームでLPを提供することで、より高いAPYを狙うこともできます。",
+      "title": "elSOL: Unlocking Stake Bandwidth Market for Solana",
+      "body": "elSOLはSolana公式ステーキングプールを基盤としたリキッドステーキングトークン（LST）です。ステーク報酬を得つつ資産流動性を維持できるだけでなく、Stake Bandwidth Marketを通じて帯域貸出による追加収益やVLDトークンのマイニングといった多面的なインセンティブを実現します。",
       "button1": "ステーキング",
       "button2": "elSOL"
     },
