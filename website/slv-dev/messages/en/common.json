@@ -63,8 +63,8 @@
       "button2": "Validators Solutions"
     },
     "ProductsElsolRow": {
-      "title": "elSOL: Solana Incentivized LST",
-      "body": "elSOL is a Liquid Staking Token (LST) that allows you to earn Solana staking rewards and additional incentives simultaneously. It maintains constant liquidity, enabling you to exchange it for SOL or other cryptocurrencies at any time. By providing liquidity on DeFi platforms like Orca, you can aim for even higher APYs.",
+      "title": "elSOL: Unlocking Stake Bandwidth Market for Solana",
+      "body": "elSOL is a Liquid Staking Token (LST) built upon Solana's official Stake Pool program, offering staking rewards and liquidity. Beyond traditional staking benefits, elSOL introduces the Stake Bandwidth Market, enabling users to earn additional revenue from bandwidth leasing and mine VLD tokens, creating multiple incentive layers within the Solana ecosystem.",
       "button1": "Staking",
       "button2": "elSOL"
     },

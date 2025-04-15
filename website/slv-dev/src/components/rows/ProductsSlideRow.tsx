@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import ProductsBuidlersCollectiveRow from './products/ProductsBuidlersCollectiveRow'
 import DAOsEpicsRow from './daos/DAOsEpicsRow'
 import DAOsValidatorsRow from './daos/DAOsValidatorsRow'
+import ProductsElsolRow from '@/components/rows/products/ProductsElsolRow'
 
 export default function ProductsSlideRow() {
   return (
@@ -31,6 +32,10 @@ export default function ProductsSlideRow() {
           <CarouselItem>
             <ProductsErpcRow />
           </CarouselItem>
+          <CarouselItem>
+            <ProductsElsolRow />
+          </CarouselItem>
+
           <CarouselItem>
             <ProductsBuidlersCollectiveRow />
           </CarouselItem>

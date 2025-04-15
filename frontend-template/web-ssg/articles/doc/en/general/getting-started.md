@@ -50,7 +50,9 @@ WSL2 installation for Windows 10: https://docs.microsoft.com/en-us/windows/wsl/i
 ### Libraries
 
 - Python3 [Install](https://www.python.org/downloads/)
-- Ansible [Install](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
+- Ansible
+  [Install](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+- Solana [Install](https://docs.anza.xyz/cli/install)
 
 ## Installation
 
