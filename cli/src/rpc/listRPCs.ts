@@ -85,6 +85,7 @@ const listRPCs = async (network: NetworkType, identityKey?: string) => {
       ])
     table.render()
   }
+  return rpcs
 }
 
 export { listRPCs }

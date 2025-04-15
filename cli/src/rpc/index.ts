@@ -1,11 +1,9 @@
 import { Command } from '@cliffy'
 import { init } from '@/rpc/init.ts'
-import { initJupiterAPI } from '@/rpc/jupiter/initJupiter.ts'
 import { colors } from '@cliffy/colors'
 import { updateAllowedIps } from '/lib/config/updateAllowedIps.ts'
 import { listRPCs } from '@/rpc/listRPCs.ts'
 import { deployRPCMainnet } from '/src/rpc/deploy/deployRPCMainnet.ts'
-import { deployJupiter, listJupiters } from '/src/rpc/jupiter/deployJupiter.ts'
 import { updateDefaultVersion } from '/lib/config/updateDefaultVersion.ts'
 import type { InventoryType } from '@cmn/types/config.ts'
 import { getTemplatePath } from '/lib/getTemplatePath.ts'
@@ -42,26 +40,6 @@ rpcCmd.command('deploy')
     } else {
       await deployRPCMainnet(options.pubkey)
     }
-  })
-
-rpcCmd.command('setup:jupiter')
-  .description('Setup Jupiter Self-hosted SWAP API')
-  .action(async () => {
-    await initJupiterAPI()
-  })
-
-rpcCmd.command('deploy:jupiter')
-  .description('Deploy Jupiter Self-hosted SWAP API')
-  .option('-p, --name <name>', 'Name of the Jupiter API to deploy')
-  .action(async (options) => {
-    await deployJupiter(options.name)
-  })
-
-rpcCmd.command('list:jupiter')
-  .description('List all Jupiter API instances')
-  .option('-n, --name <name>', 'Filter by name')
-  .action(async (options) => {
-    await listJupiters(options.name)
   })
 
 rpcCmd.command('restart')

@@ -17,5 +17,5 @@
 - import_playbook: update_startup_config.yml
 - import_playbook: setup-solv-service.yml
 - import_playbook: geyser_build.yml
-- import_playbook: run_snapshot_finder.yml
+- import_playbook: wget_snapshot.yml
 - import_playbook: start-solv-service.yml

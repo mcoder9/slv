@@ -10,7 +10,7 @@
         src: ~/.slv/tower/tower-1_9-{{ hostvars[inventory_hostname].identity_account }}.bin
         dest: /mnt/ledger/tower-1_9-{{ hostvars[inventory_hostname].identity_account }}.bin
 
-    - name: Set Identity to Testnet Validator Key
+    - name: Set Identity to Mainnet Validator Key
       shell: |
         . ~/.profile
         sudo fdctl set-identity --config /home/solv/firedancer-config.toml /home/solv/mainnet-validator-keypair.json
