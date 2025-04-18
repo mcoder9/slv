@@ -94,7 +94,7 @@
     },
     "DAOsValidatorsRow": {
       "title": "Validators DAO",
-      "body": "Validators DAO is a project focused on decentralizing and enhancing the security of the Solana network. To maintain Solana's high performance and overall health, increasing the number of validators and decentralizing staking is essential. The open-source tool 'solv' simplifies validator operations, while the community fosters active knowledge sharing among validators. Additionally, Validators Solutions offers automated operation solutions, creating an environment where anyone can easily participate as a validator.",
+      "body": "Validators DAO is a project that enables participants to strengthen the Solana network’s decentralization, security, and efficiency simply by pursuing their own incentives. Through the four pillars of SLV, Validators Solutions, elSOL, and ERPC, the DAO supports validator participation, creates new revenue opportunities through bandwidth leasing, and fosters a system of cooperative growth.",
       "button1": "Validators DAO",
       "button2": "Community"
     }
