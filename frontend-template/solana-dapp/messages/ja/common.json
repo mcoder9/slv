@@ -94,7 +94,7 @@
     },
     "DAOsValidatorsRow": {
       "title": "Validators DAO",
-      "body": "Validators DAOは、Solanaネットワークの分散化とセキュリティ強化を目的としたプロジェクトです。Solanaの高い処理性能と健全性を維持するためには、バリデータの増加とステーキングの分散が不可欠です。オープンソースツール「solv」により、バリデータの運用を簡略化し、コミュニティ内ではバリデータ同士の活発な情報交換が行われています。さらに、Validators Solutionsの自動運用ソリューションにより、誰もが容易にバリデータとして参加できる環境を整備しています。",
+      "body": "Validators DAOは、参加者が自らのインセンティブを追求することで、自然とSolanaネットワークの分散化・セキュリティ・効率性が向上する仕組みを提供するプロジェクトです。SLV、Validators Solutions、elSOL、ERPCの4つの柱を通じて、バリデータの参入支援から帯域貸出による収益機会まで、多面的な協力と成長を実現します。",
       "button1": "Validators DAO",
       "button2": "コミュニティ"
     }
