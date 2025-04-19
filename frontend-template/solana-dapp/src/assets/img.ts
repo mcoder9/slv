@@ -55,6 +55,8 @@ import LatitudeLogoHorizontal from '@/assets/img/logo/partners/data-center/Latit
 import LatitudeLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/LatitudeLogoInvertHorizontal.svg'
 import MecarneLogoHorizontal from '@/assets/img/logo/partners/data-center/MecarneLogoHorizontal.svg'
 import MecarneLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/MecarneLogoInvertHorizontal.svg'
+import TeraSwitchLogoHorizontal from '@/assets/img/logo/partners/data-center/TeraSwitchLogoHorizontal.svg'
+import TeraSwitchLogoInvertHorizontal from '@/assets/img/logo/partners/data-center/TeraSwitchLogoInvertHorizontal.svg'
 
 import CloudflareLogoHorizontal from '@/assets/img/logo/partners/cloud/CloudflareLogoHorizontal.svg'
 import CloudflareLogoInvertHorizontal from '@/assets/img/logo/partners/cloud/CloudflareLogoInvertHorizontal.svg'
@@ -449,5 +451,7 @@ export {
   LatitudeLogoHorizontal,
   LatitudeLogoInvertHorizontal,
   MecarneLogoHorizontal,
-  MecarneLogoInvertHorizontal
+  MecarneLogoInvertHorizontal,
+  TeraSwitchLogoHorizontal,
+  TeraSwitchLogoInvertHorizontal,
 }
