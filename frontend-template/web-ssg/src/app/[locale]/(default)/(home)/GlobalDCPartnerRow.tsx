@@ -15,6 +15,8 @@ import {
   MecarneLogoInvertHorizontal,
   HivelocityLogoHorizontal,
   HivelocityLogoInvertHorizontal,
+  TeraSwitchLogoHorizontal,
+  TeraSwitchLogoInvertHorizontal,
 } from '@/assets/img'
 import { mainShardGradation } from '@/lib/decoration'
 import { cn } from '@/lib/utils'
@@ -36,6 +38,11 @@ export const globalDCPartnerLogos = [
     name: 'Mecarne',
     src: MecarneLogoHorizontal,
     invertSrc: MecarneLogoInvertHorizontal,
+  },
+  {
+    name: 'TeraSwitch',
+    src: TeraSwitchLogoHorizontal,
+    invertSrc: TeraSwitchLogoInvertHorizontal,
   },
   {
     name: 'Cloudflare',
