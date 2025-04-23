@@ -14,6 +14,7 @@ dynamic_port_range = "8900-9000"
     port = 8899
     full_api = false
     private = false
+    only_known = false
 
 [reporting]
     solana_metrics_config = "host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea"
@@ -49,9 +50,6 @@ dynamic_port_range = "8900-9000"
     expected_genesis_hash = "4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY"
     expected_bank_hash = "6A7U1X8WqnWRXWtqaxF15sSYHLT66j1ycBEyFigGwr2Z"
     expected_shred_version = 64475
-    known_validators = [
-        "5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on",
-    ]
 
 [hugetlbfs]
     mount_path = "/mnt"

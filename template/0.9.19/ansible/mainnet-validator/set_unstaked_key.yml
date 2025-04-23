@@ -4,10 +4,9 @@
   become: true
   become_user: solv
   tasks:
-    - name: Change Symbolic Link to Unstaked Identity
-      shell: ln -sf /home/solv/unstaked-identity.json /home/solv/identity.json
-      become: true
-      become_user: solv
+    - name: Set validator type fact for each host
+      set_fact:
+        validator_type: "{{ validator_type | default('jito') }}"
 
     - name: Set Identity to Unstaked Key
       shell: . ~/.profile && agave-validator -l /mnt/ledger set-identity /home/solv/unstaked-identity.json
@@ -15,3 +14,12 @@
       timeout: 20
       args:
         executable: /bin/bash
+      when: validator_type == 'jito'
+
+    - name: Set Identity to Unstaked Key
+      shell: |
+        . ~/.profile
+        sudo fdctl set-identity --config /home/solv/firedancer-config.toml /home/solv/unstaked-identity.json
+      args:
+        executable: /bin/bash
+      when: validator_type == 'firedancer'
