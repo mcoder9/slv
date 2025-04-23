@@ -39,9 +39,9 @@ const addMainnetInventory = async (
       block_engine_region: 'amsterdam',
       shredstream_address: '',
       shredstream_desired_regions: '',
-      limit_ledger_size: 200000000,
+      limit_ledger_size: 100000000,
       staked_rpc_identity_account: '',
-      staked_rpc_amount: 50000000000000,
+      staked_rpc_amount: 500000000000000,
       snapshot_url: 'https://snapshots.avorio.network/mainnet-beta',
     } as ValidatorMainnetConfig
 

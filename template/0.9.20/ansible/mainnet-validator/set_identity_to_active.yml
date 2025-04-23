@@ -13,6 +13,7 @@
         validator_type: "{{ validator_type | default('jito') }}"
 
     - name: Read local validator key file securely (base64)
+      become: false
       delegate_to: localhost
       slurp:
         src: "{{ local_key_path }}"
@@ -49,11 +50,11 @@
       register: add_voter_result
       timeout: 20
       ignore_errors: yes
+      when: validator_type == 'jito'
 
-    - name: Show set-identity output
-      debug:
-        msg: "{{ inventory_hostname }}:\n{{ set_identity_result.stdout }}"
-
-    - name: Show authorized-voter output
-      debug:
-        msg: "{{ inventory_hostname }}:\n{{ add_voter_result.stdout }}"
+    - name: Add Authorized Voter
+      shell: . ~/.profile && agave-validator -l /mnt/ledger authorized-voter add /home/solv/mainnet-validator-keypair.json
+      args:
+        executable: /bin/bash
+      ignore_errors: yes
+      when: validator_type == 'firedancer'
