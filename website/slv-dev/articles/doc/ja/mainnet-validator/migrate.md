@@ -8,6 +8,8 @@ description: SLV - Solana Mainnet Validator - Migrate Solana Validator Node With
 
 既存のメインネットバリデータを停止せずに、新しいサーバーへ移行する方法を解説します。
 
+https://www.youtube.com/watch?v=sNLDz_7RJn4
+
 ## 前提条件
 
 Solana メインネットのバリデーターノードがすでにセットアップされていることを前提とします。
@@ -18,28 +20,32 @@ Solana メインネットのバリデーターノードがすでにセットア�
 
 **2. 新しいメインネットバリデーターノード** - 移行先のバリデーターノード
 
-このガイドでは、
-
-`アクティブなメインネットバリデーターノード` のアクティブアイデンティティ公開鍵を `gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV` と仮定します。
-
-`新しいメインネットバリデーターノード` のアクティブアイデンティティ公開鍵を `epics-validator-spare` と仮定します。
-
-双方のバリデーターノードは、`slv v init` コマンドを使用してセットアップされていることを前提とします。
-
 ⚠️注意事項
 
-両ノードはSolana バリデータのIPとアイデンティティキー以外は同じ設定にしてください。
+このガイドでは、
+
+`アクティブなメインネットバリデーターノード` の `slv v init` で設定した名前を `labo` と仮定します。
+
+そして、
+
+`新しいメインネットバリデーターノード` の `slv v init` で設定した名前を `labo-spare` と仮定します。
+
+双方のバリデーターノードは、`slv v deploy -n mainnet -p labo` 及び `slv v deploy -n mainnet -p labo-spare` コマンドを使用してセットアップされていることを前提とします。
+
+
+両ノードはSolana バリデータのIPと名前以外は同じ設定にしてください。
 
 例えば、スペアのバリデーターをセットアップする場合、
 `slv v init` コマンドを使用してセットアップする際に、
-以下のように仮のアイデンティティ名を使用してセットアップします。
+以下のように名前を使用してセットアップします。
 
 ```bash
 slv v init
 .
 .
 ? Do you want to create a new identity key now? (Y/n) › No
-? Please Enter Your Identity Public Key › epics-validator-spare
+? Please Enter Your Identity Public Key › xxxxxxxxxxxxx
+? Enter Inventory Name (xxxxxxxxxxxxx) › labo-spare
 ```
 
 ## バリデーターノードの移行
@@ -57,26 +63,30 @@ slv v switch
 
 ここでは  mainnet を選択します。
 
-## 移行元のバリデーターのアクティブアイデンティティ公開鍵を入力
+## 移行元のバリデーターの名前を入力
 
 ```bash
 ✨ Switching Testnet Validator Identity...
-? From Validator Identity › gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV
+? From Validator Identity › labo
 ```
 
-## 移行先のバリデーターのアクティブアイデンティティ公開鍵を入力
+## 移行先のバリデーターの名前を入力
 
 ```bash
-? To Validator Identity › epics-validator-spare
+? To Validator Identity › labo-spare
+```
 .
 .
 .
 PLAY RECAP **************************************************************************************************
-epics-validator-spare      : ok=3    changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
-gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV : ok=4    changed=3    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+labo-spare      : ok=3    changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+labo : ok=4    changed=3    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
 
-Successfully swapped hosts gnz9qntHdXDRVbthem2e28F8Asta8Lqp5FRDoDVrSLV and epics-validator-spare in testnet_validators
+Successfully swapped hosts labo and labo-spare in mainnet_validators
 ✅ Successfully Switched Validator Identity
 ```
-
 以上で、バリデーターノードの移行が完了しました。
+
+このコマンドが成功すると、以下のファイルの設定ファイルの中身も switch 先のノードに変更されます。
+
+`~/.slv/inventory.mainnet.validators.yml`
