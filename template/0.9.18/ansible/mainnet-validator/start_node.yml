@@ -6,7 +6,7 @@
     - name: Set validator type fact for each host
       set_fact:
         validator_type: "{{ validator_type | default('jito') }}"
-    
+
     - name: Debug validator type. Start if not set
       debug:
         msg: "Validator type is {{ validator_type }}"
@@ -16,11 +16,8 @@
         msg: "Validator type is not set. Please set it in the inventory."
       when: validator_type is not defined
 
-    - name: Start Solv Service
-      include_tasks: start_solv.yml
-      when: validator_type == 'jito'
+- import_playbook: start_solv.yml
+  when: validator_type == 'jito'
 
-    - name: Start Firedancer Service
-      include_tasks: start_firedancer.yml
-      when: validator_type == 'firedancer'
-
+- import_playbook: start_firedancer.yml
+  when: validator_type == 'firedancer'

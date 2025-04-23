@@ -3,15 +3,11 @@
   hosts: all
   become: true
   tasks:
-    - name: Ensure /home/solv exists
-      file:
-        path: /home/solv
-        state: directory
-        owner: solv
-        group: solv
-        mode: "0755"
+    - name: Set validator type fact for each host
+      set_fact:
+        validator_type: "{{ validator_type | default('jito') }}"
 
-    - name: Generate start-validator.sh from template
+    - name: Updatge start-validator.sh from template
       template:
         src: ~/.slv/mainnet-validator/start-mainnet-validator.sh.j2
         dest: /home/solv/start-validator.sh
@@ -25,6 +21,20 @@
         shredstream_address: "{{ hostvars[inventory_hostname].shredstream_address }}"
         port_rpc: "{{ hostvars[inventory_hostname].port_rpc }}"
         limit_ledger_size: "{{ hostvars[inventory_hostname].limit_ledger_size }}"
+      when: validator_type == 'jito'
+
+    - name: Update firedancer-config.toml from template
+      template:
+        src: ~/.slv/mainnet-validator/firedancer-config.toml.j2
+        dest: /home/solv/firedancer-config.toml
+        owner: solv
+        group: solv
+        mode: "0644"
+      vars:
+        block_engine_region: "{{ hostvars[inventory_hostname].block_engine_region }}"
+        vote_account: "{{ hostvars[inventory_hostname].vote_account }}"
+        commission_bps: "{{ hostvars[inventory_hostname].commission_bps }}"
+      when: validator_type == 'firedancer'
 
     # Make sure if solv user has permission for /mnt directory
     - name: Ensure /mnt directory belongs to solv
